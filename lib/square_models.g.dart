@@ -5412,6 +5412,12 @@ GiftCardActivity _$GiftCardActivityFromJson(Map<String, dynamic> json) =>
           ? null
           : GiftCardActivityUnblock.fromJson(
               json['unblock_activity_details'] as Map<String, dynamic>),
+      unlinkedActivityRefundActivityDetails:
+          json['unlinked_activity_refund_activity_details'] == null
+              ? null
+              : GiftCardActivityUnlinkedActivityRefund.fromJson(
+                  json['unlinked_activity_refund_activity_details']
+                      as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$GiftCardActivityToJson(GiftCardActivity instance) {
@@ -5447,6 +5453,8 @@ Map<String, dynamic> _$GiftCardActivityToJson(GiftCardActivity instance) {
   writeNotNull('redeem_activity_details', instance.redeemActivityDetails);
   writeNotNull('refund_activity_details', instance.refundActivityDetails);
   writeNotNull('unblock_activity_details', instance.unblockActivityDetails);
+  writeNotNull('unlinked_activity_refund_activity_details',
+      instance.unlinkedActivityRefundActivityDetails);
   return val;
 }
 
@@ -5515,88 +5523,699 @@ Map<String, dynamic> _$GiftCardActivityUnblockToJson(
 
 GiftCardActivityRefund _$GiftCardActivityRefundFromJson(
         Map<String, dynamic> json) =>
-    GiftCardActivityRefund();
+    GiftCardActivityRefund(
+      paymentId: json['payment_id'] as String?,
+      referenceId: json['reference_id'] as String?,
+      amountMoney: json['amount_money'] == null
+          ? null
+          : Money.fromJson(json['amount_money'] as Map<String, dynamic>),
+      redeemActivityId: json['redeem_activity_id'] as String?,
+    );
 
 Map<String, dynamic> _$GiftCardActivityRefundToJson(
-        GiftCardActivityRefund instance) =>
-    <String, dynamic>{};
+    GiftCardActivityRefund instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('redeem_activity_id', instance.redeemActivityId);
+  writeNotNull('amount_money', instance.amountMoney);
+  writeNotNull('payment_id', instance.paymentId);
+  writeNotNull('reference_id', instance.referenceId);
+  return val;
+}
 
 GiftCardActivityRedeem _$GiftCardActivityRedeemFromJson(
         Map<String, dynamic> json) =>
-    GiftCardActivityRedeem();
+    GiftCardActivityRedeem(
+      amountMoney: json['amount_money'] == null
+          ? null
+          : Money.fromJson(json['amount_money'] as Map<String, dynamic>),
+      referenceId: json['reference_id'] as String?,
+      paymentId: json['payment_id'] as String?,
+    );
 
 Map<String, dynamic> _$GiftCardActivityRedeemToJson(
-        GiftCardActivityRedeem instance) =>
-    <String, dynamic>{};
+    GiftCardActivityRedeem instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('amount_money', instance.amountMoney);
+  writeNotNull('payment_id', instance.paymentId);
+  writeNotNull('reference_id', instance.referenceId);
+  return val;
+}
 
 GiftCardActivityLoad _$GiftCardActivityLoadFromJson(
         Map<String, dynamic> json) =>
-    GiftCardActivityLoad();
+    GiftCardActivityLoad(
+      referenceId: json['reference_id'] as String?,
+      amountMoney: json['amount_money'] == null
+          ? null
+          : Money.fromJson(json['amount_money'] as Map<String, dynamic>),
+      orderId: json['order_id'] as String?,
+      buyerPaymentInstrumentIds:
+          (json['buyer_payment_instrument_ids'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList(),
+      lineItemUid: json['line_item_uid'] as String?,
+    );
 
 Map<String, dynamic> _$GiftCardActivityLoadToJson(
-        GiftCardActivityLoad instance) =>
-    <String, dynamic>{};
+    GiftCardActivityLoad instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('amount_money', instance.amountMoney);
+  writeNotNull(
+      'buyer_payment_instrument_ids', instance.buyerPaymentInstrumentIds);
+  writeNotNull('line_item_uid', instance.lineItemUid);
+  writeNotNull('order_id', instance.orderId);
+  writeNotNull('reference_id', instance.referenceId);
+  return val;
+}
 
 GiftCardActivityImportReversal _$GiftCardActivityImportReversalFromJson(
         Map<String, dynamic> json) =>
-    GiftCardActivityImportReversal();
+    GiftCardActivityImportReversal(
+      amountMoney: json['amount_money'] == null
+          ? null
+          : Money.fromJson(json['amount_money'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$GiftCardActivityImportReversalToJson(
-        GiftCardActivityImportReversal instance) =>
-    <String, dynamic>{};
+    GiftCardActivityImportReversal instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('amount_money', instance.amountMoney);
+  return val;
+}
 
 GiftCardActivityImport _$GiftCardActivityImportFromJson(
         Map<String, dynamic> json) =>
-    GiftCardActivityImport();
+    GiftCardActivityImport(
+      amountMoney: json['amount_money'] == null
+          ? null
+          : Money.fromJson(json['amount_money'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$GiftCardActivityImportToJson(
-        GiftCardActivityImport instance) =>
-    <String, dynamic>{};
+    GiftCardActivityImport instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('amount_money', instance.amountMoney);
+  return val;
+}
 
 GiftCardActivityDeactivate _$GiftCardActivityDeactivateFromJson(
         Map<String, dynamic> json) =>
-    GiftCardActivityDeactivate();
+    GiftCardActivityDeactivate(
+      reason: json['reason'] as String?,
+    );
 
 Map<String, dynamic> _$GiftCardActivityDeactivateToJson(
-        GiftCardActivityDeactivate instance) =>
-    <String, dynamic>{};
+    GiftCardActivityDeactivate instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('reason', instance.reason);
+  return val;
+}
 
 GiftCardActivityClearBalance _$GiftCardActivityClearBalanceFromJson(
         Map<String, dynamic> json) =>
-    GiftCardActivityClearBalance();
+    GiftCardActivityClearBalance(
+      reason: json['reason'] as String?,
+    );
 
 Map<String, dynamic> _$GiftCardActivityClearBalanceToJson(
-        GiftCardActivityClearBalance instance) =>
-    <String, dynamic>{};
+    GiftCardActivityClearBalance instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('reason', instance.reason);
+  return val;
+}
 
 GiftCardActivityBlock _$GiftCardActivityBlockFromJson(
         Map<String, dynamic> json) =>
-    GiftCardActivityBlock();
+    GiftCardActivityBlock(
+      reason: json['reason'] as String?,
+    );
 
 Map<String, dynamic> _$GiftCardActivityBlockToJson(
-        GiftCardActivityBlock instance) =>
-    <String, dynamic>{};
+    GiftCardActivityBlock instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('reason', instance.reason);
+  return val;
+}
 
 GiftCardActivityAdjustIncrement _$GiftCardActivityAdjustIncrementFromJson(
         Map<String, dynamic> json) =>
-    GiftCardActivityAdjustIncrement();
+    GiftCardActivityAdjustIncrement(
+      amountMoney: json['amount_money'] == null
+          ? null
+          : Money.fromJson(json['amount_money'] as Map<String, dynamic>),
+      reason: json['reason'] as String?,
+    );
 
 Map<String, dynamic> _$GiftCardActivityAdjustIncrementToJson(
-        GiftCardActivityAdjustIncrement instance) =>
-    <String, dynamic>{};
+    GiftCardActivityAdjustIncrement instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('amount_money', instance.amountMoney);
+  writeNotNull('reason', instance.reason);
+  return val;
+}
 
 GiftCardActivityAdjustDecrement _$GiftCardActivityAdjustDecrementFromJson(
         Map<String, dynamic> json) =>
-    GiftCardActivityAdjustDecrement();
+    GiftCardActivityAdjustDecrement(
+      amountMoney: json['amount_money'] == null
+          ? null
+          : Money.fromJson(json['amount_money'] as Map<String, dynamic>),
+      reason: json['reason'] as String?,
+    );
 
 Map<String, dynamic> _$GiftCardActivityAdjustDecrementToJson(
-        GiftCardActivityAdjustDecrement instance) =>
-    <String, dynamic>{};
+    GiftCardActivityAdjustDecrement instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('amount_money', instance.amountMoney);
+  writeNotNull('reason', instance.reason);
+  return val;
+}
 
 GiftCardActivityActivate _$GiftCardActivityActivateFromJson(
         Map<String, dynamic> json) =>
-    GiftCardActivityActivate();
+    GiftCardActivityActivate(
+      referenceId: json['reference_id'] as String?,
+      amountMoney: json['amount_money'] == null
+          ? null
+          : Money.fromJson(json['amount_money'] as Map<String, dynamic>),
+      orderId: json['order_id'] as String?,
+      buyerPaymentInstrumentIds:
+          (json['buyer_payment_instrument_ids'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList(),
+      lineItemUid: json['line_item_uid'] as String?,
+    );
 
 Map<String, dynamic> _$GiftCardActivityActivateToJson(
-        GiftCardActivityActivate instance) =>
-    <String, dynamic>{};
+    GiftCardActivityActivate instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('amount_money', instance.amountMoney);
+  writeNotNull(
+      'buyer_payment_instrument_ids', instance.buyerPaymentInstrumentIds);
+  writeNotNull('line_item_uid', instance.lineItemUid);
+  writeNotNull('order_id', instance.orderId);
+  writeNotNull('reference_id', instance.referenceId);
+  return val;
+}
+
+Booking _$BookingFromJson(Map<String, dynamic> json) => Booking(
+      locationId: json['location_id'] as String?,
+      id: json['id'] as String?,
+      createdAt: json['created_at'] as String?,
+      status: $enumDecodeNullable(_$BookingStatusEnumMap, json['status']),
+      updatedAt: json['updated_at'] as String?,
+      customerId: json['customer_id'] as String?,
+      startAt: json['start_at'] as String?,
+      version: json['version'] as int?,
+      source:
+          $enumDecodeNullable(_$BookingBookingSourceEnumMap, json['source']),
+      allDay: json['all_day'] as bool?,
+      appointmentSegments: (json['appointment_segments'] as List<dynamic>?)
+          ?.map((e) => AppointmentSegment.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      creatorDetails: json['creator_details'] == null
+          ? null
+          : BookingCreatorDetails.fromJson(
+              json['creator_details'] as Map<String, dynamic>),
+      customerNote: json['customer_note'] as String?,
+      locationType: $enumDecodeNullable(
+          _$BusinessAppointmentSettingsBookingLocationTypeEnumMap,
+          json['location_type']),
+      sellerNote: json['seller_note'] as String?,
+      transitionTimeMinutes: json['transition_time_minutes'] as int?,
+    );
+
+Map<String, dynamic> _$BookingToJson(Booking instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('all_day', instance.allDay);
+  writeNotNull('appointment_segments', instance.appointmentSegments);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('creator_details', instance.creatorDetails);
+  writeNotNull('customer_id', instance.customerId);
+  writeNotNull('customer_note', instance.customerNote);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull(
+      'location_type',
+      _$BusinessAppointmentSettingsBookingLocationTypeEnumMap[
+          instance.locationType]);
+  writeNotNull('seller_note', instance.sellerNote);
+  writeNotNull('source', _$BookingBookingSourceEnumMap[instance.source]);
+  writeNotNull('start_at', instance.startAt);
+  writeNotNull('status', _$BookingStatusEnumMap[instance.status]);
+  writeNotNull('transition_time_minutes', instance.transitionTimeMinutes);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('version', instance.version);
+  return val;
+}
+
+const _$BookingStatusEnumMap = {
+  BookingStatus.PENDING: 'PENDING',
+  BookingStatus.CANCELLED_BY_CUSTOMER: 'CANCELLED_BY_CUSTOMER',
+  BookingStatus.CANCELLED_BY_SELLER: 'CANCELLED_BY_SELLER',
+  BookingStatus.DECLINED: 'DECLINED',
+  BookingStatus.ACCEPTED: 'ACCEPTED',
+  BookingStatus.NO_SHOW: 'NO_SHOW',
+};
+
+const _$BookingBookingSourceEnumMap = {
+  BookingBookingSource.FIRST_PARTY_MERCHANT: 'FIRST_PARTY_MERCHANT',
+  BookingBookingSource.FIRST_PARTY_BUYER: 'FIRST_PARTY_BUYER',
+  BookingBookingSource.THIRD_PARTY_BUYER: 'THIRD_PARTY_BUYER',
+  BookingBookingSource.API: 'API',
+};
+
+const _$BusinessAppointmentSettingsBookingLocationTypeEnumMap = {
+  BusinessAppointmentSettingsBookingLocationType.BUSINESS_LOCATION:
+      'BUSINESS_LOCATION',
+  BusinessAppointmentSettingsBookingLocationType.CUSTOMER_LOCATION:
+      'CUSTOMER_LOCATION',
+  BusinessAppointmentSettingsBookingLocationType.PHONE: 'PHONE',
+};
+
+BookingCreatorDetails _$BookingCreatorDetailsFromJson(
+        Map<String, dynamic> json) =>
+    BookingCreatorDetails(
+      customerId: json['customer_id'] as String?,
+      creatorType: $enumDecodeNullable(
+          _$BookingCreatorDetailsCreatorTypeEnumMap, json['creator_type']),
+      teamMemberId: json['team_member_id'] as String?,
+    );
+
+Map<String, dynamic> _$BookingCreatorDetailsToJson(
+    BookingCreatorDetails instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('creator_type',
+      _$BookingCreatorDetailsCreatorTypeEnumMap[instance.creatorType]);
+  writeNotNull('customer_id', instance.customerId);
+  writeNotNull('team_member_id', instance.teamMemberId);
+  return val;
+}
+
+const _$BookingCreatorDetailsCreatorTypeEnumMap = {
+  BookingCreatorDetailsCreatorType.TEAM_MEMBER: 'TEAM_MEMBER',
+  BookingCreatorDetailsCreatorType.CUSTOMER: 'CUSTOMER',
+};
+
+AppointmentSegment _$AppointmentSegmentFromJson(Map<String, dynamic> json) =>
+    AppointmentSegment(
+      teamMemberId: json['team_member_id'] as String?,
+      anyTeamMember: json['any_team_member'] as bool?,
+      durationMinutes: json['duration_minutes'] as int?,
+      intermissionMinutes: json['intermission_minutes'] as int?,
+      resourceIds: (json['resource_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      serviceVariationId: json['service_variation_id'] as int?,
+      serviceVariationVersion: json['service_variation_version'] as String?,
+    );
+
+Map<String, dynamic> _$AppointmentSegmentToJson(AppointmentSegment instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('duration_minutes', instance.durationMinutes);
+  writeNotNull('service_variation_id', instance.serviceVariationId);
+  writeNotNull('service_variation_version', instance.serviceVariationVersion);
+  writeNotNull('team_member_id', instance.teamMemberId);
+  writeNotNull('any_team_member', instance.anyTeamMember);
+  writeNotNull('intermission_minutes', instance.intermissionMinutes);
+  writeNotNull('resource_ids', instance.resourceIds);
+  return val;
+}
+
+SearchAvailabilityQuery _$SearchAvailabilityQueryFromJson(
+        Map<String, dynamic> json) =>
+    SearchAvailabilityQuery(
+      filter: json['filter'] == null
+          ? null
+          : SearchAvailabilityFilter.fromJson(
+              json['filter'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$SearchAvailabilityQueryToJson(
+    SearchAvailabilityQuery instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('filter', instance.filter);
+  return val;
+}
+
+SearchAvailabilityFilter _$SearchAvailabilityFilterFromJson(
+        Map<String, dynamic> json) =>
+    SearchAvailabilityFilter(
+      locationId: json['location_id'] as String?,
+      bookingId: json['booking_id'] as String?,
+      segmentFilters: (json['segment_filters'] as List<dynamic>?)
+          ?.map((e) => SegmentFilter.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      startAtRange: json['start_at_range'] == null
+          ? null
+          : TimeRange.fromJson(json['start_at_range'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$SearchAvailabilityFilterToJson(
+    SearchAvailabilityFilter instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('start_at_range', instance.startAtRange);
+  writeNotNull('booking_id', instance.bookingId);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('segment_filters', instance.segmentFilters);
+  return val;
+}
+
+SegmentFilter _$SegmentFilterFromJson(Map<String, dynamic> json) =>
+    SegmentFilter(
+      serviceVariationId: json['service_variation_id'] as String?,
+      team_memberIdFilter: json['team_member_id_filter'] == null
+          ? null
+          : FilterValue.fromJson(
+              json['team_member_id_filter'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$SegmentFilterToJson(SegmentFilter instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('service_variation_id', instance.serviceVariationId);
+  writeNotNull('team_member_id_filter', instance.team_memberIdFilter);
+  return val;
+}
+
+Availability _$AvailabilityFromJson(Map<String, dynamic> json) => Availability(
+      locationId: json['location_id'] as String?,
+      appointmentSegments: (json['appointment_segments'] as List<dynamic>?)
+          ?.map((e) => AppointmentSegment.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      startAt: json['start_at'] as String?,
+    );
+
+Map<String, dynamic> _$AvailabilityToJson(Availability instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('appointment_segments', instance.appointmentSegments);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('start_at', instance.startAt);
+  return val;
+}
+
+BusinessBookingProfile _$BusinessBookingProfileFromJson(
+        Map<String, dynamic> json) =>
+    BusinessBookingProfile(
+      createdAt: json['created_at'] as String?,
+      allowUserCancel: json['allow_user_cancel'] as bool?,
+      bookingEnabled: json['booking_enabled'] as bool?,
+      bookingPolicy: $enumDecodeNullable(
+          _$BusinessBookingProfileBookingPolicyEnumMap, json['booking_policy']),
+      businessAppointmentSettings: json['business_appointment_settings'] == null
+          ? null
+          : BusinessAppointmentSettings.fromJson(
+              json['business_appointment_settings'] as Map<String, dynamic>),
+      customerTimezoneChoice: $enumDecodeNullable(
+          _$BusinessBookingProfileCustomerTimezoneChoiceEnumMap,
+          json['customer_timezone_choice']),
+      sellerId: json['seller_id'] as String?,
+    );
+
+Map<String, dynamic> _$BusinessBookingProfileToJson(
+    BusinessBookingProfile instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('allow_user_cancel', instance.allowUserCancel);
+  writeNotNull('booking_enabled', instance.bookingEnabled);
+  writeNotNull('booking_policy',
+      _$BusinessBookingProfileBookingPolicyEnumMap[instance.bookingPolicy]);
+  writeNotNull(
+      'business_appointment_settings', instance.businessAppointmentSettings);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull(
+      'customer_timezone_choice',
+      _$BusinessBookingProfileCustomerTimezoneChoiceEnumMap[
+          instance.customerTimezoneChoice]);
+  writeNotNull('seller_id', instance.sellerId);
+  return val;
+}
+
+const _$BusinessBookingProfileBookingPolicyEnumMap = {
+  BusinessBookingProfileBookingPolicy.ACCEPT_ALL: 'ACCEPT_ALL',
+  BusinessBookingProfileBookingPolicy.REQUIRES_ACCEPTANCE:
+      'REQUIRES_ACCEPTANCE',
+};
+
+const _$BusinessBookingProfileCustomerTimezoneChoiceEnumMap = {
+  BusinessBookingProfileCustomerTimezoneChoice.BUSINESS_LOCATION_TIMEZONE:
+      'BUSINESS_LOCATION_TIMEZONE',
+  BusinessBookingProfileCustomerTimezoneChoice.CUSTOMER_CHOICE:
+      'CUSTOMER_CHOICE',
+};
+
+BusinessAppointmentSettings _$BusinessAppointmentSettingsFromJson(
+        Map<String, dynamic> json) =>
+    BusinessAppointmentSettings(
+      alignmentTime: $enumDecodeNullable(
+          _$BusinessAppointmentSettingsAlignmentTimeEnumMap,
+          json['alignment_time']),
+      anyTeamMemberBookingEnabled:
+          json['any_team_member_booking_enabled'] as bool?,
+      cancellation_policy: $enumDecodeNullable(
+          _$BusinessAppointmentSettingsCancellationPolicyEnumMap,
+          json['cancellation_policy']),
+      cancellationFeeMoney: json['cancellation_fee_money'] == null
+          ? null
+          : Money.fromJson(
+              json['cancellation_fee_money'] as Map<String, dynamic>),
+      cancellationPolicyText: json['cancellation_policy_text'] as String?,
+      cancellationWindowSeconds: json['cancellation_window_seconds'] as int?,
+      locationTypes: (json['location_types'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(
+              _$BusinessAppointmentSettingsBookingLocationTypeEnumMap, e))
+          .toList(),
+      maxAppointmentsPerDayLimit:
+          json['max_appointments_per_day_limit'] as int?,
+      maxAppointmentsPerDayLimitType: $enumDecodeNullable(
+          _$BusinessAppointmentSettingsMaxAppointmentsPerDayLimitTypeEnumMap,
+          json['max_appointments_per_day_limit_type']),
+      maxBookingLeadTimeSeconds: json['max_booking_lead_time_seconds'] as int?,
+      minBookingLeadTimeSeconds: json['min_booking_lead_time_seconds'] as int?,
+      multipleServiceBookingEnabled:
+          json['multiple_service_booking_enabled'] as bool?,
+    );
+
+Map<String, dynamic> _$BusinessAppointmentSettingsToJson(
+    BusinessAppointmentSettings instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'alignment_time',
+      _$BusinessAppointmentSettingsAlignmentTimeEnumMap[
+          instance.alignmentTime]);
+  writeNotNull(
+      'any_team_member_booking_enabled', instance.anyTeamMemberBookingEnabled);
+  writeNotNull('cancellation_fee_money', instance.cancellationFeeMoney);
+  writeNotNull(
+      'cancellation_policy',
+      _$BusinessAppointmentSettingsCancellationPolicyEnumMap[
+          instance.cancellation_policy]);
+  writeNotNull('cancellation_policy_text', instance.cancellationPolicyText);
+  writeNotNull(
+      'cancellation_window_seconds', instance.cancellationWindowSeconds);
+  writeNotNull(
+      'location_types',
+      instance.locationTypes
+          ?.map(
+              (e) => _$BusinessAppointmentSettingsBookingLocationTypeEnumMap[e])
+          .toList());
+  writeNotNull(
+      'max_appointments_per_day_limit', instance.maxAppointmentsPerDayLimit);
+  writeNotNull(
+      'max_appointments_per_day_limit_type',
+      _$BusinessAppointmentSettingsMaxAppointmentsPerDayLimitTypeEnumMap[
+          instance.maxAppointmentsPerDayLimitType]);
+  writeNotNull(
+      'max_booking_lead_time_seconds', instance.maxBookingLeadTimeSeconds);
+  writeNotNull(
+      'min_booking_lead_time_seconds', instance.minBookingLeadTimeSeconds);
+  writeNotNull('multiple_service_booking_enabled',
+      instance.multipleServiceBookingEnabled);
+  return val;
+}
+
+const _$BusinessAppointmentSettingsAlignmentTimeEnumMap = {
+  BusinessAppointmentSettingsAlignmentTime.SERVICE_DURATION: 'SERVICE_DURATION',
+  BusinessAppointmentSettingsAlignmentTime.QUARTER_HOURLY: 'QUARTER_HOURLY',
+  BusinessAppointmentSettingsAlignmentTime.HALF_HOURLY: 'HALF_HOURLY',
+  BusinessAppointmentSettingsAlignmentTime.HOURLY: 'HOURLY',
+};
+
+const _$BusinessAppointmentSettingsCancellationPolicyEnumMap = {
+  BusinessAppointmentSettingsCancellationPolicy.CANCELLATION_TREATED_AS_NO_SHOW:
+      'CANCELLATION_TREATED_AS_NO_SHOW',
+  BusinessAppointmentSettingsCancellationPolicy.CUSTOM_POLICY: 'CUSTOM_POLICY',
+};
+
+const _$BusinessAppointmentSettingsMaxAppointmentsPerDayLimitTypeEnumMap = {
+  BusinessAppointmentSettingsMaxAppointmentsPerDayLimitType.PER_TEAM_MEMBER:
+      'PER_TEAM_MEMBER',
+  BusinessAppointmentSettingsMaxAppointmentsPerDayLimitType.PER_LOCATION:
+      'PER_LOCATION',
+};
+
+TeamMemberBookingProfile _$TeamMemberBookingProfileFromJson(
+        Map<String, dynamic> json) =>
+    TeamMemberBookingProfile(
+      teamMemberId: json['team_member_id'] as String?,
+      description: json['description'] as String?,
+      displayName: json['display_name'] as String?,
+      isBookable: json['is_bookable'] as bool?,
+      profileImageUrl: json['profile_image_url'] as String?,
+    );
+
+Map<String, dynamic> _$TeamMemberBookingProfileToJson(
+    TeamMemberBookingProfile instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('display_name', instance.displayName);
+  writeNotNull('is_bookable', instance.isBookable);
+  writeNotNull('profile_image_url', instance.profileImageUrl);
+  writeNotNull('team_member_id', instance.teamMemberId);
+  return val;
+}

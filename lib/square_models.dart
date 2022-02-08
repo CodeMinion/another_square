@@ -5551,6 +5551,439 @@ class GiftCardActivityActivate {
   }
 }
 
+@JsonSerializable(includeIfNull: false)
+class Booking {
+  
+  final String? id;
+
+  @JsonKey(name: "all_day")
+  final bool? allDay;
+
+  @JsonKey(name: "appointment_segments")
+  final List<AppointmentSegment>? appointmentSegments;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "creator_details")
+  final BookingCreatorDetails? creatorDetails;
+
+  @JsonKey(name: "customer_id")
+  final String? customerId;
+
+  @JsonKey(name: "customer_note")
+  final String? customerNote;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  @JsonKey(name: "location_type")
+  final BusinessAppointmentSettingsBookingLocationType? locationType;
+
+  @JsonKey(name: "seller_note")
+  final String? sellerNote;
+
+  final BookingBookingSource? source;
+
+  @JsonKey(name: "start_at")
+  final String? startAt;
+
+  final BookingStatus? status;
+
+  @JsonKey(name: "transition_time_minutes")
+  final int? transitionTimeMinutes;
+
+  @JsonKey(name: "updated_at")
+  final String? updatedAt;
+
+  final int? version;
+
+  Booking({
+    this.locationId, this.id, this.createdAt, this.status,
+  this.updatedAt, this.customerId, this.startAt,
+  this.version, this.source, this.allDay, this.appointmentSegments,
+    this.creatorDetails, this.customerNote, this.locationType,
+  this.sellerNote, this.transitionTimeMinutes
+  });
+
+  factory Booking.fromJson(Map<String, dynamic> json) =>
+      _$BookingFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BookingToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class BookingCreatorDetails {
+
+  @JsonKey(name: "creator_type")
+  final BookingCreatorDetailsCreatorType? creatorType;
+
+  @JsonKey(name: "customer_id")
+  final String? customerId;
+
+  @JsonKey(name: "team_member_id")
+  final String? teamMemberId;
+
+  BookingCreatorDetails({
+    this.customerId, this.creatorType, this.teamMemberId
+  });
+
+  factory BookingCreatorDetails.fromJson(Map<String, dynamic> json) =>
+      _$BookingCreatorDetailsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BookingCreatorDetailsToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class AppointmentSegment {
+
+  @JsonKey(name: "duration_minutes")
+  final int? durationMinutes;
+
+  @JsonKey(name: "service_variation_id")
+  final int? serviceVariationId;
+
+  @JsonKey(name: "service_variation_version")
+  final String? serviceVariationVersion;
+
+  @JsonKey(name: "team_member_id")
+  final String? teamMemberId;
+
+  @JsonKey(name: "any_team_member")
+  final bool? anyTeamMember;
+
+  @JsonKey(name: "intermission_minutes")
+  final int? intermissionMinutes;
+
+  @JsonKey(name: "resource_ids")
+  final List<String>? resourceIds;
+
+  AppointmentSegment({
+    this.teamMemberId, this.anyTeamMember, this.durationMinutes,
+  this.intermissionMinutes, this.resourceIds, this.serviceVariationId,
+  this.serviceVariationVersion
+  });
+
+  factory AppointmentSegment.fromJson(Map<String, dynamic> json) =>
+      _$AppointmentSegmentFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AppointmentSegmentToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class SearchAvailabilityQuery {
+
+  final SearchAvailabilityFilter? filter;
+
+  SearchAvailabilityQuery({
+    this.filter
+  });
+
+  factory SearchAvailabilityQuery.fromJson(Map<String, dynamic> json) =>
+      _$SearchAvailabilityQueryFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchAvailabilityQueryToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class SearchAvailabilityFilter {
+
+  @JsonKey(name: "start_at_range")
+  final TimeRange? startAtRange;
+
+  @JsonKey(name: "booking_id")
+  final String? bookingId;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  @JsonKey(name:"segment_filters")
+  final List<SegmentFilter>? segmentFilters;
+
+  SearchAvailabilityFilter({
+    this.locationId, this.bookingId, this.segmentFilters,
+    this.startAtRange
+  });
+
+  factory SearchAvailabilityFilter.fromJson(Map<String, dynamic> json) =>
+      _$SearchAvailabilityFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchAvailabilityFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class SegmentFilter {
+
+  @JsonKey(name: "service_variation_id")
+  final String? serviceVariationId;
+
+  @JsonKey(name: "team_member_id_filter")
+  final FilterValue? team_memberIdFilter;
+
+  SegmentFilter({
+    this.serviceVariationId, this.team_memberIdFilter
+  });
+
+  factory SegmentFilter.fromJson(Map<String, dynamic> json) =>
+      _$SegmentFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SegmentFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class Availability {
+
+  @JsonKey(name: "appointment_segments")
+  final List<AppointmentSegment>? appointmentSegments;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  @JsonKey(name: "start_at")
+  final String? startAt;
+
+  Availability({
+    this.locationId, this.appointmentSegments, this.startAt
+  });
+
+  factory Availability.fromJson(Map<String, dynamic> json) =>
+      _$AvailabilityFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AvailabilityToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class BusinessBookingProfile {
+
+  @JsonKey(name: "allow_user_cancel")
+  final bool? allowUserCancel;
+
+  @JsonKey(name: "booking_enabled")
+  final bool? bookingEnabled;
+
+  @JsonKey(name: "booking_policy")
+  final BusinessBookingProfileBookingPolicy? bookingPolicy;
+
+  @JsonKey(name: "business_appointment_settings")
+  final BusinessAppointmentSettings? businessAppointmentSettings;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "customer_timezone_choice")
+  final BusinessBookingProfileCustomerTimezoneChoice? customerTimezoneChoice;
+
+  @JsonKey(name: "seller_id")
+  final String? sellerId;
+
+  BusinessBookingProfile({
+    this.createdAt, this.allowUserCancel, this.bookingEnabled,
+  this.bookingPolicy, this.businessAppointmentSettings, this.customerTimezoneChoice,
+  this.sellerId
+  });
+
+  factory BusinessBookingProfile.fromJson(Map<String, dynamic> json) =>
+      _$BusinessBookingProfileFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BusinessBookingProfileToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class BusinessAppointmentSettings {
+
+  @JsonKey(name: "alignment_time")
+  final BusinessAppointmentSettingsAlignmentTime? alignmentTime;
+
+  @JsonKey(name: "any_team_member_booking_enabled")
+  final bool? anyTeamMemberBookingEnabled;
+
+  @JsonKey(name: "cancellation_fee_money")
+  final Money? cancellationFeeMoney;
+
+  @JsonKey(name: "cancellation_policy")
+  final BusinessAppointmentSettingsCancellationPolicy? cancellation_policy;
+
+  @JsonKey(name: "cancellation_policy_text")
+  final String? cancellationPolicyText;
+
+  @JsonKey(name: "cancellation_window_seconds")
+  final int? cancellationWindowSeconds;
+
+  @JsonKey(name: "location_types")
+  final List<BusinessAppointmentSettingsBookingLocationType>? locationTypes;
+
+  @JsonKey(name: "max_appointments_per_day_limit")
+  final int? maxAppointmentsPerDayLimit;
+
+  @JsonKey(name: "max_appointments_per_day_limit_type")
+  final BusinessAppointmentSettingsMaxAppointmentsPerDayLimitType? maxAppointmentsPerDayLimitType;
+
+  @JsonKey(name: "max_booking_lead_time_seconds")
+  final int? maxBookingLeadTimeSeconds;
+
+  @JsonKey(name: "min_booking_lead_time_seconds")
+  final int? minBookingLeadTimeSeconds;
+
+  @JsonKey(name:"multiple_service_booking_enabled")
+  final bool? multipleServiceBookingEnabled;
+
+  BusinessAppointmentSettings({
+    this.alignmentTime, this.anyTeamMemberBookingEnabled, this.cancellation_policy,
+  this.cancellationFeeMoney, this.cancellationPolicyText, this.cancellationWindowSeconds,
+    this.locationTypes, this.maxAppointmentsPerDayLimit, this.maxAppointmentsPerDayLimitType,
+    this.maxBookingLeadTimeSeconds, this.minBookingLeadTimeSeconds, this.multipleServiceBookingEnabled
+  });
+
+  factory BusinessAppointmentSettings.fromJson(Map<String, dynamic> json) =>
+      _$BusinessAppointmentSettingsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BusinessAppointmentSettingsToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class TeamMemberBookingProfile {
+
+  final String? description;
+
+  @JsonKey(name: "display_name")
+  final String? displayName;
+
+  @JsonKey(name: "is_bookable")
+  final bool? isBookable;
+
+  @JsonKey(name: "profile_image_url")
+  final String? profileImageUrl;
+
+  @JsonKey(name: "team_member_id")
+  final String? teamMemberId;
+
+  TeamMemberBookingProfile({
+    this.teamMemberId, this.description, this.displayName,
+  this.isBookable, this.profileImageUrl
+  });
+
+  factory TeamMemberBookingProfile.fromJson(Map<String, dynamic> json) =>
+      _$TeamMemberBookingProfileFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TeamMemberBookingProfileToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+enum BusinessAppointmentSettingsMaxAppointmentsPerDayLimitType {
+  PER_TEAM_MEMBER,
+  PER_LOCATION
+}
+
+enum BusinessAppointmentSettingsBookingLocationType {
+  BUSINESS_LOCATION,
+  CUSTOMER_LOCATION,
+  PHONE,
+
+}
+
+enum BusinessAppointmentSettingsCancellationPolicy {
+  CANCELLATION_TREATED_AS_NO_SHOW,
+  CUSTOM_POLICY,
+
+}
+
+enum BusinessAppointmentSettingsAlignmentTime {
+  SERVICE_DURATION,
+  QUARTER_HOURLY,
+  HALF_HOURLY,
+  HOURLY,
+
+}
+
+enum BusinessBookingProfileCustomerTimezoneChoice {
+  BUSINESS_LOCATION_TIMEZONE,
+  CUSTOMER_CHOICE
+}
+
+enum BusinessBookingProfileBookingPolicy {
+  ACCEPT_ALL,
+  REQUIRES_ACCEPTANCE,
+}
+
+enum BookingCreatorDetailsCreatorType {
+  TEAM_MEMBER,
+  CUSTOMER
+}
+
+
+enum BookingStatus {
+  PENDING,
+  CANCELLED_BY_CUSTOMER,
+  CANCELLED_BY_SELLER,
+  DECLINED,
+  ACCEPTED,
+  NO_SHOW
+}
+
+enum BookingBookingSource {
+  FIRST_PARTY_MERCHANT,
+  FIRST_PARTY_BUYER,
+  THIRD_PARTY_BUYER,
+  API
+}
+
+enum BusinessAppointmentSettingsBookingLocationType {
+  BUSINESS_LOCATION,
+  CUSTOMER_LOCATION,
+  PHONE,
+
+}
+
 enum GiftCardActivityType {
   ACTIVATE,
   LOAD,
