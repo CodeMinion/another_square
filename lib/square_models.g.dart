@@ -3834,10 +3834,10 @@ CatalogQuery _$CatalogQueryFromJson(Map<String, dynamic> json) => CatalogQuery(
           ? null
           : CatalogQueryPrefix.fromJson(
               json['prefix_query'] as Map<String, dynamic>),
-      rangeQuery: json['rangeQuery'] == null
+      rangeQuery: json['range_query'] == null
           ? null
           : CatalogQueryRange.fromJson(
-              json['rangeQuery'] as Map<String, dynamic>),
+              json['range_query'] as Map<String, dynamic>),
       setQuery: json['set_query'] == null
           ? null
           : CatalogQuerySet.fromJson(json['set_query'] as Map<String, dynamic>),
@@ -3869,7 +3869,7 @@ Map<String, dynamic> _$CatalogQueryToJson(CatalogQuery instance) {
       'items_for_modifier_list_query', instance.itemsForModifierListQuery);
   writeNotNull('items_for_tax_query', instance.itemsForTaxQuery);
   writeNotNull('prefix_query', instance.prefixQuery);
-  writeNotNull('rangeQuery', instance.rangeQuery);
+  writeNotNull('range_query', instance.rangeQuery);
   writeNotNull('set_query', instance.setQuery);
   writeNotNull('sorted_attribute_query', instance.sortedAttributeQuery);
   writeNotNull('text_query', instance.textQuery);
@@ -4099,8 +4099,8 @@ CatalogResponse _$CatalogResponseFromJson(Map<String, dynamic> json) =>
           ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
           .toList(),
       latestTime: json['latest_time'] as String?,
-      objects: (json['objects'] as List<dynamic>)
-          .map((e) => CatalogObject.fromJson(e as Map<String, dynamic>))
+      objects: (json['objects'] as List<dynamic>?)
+          ?.map((e) => CatalogObject.fromJson(e as Map<String, dynamic>))
           .toList(),
       relatedObjects: (json['related_objects'] as List<dynamic>?)
           ?.map((e) => CatalogObject.fromJson(e as Map<String, dynamic>))
@@ -4118,8 +4118,412 @@ Map<String, dynamic> _$CatalogResponseToJson(CatalogResponse instance) {
 
   writeNotNull('errors', instance.errors);
   writeNotNull('cursor', instance.cursor);
-  val['objects'] = instance.objects;
+  writeNotNull('objects', instance.objects);
   writeNotNull('related_objects', instance.relatedObjects);
   writeNotNull('latest_time', instance.latestTime);
   return val;
 }
+
+InventoryAdjustment _$InventoryAdjustmentFromJson(Map<String, dynamic> json) =>
+    InventoryAdjustment(
+      locationId: json['location_id'] as String?,
+      id: json['id'] as String?,
+      createdAt: json['created_at'] as String?,
+      source: json['source'] == null
+          ? null
+          : SourceApplication.fromJson(json['source'] as Map<String, dynamic>),
+      totalPriceMoney: json['total_price_money'] == null
+          ? null
+          : Money.fromJson(json['total_price_money'] as Map<String, dynamic>),
+      catalogObjectId: json['catalog_object_id'] as String?,
+      referenceId: json['reference_id'] as String?,
+      quantity: json['quantity'] as String?,
+      transactionId: json['transaction_id'] as String?,
+      refundId: json['refund_id'] as String?,
+      employeeId: json['employee_id'] as String?,
+      adjustmentGroup: json['adjustment_group'] == null
+          ? null
+          : InventoryAdjustmentGroup.fromJson(
+              json['adjustment_group'] as Map<String, dynamic>),
+      catalogObjectType: json['catalog_object_type'] as String?,
+      fromState: json['from_state'] as String?,
+      goodsReceiptId: json['goods_receipt_id'] as String?,
+      occurredAt: json['occurred_at'] as String?,
+      purchaseOrderId: json['purchase_order_id'] as String?,
+      toState: json['to_state'] as String?,
+    );
+
+Map<String, dynamic> _$InventoryAdjustmentToJson(InventoryAdjustment instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('adjustment_group', instance.adjustmentGroup);
+  writeNotNull('catalog_object_id', instance.catalogObjectId);
+  writeNotNull('catalog_object_type', instance.catalogObjectType);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('employee_id', instance.employeeId);
+  writeNotNull('from_state', instance.fromState);
+  writeNotNull('goods_receipt_id', instance.goodsReceiptId);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('occurred_at', instance.occurredAt);
+  writeNotNull('purchase_order_id', instance.purchaseOrderId);
+  writeNotNull('quantity', instance.quantity);
+  writeNotNull('reference_id', instance.referenceId);
+  writeNotNull('refund_id', instance.refundId);
+  writeNotNull('source', instance.source);
+  writeNotNull('to_state', instance.toState);
+  writeNotNull('total_price_money', instance.totalPriceMoney);
+  writeNotNull('transaction_id', instance.transactionId);
+  return val;
+}
+
+InventoryAdjustmentGroup _$InventoryAdjustmentGroupFromJson(
+        Map<String, dynamic> json) =>
+    InventoryAdjustmentGroup(
+      toState: $enumDecodeNullable(_$InventoryStateEnumMap, json['to_state']),
+      fromState:
+          $enumDecodeNullable(_$InventoryStateEnumMap, json['from_state']),
+      id: json['id'] as String?,
+      rootAdjustmentId: json['root_adjustment_id'] as String?,
+    );
+
+Map<String, dynamic> _$InventoryAdjustmentGroupToJson(
+    InventoryAdjustmentGroup instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('from_state', _$InventoryStateEnumMap[instance.fromState]);
+  writeNotNull('root_adjustment_id', instance.rootAdjustmentId);
+  writeNotNull('to_state', _$InventoryStateEnumMap[instance.toState]);
+  return val;
+}
+
+const _$InventoryStateEnumMap = {
+  InventoryState.CUSTOM: 'CUSTOM',
+  InventoryState.IN_STOCK: 'IN_STOCK',
+  InventoryState.SOLD: 'SOLD',
+  InventoryState.RETURNED_BY_CUSTOMER: 'RETURNED_BY_CUSTOMER',
+  InventoryState.RESERVED_FOR_SALE: 'RESERVED_FOR_SALE',
+  InventoryState.SOLD_ONLINE: 'SOLD_ONLINE',
+  InventoryState.ORDERED_FROM_VENDOR: 'ORDERED_FROM_VENDOR',
+  InventoryState.RECEIVED_FROM_VENDOR: 'RECEIVED_FROM_VENDOR',
+  InventoryState.IN_TRANSIT_TO: 'IN_TRANSIT_TO',
+  InventoryState.NONE: 'NONE',
+  InventoryState.WASTE: 'WASTE',
+  InventoryState.UNLINKED_RETURN: 'UNLINKED_RETURN',
+  InventoryState.COMPOSED: 'COMPOSED',
+  InventoryState.DECOMPOSED: 'DECOMPOSED',
+  InventoryState.SUPPORTED_BY_NEWER_VERSION: 'SUPPORTED_BY_NEWER_VERSION',
+};
+
+InventoryPhysicalCount _$InventoryPhysicalCountFromJson(
+        Map<String, dynamic> json) =>
+    InventoryPhysicalCount(
+      id: json['id'] as String?,
+      occurredAt: json['occurred_at'] as String?,
+      catalogObjectType: json['catalog_object_type'] as String?,
+      employeeId: json['employee_id'] as String?,
+      quantity: json['quantity'] as String?,
+      referenceId: json['reference_id'] as String?,
+      catalogObjectId: json['catalog_object_id'] as String?,
+      source: json['source'] == null
+          ? null
+          : SourceApplication.fromJson(json['source'] as Map<String, dynamic>),
+      createdAt: json['created_at'] as String?,
+      locationId: json['location_id'] as String?,
+      state: $enumDecodeNullable(_$InventoryStateEnumMap, json['state']),
+    );
+
+Map<String, dynamic> _$InventoryPhysicalCountToJson(
+    InventoryPhysicalCount instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('catalog_object_id', instance.catalogObjectId);
+  writeNotNull('catalog_object_type', instance.catalogObjectType);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('employee_id', instance.employeeId);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('occurred_at', instance.occurredAt);
+  writeNotNull('quantity', instance.quantity);
+  writeNotNull('reference_id', instance.referenceId);
+  writeNotNull('source', instance.source);
+  writeNotNull('state', _$InventoryStateEnumMap[instance.state]);
+  return val;
+}
+
+InventoryTransfer _$InventoryTransferFromJson(Map<String, dynamic> json) =>
+    InventoryTransfer(
+      state: $enumDecodeNullable(_$InventoryStateEnumMap, json['state']),
+      createdAt: json['created_at'] as String?,
+      source: json['source'] == null
+          ? null
+          : SourceApplication.fromJson(json['source'] as Map<String, dynamic>),
+      catalogObjectId: json['catalog_object_id'] as String?,
+      referenceId: json['reference_id'] as String?,
+      quantity: json['quantity'] as String?,
+      employeeId: json['employee_id'] as String?,
+      catalogObjectType: json['catalog_object_type'] as String?,
+      occurredAt: json['occurred_at'] as String?,
+      id: json['id'] as String?,
+      fromLocationId: json['from_location_id'] as String?,
+      toLocationId: json['to_location_id'] as String?,
+    );
+
+Map<String, dynamic> _$InventoryTransferToJson(InventoryTransfer instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('catalog_object_id', instance.catalogObjectId);
+  writeNotNull('catalog_object_type', instance.catalogObjectType);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('employee_id', instance.employeeId);
+  writeNotNull('from_location_id', instance.fromLocationId);
+  writeNotNull('occurred_at', instance.occurredAt);
+  writeNotNull('quantity', instance.quantity);
+  writeNotNull('reference_id', instance.referenceId);
+  writeNotNull('source', instance.source);
+  writeNotNull('state', _$InventoryStateEnumMap[instance.state]);
+  writeNotNull('to_location_id', instance.toLocationId);
+  return val;
+}
+
+InventoryChange _$InventoryChangeFromJson(Map<String, dynamic> json) =>
+    InventoryChange(
+      type: $enumDecodeNullable(_$InventoryChangeTypeEnumMap, json['type']),
+      measurementUnitId: json['measurement_unit_id'] as String?,
+      measurementUnit: json['measurement_unit'] == null
+          ? null
+          : CatalogMeasurementUnit.fromJson(
+              json['measurement_unit'] as Map<String, dynamic>),
+      adjustment: json['adjustment'] == null
+          ? null
+          : InventoryAdjustment.fromJson(
+              json['adjustment'] as Map<String, dynamic>),
+      physicalCount: json['physical_count'] == null
+          ? null
+          : InventoryPhysicalCount.fromJson(
+              json['physical_count'] as Map<String, dynamic>),
+      transfer: json['transfer'] == null
+          ? null
+          : InventoryTransfer.fromJson(
+              json['transfer'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$InventoryChangeToJson(InventoryChange instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('adjustment', instance.adjustment);
+  writeNotNull('measurement_unit', instance.measurementUnit);
+  writeNotNull('measurement_unit_id', instance.measurementUnitId);
+  writeNotNull('physical_count', instance.physicalCount);
+  writeNotNull('transfer', instance.transfer);
+  writeNotNull('type', _$InventoryChangeTypeEnumMap[instance.type]);
+  return val;
+}
+
+const _$InventoryChangeTypeEnumMap = {
+  InventoryChangeType.PHYSICAL_COUNT: 'PHYSICAL_COUNT',
+  InventoryChangeType.ADJUSTMENT: 'ADJUSTMENT',
+  InventoryChangeType.TRANSFER: 'TRANSFER',
+};
+
+Customer _$CustomerFromJson(Map<String, dynamic> json) => Customer(
+      id: json['id'] as String?,
+      referenceId: json['reference_id'] as String?,
+      createdAt: json['created_at'] as String?,
+      taxIds: json['tax_ids'] == null
+          ? null
+          : CustomerTaxIds.fromJson(json['tax_ids'] as Map<String, dynamic>),
+      version: json['version'] as int?,
+      updatedAt: json['updated_at'] as String?,
+      familyName: json['family_name'] as String?,
+      givenName: json['given_name'] as String?,
+      companyName: json['company_name'] as String?,
+      phoneNumber: json['phone_number'] as String?,
+      address: json['address'] == null
+          ? null
+          : Address.fromJson(json['address'] as Map<String, dynamic>),
+      emailAddress: json['email_address'] as String?,
+      note: json['note'] as String?,
+      preferences: json['preferences'] == null
+          ? null
+          : CustomerPreferences.fromJson(
+              json['preferences'] as Map<String, dynamic>),
+      birthday: json['birthday'] as String?,
+      cards: (json['cards'] as List<dynamic>?)
+          ?.map((e) => Card.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      creationSource: $enumDecodeNullable(
+          _$CustomerCreationSourceEnumMap, json['creation_source']),
+      groupIds: (json['group_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      nickname: json['nickname'] as String?,
+      segmentIds: (json['segment_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+    );
+
+Map<String, dynamic> _$CustomerToJson(Customer instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('address', instance.address);
+  writeNotNull('birthday', instance.birthday);
+  writeNotNull('company_name', instance.companyName);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('creation_source',
+      _$CustomerCreationSourceEnumMap[instance.creationSource]);
+  writeNotNull('email_address', instance.emailAddress);
+  writeNotNull('family_name', instance.familyName);
+  writeNotNull('given_name', instance.givenName);
+  writeNotNull('group_ids', instance.groupIds);
+  writeNotNull('nickname', instance.nickname);
+  writeNotNull('note', instance.note);
+  writeNotNull('phone_number', instance.phoneNumber);
+  writeNotNull('preferences', instance.preferences);
+  writeNotNull('reference_id', instance.referenceId);
+  writeNotNull('segment_ids', instance.segmentIds);
+  writeNotNull('tax_ids', instance.taxIds);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('version', instance.version);
+  writeNotNull('cards', instance.cards);
+  return val;
+}
+
+const _$CustomerCreationSourceEnumMap = {
+  CustomerCreationSource.OTHER: 'OTHER',
+  CustomerCreationSource.APPOINTMENTS: 'APPOINTMENTS',
+  CustomerCreationSource.COUPON: 'COUPON',
+  CustomerCreationSource.DELETION_RECOVERY: 'DELETION_RECOVERY',
+  CustomerCreationSource.DIRECTORY: 'DIRECTORY',
+  CustomerCreationSource.EGIFTING: 'EGIFTING',
+  CustomerCreationSource.EMAIL_COLLECTION: 'EMAIL_COLLECTION',
+  CustomerCreationSource.FEEDBACK: 'FEEDBACK',
+  CustomerCreationSource.IMPORT: 'IMPORT',
+  CustomerCreationSource.INVOICES: 'INVOICES',
+  CustomerCreationSource.LOYALTY: 'LOYALTY',
+  CustomerCreationSource.MARKETING: 'MARKETING',
+  CustomerCreationSource.MERGE: 'MERGE',
+  CustomerCreationSource.ONLINE_STORE: 'ONLINE_STORE',
+  CustomerCreationSource.INSTANT_PROFILE: 'INSTANT_PROFILE',
+  CustomerCreationSource.TERMINAL: 'TERMINAL',
+  CustomerCreationSource.THIRD_PARTY: 'THIRD_PARTY',
+  CustomerCreationSource.THIRD_PARTY_IMPORT: 'THIRD_PARTY_IMPORT',
+  CustomerCreationSource.UNMERGE_RECOVERY: 'UNMERGE_RECOVERY',
+};
+
+CustomerTaxIds _$CustomerTaxIdsFromJson(Map<String, dynamic> json) =>
+    CustomerTaxIds(
+      euVat: json['eu_vat'] as String?,
+    );
+
+Map<String, dynamic> _$CustomerTaxIdsToJson(CustomerTaxIds instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('eu_vat', instance.euVat);
+  return val;
+}
+
+CustomerPreferences _$CustomerPreferencesFromJson(Map<String, dynamic> json) =>
+    CustomerPreferences(
+      emailUnsubscribed: json['email_unsubscribed'] as bool?,
+    );
+
+Map<String, dynamic> _$CustomerPreferencesToJson(CustomerPreferences instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('email_unsubscribed', instance.emailUnsubscribed);
+  return val;
+}
+
+CustomerQuery _$CustomerQueryFromJson(Map<String, dynamic> json) =>
+    CustomerQuery();
+
+Map<String, dynamic> _$CustomerQueryToJson(CustomerQuery instance) =>
+    <String, dynamic>{};
+
+FilterValue _$FilterValueFromJson(Map<String, dynamic> json) => FilterValue();
+
+Map<String, dynamic> _$FilterValueToJson(FilterValue instance) =>
+    <String, dynamic>{};
+
+CustomerTextFilter _$CustomerTextFilterFromJson(Map<String, dynamic> json) =>
+    CustomerTextFilter();
+
+Map<String, dynamic> _$CustomerTextFilterToJson(CustomerTextFilter instance) =>
+    <String, dynamic>{};
+
+CustomerCreationSourceFilter _$CustomerCreationSourceFilterFromJson(
+        Map<String, dynamic> json) =>
+    CustomerCreationSourceFilter();
+
+Map<String, dynamic> _$CustomerCreationSourceFilterToJson(
+        CustomerCreationSourceFilter instance) =>
+    <String, dynamic>{};
+
+TimeRange _$TimeRangeFromJson(Map<String, dynamic> json) => TimeRange();
+
+Map<String, dynamic> _$TimeRangeToJson(TimeRange instance) =>
+    <String, dynamic>{};
+
+CustomerFilter _$CustomerFilterFromJson(Map<String, dynamic> json) =>
+    CustomerFilter();
+
+Map<String, dynamic> _$CustomerFilterToJson(CustomerFilter instance) =>
+    <String, dynamic>{};
+
+CustomerSort _$CustomerSortFromJson(Map<String, dynamic> json) =>
+    CustomerSort();
+
+Map<String, dynamic> _$CustomerSortToJson(CustomerSort instance) =>
+    <String, dynamic>{};

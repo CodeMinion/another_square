@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part "square_models.g.dart";
@@ -3992,6 +3994,614 @@ class CatalogResponse {
   String toString() {
     return toJson().toString();
   }
+}
+
+@JsonSerializable(includeIfNull: false)
+class InventoryAdjustment
+{
+  final String? id;
+
+  @JsonKey(name: "adjustment_group")
+  final InventoryAdjustmentGroup? adjustmentGroup;
+
+  @JsonKey(name:"catalog_object_id")
+  final String? catalogObjectId;
+
+  @JsonKey(name: "catalog_object_type")
+  final String? catalogObjectType;
+
+  @JsonKey(name:"created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "employee_id")
+  final String? employeeId;
+
+  @JsonKey(name:"from_state")
+  final String? fromState;
+
+  @JsonKey(name: "goods_receipt_id")
+  final String? goodsReceiptId;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  @JsonKey(name: "occurred_at")
+  final String? occurredAt;
+
+  @JsonKey(name: "purchase_order_id")
+  final String? purchaseOrderId;
+
+  final String? quantity;
+
+  @JsonKey(name: "reference_id")
+  final String? referenceId;
+
+  @JsonKey(name: "refund_id")
+  final String? refundId;
+
+  final SourceApplication? source;
+
+  @JsonKey(name: "to_state")
+  final String? toState;
+
+  @JsonKey(name: "total_price_money")
+  final Money? totalPriceMoney;
+
+  @JsonKey(name: "transaction_id")
+  final String? transactionId;
+
+  InventoryAdjustment({
+    this.locationId, this.id, this.createdAt, this.source,
+    this.totalPriceMoney, this.catalogObjectId, this.referenceId,
+    this.quantity, this.transactionId, this.refundId,
+    this.employeeId, this.adjustmentGroup, this.catalogObjectType,
+    this.fromState, this.goodsReceiptId, this.occurredAt,
+    this.purchaseOrderId, this.toState
+  });
+
+  factory InventoryAdjustment.fromJson(Map<String, dynamic> json) =>
+      _$InventoryAdjustmentFromJson(json);
+
+  Map<String, dynamic> toJson() => _$InventoryAdjustmentToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class InventoryAdjustmentGroup {
+
+  final String? id;
+
+  @JsonKey(name: "from_state")
+  final InventoryState? fromState;
+
+  @JsonKey(name: "root_adjustment_id")
+  final String? rootAdjustmentId;
+
+  @JsonKey(name: "to_state")
+  final InventoryState? toState;
+
+  InventoryAdjustmentGroup({
+    this.toState, this.fromState, this.id, this.rootAdjustmentId
+  });
+
+  factory InventoryAdjustmentGroup.fromJson(Map<String, dynamic> json) =>
+      _$InventoryAdjustmentGroupFromJson(json);
+
+  Map<String, dynamic> toJson() => _$InventoryAdjustmentGroupToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class InventoryPhysicalCount {
+  final String? id;
+
+  @JsonKey(name: "catalog_object_id")
+  final String? catalogObjectId;
+
+  @JsonKey(name: "catalog_object_type")
+  final String? catalogObjectType;
+
+  @JsonKey(name:"created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "employee_id")
+  final String? employeeId;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  @JsonKey(name: "occurred_at")
+  final String? occurredAt;
+
+  final String? quantity;
+
+  @JsonKey(name: "reference_id")
+  final String? referenceId;
+
+  final SourceApplication? source;
+
+  final InventoryState? state;
+
+  InventoryPhysicalCount({
+    this.id, this.occurredAt, this.catalogObjectType, this.employeeId,
+  this.quantity, this.referenceId, this.catalogObjectId, this.source,
+  this.createdAt, this.locationId, this.state
+  });
+
+  factory InventoryPhysicalCount.fromJson(Map<String, dynamic> json) =>
+      _$InventoryPhysicalCountFromJson(json);
+
+  Map<String, dynamic> toJson() => _$InventoryPhysicalCountToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class InventoryTransfer {
+  final String? id;
+
+  @JsonKey(name: "catalog_object_id")
+  final String? catalogObjectId;
+
+  @JsonKey(name: "catalog_object_type")
+  final String? catalogObjectType;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "employee_id")
+  final String? employeeId;
+
+  @JsonKey(name: "from_location_id")
+  final String? fromLocationId;
+
+  @JsonKey(name: "occurred_at")
+  final String? occurredAt;
+
+  final String? quantity;
+
+  @JsonKey(name: "reference_id")
+  final String? referenceId;
+
+  final SourceApplication? source;
+
+  final InventoryState? state;
+
+  @JsonKey(name: "to_location_id")
+  final String? toLocationId;
+
+  InventoryTransfer({
+    this.state, this.createdAt, this.source, this.catalogObjectId,
+  this.referenceId, this.quantity, this.employeeId, this.catalogObjectType,
+    this.occurredAt, this.id, this.fromLocationId, this.toLocationId
+  });
+
+  factory InventoryTransfer.fromJson(Map<String, dynamic> json) =>
+      _$InventoryTransferFromJson(json);
+
+  Map<String, dynamic> toJson() => _$InventoryTransferToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class InventoryChange {
+
+  final InventoryAdjustment? adjustment;
+
+  @JsonKey(name: "measurement_unit")
+  final CatalogMeasurementUnit? measurementUnit;
+
+  @JsonKey(name: "measurement_unit_id")
+  final String? measurementUnitId;
+
+  @JsonKey(name: "physical_count")
+  final InventoryPhysicalCount? physicalCount;
+
+  final InventoryTransfer? transfer;
+
+  final InventoryChangeType? type;
+
+  InventoryChange({
+    this.type, this.measurementUnitId, this.measurementUnit,
+    this.adjustment, this.physicalCount, this.transfer
+  });
+
+  factory InventoryChange.fromJson(Map<String, dynamic> json) =>
+      _$InventoryChangeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$InventoryChangeToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class Customer {
+
+  final String? id;
+
+  final Address? address;
+
+  final String? birthday;
+
+  @JsonKey(name: "company_name")
+  final String? companyName;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "creation_source")
+  final CustomerCreationSource? creationSource;
+
+  @JsonKey(name: "email_address")
+  final String? emailAddress;
+
+  @JsonKey(name: "family_name")
+  final String? familyName;
+
+  @JsonKey(name: "given_name")
+  final String? givenName;
+
+  @JsonKey(name: "group_ids")
+  final List<String>? groupIds;
+
+  final String? nickname;
+
+  final String? note;
+
+  @JsonKey(name: "phone_number")
+  final String? phoneNumber;
+
+  final CustomerPreferences? preferences;
+
+  @JsonKey(name: "reference_id")
+  final String? referenceId;
+
+  @JsonKey(name: "segment_ids")
+  final List<String>? segmentIds;
+
+  @JsonKey(name: "tax_ids")
+  final CustomerTaxIds? taxIds;
+
+  @JsonKey(name: "updated_at")
+  final String? updatedAt;
+
+  final int? version;
+
+  final List<Card>? cards;
+
+  Customer({
+    this.id, this.referenceId, this.createdAt, this.taxIds,
+  this.version, this.updatedAt, this.familyName, this.givenName,
+  this.companyName, this.phoneNumber, this.address, this.emailAddress,
+    this.note, this.preferences, this.birthday, this.cards,
+  this.creationSource, this.groupIds, this.nickname, this.segmentIds
+  });
+
+  factory Customer.fromJson(Map<String, dynamic> json) =>
+      _$CustomerFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CustomerToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CustomerTaxIds {
+
+  @JsonKey(name: "eu_vat")
+  final String? euVat;
+
+  CustomerTaxIds({
+    this.euVat
+  });
+
+  factory CustomerTaxIds.fromJson(Map<String, dynamic> json) =>
+      _$CustomerTaxIdsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CustomerTaxIdsToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CustomerPreferences {
+
+  @JsonKey(name: "email_unsubscribed")
+  final bool? emailUnsubscribed;
+
+  CustomerPreferences({
+    this.emailUnsubscribed
+  });
+
+  factory CustomerPreferences.fromJson(Map<String, dynamic> json) =>
+      _$CustomerPreferencesFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CustomerPreferencesToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CustomerQuery {
+
+  @JsonKey(name: "created_at")
+  final TimeRange? createdAt;
+
+  @JsonKey(name:" creation_source")
+  final CustomerCreationSourceFilter? creationSource;
+
+  @JsonKey(name: "email_address")
+  final CustomerTextFilter? emailAddress;
+
+  @JsonKey(name: "group_ids")
+  final FilterValue? groupIds;
+
+  @JsonKey(name: "phone_number")
+  final CustomerTextFilter? phoneNumber;
+
+  @JsonKey(name: "reference_id")
+  final CustomerTextFilter? referenceId;
+
+  @JsonKey(name: "updated_at")
+  final TimeRange? updated_at;
+
+  CustomerQuery({
+    this.groupIds, this.creationSource, this.emailAddress, this.phoneNumber,
+    this.createdAt, this.referenceId, this.updated_at
+  });
+
+  factory CustomerQuery.fromJson(Map<String, dynamic> json) =>
+      _$CustomerQueryFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CustomerQueryToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class FilterValue {
+
+  final List<String>? all;
+
+  final List<String>? any;
+  
+  final List<String>? none;
+
+  FilterValue({
+    this.all, this.any, this.none
+  });
+
+  factory FilterValue.fromJson(Map<String, dynamic> json) =>
+      _$FilterValueFromJson(json);
+
+  Map<String, dynamic> toJson() => _$FilterValueToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CustomerTextFilter {
+  final String? exact;
+
+  final String? fuzzy;
+
+  CustomerTextFilter({
+    this.exact, this.fuzzy
+  });
+
+  factory CustomerTextFilter.fromJson(Map<String, dynamic> json) =>
+      _$CustomerTextFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CustomerTextFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CustomerCreationSourceFilter {
+
+  final CustomerInclusionExclusion? rule;
+
+  final List<CustomerCreationSource>? values;
+
+  CustomerCreationSourceFilter({
+    this.values, this.rule
+  });
+
+  factory CustomerCreationSourceFilter.fromJson(Map<String, dynamic> json) =>
+      _$CustomerCreationSourceFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CustomerCreationSourceFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class TimeRange {
+
+  @JsonKey(name: "end_at")
+  final String? endAt;
+
+  @JsonKey(name: "start_at")
+  final String? startAt;
+
+  TimeRange({
+    this.endAt, this.startAt
+  });
+
+  factory TimeRange.fromJson(Map<String, dynamic> json) =>
+      _$TimeRangeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TimeRangeToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CustomerFilter {
+
+  @JsonKey(name: "created_at")
+  final TimeRange? createdAt;
+
+  @JsonKey(name: "creation_source")
+  final CustomerCreationSourceFilter? creationSource;
+
+  @JsonKey(name: "email_address")
+  final CustomerTextFilter? emailAddress;
+
+  @JsonKey(name: "group_ids")
+  final FilterValue? groupIds;
+
+  @JsonKey(name: "phone_number")
+  final CustomerTextFilter? phoneNumber;
+
+  @JsonKey(name: "reference_id")
+  final CustomerTextFilter? referenceId;
+
+  @JsonKey(name: "updated_at")
+  final TimeRange? updatedAt;
+
+  CustomerFilter({
+    this.referenceId, this.createdAt, this.phoneNumber,
+    this.emailAddress, this.creationSource, this.groupIds,
+  this.updatedAt
+  });
+
+  factory CustomerFilter.fromJson(Map<String, dynamic> json) =>
+      _$CustomerFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CustomerFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+
+}
+
+
+@JsonSerializable(includeIfNull: false)
+class CustomerSort {
+
+  final CustomerSortField? field;
+
+  final SortOrder? order;
+
+  CustomerSort({
+    this.order, this.field
+  });
+
+  factory CustomerSort.fromJson(Map<String, dynamic> json) =>
+      _$CustomerSortFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CustomerSortToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+enum CustomerSortField {
+  DEFAULT,
+  CREATED_AT,
+}
+
+enum CustomerInclusionExclusion {
+  INCLUDE,
+  EXCLUDE,
+
+}
+
+enum CustomerCreationSource {
+  OTHER,
+  APPOINTMENTS,
+  COUPON,
+  DELETION_RECOVERY,
+  DIRECTORY,
+  EGIFTING,
+  EMAIL_COLLECTION,
+  FEEDBACK,
+  IMPORT,
+  INVOICES,
+  LOYALTY,
+  MARKETING,
+  MERGE,
+  ONLINE_STORE,
+  INSTANT_PROFILE,
+  TERMINAL,
+  THIRD_PARTY,
+  THIRD_PARTY_IMPORT,
+  UNMERGE_RECOVERY,
+
+}
+
+enum InventoryChangeType {
+  PHYSICAL_COUNT,
+  ADJUSTMENT,
+  TRANSFER
+}
+
+enum InventoryState {
+  CUSTOM,
+  IN_STOCK,
+  SOLD,
+  RETURNED_BY_CUSTOMER,
+  RESERVED_FOR_SALE,
+  SOLD_ONLINE,
+  ORDERED_FROM_VENDOR,
+  RECEIVED_FROM_VENDOR,
+  IN_TRANSIT_TO,
+  NONE,
+  WASTE,
+  UNLINKED_RETURN,
+  COMPOSED,
+  DECOMPOSED,
+  SUPPORTED_BY_NEWER_VERSION,
+
 }
 
 enum ProductValue {
