@@ -5104,6 +5104,63 @@ class SearchLoyaltyRewardsRequestLoyaltyRewardQuery {
   }
 }
 
+@JsonSerializable(includeIfNull: false)
+class GiftCard {
+  final String? id;
+
+  final GiftCardType? type;
+
+  @JsonKey(name: "balance_money")
+  final Money? balanceMoney;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "customer_ids")
+  final List<String>? customerIds;
+
+  final String? gan;
+
+  @JsonKey(name: "gan_source")
+  final GiftCardGANSource? ganSource;
+
+  final GiftCardStatus? status;
+
+  GiftCard({
+    this.status, this.id, this.createdAt, this.customerIds,
+    this.type, this.balanceMoney, this.gan, this.ganSource
+  });
+
+  factory GiftCard.fromJson(Map<String, dynamic> json) =>
+      _$GiftCardFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GiftCardToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+enum GiftCardStatus {
+  ACTIVE,
+  DEACTIVATED,
+  BLOCKED,
+  PENDING,
+
+}
+
+enum GiftCardGANSource {
+  SQUARE,
+  OTHER
+}
+
+
+enum GiftCardType {
+  PHYSICAL,
+  DIGITAL
+}
+
 enum LoyaltyRewardStatus {
   ISSUED,
   REDEEMED,
