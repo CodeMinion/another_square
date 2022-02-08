@@ -5106,6 +5106,7 @@ class SearchLoyaltyRewardsRequestLoyaltyRewardQuery {
 
 @JsonSerializable(includeIfNull: false)
 class GiftCard {
+
   final String? id;
 
   final GiftCardType? type;
@@ -5140,6 +5141,430 @@ class GiftCard {
   String toString() {
     return toJson().toString();
   }
+}
+
+@JsonSerializable(includeIfNull: false)
+class GiftCardActivity {
+
+  final String? id;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  final GiftCardActivityType? type;
+
+  @JsonKey(name: "activate_activity_details")
+  final GiftCardActivityActivate? activateActivityDetails;
+
+  @JsonKey(name: "adjust_decrement_activity_details")
+  final GiftCardActivityAdjustDecrement? adjustDecrementActivityDetails;
+
+  @JsonKey(name: "adjust_increment_activity_details")
+  final GiftCardActivityAdjustIncrement? adjustIncrementActivityDetails;
+
+  @JsonKey(name: "block_activity_details")
+  final GiftCardActivityBlock? blockActivityDetails;
+
+  @JsonKey(name: "clear_balance_activity_details")
+  final GiftCardActivityClearBalance? clearBalanceActivityDetails;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "deactivate_activity_details")
+  final GiftCardActivityDeactivate? deactivateActivityDetails;
+
+  @JsonKey(name: "gift_card_balance_money")
+  final Money? giftCardBalanceMoney;
+
+  @JsonKey(name: "gift_card_gan")
+  final String? giftCardGan;
+
+  @JsonKey(name: "gift_card_id")
+  final String? giftCardId;
+
+  @JsonKey(name:"import_activity_details")
+  final GiftCardActivityImport? importActivityDetails;
+
+  @JsonKey(name: "import_reversal_activity_details")
+  final GiftCardActivityImportReversal? importReversalActivityDetails;
+
+  @JsonKey(name: "load_activity_details")
+  final GiftCardActivityLoad? loadActivityDetails;
+
+  @JsonKey(name: "redeem_activity_details")
+  final GiftCardActivityRedeem? redeemActivityDetails;
+
+  @JsonKey(name: "refund_activity_details")
+  final GiftCardActivityRefund? refundActivityDetails;
+
+  @JsonKey(name: "unblock_activity_details")
+  final GiftCardActivityUnblock? unblockActivityDetails;
+
+  @JsonKey(name: "unlinked_activity_refund_activity_details")
+  final GiftCardActivityUnlinkedActivityRefund? unlinkedActivityRefundActivityDetails;
+
+
+
+  GiftCardActivity({
+    this.type, this.createdAt, this.id, this.locationId, this.activateActivityDetails,
+  this.adjustDecrementActivityDetails, this.adjustIncrementActivityDetails,
+  this.blockActivityDetails, this.clearBalanceActivityDetails, this.deactivateActivityDetails,
+  this.giftCardBalanceMoney, this.giftCardGan, this.giftCardId,
+  this.importActivityDetails, this.importReversalActivityDetails, this.loadActivityDetails,
+  this.redeemActivityDetails, this.refundActivityDetails, this.unblockActivityDetails,
+    this.unlinkedActivityRefundActivityDetails
+  });
+
+  factory GiftCardActivity.fromJson(Map<String, dynamic> json) =>
+      _$GiftCardActivityFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GiftCardActivityToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class GiftCardActivityUnlinkedActivityRefund {
+
+  @JsonKey(name: "amount_money")
+  final Money? amountMoney;
+
+  @JsonKey(name: "payment_id")
+  final String? paymentId;
+
+  @JsonKey(name: "reference_id")
+  final String? referenceId;
+
+  GiftCardActivityUnlinkedActivityRefund({
+    this.amountMoney, this.referenceId, this.paymentId
+  });
+
+  factory GiftCardActivityUnlinkedActivityRefund.fromJson(Map<String, dynamic> json) =>
+      _$GiftCardActivityUnlinkedActivityRefundFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GiftCardActivityUnlinkedActivityRefundToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class GiftCardActivityUnblock  {
+
+  final String? reason;
+
+  GiftCardActivityUnblock({
+    this.reason
+  });
+
+  factory GiftCardActivityUnblock.fromJson(Map<String, dynamic> json) =>
+      _$GiftCardActivityUnblockFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GiftCardActivityUnblockToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+
+@JsonSerializable(includeIfNull: false)
+class GiftCardActivityRefund {
+
+  @JsonKey(name: "redeem_activity_id")
+  final String? redeemActivityId;
+
+  @JsonKey(name: "amount_money")
+  final Money? amountMoney;
+
+  @JsonKey(name: "payment_id")
+  final String? paymentId;
+
+  @JsonKey(name: "reference_id")
+  final String? referenceId;
+
+  GiftCardActivityRefund({
+    this.paymentId, this.referenceId, this.amountMoney, this.redeemActivityId
+  });
+
+  factory GiftCardActivityRefund.fromJson(Map<String, dynamic> json) =>
+      _$GiftCardActivityRefundFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GiftCardActivityRefundToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class GiftCardActivityRedeem {
+
+  @JsonKey(name: "amount_money")
+  final Money? amountMoney;
+
+  @JsonKey(name: "payment_id")
+  final String? paymentId;
+
+  @JsonKey(name:"reference_id")
+  final String? referenceId;
+
+  GiftCardActivityRedeem({
+    this.amountMoney, this.referenceId, this.paymentId
+  });
+
+  factory GiftCardActivityRedeem.fromJson(Map<String, dynamic> json) =>
+      _$GiftCardActivityRedeemFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GiftCardActivityRedeemToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class GiftCardActivityLoad {
+
+  @JsonKey(name: "amount_money")
+  final Money? amountMoney;
+
+  @JsonKey(name: "buyer_payment_instrument_ids")
+  final List<String>? buyerPaymentInstrumentIds;
+
+  @JsonKey(name: "line_item_uid")
+  final String? lineItemUid;
+
+  @JsonKey(name: "order_id")
+  final String? orderId;
+
+  @JsonKey(name: "reference_id")
+  final String? referenceId;
+
+  GiftCardActivityLoad({
+    this.referenceId, this.amountMoney, this.orderId,
+    this.buyerPaymentInstrumentIds, this.lineItemUid
+  });
+
+  factory GiftCardActivityLoad.fromJson(Map<String, dynamic> json) =>
+      _$GiftCardActivityLoadFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GiftCardActivityLoadToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class GiftCardActivityImportReversal {
+
+  @JsonKey(name: "amount_money")
+  final Money? amountMoney;
+
+  GiftCardActivityImportReversal({
+    this.amountMoney
+  });
+
+  factory GiftCardActivityImportReversal.fromJson(Map<String, dynamic> json) =>
+      _$GiftCardActivityImportReversalFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GiftCardActivityImportReversalToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class GiftCardActivityImport {
+  @JsonKey(name: "amount_money")
+  final Money? amountMoney;
+
+  GiftCardActivityImport({
+    this.amountMoney
+  });
+
+  factory GiftCardActivityImport.fromJson(Map<String, dynamic> json) =>
+      _$GiftCardActivityImportFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GiftCardActivityImportToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class GiftCardActivityDeactivate {
+
+  final String? reason;
+
+  GiftCardActivityDeactivate({
+    this.reason
+  });
+
+  factory GiftCardActivityDeactivate.fromJson(Map<String, dynamic> json) =>
+      _$GiftCardActivityDeactivateFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GiftCardActivityDeactivateToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class GiftCardActivityClearBalance {
+
+  final String? reason;
+
+  GiftCardActivityClearBalance({
+    this.reason
+  });
+
+  factory GiftCardActivityClearBalance.fromJson(Map<String, dynamic> json) =>
+      _$GiftCardActivityClearBalanceFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GiftCardActivityClearBalanceToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class GiftCardActivityBlock {
+
+  final String? reason;
+
+  GiftCardActivityBlock({
+    this.reason
+  });
+
+  factory GiftCardActivityBlock.fromJson(Map<String, dynamic> json) =>
+      _$GiftCardActivityBlockFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GiftCardActivityBlockToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class GiftCardActivityAdjustIncrement {
+
+  @JsonKey(name: "amount_money")
+  final Money? amountMoney;
+
+  final String? reason;
+
+  GiftCardActivityAdjustIncrement({
+  this.amountMoney,
+    this.reason
+  });
+
+  factory GiftCardActivityAdjustIncrement.fromJson(Map<String, dynamic> json) =>
+      _$GiftCardActivityAdjustIncrementFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GiftCardActivityAdjustIncrementToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class GiftCardActivityAdjustDecrement {
+
+  @JsonKey(name: "amount_money")
+  final Money? amountMoney;
+
+  final String? reason;
+
+  GiftCardActivityAdjustDecrement({
+    this.amountMoney,
+    this.reason
+  });
+
+  factory GiftCardActivityAdjustDecrement.fromJson(Map<String, dynamic> json) =>
+      _$GiftCardActivityAdjustDecrementFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GiftCardActivityAdjustDecrementToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class GiftCardActivityActivate {
+
+  @JsonKey(name: "amount_money")
+  final Money? amountMoney;
+
+  @JsonKey(name: "buyer_payment_instrument_ids")
+  final List<String>? buyerPaymentInstrumentIds;
+
+  @JsonKey(name: "line_item_uid")
+  final String? lineItemUid;
+
+  @JsonKey(name: "order_id")
+  final String? orderId;
+
+  @JsonKey(name: "reference_id")
+  final String? referenceId;
+
+  GiftCardActivityActivate({
+    this.referenceId, this.amountMoney, this.orderId,
+    this.buyerPaymentInstrumentIds, this.lineItemUid
+  });
+
+  factory GiftCardActivityActivate.fromJson(Map<String, dynamic> json) =>
+      _$GiftCardActivityActivateFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GiftCardActivityActivateToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+enum GiftCardActivityType {
+  ACTIVATE,
+  LOAD,
+  REDEEM,
+  CLEAR_BALANCE,
+  DEACTIVATE,
+  ADJUST_INCREMENT,
+  ADJUST_DECREMENT,
+  REFUND,
+  UNLINKED_ACTIVITY_REFUND,
+  IMPORT,
+  BLOCK,
+  UNBLOCK,
+  IMPORT_REVERSAL,
 }
 
 enum GiftCardStatus {

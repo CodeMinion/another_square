@@ -5292,3 +5292,311 @@ Map<String, dynamic> _$SearchLoyaltyRewardsRequestLoyaltyRewardQueryToJson(
   writeNotNull('status', _$LoyaltyRewardStatusEnumMap[instance.status]);
   return val;
 }
+
+GiftCard _$GiftCardFromJson(Map<String, dynamic> json) => GiftCard(
+      status: $enumDecodeNullable(_$GiftCardStatusEnumMap, json['status']),
+      id: json['id'] as String?,
+      createdAt: json['created_at'] as String?,
+      customerIds: (json['customer_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      type: $enumDecodeNullable(_$GiftCardTypeEnumMap, json['type']),
+      balanceMoney: json['balance_money'] == null
+          ? null
+          : Money.fromJson(json['balance_money'] as Map<String, dynamic>),
+      gan: json['gan'] as String?,
+      ganSource:
+          $enumDecodeNullable(_$GiftCardGANSourceEnumMap, json['gan_source']),
+    );
+
+Map<String, dynamic> _$GiftCardToJson(GiftCard instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('type', _$GiftCardTypeEnumMap[instance.type]);
+  writeNotNull('balance_money', instance.balanceMoney);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('customer_ids', instance.customerIds);
+  writeNotNull('gan', instance.gan);
+  writeNotNull('gan_source', _$GiftCardGANSourceEnumMap[instance.ganSource]);
+  writeNotNull('status', _$GiftCardStatusEnumMap[instance.status]);
+  return val;
+}
+
+const _$GiftCardStatusEnumMap = {
+  GiftCardStatus.ACTIVE: 'ACTIVE',
+  GiftCardStatus.DEACTIVATED: 'DEACTIVATED',
+  GiftCardStatus.BLOCKED: 'BLOCKED',
+  GiftCardStatus.PENDING: 'PENDING',
+};
+
+const _$GiftCardTypeEnumMap = {
+  GiftCardType.PHYSICAL: 'PHYSICAL',
+  GiftCardType.DIGITAL: 'DIGITAL',
+};
+
+const _$GiftCardGANSourceEnumMap = {
+  GiftCardGANSource.SQUARE: 'SQUARE',
+  GiftCardGANSource.OTHER: 'OTHER',
+};
+
+GiftCardActivity _$GiftCardActivityFromJson(Map<String, dynamic> json) =>
+    GiftCardActivity(
+      type: $enumDecodeNullable(_$GiftCardActivityTypeEnumMap, json['type']),
+      createdAt: json['created_at'] as String?,
+      id: json['id'] as String?,
+      locationId: json['location_id'] as String?,
+      activateActivityDetails: json['activate_activity_details'] == null
+          ? null
+          : GiftCardActivityActivate.fromJson(
+              json['activate_activity_details'] as Map<String, dynamic>),
+      adjustDecrementActivityDetails:
+          json['adjust_decrement_activity_details'] == null
+              ? null
+              : GiftCardActivityAdjustDecrement.fromJson(
+                  json['adjust_decrement_activity_details']
+                      as Map<String, dynamic>),
+      adjustIncrementActivityDetails:
+          json['adjust_increment_activity_details'] == null
+              ? null
+              : GiftCardActivityAdjustIncrement.fromJson(
+                  json['adjust_increment_activity_details']
+                      as Map<String, dynamic>),
+      blockActivityDetails: json['block_activity_details'] == null
+          ? null
+          : GiftCardActivityBlock.fromJson(
+              json['block_activity_details'] as Map<String, dynamic>),
+      clearBalanceActivityDetails: json['clear_balance_activity_details'] ==
+              null
+          ? null
+          : GiftCardActivityClearBalance.fromJson(
+              json['clear_balance_activity_details'] as Map<String, dynamic>),
+      deactivateActivityDetails: json['deactivate_activity_details'] == null
+          ? null
+          : GiftCardActivityDeactivate.fromJson(
+              json['deactivate_activity_details'] as Map<String, dynamic>),
+      giftCardBalanceMoney: json['gift_card_balance_money'] == null
+          ? null
+          : Money.fromJson(
+              json['gift_card_balance_money'] as Map<String, dynamic>),
+      giftCardGan: json['gift_card_gan'] as String?,
+      giftCardId: json['gift_card_id'] as String?,
+      importActivityDetails: json['import_activity_details'] == null
+          ? null
+          : GiftCardActivityImport.fromJson(
+              json['import_activity_details'] as Map<String, dynamic>),
+      importReversalActivityDetails: json['import_reversal_activity_details'] ==
+              null
+          ? null
+          : GiftCardActivityImportReversal.fromJson(
+              json['import_reversal_activity_details'] as Map<String, dynamic>),
+      loadActivityDetails: json['load_activity_details'] == null
+          ? null
+          : GiftCardActivityLoad.fromJson(
+              json['load_activity_details'] as Map<String, dynamic>),
+      redeemActivityDetails: json['redeem_activity_details'] == null
+          ? null
+          : GiftCardActivityRedeem.fromJson(
+              json['redeem_activity_details'] as Map<String, dynamic>),
+      refundActivityDetails: json['refund_activity_details'] == null
+          ? null
+          : GiftCardActivityRefund.fromJson(
+              json['refund_activity_details'] as Map<String, dynamic>),
+      unblockActivityDetails: json['unblock_activity_details'] == null
+          ? null
+          : GiftCardActivityUnblock.fromJson(
+              json['unblock_activity_details'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$GiftCardActivityToJson(GiftCardActivity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('type', _$GiftCardActivityTypeEnumMap[instance.type]);
+  writeNotNull('activate_activity_details', instance.activateActivityDetails);
+  writeNotNull('adjust_decrement_activity_details',
+      instance.adjustDecrementActivityDetails);
+  writeNotNull('adjust_increment_activity_details',
+      instance.adjustIncrementActivityDetails);
+  writeNotNull('block_activity_details', instance.blockActivityDetails);
+  writeNotNull(
+      'clear_balance_activity_details', instance.clearBalanceActivityDetails);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull(
+      'deactivate_activity_details', instance.deactivateActivityDetails);
+  writeNotNull('gift_card_balance_money', instance.giftCardBalanceMoney);
+  writeNotNull('gift_card_gan', instance.giftCardGan);
+  writeNotNull('gift_card_id', instance.giftCardId);
+  writeNotNull('import_activity_details', instance.importActivityDetails);
+  writeNotNull('import_reversal_activity_details',
+      instance.importReversalActivityDetails);
+  writeNotNull('load_activity_details', instance.loadActivityDetails);
+  writeNotNull('redeem_activity_details', instance.redeemActivityDetails);
+  writeNotNull('refund_activity_details', instance.refundActivityDetails);
+  writeNotNull('unblock_activity_details', instance.unblockActivityDetails);
+  return val;
+}
+
+const _$GiftCardActivityTypeEnumMap = {
+  GiftCardActivityType.ACTIVATE: 'ACTIVATE',
+  GiftCardActivityType.LOAD: 'LOAD',
+  GiftCardActivityType.REDEEM: 'REDEEM',
+  GiftCardActivityType.CLEAR_BALANCE: 'CLEAR_BALANCE',
+  GiftCardActivityType.DEACTIVATE: 'DEACTIVATE',
+  GiftCardActivityType.ADJUST_INCREMENT: 'ADJUST_INCREMENT',
+  GiftCardActivityType.ADJUST_DECREMENT: 'ADJUST_DECREMENT',
+  GiftCardActivityType.REFUND: 'REFUND',
+  GiftCardActivityType.UNLINKED_ACTIVITY_REFUND: 'UNLINKED_ACTIVITY_REFUND',
+  GiftCardActivityType.IMPORT: 'IMPORT',
+  GiftCardActivityType.BLOCK: 'BLOCK',
+  GiftCardActivityType.UNBLOCK: 'UNBLOCK',
+  GiftCardActivityType.IMPORT_REVERSAL: 'IMPORT_REVERSAL',
+};
+
+GiftCardActivityUnlinkedActivityRefund
+    _$GiftCardActivityUnlinkedActivityRefundFromJson(
+            Map<String, dynamic> json) =>
+        GiftCardActivityUnlinkedActivityRefund(
+          amountMoney: json['amount_money'] == null
+              ? null
+              : Money.fromJson(json['amount_money'] as Map<String, dynamic>),
+          referenceId: json['reference_id'] as String?,
+          paymentId: json['payment_id'] as String?,
+        );
+
+Map<String, dynamic> _$GiftCardActivityUnlinkedActivityRefundToJson(
+    GiftCardActivityUnlinkedActivityRefund instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('amount_money', instance.amountMoney);
+  writeNotNull('payment_id', instance.paymentId);
+  writeNotNull('reference_id', instance.referenceId);
+  return val;
+}
+
+GiftCardActivityUnblock _$GiftCardActivityUnblockFromJson(
+        Map<String, dynamic> json) =>
+    GiftCardActivityUnblock(
+      reason: json['reason'] as String?,
+    );
+
+Map<String, dynamic> _$GiftCardActivityUnblockToJson(
+    GiftCardActivityUnblock instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('reason', instance.reason);
+  return val;
+}
+
+GiftCardActivityRefund _$GiftCardActivityRefundFromJson(
+        Map<String, dynamic> json) =>
+    GiftCardActivityRefund();
+
+Map<String, dynamic> _$GiftCardActivityRefundToJson(
+        GiftCardActivityRefund instance) =>
+    <String, dynamic>{};
+
+GiftCardActivityRedeem _$GiftCardActivityRedeemFromJson(
+        Map<String, dynamic> json) =>
+    GiftCardActivityRedeem();
+
+Map<String, dynamic> _$GiftCardActivityRedeemToJson(
+        GiftCardActivityRedeem instance) =>
+    <String, dynamic>{};
+
+GiftCardActivityLoad _$GiftCardActivityLoadFromJson(
+        Map<String, dynamic> json) =>
+    GiftCardActivityLoad();
+
+Map<String, dynamic> _$GiftCardActivityLoadToJson(
+        GiftCardActivityLoad instance) =>
+    <String, dynamic>{};
+
+GiftCardActivityImportReversal _$GiftCardActivityImportReversalFromJson(
+        Map<String, dynamic> json) =>
+    GiftCardActivityImportReversal();
+
+Map<String, dynamic> _$GiftCardActivityImportReversalToJson(
+        GiftCardActivityImportReversal instance) =>
+    <String, dynamic>{};
+
+GiftCardActivityImport _$GiftCardActivityImportFromJson(
+        Map<String, dynamic> json) =>
+    GiftCardActivityImport();
+
+Map<String, dynamic> _$GiftCardActivityImportToJson(
+        GiftCardActivityImport instance) =>
+    <String, dynamic>{};
+
+GiftCardActivityDeactivate _$GiftCardActivityDeactivateFromJson(
+        Map<String, dynamic> json) =>
+    GiftCardActivityDeactivate();
+
+Map<String, dynamic> _$GiftCardActivityDeactivateToJson(
+        GiftCardActivityDeactivate instance) =>
+    <String, dynamic>{};
+
+GiftCardActivityClearBalance _$GiftCardActivityClearBalanceFromJson(
+        Map<String, dynamic> json) =>
+    GiftCardActivityClearBalance();
+
+Map<String, dynamic> _$GiftCardActivityClearBalanceToJson(
+        GiftCardActivityClearBalance instance) =>
+    <String, dynamic>{};
+
+GiftCardActivityBlock _$GiftCardActivityBlockFromJson(
+        Map<String, dynamic> json) =>
+    GiftCardActivityBlock();
+
+Map<String, dynamic> _$GiftCardActivityBlockToJson(
+        GiftCardActivityBlock instance) =>
+    <String, dynamic>{};
+
+GiftCardActivityAdjustIncrement _$GiftCardActivityAdjustIncrementFromJson(
+        Map<String, dynamic> json) =>
+    GiftCardActivityAdjustIncrement();
+
+Map<String, dynamic> _$GiftCardActivityAdjustIncrementToJson(
+        GiftCardActivityAdjustIncrement instance) =>
+    <String, dynamic>{};
+
+GiftCardActivityAdjustDecrement _$GiftCardActivityAdjustDecrementFromJson(
+        Map<String, dynamic> json) =>
+    GiftCardActivityAdjustDecrement();
+
+Map<String, dynamic> _$GiftCardActivityAdjustDecrementToJson(
+        GiftCardActivityAdjustDecrement instance) =>
+    <String, dynamic>{};
+
+GiftCardActivityActivate _$GiftCardActivityActivateFromJson(
+        Map<String, dynamic> json) =>
+    GiftCardActivityActivate();
+
+Map<String, dynamic> _$GiftCardActivityActivateToJson(
+        GiftCardActivityActivate instance) =>
+    <String, dynamic>{};
