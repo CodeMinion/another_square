@@ -4487,43 +4487,808 @@ Map<String, dynamic> _$CustomerPreferencesToJson(CustomerPreferences instance) {
 }
 
 CustomerQuery _$CustomerQueryFromJson(Map<String, dynamic> json) =>
-    CustomerQuery();
+    CustomerQuery(
+      groupIds: json['group_ids'] == null
+          ? null
+          : FilterValue.fromJson(json['group_ids'] as Map<String, dynamic>),
+      creationSource: json[' creation_source'] == null
+          ? null
+          : CustomerCreationSourceFilter.fromJson(
+              json[' creation_source'] as Map<String, dynamic>),
+      emailAddress: json['email_address'] == null
+          ? null
+          : CustomerTextFilter.fromJson(
+              json['email_address'] as Map<String, dynamic>),
+      phoneNumber: json['phone_number'] == null
+          ? null
+          : CustomerTextFilter.fromJson(
+              json['phone_number'] as Map<String, dynamic>),
+      createdAt: json['created_at'] == null
+          ? null
+          : TimeRange.fromJson(json['created_at'] as Map<String, dynamic>),
+      referenceId: json['reference_id'] == null
+          ? null
+          : CustomerTextFilter.fromJson(
+              json['reference_id'] as Map<String, dynamic>),
+      updated_at: json['updated_at'] == null
+          ? null
+          : TimeRange.fromJson(json['updated_at'] as Map<String, dynamic>),
+    );
 
-Map<String, dynamic> _$CustomerQueryToJson(CustomerQuery instance) =>
-    <String, dynamic>{};
+Map<String, dynamic> _$CustomerQueryToJson(CustomerQuery instance) {
+  final val = <String, dynamic>{};
 
-FilterValue _$FilterValueFromJson(Map<String, dynamic> json) => FilterValue();
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
 
-Map<String, dynamic> _$FilterValueToJson(FilterValue instance) =>
-    <String, dynamic>{};
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull(' creation_source', instance.creationSource);
+  writeNotNull('email_address', instance.emailAddress);
+  writeNotNull('group_ids', instance.groupIds);
+  writeNotNull('phone_number', instance.phoneNumber);
+  writeNotNull('reference_id', instance.referenceId);
+  writeNotNull('updated_at', instance.updated_at);
+  return val;
+}
+
+FilterValue _$FilterValueFromJson(Map<String, dynamic> json) => FilterValue(
+      all: (json['all'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      any: (json['any'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      none: (json['none'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$FilterValueToJson(FilterValue instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('all', instance.all);
+  writeNotNull('any', instance.any);
+  writeNotNull('none', instance.none);
+  return val;
+}
 
 CustomerTextFilter _$CustomerTextFilterFromJson(Map<String, dynamic> json) =>
-    CustomerTextFilter();
+    CustomerTextFilter(
+      exact: json['exact'] as String?,
+      fuzzy: json['fuzzy'] as String?,
+    );
 
-Map<String, dynamic> _$CustomerTextFilterToJson(CustomerTextFilter instance) =>
-    <String, dynamic>{};
+Map<String, dynamic> _$CustomerTextFilterToJson(CustomerTextFilter instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('exact', instance.exact);
+  writeNotNull('fuzzy', instance.fuzzy);
+  return val;
+}
 
 CustomerCreationSourceFilter _$CustomerCreationSourceFilterFromJson(
         Map<String, dynamic> json) =>
-    CustomerCreationSourceFilter();
+    CustomerCreationSourceFilter(
+      values: (json['values'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$CustomerCreationSourceEnumMap, e))
+          .toList(),
+      rule: $enumDecodeNullable(
+          _$CustomerInclusionExclusionEnumMap, json['rule']),
+    );
 
 Map<String, dynamic> _$CustomerCreationSourceFilterToJson(
-        CustomerCreationSourceFilter instance) =>
-    <String, dynamic>{};
+    CustomerCreationSourceFilter instance) {
+  final val = <String, dynamic>{};
 
-TimeRange _$TimeRangeFromJson(Map<String, dynamic> json) => TimeRange();
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
 
-Map<String, dynamic> _$TimeRangeToJson(TimeRange instance) =>
-    <String, dynamic>{};
+  writeNotNull('rule', _$CustomerInclusionExclusionEnumMap[instance.rule]);
+  writeNotNull('values',
+      instance.values?.map((e) => _$CustomerCreationSourceEnumMap[e]).toList());
+  return val;
+}
+
+const _$CustomerInclusionExclusionEnumMap = {
+  CustomerInclusionExclusion.INCLUDE: 'INCLUDE',
+  CustomerInclusionExclusion.EXCLUDE: 'EXCLUDE',
+};
+
+TimeRange _$TimeRangeFromJson(Map<String, dynamic> json) => TimeRange(
+      endAt: json['end_at'] as String?,
+      startAt: json['start_at'] as String?,
+    );
+
+Map<String, dynamic> _$TimeRangeToJson(TimeRange instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('end_at', instance.endAt);
+  writeNotNull('start_at', instance.startAt);
+  return val;
+}
 
 CustomerFilter _$CustomerFilterFromJson(Map<String, dynamic> json) =>
-    CustomerFilter();
+    CustomerFilter(
+      referenceId: json['reference_id'] == null
+          ? null
+          : CustomerTextFilter.fromJson(
+              json['reference_id'] as Map<String, dynamic>),
+      createdAt: json['created_at'] == null
+          ? null
+          : TimeRange.fromJson(json['created_at'] as Map<String, dynamic>),
+      phoneNumber: json['phone_number'] == null
+          ? null
+          : CustomerTextFilter.fromJson(
+              json['phone_number'] as Map<String, dynamic>),
+      emailAddress: json['email_address'] == null
+          ? null
+          : CustomerTextFilter.fromJson(
+              json['email_address'] as Map<String, dynamic>),
+      creationSource: json['creation_source'] == null
+          ? null
+          : CustomerCreationSourceFilter.fromJson(
+              json['creation_source'] as Map<String, dynamic>),
+      groupIds: json['group_ids'] == null
+          ? null
+          : FilterValue.fromJson(json['group_ids'] as Map<String, dynamic>),
+      updatedAt: json['updated_at'] == null
+          ? null
+          : TimeRange.fromJson(json['updated_at'] as Map<String, dynamic>),
+    );
 
-Map<String, dynamic> _$CustomerFilterToJson(CustomerFilter instance) =>
-    <String, dynamic>{};
+Map<String, dynamic> _$CustomerFilterToJson(CustomerFilter instance) {
+  final val = <String, dynamic>{};
 
-CustomerSort _$CustomerSortFromJson(Map<String, dynamic> json) =>
-    CustomerSort();
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
 
-Map<String, dynamic> _$CustomerSortToJson(CustomerSort instance) =>
-    <String, dynamic>{};
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('creation_source', instance.creationSource);
+  writeNotNull('email_address', instance.emailAddress);
+  writeNotNull('group_ids', instance.groupIds);
+  writeNotNull('phone_number', instance.phoneNumber);
+  writeNotNull('reference_id', instance.referenceId);
+  writeNotNull('updated_at', instance.updatedAt);
+  return val;
+}
+
+CustomerSort _$CustomerSortFromJson(Map<String, dynamic> json) => CustomerSort(
+      order: $enumDecodeNullable(_$SortOrderEnumMap, json['order']),
+      field: $enumDecodeNullable(_$CustomerSortFieldEnumMap, json['field']),
+    );
+
+Map<String, dynamic> _$CustomerSortToJson(CustomerSort instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('field', _$CustomerSortFieldEnumMap[instance.field]);
+  writeNotNull('order', _$SortOrderEnumMap[instance.order]);
+  return val;
+}
+
+const _$CustomerSortFieldEnumMap = {
+  CustomerSortField.DEFAULT: 'DEFAULT',
+  CustomerSortField.CREATED_AT: 'CREATED_AT',
+};
+
+CustomerGroup _$CustomerGroupFromJson(Map<String, dynamic> json) =>
+    CustomerGroup(
+      updatedAt: json['updated_at'] as String?,
+      createdAt: json['created_at'] as String?,
+      id: json['id'] as String?,
+      name: json['name'] as String?,
+    );
+
+Map<String, dynamic> _$CustomerGroupToJson(CustomerGroup instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('name', instance.name);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  return val;
+}
+
+CustomerSegment _$CustomerSegmentFromJson(Map<String, dynamic> json) =>
+    CustomerSegment(
+      name: json['name'] as String?,
+      id: json['id'] as String?,
+      createdAt: json['created_at'] as String?,
+      updatedAt: json['updated_at'] as String?,
+    );
+
+Map<String, dynamic> _$CustomerSegmentToJson(CustomerSegment instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('name', instance.name);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  return val;
+}
+
+LoyaltyAccount _$LoyaltyAccountFromJson(Map<String, dynamic> json) =>
+    LoyaltyAccount(
+      updatedAt: json['updated_at'] as String?,
+      createdAt: json['created_at'] as String?,
+      id: json['id'] as String?,
+      customerId: json['customer_id'] as String?,
+      balance: json['balance'] as int?,
+      enrolledAt: json['enrolled_at'] as String?,
+      expiringPointDeadlines:
+          (json['expiring_point_deadlines'] as List<dynamic>?)
+              ?.map((e) => LoyaltyAccountExpiringPointDeadline.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
+      lifetimePoints: json['lifetime_points'] as int?,
+      mapping: json['mapping'] == null
+          ? null
+          : LoyaltyAccountMapping.fromJson(
+              json['mapping'] as Map<String, dynamic>),
+      programId: json['program_id'] as String?,
+    );
+
+Map<String, dynamic> _$LoyaltyAccountToJson(LoyaltyAccount instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('program_id', instance.programId);
+  writeNotNull('balance', instance.balance);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('customer_id', instance.customerId);
+  writeNotNull('enrolled_at', instance.enrolledAt);
+  writeNotNull('expiring_point_deadlines', instance.expiringPointDeadlines);
+  writeNotNull('lifetime_points', instance.lifetimePoints);
+  writeNotNull('mapping', instance.mapping);
+  writeNotNull('updated_at', instance.updatedAt);
+  return val;
+}
+
+LoyaltyAccountMapping _$LoyaltyAccountMappingFromJson(
+        Map<String, dynamic> json) =>
+    LoyaltyAccountMapping(
+      id: json['id'] as String?,
+      createdAt: json['created_at'] as String?,
+      phoneNumber: json['phone_number'] as String?,
+    );
+
+Map<String, dynamic> _$LoyaltyAccountMappingToJson(
+    LoyaltyAccountMapping instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('phone_number', instance.phoneNumber);
+  return val;
+}
+
+LoyaltyAccountExpiringPointDeadline
+    _$LoyaltyAccountExpiringPointDeadlineFromJson(Map<String, dynamic> json) =>
+        LoyaltyAccountExpiringPointDeadline(
+          expiresAt: json['expires_at'] as String?,
+          points: json['points'] as int?,
+        );
+
+Map<String, dynamic> _$LoyaltyAccountExpiringPointDeadlineToJson(
+    LoyaltyAccountExpiringPointDeadline instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('expires_at', instance.expiresAt);
+  writeNotNull('points', instance.points);
+  return val;
+}
+
+SearchLoyaltyAccountsRequestLoyaltyAccountQuery
+    _$SearchLoyaltyAccountsRequestLoyaltyAccountQueryFromJson(
+            Map<String, dynamic> json) =>
+        SearchLoyaltyAccountsRequestLoyaltyAccountQuery(
+          customerIds: (json['customer_ids'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList(),
+          mappings: (json['mappings'] as List<dynamic>?)
+              ?.map((e) =>
+                  LoyaltyAccountMapping.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        );
+
+Map<String, dynamic> _$SearchLoyaltyAccountsRequestLoyaltyAccountQueryToJson(
+    SearchLoyaltyAccountsRequestLoyaltyAccountQuery instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('customer_ids', instance.customerIds);
+  writeNotNull('mappings', instance.mappings);
+  return val;
+}
+
+LoyaltyProgram _$LoyaltyProgramFromJson(Map<String, dynamic> json) =>
+    LoyaltyProgram(
+      createdAt: json['created_at'] as String?,
+      id: json['id'] as String?,
+      updatedAt: json['updated_at'] as String?,
+      locationIds: (json['location_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      status:
+          $enumDecodeNullable(_$LoyaltyProgramStatusEnumMap, json['status']),
+      accrualRules: (json['accrual_rules'] as List<dynamic>?)
+          ?.map((e) =>
+              LoyaltyProgramAccrualRule.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      expirationPolicy: json['expiration_policy'] == null
+          ? null
+          : LoyaltyProgramExpirationPolicy.fromJson(
+              json['expiration_policy'] as Map<String, dynamic>),
+      rewardTiers: (json['reward_tiers'] as List<dynamic>?)
+          ?.map((e) =>
+              LoyaltyProgramRewardTier.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      terminology: json['terminology'] == null
+          ? null
+          : LoyaltyProgramTerminology.fromJson(
+              json['terminology'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$LoyaltyProgramToJson(LoyaltyProgram instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('accrual_rules', instance.accrualRules);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('location_ids', instance.locationIds);
+  writeNotNull('reward_tiers', instance.rewardTiers);
+  writeNotNull('status', _$LoyaltyProgramStatusEnumMap[instance.status]);
+  writeNotNull('terminology', instance.terminology);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('expiration_policy', instance.expirationPolicy);
+  return val;
+}
+
+const _$LoyaltyProgramStatusEnumMap = {
+  LoyaltyProgramStatus.INACTIVE: 'INACTIVE',
+  LoyaltyProgramStatus.ACTIVE: 'ACTIVE',
+};
+
+LoyaltyProgramExpirationPolicy _$LoyaltyProgramExpirationPolicyFromJson(
+        Map<String, dynamic> json) =>
+    LoyaltyProgramExpirationPolicy(
+      expirationDuration: json['expiration_duration'] as String?,
+    );
+
+Map<String, dynamic> _$LoyaltyProgramExpirationPolicyToJson(
+    LoyaltyProgramExpirationPolicy instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('expiration_duration', instance.expirationDuration);
+  return val;
+}
+
+LoyaltyProgramTerminology _$LoyaltyProgramTerminologyFromJson(
+        Map<String, dynamic> json) =>
+    LoyaltyProgramTerminology(
+      one: json['one'] as String?,
+      other: json['other'] as String?,
+    );
+
+Map<String, dynamic> _$LoyaltyProgramTerminologyToJson(
+    LoyaltyProgramTerminology instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('one', instance.one);
+  writeNotNull('other', instance.other);
+  return val;
+}
+
+LoyaltyProgramRewardTier _$LoyaltyProgramRewardTierFromJson(
+        Map<String, dynamic> json) =>
+    LoyaltyProgramRewardTier(
+      id: json['id'] as String?,
+      createdAt: json['created_at'] as String?,
+      points: json['points'] as int?,
+      name: json['name'] as String?,
+      definition: json['definition'] == null
+          ? null
+          : LoyaltyProgramRewardDefinition.fromJson(
+              json['definition'] as Map<String, dynamic>),
+      pricingRuleReference: json['pricing_rule_reference'] == null
+          ? null
+          : CatalogObjectReference.fromJson(
+              json['pricing_rule_reference'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$LoyaltyProgramRewardTierToJson(
+    LoyaltyProgramRewardTier instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('name', instance.name);
+  writeNotNull('points', instance.points);
+  writeNotNull('pricing_rule_reference', instance.pricingRuleReference);
+  writeNotNull('definition', instance.definition);
+  return val;
+}
+
+LoyaltyProgramRewardDefinition _$LoyaltyProgramRewardDefinitionFromJson(
+        Map<String, dynamic> json) =>
+    LoyaltyProgramRewardDefinition(
+      discountType: $enumDecodeNullable(
+          _$LoyaltyProgramRewardDefinitionTypeEnumMap, json['discount_type']),
+      scope: $enumDecodeNullable(
+          _$LoyaltyProgramRewardDefinitionScopeEnumMap, json['scope']),
+      catalogObjectIds: (json['catalog_object_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      fixedDiscountMoney: json['fixed_discount_money'] == null
+          ? null
+          : Money.fromJson(
+              json['fixed_discount_money'] as Map<String, dynamic>),
+      maxDiscountMoney: json['max_discount_money'] == null
+          ? null
+          : Money.fromJson(json['max_discount_money'] as Map<String, dynamic>),
+      percentageDiscount: json['percentage_discount'] as String?,
+    );
+
+Map<String, dynamic> _$LoyaltyProgramRewardDefinitionToJson(
+    LoyaltyProgramRewardDefinition instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('discount_type',
+      _$LoyaltyProgramRewardDefinitionTypeEnumMap[instance.discountType]);
+  writeNotNull(
+      'scope', _$LoyaltyProgramRewardDefinitionScopeEnumMap[instance.scope]);
+  writeNotNull('catalog_object_ids', instance.catalogObjectIds);
+  writeNotNull('fixed_discount_money', instance.fixedDiscountMoney);
+  writeNotNull('max_discount_money', instance.maxDiscountMoney);
+  writeNotNull('percentage_discount', instance.percentageDiscount);
+  return val;
+}
+
+const _$LoyaltyProgramRewardDefinitionTypeEnumMap = {
+  LoyaltyProgramRewardDefinitionType.FIXED_AMOUNT: 'FIXED_AMOUNT',
+  LoyaltyProgramRewardDefinitionType.FIXED_PERCENTAGE: 'FIXED_PERCENTAGE',
+};
+
+const _$LoyaltyProgramRewardDefinitionScopeEnumMap = {
+  LoyaltyProgramRewardDefinitionScope.ORDER: 'ORDER',
+  LoyaltyProgramRewardDefinitionScope.ITEM_VARIATION: 'ITEM_VARIATION',
+  LoyaltyProgramRewardDefinitionScope.CATEGORY: 'CATEGORY',
+};
+
+CatalogObjectReference _$CatalogObjectReferenceFromJson(
+        Map<String, dynamic> json) =>
+    CatalogObjectReference(
+      objectId: json['object_id'] as String?,
+      catalogVersion: json['catalog_version'] as int?,
+    );
+
+Map<String, dynamic> _$CatalogObjectReferenceToJson(
+    CatalogObjectReference instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('catalog_version', instance.catalogVersion);
+  writeNotNull('object_id', instance.objectId);
+  return val;
+}
+
+LoyaltyProgramAccrualRule _$LoyaltyProgramAccrualRuleFromJson(
+        Map<String, dynamic> json) =>
+    LoyaltyProgramAccrualRule(
+      points: json['points'] as int?,
+      itemVariationData: json['item_variation_data'] == null
+          ? null
+          : LoyaltyProgramAccrualRuleItemVariationData.fromJson(
+              json['item_variation_data'] as Map<String, dynamic>),
+      categoryData: json['category_data'] == null
+          ? null
+          : LoyaltyProgramAccrualRuleCategoryData.fromJson(
+              json['category_data'] as Map<String, dynamic>),
+      accrualType: $enumDecodeNullable(
+          _$LoyaltyProgramAccrualRuleTypeEnumMap, json['accrual_type']),
+      spendData: json['spend_data'] == null
+          ? null
+          : LoyaltyProgramAccrualRuleSpendData.fromJson(
+              json['spend_data'] as Map<String, dynamic>),
+      visitData: json['visit_data'] == null
+          ? null
+          : LoyaltyProgramAccrualRuleVisitData.fromJson(
+              json['visit_data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$LoyaltyProgramAccrualRuleToJson(
+    LoyaltyProgramAccrualRule instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('accrual_type',
+      _$LoyaltyProgramAccrualRuleTypeEnumMap[instance.accrualType]);
+  writeNotNull('category_data', instance.categoryData);
+  writeNotNull('item_variation_data', instance.itemVariationData);
+  writeNotNull('points', instance.points);
+  writeNotNull('spend_data', instance.spendData);
+  writeNotNull('visit_data', instance.visitData);
+  return val;
+}
+
+const _$LoyaltyProgramAccrualRuleTypeEnumMap = {
+  LoyaltyProgramAccrualRuleType.VISIT: 'VISIT',
+  LoyaltyProgramAccrualRuleType.SPEND: 'SPEND',
+  LoyaltyProgramAccrualRuleType.ITEM_VARIATION: 'ITEM_VARIATION',
+  LoyaltyProgramAccrualRuleType.CATEGORY: 'CATEGORY',
+};
+
+LoyaltyProgramAccrualRuleVisitData _$LoyaltyProgramAccrualRuleVisitDataFromJson(
+        Map<String, dynamic> json) =>
+    LoyaltyProgramAccrualRuleVisitData(
+      minimumAmountMoney: json['minimum_amount_money'] == null
+          ? null
+          : Money.fromJson(
+              json['minimum_amount_money'] as Map<String, dynamic>),
+      taxMode: $enumDecodeNullable(
+          _$LoyaltyProgramAccrualRuleTaxModeEnumMap, json['tax_mode']),
+    );
+
+Map<String, dynamic> _$LoyaltyProgramAccrualRuleVisitDataToJson(
+    LoyaltyProgramAccrualRuleVisitData instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'tax_mode', _$LoyaltyProgramAccrualRuleTaxModeEnumMap[instance.taxMode]);
+  writeNotNull('minimum_amount_money', instance.minimumAmountMoney);
+  return val;
+}
+
+const _$LoyaltyProgramAccrualRuleTaxModeEnumMap = {
+  LoyaltyProgramAccrualRuleTaxMode.BEFORE_TAX: 'BEFORE_TAX',
+  LoyaltyProgramAccrualRuleTaxMode.AFTER_TAX: 'AFTER_TAX',
+};
+
+LoyaltyProgramAccrualRuleSpendData _$LoyaltyProgramAccrualRuleSpendDataFromJson(
+        Map<String, dynamic> json) =>
+    LoyaltyProgramAccrualRuleSpendData(
+      taxMode: $enumDecodeNullable(
+          _$LoyaltyProgramAccrualRuleTaxModeEnumMap, json['tax_mode']),
+      amountMoney: json['amount_money'] == null
+          ? null
+          : Money.fromJson(json['amount_money'] as Map<String, dynamic>),
+      excludedCategoryIds: (json['excluded_category_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      excludedItemVariationIds:
+          (json['excluded_item_variation_ids'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList(),
+    );
+
+Map<String, dynamic> _$LoyaltyProgramAccrualRuleSpendDataToJson(
+    LoyaltyProgramAccrualRuleSpendData instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('amount_money', instance.amountMoney);
+  writeNotNull(
+      'tax_mode', _$LoyaltyProgramAccrualRuleTaxModeEnumMap[instance.taxMode]);
+  writeNotNull('excluded_category_ids', instance.excludedCategoryIds);
+  writeNotNull(
+      'excluded_item_variation_ids', instance.excludedItemVariationIds);
+  return val;
+}
+
+LoyaltyProgramAccrualRuleItemVariationData
+    _$LoyaltyProgramAccrualRuleItemVariationDataFromJson(
+            Map<String, dynamic> json) =>
+        LoyaltyProgramAccrualRuleItemVariationData(
+          itemVariationId: json['item_variation_id'] as String?,
+        );
+
+Map<String, dynamic> _$LoyaltyProgramAccrualRuleItemVariationDataToJson(
+    LoyaltyProgramAccrualRuleItemVariationData instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('item_variation_id', instance.itemVariationId);
+  return val;
+}
+
+LoyaltyProgramAccrualRuleCategoryData
+    _$LoyaltyProgramAccrualRuleCategoryDataFromJson(
+            Map<String, dynamic> json) =>
+        LoyaltyProgramAccrualRuleCategoryData(
+          categoryId: json['category_id'] as String?,
+        );
+
+Map<String, dynamic> _$LoyaltyProgramAccrualRuleCategoryDataToJson(
+    LoyaltyProgramAccrualRuleCategoryData instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('category_id', instance.categoryId);
+  return val;
+}
+
+LoyaltyReward _$LoyaltyRewardFromJson(Map<String, dynamic> json) =>
+    LoyaltyReward(
+      points: json['points'] as int?,
+      createdAt: json['created_at'] as String?,
+      id: json['id'] as String?,
+      status: $enumDecodeNullable(_$LoyaltyRewardStatusEnumMap, json['status']),
+      updatedAt: json['updated_at'] as String?,
+      orderId: json['order_id'] as String?,
+      rewardTierId: json['reward_tier_id'] as String?,
+      loyaltyAccountId: json['loyalty_account_id'] as String?,
+      redeemedAt: json['redeemed_at'] as String?,
+    );
+
+Map<String, dynamic> _$LoyaltyRewardToJson(LoyaltyReward instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('loyalty_account_id', instance.loyaltyAccountId);
+  writeNotNull('reward_tier_id', instance.rewardTierId);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('order_id', instance.orderId);
+  writeNotNull('points', instance.points);
+  writeNotNull('redeemed_at', instance.redeemedAt);
+  writeNotNull('status', _$LoyaltyRewardStatusEnumMap[instance.status]);
+  writeNotNull('updated_at', instance.updatedAt);
+  return val;
+}
+
+const _$LoyaltyRewardStatusEnumMap = {
+  LoyaltyRewardStatus.ISSUED: 'ISSUED',
+  LoyaltyRewardStatus.REDEEMED: 'REDEEMED',
+  LoyaltyRewardStatus.DELETED: 'DELETED',
+};
+
+SearchLoyaltyRewardsRequestLoyaltyRewardQuery
+    _$SearchLoyaltyRewardsRequestLoyaltyRewardQueryFromJson(
+            Map<String, dynamic> json) =>
+        SearchLoyaltyRewardsRequestLoyaltyRewardQuery(
+          loyaltyAccountId: json['loyalty_account_id'] as String?,
+          status:
+              $enumDecodeNullable(_$LoyaltyRewardStatusEnumMap, json['status']),
+        );
+
+Map<String, dynamic> _$SearchLoyaltyRewardsRequestLoyaltyRewardQueryToJson(
+    SearchLoyaltyRewardsRequestLoyaltyRewardQuery instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('loyalty_account_id', instance.loyaltyAccountId);
+  writeNotNull('status', _$LoyaltyRewardStatusEnumMap[instance.status]);
+  return val;
+}
