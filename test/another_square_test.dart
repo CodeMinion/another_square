@@ -8,6 +8,8 @@ void main() {
   const String clientId = "sandbox-sq0idb-BOZshuZ7XTKLKpBk73rJtQ";
   const String clientSecret = "sandbox-sq0csb-JFyKEpzTvo2Sp_TXf8yZ20FAaOycuokBeQR0Fj3KXaQ";
   const String refreshToken = "EQAAEBuVqFR903EI0SY3q9RXU6aDZkltg9JA-CWPgBFc-w2GGUO1naFcaAF9wLrZ";
+  const String authToken = "";
+
 
   ///
   /// Test that the correct auth URL is generated
@@ -100,4 +102,222 @@ void main() {
     expect(response, isNotNull);
 
   });
+
+  ///
+  /// Test for auth token refresh
+  test('test create terminal checkout ', () async {
+    final squareClient = SquareClient(
+        applicationId: applicationId,
+        clientId: clientId,
+        clientSecret: clientSecret,
+        environmentType: EnvironmentType.Sandbox
+    );
+    await squareClient.initialize();
+    expect(squareClient.isInitialized(), true);
+
+    var token = await squareClient.refreshToken(
+        refreshToken: refreshToken
+    );
+    print (token);
+    expect(token, isNotNull);
+
+    var result = await squareClient.createTerminalCheckout(request:
+    CreateTerminalCheckoutRequest.fromJson({
+      "idempotency_key": "28a0c3bc-7839-11ea-bc55-0242ac130003",
+      "checkout": {
+        "amount_money": {
+          "amount": 2610,
+          "currency": "USD"
+        },
+        "reference_id": "id11572",
+        "device_options": {
+          "device_id": "dbb5d83a-7838-11ea-bc55-0242ac130003"
+        },
+        "note": "A brief note"
+      }
+    }));
+
+
+    expect(result, isNotNull);
+
+  });
+
+  ///
+  /// Tests searching terminal checkouts
+  test('test search terminal checkout ', () async {
+    final squareClient = SquareClient(
+        applicationId: applicationId,
+        clientId: clientId,
+        clientSecret: clientSecret,
+        environmentType: EnvironmentType.Sandbox
+    );
+    await squareClient.initialize();
+    expect(squareClient.isInitialized(), true);
+
+    var result = await squareClient.searchTerminalCheckout(
+        authToken: authToken,
+        request:
+    SearchTerminalRequest.fromJson({
+      "limit": 2,
+      "query": {
+        "filter": {
+          "status": "COMPLETED"
+        }
+      }
+    }));
+
+
+    expect(result, isNotNull);
+
+  });
+
+  ///
+  /// Tests reading a terminal checkout
+  test('test read terminal checkout ', () async {
+    final squareClient = SquareClient(
+        applicationId: applicationId,
+        clientId: clientId,
+        clientSecret: clientSecret,
+        environmentType: EnvironmentType.Sandbox
+    );
+    await squareClient.initialize();
+    expect(squareClient.isInitialized(), true);
+
+    var result = await squareClient.readTerminalCheckout(
+        authToken: authToken,
+        checkoutId: "1234");
+
+    expect(result, isNotNull);
+
+  });
+
+  ///
+  /// Test the cancel flow of a terminal checkout
+  ///
+  test('test cancel terminal checkout ', () async {
+    final squareClient = SquareClient(
+        applicationId: applicationId,
+        clientId: clientId,
+        clientSecret: clientSecret,
+        environmentType: EnvironmentType.Sandbox
+    );
+    await squareClient.initialize();
+    expect(squareClient.isInitialized(), true);
+
+    var result = await squareClient.cancelTerminalCheckout(
+        authToken: authToken,
+        checkoutId: "08YceKh7B3ZqO");
+
+    expect(result, isNotNull);
+
+  });
+
+  ///
+  /// Test for auth token refresh
+  test('test create terminal refund ', () async {
+    final squareClient = SquareClient(
+        applicationId: applicationId,
+        clientId: clientId,
+        clientSecret: clientSecret,
+        environmentType: EnvironmentType.Sandbox
+    );
+    await squareClient.initialize();
+    expect(squareClient.isInitialized(), true);
+
+    var token = await squareClient.refreshToken(
+        refreshToken: refreshToken
+    );
+    print (token);
+    expect(token, isNotNull);
+
+    var result = await squareClient.createTerminalRefund(request:
+    CreateRefundRequest.fromJson({
+      "idempotency_key": "402a640b-b26f-401f-b406-46f839590c04",
+      "refund": {
+        "amount_money": {
+          "amount": 111,
+          "currency": "CAD"
+        },
+        "device_id": "f72dfb8e-4d65-4e56-aade-ec3fb8d33291",
+        "reason": "Returning items",
+        "payment_id": "5O5OvgkcNUhl7JBuINflcjKqUzXZY"
+      }
+    }));
+
+
+    expect(result, isNotNull);
+
+  });
+
+  ///
+  /// Tests searching terminal refund
+  test('test search terminal refund ', () async {
+    final squareClient = SquareClient(
+        applicationId: applicationId,
+        clientId: clientId,
+        clientSecret: clientSecret,
+        environmentType: EnvironmentType.Sandbox
+    );
+    await squareClient.initialize();
+    expect(squareClient.isInitialized(), true);
+
+    var result = await squareClient.searchTerminalRefund(
+        authToken: authToken,
+        request:
+        SearchTerminalRequest.fromJson({
+          "limit": 1,
+          "query": {
+            "filter": {
+              "status": "COMPLETED"
+            }
+          }
+        }));
+
+
+    expect(result, isNotNull);
+
+  });
+
+  ///
+  /// Tests reading a terminal refund
+  ///
+  test('test read terminal refund ', () async {
+    final squareClient = SquareClient(
+        applicationId: applicationId,
+        clientId: clientId,
+        clientSecret: clientSecret,
+        environmentType: EnvironmentType.Sandbox
+    );
+    await squareClient.initialize();
+    expect(squareClient.isInitialized(), true);
+
+    var result = await squareClient.readTerminalRefund(
+        authToken: authToken,
+        terminalRefundId: "terminal_refund_id0");
+
+    expect(result, isNotNull);
+
+  });
+
+  ///
+  /// Test the cancel flow of a terminal refund
+  ///
+  test('test cancel terminal refund ', () async {
+    final squareClient = SquareClient(
+        applicationId: applicationId,
+        clientId: clientId,
+        clientSecret: clientSecret,
+        environmentType: EnvironmentType.Sandbox
+    );
+    await squareClient.initialize();
+    expect(squareClient.isInitialized(), true);
+
+    var result = await squareClient.cancelTerminalRefund(
+        authToken: authToken,
+        terminalRefundId: "terminal_refund_id0");
+
+    expect(result, isNotNull);
+
+  });
+
 }

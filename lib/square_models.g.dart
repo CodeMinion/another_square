@@ -6963,3 +6963,383 @@ Map<String, dynamic> _$SiteToJson(Site instance) {
   writeNotNull('updated_at', instance.updatedAt);
   return val;
 }
+
+TerminalCheckout _$TerminalCheckoutFromJson(Map<String, dynamic> json) =>
+    TerminalCheckout(
+      updatedAt: json['updated_at'] as String?,
+      createdAt: json['created_at'] as String?,
+      id: json['id'] as String?,
+      referenceId: json['reference_id'] as String?,
+      locationId: json['location_id'] as String?,
+      status: json['status'] as String?,
+      customerId: json['customer_id'] as String?,
+      amountMoney: json['amount_money'] == null
+          ? null
+          : Money.fromJson(json['amount_money'] as Map<String, dynamic>),
+      note: json['note'] as String?,
+      cancelReason: $enumDecodeNullable(
+          _$ActionCancelReasonEnumMap, json['cancel_reason']),
+      appId: json['app_id'] as String?,
+      deadlineDuration: json['deadline_duration'] as String?,
+      deviceOptions: json['device_options'] == null
+          ? null
+          : DeviceCheckoutOptions.fromJson(
+              json['device_options'] as Map<String, dynamic>),
+      paymentIds: (json['payment_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      paymentType: $enumDecodeNullable(
+          _$CheckoutOptionsPaymentTypeEnumMap, json['payment_type']),
+    );
+
+Map<String, dynamic> _$TerminalCheckoutToJson(TerminalCheckout instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('amount_money', instance.amountMoney);
+  writeNotNull('device_options', instance.deviceOptions);
+  writeNotNull('app_id', instance.appId);
+  writeNotNull(
+      'cancel_reason', _$ActionCancelReasonEnumMap[instance.cancelReason]);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('customer_id', instance.customerId);
+  writeNotNull('deadline_duration', instance.deadlineDuration);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('note', instance.note);
+  writeNotNull('payment_ids', instance.paymentIds);
+  writeNotNull('payment_type',
+      _$CheckoutOptionsPaymentTypeEnumMap[instance.paymentType]);
+  writeNotNull('reference_id', instance.referenceId);
+  writeNotNull('status', instance.status);
+  writeNotNull('updated_at', instance.updatedAt);
+  return val;
+}
+
+const _$ActionCancelReasonEnumMap = {
+  ActionCancelReason.BUYER_CANCELED: 'BUYER_CANCELED',
+  ActionCancelReason.SELLER_CANCELED: 'SELLER_CANCELED',
+  ActionCancelReason.TIMED_OUT: 'TIMED_OUT',
+};
+
+const _$CheckoutOptionsPaymentTypeEnumMap = {
+  CheckoutOptionsPaymentType.CARD_PRESENT: 'CARD_PRESENT',
+  CheckoutOptionsPaymentType.MANUAL_CARD_ENTRY: 'MANUAL_CARD_ENTRY',
+  CheckoutOptionsPaymentType.FELICA_ID: 'FELICA_ID',
+  CheckoutOptionsPaymentType.FELICA_QUICPAY: 'FELICA_QUICPAY',
+  CheckoutOptionsPaymentType.FELICA_TRANSPORTATION_GROUP:
+      'FELICA_TRANSPORTATION_GROUP',
+  CheckoutOptionsPaymentType.FELICA_ALL: 'FELICA_ALL',
+};
+
+DeviceCheckoutOptions _$DeviceCheckoutOptionsFromJson(
+        Map<String, dynamic> json) =>
+    DeviceCheckoutOptions(
+      deviceId: json['device_id'] as String?,
+      skipReceiptScreen: json['skip_receipt_screen'] as bool?,
+      tipSettings: json['tip_settings'] == null
+          ? null
+          : TipSettings.fromJson(json['tip_settings'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DeviceCheckoutOptionsToJson(
+    DeviceCheckoutOptions instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('device_id', instance.deviceId);
+  writeNotNull('skip_receipt_screen', instance.skipReceiptScreen);
+  writeNotNull('tip_settings', instance.tipSettings);
+  return val;
+}
+
+TipSettings _$TipSettingsFromJson(Map<String, dynamic> json) => TipSettings(
+      allowTipping: json['allow_tipping'] as bool?,
+      customTipField: json['custom_tip_field'] as bool?,
+      separateTipScreen: json['separate_tip_screen'] as bool?,
+      smartTipping: json['smart_tipping'] as bool?,
+      tipPercentages: (json['tip_percentages'] as List<dynamic>?)
+          ?.map((e) => e as int)
+          .toList(),
+    );
+
+Map<String, dynamic> _$TipSettingsToJson(TipSettings instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('allow_tipping', instance.allowTipping);
+  writeNotNull('custom_tip_field', instance.customTipField);
+  writeNotNull('separate_tip_screen', instance.separateTipScreen);
+  writeNotNull('smart_tipping', instance.smartTipping);
+  writeNotNull('tip_percentages', instance.tipPercentages);
+  return val;
+}
+
+TerminalCheckoutResponse _$TerminalCheckoutResponseFromJson(
+        Map<String, dynamic> json) =>
+    TerminalCheckoutResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      termCheckout: json['checkout'] == null
+          ? null
+          : TerminalCheckout.fromJson(json['checkout'] as Map<String, dynamic>),
+      checkouts: (json['checkouts'] as List<dynamic>?)
+          ?.map((e) => TerminalCheckout.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      cursor: json['cursor'] as String?,
+    );
+
+Map<String, dynamic> _$TerminalCheckoutResponseToJson(
+    TerminalCheckoutResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('checkout', instance.termCheckout);
+  writeNotNull('checkouts', instance.checkouts);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+TerminalRefundResponse _$TerminalRefundResponseFromJson(
+        Map<String, dynamic> json) =>
+    TerminalRefundResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      refund: json['checkout'] == null
+          ? null
+          : TerminalRefund.fromJson(json['checkout'] as Map<String, dynamic>),
+      refunds: (json['refunds'] as List<dynamic>?)
+          ?.map((e) => TerminalRefund.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      cursor: json['cursor'] as String?,
+    );
+
+Map<String, dynamic> _$TerminalRefundResponseToJson(
+    TerminalRefundResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('checkout', instance.refund);
+  writeNotNull('refunds', instance.refunds);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+CreateTerminalCheckoutRequest _$CreateTerminalCheckoutRequestFromJson(
+        Map<String, dynamic> json) =>
+    CreateTerminalCheckoutRequest(
+      idempotencyKey: json['idempotency_key'] as String,
+      checkout:
+          TerminalCheckout.fromJson(json['checkout'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CreateTerminalCheckoutRequestToJson(
+        CreateTerminalCheckoutRequest instance) =>
+    <String, dynamic>{
+      'idempotency_key': instance.idempotencyKey,
+      'checkout': instance.checkout,
+    };
+
+SearchTerminalRequest _$SearchTerminalRequestFromJson(
+        Map<String, dynamic> json) =>
+    SearchTerminalRequest(
+      cursor: json['cursor'] as String?,
+      query:
+          TerminalSearchQuery.fromJson(json['query'] as Map<String, dynamic>),
+      limit: json['limit'] as int,
+    );
+
+Map<String, dynamic> _$SearchTerminalRequestToJson(
+    SearchTerminalRequest instance) {
+  final val = <String, dynamic>{
+    'query': instance.query,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('cursor', instance.cursor);
+  val['limit'] = instance.limit;
+  return val;
+}
+
+CreateRefundRequest _$CreateRefundRequestFromJson(Map<String, dynamic> json) =>
+    CreateRefundRequest(
+      idempotencyKey: json['idempotency_key'] as String,
+      refund: TerminalRefund.fromJson(json['refund'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CreateRefundRequestToJson(
+        CreateRefundRequest instance) =>
+    <String, dynamic>{
+      'idempotency_key': instance.idempotencyKey,
+      'refund': instance.refund,
+    };
+
+TerminalRefund _$TerminalRefundFromJson(Map<String, dynamic> json) =>
+    TerminalRefund(
+      createdAt: json['created_at'] as String?,
+      status:
+          $enumDecodeNullable(_$TerimnalRefundStatusEnumMap, json['status']),
+      deviceId: json['device_id'] as String?,
+      deadlineDuration: json['deadline_duration'] as String?,
+      appId: json['app_id'] as String?,
+      cancelReason: $enumDecodeNullable(
+          _$ActionCancelReasonEnumMap, json['cancel_reason']),
+      amountMoney: json['amount_money'] == null
+          ? null
+          : Money.fromJson(json['amount_money'] as Map<String, dynamic>),
+      locationId: json['location_id'] as String?,
+      id: json['id'] as String?,
+      updatedAt: json['updated_at'] as String?,
+      reason: json['reason'] as String?,
+      orderId: json['order_id'] as String?,
+      paymentId: json['payment_id'] as String?,
+      refundId: json['refund_id'] as String?,
+    );
+
+Map<String, dynamic> _$TerminalRefundToJson(TerminalRefund instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('amount_money', instance.amountMoney);
+  writeNotNull('payment_id', instance.paymentId);
+  writeNotNull('app_id', instance.appId);
+  writeNotNull(
+      'cancel_reason', _$ActionCancelReasonEnumMap[instance.cancelReason]);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('deadline_duration', instance.deadlineDuration);
+  writeNotNull('device_id', instance.deviceId);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('order_id', instance.orderId);
+  writeNotNull('reason', instance.reason);
+  writeNotNull('refund_id', instance.refundId);
+  writeNotNull('status', _$TerimnalRefundStatusEnumMap[instance.status]);
+  writeNotNull('updated_at', instance.updatedAt);
+  return val;
+}
+
+const _$TerimnalRefundStatusEnumMap = {
+  TerimnalRefundStatus.PENDING: 'PENDING',
+  TerimnalRefundStatus.IN_PROGRESS: 'IN_PROGRESS',
+  TerimnalRefundStatus.CANCELED: 'CANCELED',
+  TerimnalRefundStatus.COMPLETED: 'COMPLETED',
+};
+
+TerminalSearchQuery _$TerminalCheckoutQueryFromJson(
+        Map<String, dynamic> json) =>
+    TerminalSearchQuery(
+      filter: json['filter'] == null
+          ? null
+          : TerminalQueryFilter.fromJson(
+              json['filter'] as Map<String, dynamic>),
+      sort: json['sort'] == null
+          ? null
+          : TerminalQuerySort.fromJson(
+              json['sort'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$TerminalCheckoutQueryToJson(
+    TerminalSearchQuery instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('filter', instance.filter);
+  writeNotNull('sort', instance.sort);
+  return val;
+}
+
+TerminalQueryFilter _$TerminalCheckoutQueryFilterFromJson(
+        Map<String, dynamic> json) =>
+    TerminalQueryFilter(
+      deviceId: json['device_id'] as String?,
+      status:
+          $enumDecodeNullable(_$TerminalCheckoutStatusEnumMap, json['status']),
+      createdAt: json['created_at'] as String?,
+    );
+
+Map<String, dynamic> _$TerminalCheckoutQueryFilterToJson(
+    TerminalQueryFilter instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('device_id', instance.deviceId);
+  writeNotNull('status', _$TerminalCheckoutStatusEnumMap[instance.status]);
+  return val;
+}
+
+const _$TerminalCheckoutStatusEnumMap = {
+  TerminalStatus.PENDING: 'PENDING',
+  TerminalStatus.IN_PROGRESS: 'IN_PROGRESS',
+  TerminalStatus.CANCELED: 'CANCELED',
+  TerminalStatus.COMPLETED: 'COMPLETED',
+};
+
+TerminalQuerySort _$TerminalCheckoutQuerySortFromJson(
+        Map<String, dynamic> json) =>
+    TerminalQuerySort(
+      sortOrder: $enumDecodeNullable(_$SortOrderEnumMap, json['sort_order']),
+    );
+
+Map<String, dynamic> _$TerminalCheckoutQuerySortToJson(
+    TerminalQuerySort instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('sort_order', _$SortOrderEnumMap[instance.sortOrder]);
+  return val;
+}

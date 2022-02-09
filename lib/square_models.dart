@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:json_annotation/json_annotation.dart';
 
 part "square_models.g.dart";
@@ -6673,6 +6671,410 @@ class Site {
   String toString() {
     return toJson().toString();
   }
+}
+
+@JsonSerializable(includeIfNull: false)
+class TerminalCheckout {
+  final String? id;
+
+  @JsonKey(name: "amount_money")
+  final Money? amountMoney;
+
+  @JsonKey(name: "device_options")
+  final DeviceCheckoutOptions? deviceOptions;
+
+  @JsonKey(name: "app_id")
+  final String? appId;
+
+  @JsonKey(name: "cancel_reason")
+  final ActionCancelReason? cancelReason;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "customer_id")
+  final String? customerId;
+  
+  @JsonKey(name: "deadline_duration")
+  final String? deadlineDuration;
+  
+  @JsonKey(name: "location_id")
+  final String? locationId;
+  
+  final String? note;
+  
+  @JsonKey(name: "payment_ids")
+  final List<String>? paymentIds;
+
+  @JsonKey(name: "payment_type")
+  final CheckoutOptionsPaymentType? paymentType;
+
+  @JsonKey(name: "reference_id")
+  final String? referenceId;
+
+  final String? status;
+
+  @JsonKey(name: "updated_at")
+  final String? updatedAt;
+
+  TerminalCheckout({
+    this.updatedAt, this.createdAt, this.id, this.referenceId,
+  this.locationId, this.status, this.customerId, this.amountMoney,
+  this.note, this.cancelReason, this.appId, this.deadlineDuration,
+  this.deviceOptions, this.paymentIds, this.paymentType
+ });
+
+  factory TerminalCheckout.fromJson(Map<String, dynamic> json) =>
+      _$TerminalCheckoutFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TerminalCheckoutToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class DeviceCheckoutOptions {
+
+  @JsonKey(name: "device_id")
+  final String? deviceId;
+
+  @JsonKey(name: "skip_receipt_screen")
+  final bool? skipReceiptScreen;
+
+  @JsonKey(name: "tip_settings")
+  final TipSettings? tipSettings;
+
+  DeviceCheckoutOptions({
+    this.deviceId, this.skipReceiptScreen, this.tipSettings
+  });
+
+  factory DeviceCheckoutOptions.fromJson(Map<String, dynamic> json) =>
+      _$DeviceCheckoutOptionsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DeviceCheckoutOptionsToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class TipSettings {
+
+  @JsonKey(name: "allow_tipping")
+  final bool? allowTipping;
+  
+  @JsonKey(name: "custom_tip_field")
+  final bool? customTipField;
+
+  @JsonKey(name: "separate_tip_screen")
+  final bool? separateTipScreen;
+
+  @JsonKey(name: "smart_tipping")
+  final bool? smartTipping;
+
+  @JsonKey(name: "tip_percentages")
+  final List<int>? tipPercentages;
+
+  TipSettings({
+    this.allowTipping, this.customTipField, this.separateTipScreen,
+  this.smartTipping, this.tipPercentages
+  });
+
+  factory TipSettings.fromJson(Map<String, dynamic> json) =>
+      _$TipSettingsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TipSettingsToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class TerminalCheckoutResponse {
+
+  final List<SquareError>? errors;
+
+  @JsonKey(name: "checkout")
+  final TerminalCheckout? termCheckout;
+
+  final List<TerminalCheckout>? checkouts;
+
+  final String? cursor;
+
+  TerminalCheckoutResponse({
+    this.errors, this.termCheckout, this.checkouts, this.cursor
+  });
+
+  factory TerminalCheckoutResponse.fromJson(Map<String, dynamic> json) =>
+      _$TerminalCheckoutResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TerminalCheckoutResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class TerminalRefundResponse {
+
+  final List<SquareError>? errors;
+
+  @JsonKey(name: "checkout")
+  final TerminalRefund? refund;
+
+  final List<TerminalRefund>? refunds;
+
+  final String? cursor;
+
+  TerminalRefundResponse({
+    this.errors, this.refund, this.refunds, this.cursor
+  });
+
+  factory TerminalRefundResponse.fromJson(Map<String, dynamic> json) =>
+      _$TerminalRefundResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TerminalRefundResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CreateTerminalCheckoutRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String idempotencyKey;
+
+  final TerminalCheckout checkout;
+
+  CreateTerminalCheckoutRequest({
+    required this.idempotencyKey, required this.checkout
+  });
+
+  factory CreateTerminalCheckoutRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateTerminalCheckoutRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CreateTerminalCheckoutRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+
+
+@JsonSerializable(includeIfNull:false)
+class SearchTerminalRequest {
+  final TerminalSearchQuery query;
+  final String? cursor;
+  final int limit;
+
+  SearchTerminalRequest({
+    this.cursor, required this.query, required this.limit
+  });
+
+  factory SearchTerminalRequest.fromJson(Map<String, dynamic> json) =>
+      _$SearchTerminalRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchTerminalRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CreateRefundRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String idempotencyKey;
+
+  final TerminalRefund refund;
+
+  CreateRefundRequest({
+    required this.idempotencyKey, required this.refund
+  });
+
+  factory CreateRefundRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateRefundRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CreateRefundRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class TerminalRefund{
+  final String? id;
+
+  @JsonKey(name: "amount_money")
+  final Money? amountMoney;
+
+  @JsonKey(name: "payment_id")
+  final String? paymentId;
+
+  @JsonKey(name: "app_id")
+  final String? appId;
+
+  @JsonKey(name: "cancel_reason")
+  final ActionCancelReason? cancelReason;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "deadline_duration")
+  final String? deadlineDuration;
+
+  @JsonKey(name: "device_id")
+  final String? deviceId;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  @JsonKey(name: "order_id")
+  final String? orderId;
+
+  final String? reason;
+  
+  @JsonKey(name: "refund_id")
+  final String? refundId;
+  
+  final TerimnalRefundStatus? status;
+
+  @JsonKey(name: "updated_at")
+  final String? updatedAt;
+
+  TerminalRefund({
+    this.createdAt, this.status, this.deviceId, this.deadlineDuration,
+  this.appId, this.cancelReason, this.amountMoney, this.locationId,
+  this.id, this.updatedAt, this.reason, this.orderId,
+    this.paymentId, this.refundId
+  });
+
+  factory TerminalRefund.fromJson(Map<String, dynamic> json) =>
+      _$TerminalRefundFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TerminalRefundToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class TerminalSearchQuery {
+  final TerminalQueryFilter? filter;
+  final TerminalQuerySort? sort;
+
+  TerminalSearchQuery({
+    this.filter, this.sort
+  });
+
+  factory TerminalSearchQuery.fromJson(Map<String, dynamic> json) =>
+      _$TerminalCheckoutQueryFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TerminalCheckoutQueryToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class TerminalQueryFilter {
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "device_id")
+  final String? deviceId;
+
+  final TerminalStatus? status;
+
+  TerminalQueryFilter({
+    this.deviceId, this.status, this.createdAt
+  });
+
+  factory TerminalQueryFilter.fromJson(Map<String, dynamic> json) =>
+      _$TerminalCheckoutQueryFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TerminalCheckoutQueryFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+  
+}
+
+@JsonSerializable(includeIfNull: false)
+class TerminalQuerySort {
+
+  @JsonKey(name: "sort_order")
+  final SortOrder? sortOrder;
+
+  TerminalQuerySort({
+    this.sortOrder
+  });
+
+  factory TerminalQuerySort.fromJson(Map<String, dynamic> json) =>
+      _$TerminalCheckoutQuerySortFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TerminalCheckoutQuerySortToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+enum TerimnalRefundStatus {
+  PENDING,
+  IN_PROGRESS,
+  CANCELED,
+  COMPLETED,
+
+}
+
+enum TerminalStatus {
+  PENDING,
+  IN_PROGRESS,
+  CANCELED,
+  COMPLETED
+
+}
+
+enum CheckoutOptionsPaymentType {
+  CARD_PRESENT,
+  MANUAL_CARD_ENTRY,
+  FELICA_ID,
+  FELICA_QUICPAY,
+  FELICA_TRANSPORTATION_GROUP,
+  FELICA_ALL
+}
+
+enum ActionCancelReason {
+  BUYER_CANCELED,
+  SELLER_CANCELED,
+  TIMED_OUT
 }
 
 enum BankAccountStatus {

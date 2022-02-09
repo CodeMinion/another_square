@@ -1,6 +1,7 @@
 library another_square;
 
 import 'package:another_square/services/authentication_service.dart';
+import 'package:another_square/services/terminal_service.dart';
 import 'package:another_square/square_models.dart';
 
 ///
@@ -12,7 +13,7 @@ class SquareClient {
   final String clientSecret;
   String _url = "connect.squareupsandbox.com";
   AuthenticationService? _authenticationService;
-
+  late TerminalService _terminalService;
   SquareClient(
       {
         required this.applicationId,
@@ -35,6 +36,9 @@ class SquareClient {
         authorizationEndpoint: "https://$_url/oauth2/authorize",
         tokenEndpoint: "https://connect.squareupsandbox.com/oauth2/token",
         revocationEndpoint: "https://connect.squareupsandbox.com/oauth2/token");
+
+    _terminalService = TerminalService(authenticationService:
+    _authenticationService!, baseUrl: _url);
 
   }
   ///
@@ -80,6 +84,91 @@ class SquareClient {
       return _authenticationService!.refreshToken(refreshToken: refreshToken);
     }
   }
+
+  ///
+  /// Creates a Terminal checkout request and sends it to the
+  /// specified device to take a payment for the requested amount.
+  ///
+  Future<TerminalCheckout> createTerminalCheckout({
+    required CreateTerminalCheckoutRequest request,
+    String? authToken,
+  }) async {
+    return _terminalService.createTerminalCheckout(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves a filtered list of Terminal checkout requests
+  /// created by the account making the request.
+  ///
+  Future<TerminalCheckoutResponse> searchTerminalCheckout({
+    required SearchTerminalRequest request,
+    String? authToken,
+  }) async {
+    return _terminalService.searchTerminalCheckout(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves a Terminal checkout request by [checkoutId].
+  ///
+  Future<TerminalCheckout> readTerminalCheckout({
+    required String checkoutId,
+    String? authToken,
+  }) async {
+    return _terminalService.readTerminalCheckout(checkoutId: checkoutId, authToken: authToken);
+  }
+
+  ///
+  /// Cancels a Terminal checkout request if the status of the request permits it.
+  ///
+  Future<TerminalCheckout> cancelTerminalCheckout({
+    required String checkoutId,
+    String? authToken,
+  }) async {
+    return _terminalService.cancelTerminalCheckout(checkoutId: checkoutId, authToken: authToken);
+  }
+
+  ///
+  /// Creates a request to refund an Interac payment completed
+  /// on a Square Terminal.
+  ///
+  Future<TerminalRefund> createTerminalRefund({
+    required CreateRefundRequest request,
+    String? authToken,
+  }) async {
+    return _terminalService.createTerminalRefund(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves a filtered list of Interac Terminal refund requests
+  /// created by the seller making the request.
+  ///
+  Future<TerminalRefundResponse> searchTerminalRefund({
+    required SearchTerminalRequest request,
+    String? authToken,
+  }) async {
+    return _terminalService.searchTerminalRefund(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves an Interac Terminal refund object by ID.
+  ///
+  Future<TerminalRefund> readTerminalRefund({
+    required String terminalRefundId,
+    String? authToken,
+  }) async {
+    return _terminalService.readTerminalRefund(terminalRefundId: terminalRefundId, authToken: authToken);
+  }
+
+  ///
+  /// Cancels a Terminal checkout request if the status of the request permits it.
+  ///
+  Future<TerminalRefund> cancelTerminalRefund({
+    required String terminalRefundId,
+    String? authToken,
+  }) async {
+    return _terminalService.cancelTerminalRefund(terminalRefundId: terminalRefundId, authToken: authToken);
+  }
+
 
   bool isInitialized() {
     return _authenticationService != null;
