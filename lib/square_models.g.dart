@@ -6219,3 +6219,747 @@ Map<String, dynamic> _$TeamMemberBookingProfileToJson(
   writeNotNull('team_member_id', instance.teamMemberId);
   return val;
 }
+
+Merchant _$MerchantFromJson(Map<String, dynamic> json) => Merchant(
+      createdAt: json['created_at'] as String?,
+      status: $enumDecodeNullable(_$MerchantStatusEnumMap, json['status']),
+      id: json['id'] as String?,
+      languageCode: json['language_code'] as String?,
+      country: json['country'] as String?,
+      currency: json['currency'] as String?,
+      businessName: json['business_name'] as String?,
+      mainLocationId: json['main_location_id'] as String?,
+    );
+
+Map<String, dynamic> _$MerchantToJson(Merchant instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('country', instance.country);
+  writeNotNull('business_name', instance.businessName);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('currency', instance.currency);
+  writeNotNull('language_code', instance.languageCode);
+  writeNotNull('main_location_id', instance.mainLocationId);
+  writeNotNull('status', _$MerchantStatusEnumMap[instance.status]);
+  return val;
+}
+
+const _$MerchantStatusEnumMap = {
+  MerchantStatus.ACTIVE: 'ACTIVE',
+  MerchantStatus.INACTIVE: 'INACTIVE',
+};
+
+Location _$LocationFromJson(Map<String, dynamic> json) => Location(
+      businessName: json['business_name'] as String?,
+      currency: json['currency'] as String?,
+      country: json['country'] as String?,
+      languageCode: json['language_code'] as String?,
+      id: json['id'] as String?,
+      status: $enumDecodeNullable(_$LocationStatusEnumMap, json['status']),
+      createdAt: json['created_at'] as String?,
+      description: json['description'] as String?,
+      type: $enumDecodeNullable(_$LocationTypeEnumMap, json['type']),
+      name: json['name'] as String?,
+      phoneNumber: json['phone_number'] as String?,
+      address: json['address'] == null
+          ? null
+          : Address.fromJson(json['address'] as Map<String, dynamic>),
+      taxIds: json['tax_ids'] == null
+          ? null
+          : TaxIds.fromJson(json['tax_ids'] as Map<String, dynamic>),
+      timezone: json['timezone'] as String?,
+      merchantId: json['merchant_id'] as String?,
+      businessEmail: json['business_email'] as String?,
+      businessHours: json['business_hours'] == null
+          ? null
+          : BusinessHours.fromJson(
+              json['business_hours'] as Map<String, dynamic>),
+      capabilities: (json['capabilities'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$LocationCapabilityEnumMap, e))
+          .toList(),
+      coordinates: json['coordinates'] == null
+          ? null
+          : SquareCoordinates.fromJson(
+              json['coordinates'] as Map<String, dynamic>),
+      facebookUrl: json['facebook_url'] as String?,
+      fullFormatLogoUrl: json['full_format_logo_url'] as String?,
+      instagramUsername: json['instagram_username'] as String?,
+      logoUrl: json['logo_url'] as String?,
+      mcc: json['mcc'] as String?,
+      posBackgroundUrl: json['pos_background_url'] as String?,
+      twitterUsername: json['twitter_username'] as String?,
+      websiteUrl: json['website_url'] as String?,
+    );
+
+Map<String, dynamic> _$LocationToJson(Location instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('address', instance.address);
+  writeNotNull('business_email', instance.businessEmail);
+  writeNotNull('business_hours', instance.businessHours);
+  writeNotNull('business_name', instance.businessName);
+  writeNotNull(
+      'capabilities',
+      instance.capabilities
+          ?.map((e) => _$LocationCapabilityEnumMap[e])
+          .toList());
+  writeNotNull('coordinates', instance.coordinates);
+  writeNotNull('country', instance.country);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('currency', instance.currency);
+  writeNotNull('description', instance.description);
+  writeNotNull('facebook_url', instance.facebookUrl);
+  writeNotNull('full_format_logo_url', instance.fullFormatLogoUrl);
+  writeNotNull('instagram_username', instance.instagramUsername);
+  writeNotNull('language_code', instance.languageCode);
+  writeNotNull('logo_url', instance.logoUrl);
+  writeNotNull('mcc', instance.mcc);
+  writeNotNull('merchant_id', instance.merchantId);
+  writeNotNull('name', instance.name);
+  writeNotNull('phone_number', instance.phoneNumber);
+  writeNotNull('pos_background_url', instance.posBackgroundUrl);
+  writeNotNull('status', _$LocationStatusEnumMap[instance.status]);
+  writeNotNull('tax_ids', instance.taxIds);
+  writeNotNull('timezone', instance.timezone);
+  writeNotNull('twitter_username', instance.twitterUsername);
+  writeNotNull('type', _$LocationTypeEnumMap[instance.type]);
+  writeNotNull('website_url', instance.websiteUrl);
+  return val;
+}
+
+const _$LocationStatusEnumMap = {
+  LocationStatus.ACTIVE: 'ACTIVE',
+  LocationStatus.INACTIVE: 'INACTIVE',
+};
+
+const _$LocationTypeEnumMap = {
+  LocationType.PHYSICAL: 'PHYSICAL',
+  LocationType.MOBILE: 'MOBILE',
+};
+
+const _$LocationCapabilityEnumMap = {
+  LocationCapability.CREDIT_CARD_PROCESSING: 'CREDIT_CARD_PROCESSING',
+  LocationCapability.AUTOMATIC_TRANSFERS: 'AUTOMATIC_TRANSFERS',
+};
+
+TaxIds _$TaxIdsFromJson(Map<String, dynamic> json) => TaxIds(
+      euVat: json['eu_vat'] as String?,
+      frNaf: json['fr_naf'] as String?,
+      frSiret: json['fr_siret'] as String?,
+    );
+
+Map<String, dynamic> _$TaxIdsToJson(TaxIds instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('eu_vat', instance.euVat);
+  writeNotNull('fr_naf', instance.frNaf);
+  writeNotNull('fr_siret', instance.frSiret);
+  return val;
+}
+
+SquareCoordinates _$SquareCoordinatesFromJson(Map<String, dynamic> json) =>
+    SquareCoordinates(
+      longitude: json['longitude'] as String?,
+      latitude: json['latitude'] as String?,
+    );
+
+Map<String, dynamic> _$SquareCoordinatesToJson(SquareCoordinates instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('latitude', instance.latitude);
+  writeNotNull('longitude', instance.longitude);
+  return val;
+}
+
+BusinessHours _$BusinessHoursFromJson(Map<String, dynamic> json) =>
+    BusinessHours(
+      periods: (json['periods'] as List<dynamic>?)
+          ?.map((e) => BusinessHoursPeriod.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$BusinessHoursToJson(BusinessHours instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('periods', instance.periods);
+  return val;
+}
+
+BusinessHoursPeriod _$BusinessHoursPeriodFromJson(Map<String, dynamic> json) =>
+    BusinessHoursPeriod(
+      dayOfWeek: $enumDecodeNullable(_$DayOfWeekEnumMap, json['day_of_week']),
+      endLocalTime: json['end_local_time'] as String?,
+      startLocalTime: json['start_local_time'] as String?,
+    );
+
+Map<String, dynamic> _$BusinessHoursPeriodToJson(BusinessHoursPeriod instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('day_of_week', _$DayOfWeekEnumMap[instance.dayOfWeek]);
+  writeNotNull('end_local_time', instance.endLocalTime);
+  writeNotNull('start_local_time', instance.startLocalTime);
+  return val;
+}
+
+const _$DayOfWeekEnumMap = {
+  DayOfWeek.SUN: 'SUN',
+  DayOfWeek.MON: 'MON',
+  DayOfWeek.TUE: 'TUE',
+  DayOfWeek.WED: 'WED',
+  DayOfWeek.THU: 'THU',
+  DayOfWeek.FRI: 'FRI',
+  DayOfWeek.SAT: 'SAT',
+};
+
+DeviceCode _$DeviceCodeFromJson(Map<String, dynamic> json) => DeviceCode(
+      name: json['name'] as String?,
+      createdAt: json['created_at'] as String?,
+      status: $enumDecodeNullable(_$DeviceCodeStatusEnumMap, json['status']),
+      id: json['id'] as String?,
+      locationId: json['location_id'] as String?,
+      productType:
+          $enumDecodeNullable(_$ProductTypeEnumMap, json['product_type']),
+      code: json['code'] as String?,
+      deviceId: json['device_id'] as String?,
+      pairBy: json['pair_by'] as String?,
+      pairedAt: json['paired_at'] as String?,
+      statusChangedAt: json['status_changed_at'] as String?,
+    );
+
+Map<String, dynamic> _$DeviceCodeToJson(DeviceCode instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('product_type', _$ProductTypeEnumMap[instance.productType]);
+  writeNotNull('code', instance.code);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('device_id', instance.deviceId);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('name', instance.name);
+  writeNotNull('pair_by', instance.pairBy);
+  writeNotNull('paired_at', instance.pairedAt);
+  writeNotNull('status', _$DeviceCodeStatusEnumMap[instance.status]);
+  writeNotNull('status_changed_at', instance.statusChangedAt);
+  return val;
+}
+
+const _$DeviceCodeStatusEnumMap = {
+  DeviceCodeStatus.UNKNOWN: 'UNKNOWN',
+  DeviceCodeStatus.UNPAIRED: 'UNPAIRED',
+  DeviceCodeStatus.PAIRED: 'PAIRED',
+  DeviceCodeStatus.EXPIRED: 'EXPIRED',
+};
+
+const _$ProductTypeEnumMap = {
+  ProductType.TERMINAL_API: 'TERMINAL_API',
+};
+
+CashDrawerShiftSummary _$CashDrawerShiftSummaryFromJson(
+        Map<String, dynamic> json) =>
+    CashDrawerShiftSummary(
+      id: json['id'] as String?,
+      description: json['description'] as String?,
+      state: $enumDecodeNullable(_$CashDrawerShiftStateEnumMap, json['state']),
+      closedAt: json['closed_at'] as String?,
+      closedCashMoney: json['closed_cash_money'] == null
+          ? null
+          : Money.fromJson(json['closed_cash_money'] as Map<String, dynamic>),
+      endedAt: json['ended_at'] as String?,
+      expectedCashMoney: json['expected_cash_money'] == null
+          ? null
+          : Money.fromJson(json['expected_cash_money'] as Map<String, dynamic>),
+      openedAt: json['opened_at'] as String?,
+      openedCashMoney: json['opened_cash_money'] == null
+          ? null
+          : Money.fromJson(json['opened_cash_money'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CashDrawerShiftSummaryToJson(
+    CashDrawerShiftSummary instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('closed_at', instance.closedAt);
+  writeNotNull('closed_cash_money', instance.closedCashMoney);
+  writeNotNull('description', instance.description);
+  writeNotNull('ended_at', instance.endedAt);
+  writeNotNull('expected_cash_money', instance.expectedCashMoney);
+  writeNotNull('opened_at', instance.openedAt);
+  writeNotNull('opened_cash_money', instance.openedCashMoney);
+  writeNotNull('state', _$CashDrawerShiftStateEnumMap[instance.state]);
+  return val;
+}
+
+const _$CashDrawerShiftStateEnumMap = {
+  CashDrawerShiftState.OPEN: 'OPEN',
+  CashDrawerShiftState.ENDED: 'ENDED',
+  CashDrawerShiftState.CLOSED: 'CLOSED',
+};
+
+CashDrawerShiftEvent _$CashDrawerShiftEventFromJson(
+        Map<String, dynamic> json) =>
+    CashDrawerShiftEvent(
+      description: json['description'] as String?,
+      id: json['id'] as String?,
+      createdAt: json['created_at'] as String?,
+      employeeId: json['employee_id'] as String?,
+      eventMoney: json['event_money'] == null
+          ? null
+          : Money.fromJson(json['event_money'] as Map<String, dynamic>),
+      eventType:
+          $enumDecodeNullable(_$CashDrawerEventTypeEnumMap, json['event_type']),
+    );
+
+Map<String, dynamic> _$CashDrawerShiftEventToJson(
+    CashDrawerShiftEvent instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('description', instance.description);
+  writeNotNull('employee_id', instance.employeeId);
+  writeNotNull('event_money', instance.eventMoney);
+  writeNotNull('event_type', _$CashDrawerEventTypeEnumMap[instance.eventType]);
+  return val;
+}
+
+const _$CashDrawerEventTypeEnumMap = {
+  CashDrawerEventType.NO_SALE: 'NO_SALE',
+  CashDrawerEventType.CASH_TENDER_PAYMENT: 'CASH_TENDER_PAYMENT',
+  CashDrawerEventType.OTHER_TENDER_PAYMENT: 'OTHER_TENDER_PAYMENT',
+  CashDrawerEventType.CASH_TENDER_CANCELLED_PAYMENT:
+      'CASH_TENDER_CANCELLED_PAYMENT',
+  CashDrawerEventType.OTHER_TENDER_CANCELLED_PAYMENT:
+      'OTHER_TENDER_CANCELLED_PAYMENT',
+  CashDrawerEventType.CASH_TENDER_REFUND: 'CASH_TENDER_REFUND',
+  CashDrawerEventType.OTHER_TENDER_REFUND: 'OTHER_TENDER_REFUND',
+  CashDrawerEventType.PAID_IN: 'PAID_IN',
+  CashDrawerEventType.PAID_OUT: 'PAID_OUT',
+};
+
+TeamMember _$TeamMemberFromJson(Map<String, dynamic> json) => TeamMember(
+      createdAt: json['created_at'] as String?,
+      id: json['id'] as String?,
+      status: $enumDecodeNullable(_$TeamMemberStatusEnumMap, json['status']),
+      phoneNumber: json['phone_number'] as String?,
+      updatedAt: json['updated_at'] as String?,
+      referenceId: json['reference_id'] as String?,
+      emailAddress: json['email_address'] as String?,
+      givenName: json['given_name'] as String?,
+      familyName: json['family_name'] as String?,
+      assignedLocations: json['assigned_locations'] == null
+          ? null
+          : TeamMemberAssignedLocations.fromJson(
+              json['assigned_locations'] as Map<String, dynamic>),
+      is_owner: json['is_owner'] as bool?,
+    );
+
+Map<String, dynamic> _$TeamMemberToJson(TeamMember instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('assigned_locations', instance.assignedLocations);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('email_address', instance.emailAddress);
+  writeNotNull('family_name', instance.familyName);
+  writeNotNull('given_name', instance.givenName);
+  writeNotNull('is_owner', instance.is_owner);
+  writeNotNull('phone_number', instance.phoneNumber);
+  writeNotNull('reference_id', instance.referenceId);
+  writeNotNull('status', _$TeamMemberStatusEnumMap[instance.status]);
+  writeNotNull('updated_at', instance.updatedAt);
+  return val;
+}
+
+const _$TeamMemberStatusEnumMap = {
+  TeamMemberStatus.ACTIVE: 'ACTIVE',
+  TeamMemberStatus.INACTIVE: 'INACTIVE',
+};
+
+TeamMemberAssignedLocations _$TeamMemberAssignedLocationsFromJson(
+        Map<String, dynamic> json) =>
+    TeamMemberAssignedLocations(
+      locationIds: (json['location_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      assignment_type: $enumDecodeNullable(
+          _$TeamMemberAssignedLocationsAssignmentTypeEnumMap,
+          json['assignment_type']),
+    );
+
+Map<String, dynamic> _$TeamMemberAssignedLocationsToJson(
+    TeamMemberAssignedLocations instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'assignment_type',
+      _$TeamMemberAssignedLocationsAssignmentTypeEnumMap[
+          instance.assignment_type]);
+  writeNotNull('location_ids', instance.locationIds);
+  return val;
+}
+
+const _$TeamMemberAssignedLocationsAssignmentTypeEnumMap = {
+  TeamMemberAssignedLocationsAssignmentType.ALL_CURRENT_AND_FUTURE_LOCATIONS:
+      'ALL_CURRENT_AND_FUTURE_LOCATIONS',
+  TeamMemberAssignedLocationsAssignmentType.EXPLICIT_LOCATIONS:
+      'EXPLICIT_LOCATIONS',
+};
+
+BreakType _$BreakTypeFromJson(Map<String, dynamic> json) => BreakType(
+      updatedAt: json['updated_at'] as String?,
+      id: json['id'] as String?,
+      createdAt: json['created_at'] as String?,
+      locationId: json['location_id'] as String?,
+      version: json['version'] as int?,
+      breakMame: json['break_name'] as String?,
+      expectedDuration: json['expected_duration'] as String?,
+      isPaid: json['is_paid'] as bool?,
+    );
+
+Map<String, dynamic> _$BreakTypeToJson(BreakType instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('break_name', instance.breakMame);
+  writeNotNull('expected_duration', instance.expectedDuration);
+  writeNotNull('is_paid', instance.isPaid);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('version', instance.version);
+  return val;
+}
+
+Shift _$ShiftFromJson(Map<String, dynamic> json) => Shift(
+      version: json['version'] as int?,
+      locationId: json['location_id'] as String?,
+      createdAt: json['created_at'] as String?,
+      id: json['id'] as String?,
+      updatedAt: json['updated_at'] as String?,
+      status: $enumDecodeNullable(_$ShiftStatusEnumMap, json['status']),
+      employeeId: json['employee_id'] as String?,
+      timezone: json['timezone'] as String?,
+      teamMemberId: json['team_member_id'] as String?,
+      startAt: json['start_at'] as String?,
+      endAt: json['end_at'] as String?,
+      breaks: (json['breaks'] as List<dynamic>?)
+          ?.map((e) => Break.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      wage: json['wage'] == null
+          ? null
+          : ShiftWage.fromJson(json['wage'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ShiftToJson(Shift instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('start_at', instance.startAt);
+  writeNotNull('breaks', instance.breaks);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('end_at', instance.endAt);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('status', _$ShiftStatusEnumMap[instance.status]);
+  writeNotNull('team_member_id', instance.teamMemberId);
+  writeNotNull('timezone', instance.timezone);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('version', instance.version);
+  writeNotNull('wage', instance.wage);
+  writeNotNull('employee_id', instance.employeeId);
+  return val;
+}
+
+const _$ShiftStatusEnumMap = {
+  ShiftStatus.OPEN: 'OPEN',
+  ShiftStatus.CLOSED: 'CLOSED',
+};
+
+Break _$BreakFromJson(Map<String, dynamic> json) => Break(
+      id: json['id'] as String?,
+      endAt: json['end_at'] as String?,
+      startAt: json['start_at'] as String?,
+      isPaid: json['is_paid'] as bool?,
+      expectedDuration: json['expected_duration'] as String?,
+      name: json['name'] as String?,
+      breakTypeId: json['break_type_id'] as String?,
+    );
+
+Map<String, dynamic> _$BreakToJson(Break instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('break_type_id', instance.breakTypeId);
+  writeNotNull('expected_duration', instance.expectedDuration);
+  writeNotNull('is_paid', instance.isPaid);
+  writeNotNull('name', instance.name);
+  writeNotNull('start_at', instance.startAt);
+  writeNotNull('end_at', instance.endAt);
+  return val;
+}
+
+ShiftWage _$ShiftWageFromJson(Map<String, dynamic> json) => ShiftWage(
+      title: json['title'] as String?,
+      hourlyRate: json['hourly_rate'] == null
+          ? null
+          : Money.fromJson(json['hourly_rate'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ShiftWageToJson(ShiftWage instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('hourly_rate', instance.hourlyRate);
+  writeNotNull('title', instance.title);
+  return val;
+}
+
+TeamMemberWag _$TeamMemberWagFromJson(Map<String, dynamic> json) =>
+    TeamMemberWag(
+      hourlyRate: json['hourly_rate'] == null
+          ? null
+          : Money.fromJson(json['hourly_rate'] as Map<String, dynamic>),
+      title: json['title'] as String?,
+      teamMemberId: json['team_member_id'] as String?,
+      id: json['id'] as String?,
+    );
+
+Map<String, dynamic> _$TeamMemberWagToJson(TeamMemberWag instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('hourly_rate', instance.hourlyRate);
+  writeNotNull('team_member_id', instance.teamMemberId);
+  writeNotNull('title', instance.title);
+  return val;
+}
+
+WorkweekConfig _$WorkweekConfigFromJson(Map<String, dynamic> json) =>
+    WorkweekConfig(
+      id: json['id'] as String?,
+      updatedAt: json['updated_at'] as String?,
+      createdAt: json['created_at'] as String?,
+      version: json['version'] as int?,
+      startOfDayLocalTime: json['start_of_day_local_time'] as String?,
+      startOfWeek: $enumDecodeNullable(_$WeekdayEnumMap, json['start_of_week']),
+    );
+
+Map<String, dynamic> _$WorkweekConfigToJson(WorkweekConfig instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('start_of_day_local_time', instance.startOfDayLocalTime);
+  writeNotNull('start_of_week', _$WeekdayEnumMap[instance.startOfWeek]);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('version', instance.version);
+  return val;
+}
+
+const _$WeekdayEnumMap = {
+  Weekday.MON: 'MON',
+  Weekday.TUE: 'TUE',
+  Weekday.WED: 'WED',
+  Weekday.THU: 'THU',
+  Weekday.FRI: 'FRI',
+  Weekday.SAT: 'SAT',
+  Weekday.SUN: 'SUN',
+};
+
+BankAccount _$BankAccountFromJson(Map<String, dynamic> json) => BankAccount(
+      id: json['id'] as String?,
+      version: json['version'] as int?,
+      status: $enumDecodeNullable(_$BankAccountStatusEnumMap, json['status']),
+      locationId: json['location_id'] as String?,
+      referenceId: json['reference_id'] as String?,
+      country: json['country'] as String?,
+      currency: json['currency'] as String?,
+      fingerprint: json['fingerprint'] as String?,
+      accountType:
+          $enumDecodeNullable(_$BankAccountTypeEnumMap, json['account_type']),
+      accountNumberSuffix: json['account_number_suffix'] as String?,
+      bankName: json['bank_name'] as String?,
+      creditable: json['creditable'] as bool?,
+      debitable: json['debitable'] as bool?,
+      debitMandateReferenceId: json['debit_mandate_reference_id'] as String?,
+      holderName: json['holder_name'] as String?,
+      primaryBankIdentificationNumber:
+          json['primary_bank_identification_number'] as String?,
+      secondaryBankIdentificationNumber:
+          json['secondary_bank_identification_number'] as String?,
+    );
+
+Map<String, dynamic> _$BankAccountToJson(BankAccount instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('account_number_suffix', instance.accountNumberSuffix);
+  writeNotNull('account_type', _$BankAccountTypeEnumMap[instance.accountType]);
+  writeNotNull('country', instance.country);
+  writeNotNull('creditable', instance.creditable);
+  writeNotNull('currency', instance.currency);
+  writeNotNull('debitable', instance.debitable);
+  writeNotNull('holder_name', instance.holderName);
+  writeNotNull('primary_bank_identification_number',
+      instance.primaryBankIdentificationNumber);
+  writeNotNull('status', _$BankAccountStatusEnumMap[instance.status]);
+  writeNotNull('bank_name', instance.bankName);
+  writeNotNull('debit_mandate_reference_id', instance.debitMandateReferenceId);
+  writeNotNull('fingerprint', instance.fingerprint);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('reference_id', instance.referenceId);
+  writeNotNull('secondary_bank_identification_number',
+      instance.secondaryBankIdentificationNumber);
+  writeNotNull('version', instance.version);
+  return val;
+}
+
+const _$BankAccountStatusEnumMap = {
+  BankAccountStatus.VERIFICATION_IN_PROGRESS: 'VERIFICATION_IN_PROGRESS',
+  BankAccountStatus.VERIFIED: 'VERIFIED',
+  BankAccountStatus.DISABLED: 'DISABLED',
+};
+
+const _$BankAccountTypeEnumMap = {
+  BankAccountType.CHECKING: 'CHECKING',
+  BankAccountType.SAVINGS: 'SAVINGS',
+  BankAccountType.INVESTMENT: 'INVESTMENT',
+  BankAccountType.OTHER: 'OTHER',
+  BankAccountType.BUSINESS_CHECKING: 'BUSINESS_CHECKING',
+};
+
+Site _$SiteFromJson(Map<String, dynamic> json) => Site(
+      id: json['id'] as String?,
+      createdAt: json['created_at'] as String?,
+      updatedAt: json['updated_at'] as String?,
+      domain: json['domain'] as String?,
+      isPublished: json['is_published'] as bool?,
+      siteTitle: json['site_title'] as String?,
+    );
+
+Map<String, dynamic> _$SiteToJson(Site instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('domain', instance.domain);
+  writeNotNull('is_published', instance.isPublished);
+  writeNotNull('site_title', instance.siteTitle);
+  writeNotNull('updated_at', instance.updatedAt);
+  return val;
+}

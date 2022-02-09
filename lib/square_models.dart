@@ -5919,6 +5919,868 @@ class TeamMemberBookingProfile {
   }
 }
 
+@JsonSerializable(includeIfNull: false)
+class Merchant {
+
+  final String? id;
+
+  final String? country;
+
+  @JsonKey(name: "business_name")
+  final String? businessName;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  final String? currency;
+
+  @JsonKey(name: "language_code")
+  final String? languageCode;
+
+  @JsonKey(name: "main_location_id")
+  final String? mainLocationId;
+
+  final MerchantStatus? status;
+
+  Merchant({
+    this.createdAt, this.status, this.id, this.languageCode,
+    this.country, this.currency, this.businessName,
+    this.mainLocationId
+  });
+
+  factory Merchant.fromJson(Map<String, dynamic> json) =>
+      _$MerchantFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MerchantToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class Location {
+
+  final String? id;
+  
+  final Address? address;
+
+  @JsonKey(name: "business_email")
+  final String? businessEmail;
+
+  @JsonKey(name: "business_hours")
+  final BusinessHours? businessHours;
+
+  @JsonKey(name: "business_name")
+  final String? businessName;
+
+  final List<LocationCapability>? capabilities;
+
+  final SquareCoordinates? coordinates;
+
+  final String? country;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  final String? currency;
+
+  final String? description;
+
+  @JsonKey(name: "facebook_url")
+  final String? facebookUrl;
+
+  @JsonKey(name: "full_format_logo_url")
+  final String? fullFormatLogoUrl;
+
+  @JsonKey(name: "instagram_username")
+  final String? instagramUsername;
+
+  @JsonKey(name: "language_code")
+  final String? languageCode;
+
+  @JsonKey(name: "logo_url")
+  final String? logoUrl;
+
+  final String? mcc;
+
+  @JsonKey(name: "merchant_id")
+  final String? merchantId;
+
+  final String? name;
+
+  @JsonKey(name: "phone_number")
+  final String? phoneNumber;
+
+  @JsonKey(name: "pos_background_url")
+  final String? posBackgroundUrl;
+
+  final LocationStatus? status;
+
+  @JsonKey(name: "tax_ids")
+  final TaxIds? taxIds;
+
+  final String? timezone;
+
+  @JsonKey(name: "twitter_username")
+  final String? twitterUsername;
+
+  final LocationType? type;
+
+  @JsonKey(name: "website_url")
+  final String? websiteUrl;
+
+  Location({
+  this.businessName, this.currency, this.country,
+    this.languageCode, this.id, this.status,
+  this.createdAt, this.description, this.type, this.name,
+    this.phoneNumber, this.address, this.taxIds, this.timezone,
+  this.merchantId, this.businessEmail, this.businessHours, this.capabilities,
+  this.coordinates, this.facebookUrl, this.fullFormatLogoUrl,
+    this.instagramUsername, this.logoUrl, this.mcc, this.posBackgroundUrl,
+  this.twitterUsername, this.websiteUrl
+  });
+
+  factory Location.fromJson(Map<String, dynamic> json) =>
+      _$LocationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LocationToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull:false)
+class TaxIds {
+  @JsonKey(name: "eu_vat")
+  final String? euVat;
+  
+  @JsonKey(name: "fr_naf")
+  final String? frNaf;
+
+  @JsonKey(name: "fr_siret")
+  final String? frSiret;
+
+  TaxIds({
+    this.euVat, this.frNaf, this.frSiret
+  });
+
+  factory TaxIds.fromJson(Map<String, dynamic> json) =>
+      _$TaxIdsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TaxIdsToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class SquareCoordinates {
+  final String? latitude;
+  
+  final String? longitude;
+
+  SquareCoordinates({
+    this.longitude, this.latitude
+  });
+
+  factory SquareCoordinates.fromJson(Map<String, dynamic> json) =>
+      _$SquareCoordinatesFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SquareCoordinatesToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class BusinessHours {
+
+  final List<BusinessHoursPeriod>? periods;
+
+  BusinessHours({
+    this.periods
+  });
+
+  factory BusinessHours.fromJson(Map<String, dynamic> json) =>
+      _$BusinessHoursFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BusinessHoursToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class BusinessHoursPeriod {
+
+  @JsonKey(name: "day_of_week")
+  final DayOfWeek? dayOfWeek;
+
+  @JsonKey(name: "end_local_time")
+  final String? endLocalTime;
+
+  @JsonKey(name: "start_local_time")
+  final String? startLocalTime;
+
+  BusinessHoursPeriod({
+    this.dayOfWeek, this.endLocalTime, this.startLocalTime
+  });
+
+  factory BusinessHoursPeriod.fromJson(Map<String, dynamic> json) =>
+      _$BusinessHoursPeriodFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BusinessHoursPeriodToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class DeviceCode {
+  final String? id;
+
+  @JsonKey(name: "product_type")
+  final ProductType? productType;
+
+  final String? code;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "device_id")
+  final String? deviceId;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  final String? name;
+
+  @JsonKey(name: "pair_by")
+  final String? pairBy;
+
+  @JsonKey(name: "paired_at")
+  final String? pairedAt;
+
+  final DeviceCodeStatus? status;
+
+  @JsonKey(name: "status_changed_at")
+  final String? statusChangedAt;
+
+  DeviceCode({
+    this.name, this.createdAt, this.status, this.id,
+    this.locationId, this.productType, this.code,
+  this.deviceId, this.pairBy, this.pairedAt,
+    this.statusChangedAt
+  });
+
+  factory DeviceCode.fromJson(Map<String, dynamic> json) =>
+      _$DeviceCodeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DeviceCodeToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CashDrawerShiftSummary {
+
+  final String? id;
+
+  @JsonKey(name: "closed_at")
+  final String? closedAt;
+
+  @JsonKey(name: "closed_cash_money")
+  final Money? closedCashMoney;
+
+  final String? description;
+
+  @JsonKey(name: "ended_at")
+  final String? endedAt;
+
+  @JsonKey(name: "expected_cash_money")
+  final Money? expectedCashMoney;
+
+  @JsonKey(name: "opened_at")
+  final String? openedAt;
+
+  @JsonKey(name:"opened_cash_money")
+  final Money? openedCashMoney;
+
+  final CashDrawerShiftState? state;
+
+  CashDrawerShiftSummary({
+    this.id, this.description, this.state, this.closedAt,
+  this.closedCashMoney, this.endedAt, this.expectedCashMoney,
+  this.openedAt, this.openedCashMoney
+  });
+
+  factory CashDrawerShiftSummary.fromJson(Map<String, dynamic> json) =>
+      _$CashDrawerShiftSummaryFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CashDrawerShiftSummaryToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CashDrawerShiftEvent {
+
+  final String? id;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  final String? description;
+
+  @JsonKey(name: "employee_id")
+  final String? employeeId;
+
+  @JsonKey(name: "event_money")
+  final Money? eventMoney;
+
+  @JsonKey(name: "event_type")
+  final CashDrawerEventType? eventType;
+
+  CashDrawerShiftEvent({
+    this.description, this.id, this.createdAt,
+  this.employeeId, this.eventMoney, this.eventType
+
+  });
+
+  factory CashDrawerShiftEvent.fromJson(Map<String, dynamic> json) =>
+      _$CashDrawerShiftEventFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CashDrawerShiftEventToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class TeamMember {
+
+  final String? id;
+
+  @JsonKey(name: "assigned_locations")
+  final TeamMemberAssignedLocations? assignedLocations;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "email_address")
+  final String? emailAddress;
+
+  @JsonKey(name: "family_name")
+  final String? familyName;
+
+  @JsonKey(name: "given_name")
+  final String? givenName;
+
+  @JsonKey(name: "is_owner")
+  final bool? is_owner;
+
+  @JsonKey(name: "phone_number")
+  final String? phoneNumber;
+
+  @JsonKey(name: "reference_id")
+  final String? referenceId;
+
+  final TeamMemberStatus? status;
+
+  @JsonKey(name: "updated_at")
+  final String? updatedAt;
+
+  TeamMember({
+  this.createdAt, this.id, this.status, this.phoneNumber,
+  this.updatedAt, this.referenceId, this.emailAddress,
+  this.givenName, this.familyName, this.assignedLocations,
+    this.is_owner
+
+  });
+
+  factory TeamMember.fromJson(Map<String, dynamic> json) =>
+      _$TeamMemberFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TeamMemberToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class TeamMemberAssignedLocations {
+
+  final TeamMemberAssignedLocationsAssignmentType? assignment_type;
+
+  @JsonKey(name: "location_ids")
+  final List<String>? locationIds;
+
+  TeamMemberAssignedLocations({
+    this.locationIds, this.assignment_type
+
+  });
+
+  factory TeamMemberAssignedLocations.fromJson(Map<String, dynamic> json) =>
+      _$TeamMemberAssignedLocationsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TeamMemberAssignedLocationsToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class BreakType {
+  final String? id;
+
+  @JsonKey(name: "break_name")
+  final String? breakMame;
+
+  @JsonKey(name: "expected_duration")
+  final String? expectedDuration;
+
+  @JsonKey(name: "is_paid")
+  final bool? isPaid;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "updated_at")
+  final String? updatedAt;
+  
+  final int? version;
+
+  BreakType({
+
+      this.updatedAt, this.id, this.createdAt, this.locationId,
+  this.version, this.breakMame, this.expectedDuration, this.isPaid
+  });
+
+  factory BreakType.fromJson(Map<String, dynamic> json) =>
+      _$BreakTypeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BreakTypeToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class Shift {
+
+  final String? id;
+
+  @JsonKey(name: "start_at")
+  final String? startAt;
+
+  final List<Break>? breaks;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "end_at")
+  final String? endAt;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  final ShiftStatus? status;
+
+  @JsonKey(name: "team_member_id")
+  final String? teamMemberId;
+
+  final String? timezone;
+
+  @JsonKey(name: "updated_at")
+  final String? updatedAt;
+
+  final int? version;
+
+  final ShiftWage? wage;
+
+  @JsonKey(name: "employee_id")
+  final String? employeeId;
+
+  Shift({
+    this.version, this.locationId, this.createdAt, this.id,
+    this.updatedAt, this.status, this.employeeId, this.timezone,
+  this.teamMemberId, this.startAt, this.endAt, this.breaks,
+  this.wage
+  });
+
+  factory Shift.fromJson(Map<String, dynamic> json) =>
+      _$ShiftFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ShiftToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class Break {
+
+  final String? id;
+
+  @JsonKey(name: "break_type_id")
+  final String? breakTypeId;
+
+  @JsonKey(name: "expected_duration")
+  final String? expectedDuration;
+
+  @JsonKey(name: "is_paid")
+  final bool? isPaid;
+
+  final String? name;
+
+  @JsonKey(name: "start_at")
+  final String? startAt;
+
+  @JsonKey(name: "end_at")
+  final String? endAt;
+
+  Break({
+    this.id, this.endAt, this.startAt, this.isPaid, this.expectedDuration,
+    this.name, this.breakTypeId
+  });
+
+  factory Break.fromJson(Map<String, dynamic> json) =>
+      _$BreakFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BreakToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull:false)
+class ShiftWage {
+
+  @JsonKey(name: "hourly_rate")
+  final Money? hourlyRate;
+
+  final String? title;
+
+  ShiftWage({
+    this.title, this.hourlyRate
+  });
+
+  factory ShiftWage.fromJson(Map<String, dynamic> json) =>
+      _$ShiftWageFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ShiftWageToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class TeamMemberWag {
+
+  final String? id;
+
+  @JsonKey(name: "hourly_rate")
+  final Money? hourlyRate;
+
+  @JsonKey(name: "team_member_id")
+  final String? teamMemberId;
+
+  final String? title;
+
+  TeamMemberWag({
+    this.hourlyRate, this.title, this.teamMemberId, this.id
+  });
+
+  factory TeamMemberWag.fromJson(Map<String, dynamic> json) =>
+      _$TeamMemberWagFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TeamMemberWagToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class WorkweekConfig {
+
+  final String? id;
+
+  @JsonKey(name: "start_of_day_local_time")
+  final String? startOfDayLocalTime;
+
+  @JsonKey(name: "start_of_week")
+  final Weekday? startOfWeek;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "updated_at")
+  final String? updatedAt;
+
+  final int? version;
+
+  WorkweekConfig({
+    this.id, this.updatedAt, this.createdAt, this.version,
+  this.startOfDayLocalTime, this.startOfWeek
+  });
+
+  factory WorkweekConfig.fromJson(Map<String, dynamic> json) =>
+      _$WorkweekConfigFromJson(json);
+
+  Map<String, dynamic> toJson() => _$WorkweekConfigToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull:false)
+class BankAccount {
+  final String? id;
+
+  @JsonKey(name: "account_number_suffix")
+  final String? accountNumberSuffix;
+
+  @JsonKey(name: "account_type")
+  final BankAccountType? accountType;
+
+  final String? country;
+
+  final bool? creditable;
+
+  final String? currency;
+
+  final bool? debitable;
+
+  @JsonKey(name: "holder_name")
+  final String? holderName;
+
+  @JsonKey(name: "primary_bank_identification_number")
+  final String? primaryBankIdentificationNumber;
+
+  final BankAccountStatus? status;
+  
+  @JsonKey(name: "bank_name")
+  final String? bankName;
+
+  @JsonKey(name: "debit_mandate_reference_id")
+  final String? debitMandateReferenceId;
+
+  final String? fingerprint;
+  
+  @JsonKey(name: "location_id")
+  final String? locationId;
+  
+  @JsonKey(name: "reference_id")
+  final String? referenceId;
+
+  @JsonKey(name: "secondary_bank_identification_number")
+  final String? secondaryBankIdentificationNumber;
+
+  final int? version;
+
+  BankAccount({
+    this.id, this.version, this.status, this.locationId, this.referenceId,
+  this.country, this.currency, this.fingerprint, this.accountType,
+  this.accountNumberSuffix, this.bankName, this.creditable,
+  this.debitable, this.debitMandateReferenceId, this.holderName,
+  this.primaryBankIdentificationNumber, this.secondaryBankIdentificationNumber
+  });
+
+  factory BankAccount.fromJson(Map<String, dynamic> json) =>
+      _$BankAccountFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BankAccountToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class Site {
+  final String? id;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  final String? domain;
+
+  @JsonKey(name: "is_published")
+  final bool? isPublished;
+
+  @JsonKey(name: "site_title")
+  final String? siteTitle;
+
+  @JsonKey(name: "updated_at")
+  final String? updatedAt;
+
+  Site({
+    this.id, this.createdAt, this.updatedAt, this.domain,
+  this.isPublished, this.siteTitle
+  });
+
+  factory Site.fromJson(Map<String, dynamic> json) =>
+      _$SiteFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SiteToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+enum BankAccountStatus {
+  VERIFICATION_IN_PROGRESS,
+  VERIFIED,
+  DISABLED,
+  
+}
+
+enum BankAccountType {
+  CHECKING,
+  SAVINGS,
+  INVESTMENT,
+  OTHER,
+  BUSINESS_CHECKING
+}
+
+enum Weekday {
+  MON,
+  TUE,
+  WED,
+  THU,
+  FRI,
+  SAT,
+  SUN,
+
+}
+
+enum ShiftStatus {
+  OPEN,
+  CLOSED
+}
+
+enum TeamMemberAssignedLocationsAssignmentType {
+  ALL_CURRENT_AND_FUTURE_LOCATIONS,
+  EXPLICIT_LOCATIONS
+}
+
+enum TeamMemberStatus {
+  ACTIVE,
+  INACTIVE
+}
+
+
+enum CashDrawerEventType {
+  NO_SALE,
+  CASH_TENDER_PAYMENT,
+  OTHER_TENDER_PAYMENT,
+  CASH_TENDER_CANCELLED_PAYMENT,
+  OTHER_TENDER_CANCELLED_PAYMENT,
+  CASH_TENDER_REFUND,
+  OTHER_TENDER_REFUND,
+  PAID_IN,
+  PAID_OUT,
+
+}
+
+enum CashDrawerShiftState {
+  OPEN,
+  ENDED,
+  CLOSED,
+
+}
+
+
+enum DeviceCodeStatus {
+  UNKNOWN,
+  UNPAIRED,
+  PAIRED,
+  EXPIRED
+}
+
+enum ProductType {
+  TERMINAL_API
+}
+
+enum DayOfWeek {
+  SUN,
+  MON,
+  TUE,
+  WED,
+  THU,
+  FRI,
+  SAT,
+
+}
+
+enum LocationStatus {
+  ACTIVE,
+  INACTIVE
+}
+
+enum LocationType {
+  PHYSICAL,
+  MOBILE
+}
+
+enum LocationCapability {
+  CREDIT_CARD_PROCESSING,
+  AUTOMATIC_TRANSFERS
+}
+
+enum MerchantStatus {
+  ACTIVE,
+  INACTIVE
+}
+
+
 enum BusinessAppointmentSettingsMaxAppointmentsPerDayLimitType {
   PER_TEAM_MEMBER,
   PER_LOCATION
@@ -5977,12 +6839,6 @@ enum BookingBookingSource {
   API
 }
 
-enum BusinessAppointmentSettingsBookingLocationType {
-  BUSINESS_LOCATION,
-  CUSTOMER_LOCATION,
-  PHONE,
-
-}
 
 enum GiftCardActivityType {
   ACTIVATE,
