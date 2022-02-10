@@ -7169,6 +7169,397 @@ Map<String, dynamic> _$CreateTerminalCheckoutRequestToJson(
       'checkout': instance.checkout,
     };
 
+CreateOrderRequest _$CreateOrderRequestFromJson(Map<String, dynamic> json) =>
+    CreateOrderRequest(
+      idempotencyKey: json['idempotency_key'] as String,
+      order: json['order'] == null
+          ? null
+          : Order.fromJson(json['order'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CreateOrderRequestToJson(CreateOrderRequest instance) {
+  final val = <String, dynamic>{
+    'idempotency_key': instance.idempotencyKey,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('order', instance.order);
+  return val;
+}
+
+CalculateOrderRequest _$CalculateOrderRequestFromJson(
+        Map<String, dynamic> json) =>
+    CalculateOrderRequest(
+      idempotencyKey: json['idempotency_key'] as String,
+      order: json['order'] == null
+          ? null
+          : Order.fromJson(json['order'] as Map<String, dynamic>),
+      proposedRewards: (json['proposed_rewards'] as List<dynamic>?)
+          ?.map((e) => OrderReward.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$CalculateOrderRequestToJson(
+    CalculateOrderRequest instance) {
+  final val = <String, dynamic>{
+    'idempotency_key': instance.idempotencyKey,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('order', instance.order);
+  writeNotNull('proposed_rewards', instance.proposedRewards);
+  return val;
+}
+
+CloneOrderRequest _$CloneOrderRequestFromJson(Map<String, dynamic> json) =>
+    CloneOrderRequest(
+      idempotencyKey: json['idempotency_key'] as String?,
+      orderId: json['order_id'] as String,
+      version: json['version'] as int?,
+    );
+
+Map<String, dynamic> _$CloneOrderRequestToJson(CloneOrderRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('idempotency_key', instance.idempotencyKey);
+  val['order_id'] = instance.orderId;
+  writeNotNull('version', instance.version);
+  return val;
+}
+
+UpdateOrderRequest _$UpdateOrderRequestFromJson(Map<String, dynamic> json) =>
+    UpdateOrderRequest(
+      idempotencyKey: json['idempotency_key'] as String?,
+      fieldsToClear: (json['fields_to_clear'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      order: json['order'] == null
+          ? null
+          : Order.fromJson(json['order'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UpdateOrderRequestToJson(UpdateOrderRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('idempotency_key', instance.idempotencyKey);
+  writeNotNull('order', instance.order);
+  writeNotNull('fields_to_clear', instance.fieldsToClear);
+  return val;
+}
+
+PayOrderRequest _$PayOrderRequestFromJson(Map<String, dynamic> json) =>
+    PayOrderRequest(
+      idempotencyKey: json['idempotency_key'] as String?,
+      orderVersion: json['order_version'] as int?,
+      paymentIds: (json['payment_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+    );
+
+Map<String, dynamic> _$PayOrderRequestToJson(PayOrderRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('idempotency_key', instance.idempotencyKey);
+  writeNotNull('order_version', instance.orderVersion);
+  writeNotNull('payment_ids', instance.paymentIds);
+  return val;
+}
+
+SearchOrderRequest _$SearchOrderRequestFromJson(Map<String, dynamic> json) =>
+    SearchOrderRequest(
+      limit: json['limit'] as int?,
+      query: json['query'] == null
+          ? null
+          : SearchOrdersQuery.fromJson(json['query'] as Map<String, dynamic>),
+      cursor: json['cursor'] as String?,
+      locationIds: (json['location_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      returnEntries: json['return_entries'] as bool?,
+    );
+
+Map<String, dynamic> _$SearchOrderRequestToJson(SearchOrderRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('location_ids', instance.locationIds);
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('query', instance.query);
+  writeNotNull('limit', instance.limit);
+  writeNotNull('return_entries', instance.returnEntries);
+  return val;
+}
+
+SearchOrdersQuery _$SearchOrdersQueryFromJson(Map<String, dynamic> json) =>
+    SearchOrdersQuery(
+      sort: json['sort'] == null
+          ? null
+          : SearchOrdersSort.fromJson(json['sort'] as Map<String, dynamic>),
+      filter: json['filter'] == null
+          ? null
+          : SearchOrdersFilter.fromJson(json['filter'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$SearchOrdersQueryToJson(SearchOrdersQuery instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('filter', instance.filter);
+  writeNotNull('sort', instance.sort);
+  return val;
+}
+
+SearchOrdersSort _$SearchOrdersSortFromJson(Map<String, dynamic> json) =>
+    SearchOrdersSort(
+      sortOrder: $enumDecodeNullable(_$SortOrderEnumMap, json['sort_order']),
+      sortField: json['sort_field'] as String?,
+    );
+
+Map<String, dynamic> _$SearchOrdersSortToJson(SearchOrdersSort instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('sort_field', instance.sortField);
+  writeNotNull('sort_order', _$SortOrderEnumMap[instance.sortOrder]);
+  return val;
+}
+
+SearchOrdersFilter _$SearchOrdersFilterFromJson(Map<String, dynamic> json) =>
+    SearchOrdersFilter(
+      customerFilter: json['customer_filter'] == null
+          ? null
+          : SearchOrdersCustomerFilter.fromJson(
+              json['customer_filter'] as Map<String, dynamic>),
+      dateTimeFilter: json['date_time_filter'] == null
+          ? null
+          : SearchOrdersDateTimeFilter.fromJson(
+              json['date_time_filter'] as Map<String, dynamic>),
+      fulfillmentFilter: json['fulfillment_filter'] == null
+          ? null
+          : SearchOrdersFulfillmentFilter.fromJson(
+              json['fulfillment_filter'] as Map<String, dynamic>),
+      sourceFilter: json['source_filter'] == null
+          ? null
+          : SearchOrdersSourceFilter.fromJson(
+              json['source_filter'] as Map<String, dynamic>),
+      stateFilter: json['state_filter'] == null
+          ? null
+          : SearchOrdersStateFilter.fromJson(
+              json['state_filter'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$SearchOrdersFilterToJson(SearchOrdersFilter instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('customer_filter', instance.customerFilter);
+  writeNotNull('date_time_filter', instance.dateTimeFilter);
+  writeNotNull('fulfillment_filter', instance.fulfillmentFilter);
+  writeNotNull('source_filter', instance.sourceFilter);
+  writeNotNull('state_filter', instance.stateFilter);
+  return val;
+}
+
+SearchOrdersStateFilter _$SearchOrdersStateFilterFromJson(
+        Map<String, dynamic> json) =>
+    SearchOrdersStateFilter(
+      states: (json['states'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$OrderStateEnumMap, e))
+          .toList(),
+    );
+
+Map<String, dynamic> _$SearchOrdersStateFilterToJson(
+    SearchOrdersStateFilter instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'states', instance.states?.map((e) => _$OrderStateEnumMap[e]).toList());
+  return val;
+}
+
+const _$OrderStateEnumMap = {
+  OrderState.OPEN: 'OPEN',
+  OrderState.COMPLETED: 'COMPLETED',
+  OrderState.CANCELED: 'CANCELED',
+  OrderState.DRAFT: 'DRAFT',
+};
+
+SearchOrdersSourceFilter _$SearchOrdersSourceFilterFromJson(
+        Map<String, dynamic> json) =>
+    SearchOrdersSourceFilter(
+      sourceNames: (json['source_names'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+    );
+
+Map<String, dynamic> _$SearchOrdersSourceFilterToJson(
+    SearchOrdersSourceFilter instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('source_names', instance.sourceNames);
+  return val;
+}
+
+SearchOrdersFulfillmentFilter _$SearchOrdersFulfillmentFilterFromJson(
+        Map<String, dynamic> json) =>
+    SearchOrdersFulfillmentFilter(
+      fulfillmentStates: (json['fulfillment_states'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$OrderFulfillmentStateEnumMap, e))
+          .toList(),
+      fulfillmentTypes: (json['fulfillment_types'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$OrderFulfillmentTypeEnumMap, e))
+          .toList(),
+    );
+
+Map<String, dynamic> _$SearchOrdersFulfillmentFilterToJson(
+    SearchOrdersFulfillmentFilter instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'fulfillment_states',
+      instance.fulfillmentStates
+          ?.map((e) => _$OrderFulfillmentStateEnumMap[e])
+          .toList());
+  writeNotNull(
+      'fulfillment_types',
+      instance.fulfillmentTypes
+          ?.map((e) => _$OrderFulfillmentTypeEnumMap[e])
+          .toList());
+  return val;
+}
+
+const _$OrderFulfillmentStateEnumMap = {
+  OrderFulfillmentState.PROPOSED: 'PROPOSED',
+  OrderFulfillmentState.RESERVED: 'RESERVED',
+  OrderFulfillmentState.PREPARED: 'PREPARED',
+  OrderFulfillmentState.COMPLETED: 'COMPLETED',
+  OrderFulfillmentState.CANCELED: 'CANCELED',
+  OrderFulfillmentState.FAILED: 'FAILED',
+};
+
+const _$OrderFulfillmentTypeEnumMap = {
+  OrderFulfillmentType.PICKUP: 'PICKUP',
+  OrderFulfillmentType.SHIPMENT: 'SHIPMENT',
+};
+
+SearchOrdersDateTimeFilter _$SearchOrdersDateTimeFilterFromJson(
+        Map<String, dynamic> json) =>
+    SearchOrdersDateTimeFilter(
+      updatedAt: json['updated_at'] == null
+          ? null
+          : TimeRange.fromJson(json['updated_at'] as Map<String, dynamic>),
+      createdAt: json['created_at'] == null
+          ? null
+          : TimeRange.fromJson(json['created_at'] as Map<String, dynamic>),
+      closedAt: json['closed_at'] == null
+          ? null
+          : TimeRange.fromJson(json['closed_at'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$SearchOrdersDateTimeFilterToJson(
+    SearchOrdersDateTimeFilter instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('closed_at', instance.closedAt);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  return val;
+}
+
+SearchOrdersCustomerFilter _$SearchOrdersCustomerFilterFromJson(
+        Map<String, dynamic> json) =>
+    SearchOrdersCustomerFilter(
+      customerIds: (json['customer_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+    );
+
+Map<String, dynamic> _$SearchOrdersCustomerFilterToJson(
+    SearchOrdersCustomerFilter instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('customer_ids', instance.customerIds);
+  return val;
+}
+
 SearchTerminalRequest _$SearchTerminalRequestFromJson(
         Map<String, dynamic> json) =>
     SearchTerminalRequest(
@@ -7264,8 +7655,7 @@ const _$TerimnalRefundStatusEnumMap = {
   TerimnalRefundStatus.COMPLETED: 'COMPLETED',
 };
 
-TerminalSearchQuery _$TerminalCheckoutQueryFromJson(
-        Map<String, dynamic> json) =>
+TerminalSearchQuery _$TerminalSearchQueryFromJson(Map<String, dynamic> json) =>
     TerminalSearchQuery(
       filter: json['filter'] == null
           ? null
@@ -7273,12 +7663,10 @@ TerminalSearchQuery _$TerminalCheckoutQueryFromJson(
               json['filter'] as Map<String, dynamic>),
       sort: json['sort'] == null
           ? null
-          : TerminalQuerySort.fromJson(
-              json['sort'] as Map<String, dynamic>),
+          : TerminalQuerySort.fromJson(json['sort'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$TerminalCheckoutQueryToJson(
-    TerminalSearchQuery instance) {
+Map<String, dynamic> _$TerminalSearchQueryToJson(TerminalSearchQuery instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -7292,17 +7680,14 @@ Map<String, dynamic> _$TerminalCheckoutQueryToJson(
   return val;
 }
 
-TerminalQueryFilter _$TerminalCheckoutQueryFilterFromJson(
-        Map<String, dynamic> json) =>
+TerminalQueryFilter _$TerminalQueryFilterFromJson(Map<String, dynamic> json) =>
     TerminalQueryFilter(
       deviceId: json['device_id'] as String?,
-      status:
-          $enumDecodeNullable(_$TerminalCheckoutStatusEnumMap, json['status']),
+      status: $enumDecodeNullable(_$TerminalStatusEnumMap, json['status']),
       createdAt: json['created_at'] as String?,
     );
 
-Map<String, dynamic> _$TerminalCheckoutQueryFilterToJson(
-    TerminalQueryFilter instance) {
+Map<String, dynamic> _$TerminalQueryFilterToJson(TerminalQueryFilter instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -7313,25 +7698,23 @@ Map<String, dynamic> _$TerminalCheckoutQueryFilterToJson(
 
   writeNotNull('created_at', instance.createdAt);
   writeNotNull('device_id', instance.deviceId);
-  writeNotNull('status', _$TerminalCheckoutStatusEnumMap[instance.status]);
+  writeNotNull('status', _$TerminalStatusEnumMap[instance.status]);
   return val;
 }
 
-const _$TerminalCheckoutStatusEnumMap = {
+const _$TerminalStatusEnumMap = {
   TerminalStatus.PENDING: 'PENDING',
   TerminalStatus.IN_PROGRESS: 'IN_PROGRESS',
   TerminalStatus.CANCELED: 'CANCELED',
   TerminalStatus.COMPLETED: 'COMPLETED',
 };
 
-TerminalQuerySort _$TerminalCheckoutQuerySortFromJson(
-        Map<String, dynamic> json) =>
+TerminalQuerySort _$TerminalQuerySortFromJson(Map<String, dynamic> json) =>
     TerminalQuerySort(
       sortOrder: $enumDecodeNullable(_$SortOrderEnumMap, json['sort_order']),
     );
 
-Map<String, dynamic> _$TerminalCheckoutQuerySortToJson(
-    TerminalQuerySort instance) {
+Map<String, dynamic> _$TerminalQuerySortToJson(TerminalQuerySort instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -7341,5 +7724,60 @@ Map<String, dynamic> _$TerminalCheckoutQuerySortToJson(
   }
 
   writeNotNull('sort_order', _$SortOrderEnumMap[instance.sortOrder]);
+  return val;
+}
+
+OrderResponse _$OrderResponseFromJson(Map<String, dynamic> json) =>
+    OrderResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      order: json['order'] == null
+          ? null
+          : Order.fromJson(json['order'] as Map<String, dynamic>),
+      orders: (json['orders'] as List<dynamic>?)
+          ?.map((e) => Order.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      cursor: json['cursor'] as String?,
+      orderEntries: json['order_entries'] == null
+          ? null
+          : OrderEntry.fromJson(json['order_entries'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$OrderResponseToJson(OrderResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('order', instance.order);
+  writeNotNull('orders', instance.orders);
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('order_entries', instance.orderEntries);
+  return val;
+}
+
+BatchOrderRequest _$BatchOrderRequestFromJson(Map<String, dynamic> json) =>
+    BatchOrderRequest(
+      locationId: json['location_id'] as String?,
+      orderIds:
+          (json['order_ids'] as List<dynamic>).map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$BatchOrderRequestToJson(BatchOrderRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('location_id', instance.locationId);
+  val['order_ids'] = instance.orderIds;
   return val;
 }

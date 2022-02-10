@@ -7,8 +7,8 @@ void main() {
   const String applicationId = "sandbox-sq0idb-BOZshuZ7XTKLKpBk73rJtQ";
   const String clientId = "sandbox-sq0idb-BOZshuZ7XTKLKpBk73rJtQ";
   const String clientSecret = "sandbox-sq0csb-JFyKEpzTvo2Sp_TXf8yZ20FAaOycuokBeQR0Fj3KXaQ";
-  const String refreshToken = "EQAAEBuVqFR903EI0SY3q9RXU6aDZkltg9JA-CWPgBFc-w2GGUO1naFcaAF9wLrZ";
-  const String authToken = "";
+  const String refreshToken = "EQAAENfNieufQblDRPhuWTDJicWLTlgoPTFJctN_OfokyNLve9fxD6yWOmuY1QWf";
+  const String authToken = "EAAAENJpx8oLhXucYIZdKo_TuwoPaQi7CS6T117xS3wWCLoLID4CD5HIBWZivvUV";
 
 
   ///
@@ -26,31 +26,8 @@ void main() {
     expect(squareClient.isInitialized(), true);
 
     String authUrl = squareClient.getAuthorizationPageUrl(
-        scopes: [Scope.CustomerWrite,Scope.CustomerRead ],
-        redirectUrl: "https://localhost/v2/OAuth2Playground/RedirectUrl",
-        state: "82201dd8d83d23cc8a48caf52b");
-
-    //print (authUrl);
-    expect(authUrl, "https://connect.squareupsandbox.com/oauth2/authorize?client_id=$applicationId&scope=CUSTOMERS_WRITE+CUSTOMERS_READ&session=False&state=82201dd8d83d23cc8a48caf52b");
-
-  });
-
-  ///
-  /// Test that the correct auth URL is generated
-  /// for sandbox
-  ///
-  test('test auth url', () async {
-    final squareClient = SquareClient(
-        applicationId: applicationId,
-        clientId: clientId,
-        clientSecret: clientSecret,
-        environmentType: EnvironmentType.Sandbox
-    );
-    await squareClient.initialize();
-    expect(squareClient.isInitialized(), true);
-
-    String authUrl = squareClient.getAuthorizationPageUrl(
-        scopes: [Scope.CustomerWrite,Scope.CustomerRead ],
+        //scopes: [Scope.CustomerWrite,Scope.CustomerRead,],
+        scopes: Scope.getScopes(),//.sublist(0, 3),//[Scope.PaymentRead,Scope.PaymentRead, Scope.PaymentWriteAdditionalRecipients, Scope.PaymentWriteInPerson],
         redirectUrl: "https://localhost/v2/OAuth2Playground/RedirectUrl",
         state: "82201dd8d83d23cc8a48caf52b");
 
@@ -58,6 +35,7 @@ void main() {
     expect(authUrl, "https://connect.squareupsandbox.com/oauth2/authorize?client_id=$applicationId&scope=CUSTOMERS_WRITE+CUSTOMERS_READ&session=False&state=82201dd8d83d23cc8a48caf52b");
 
   });
+
 
   ///
   /// Test the request for a auth code
@@ -74,10 +52,11 @@ void main() {
     expect(squareClient.isInitialized(), true);
 
     var response = await squareClient.getAuthToken(
-      code: "sandbox-sq0cgb-kGor8DK6hRUN_xOe4aDl9w",
+      code: "sandbox-sq0cgb-g-AjFOCFJtBmtIUIKqk8hg",
         redirectUrl: "https://localhost"
     );
 
+    print (response);
     expect(response.accessToken, isNotNull);
 
   });
@@ -115,13 +94,9 @@ void main() {
     await squareClient.initialize();
     expect(squareClient.isInitialized(), true);
 
-    var token = await squareClient.refreshToken(
-        refreshToken: refreshToken
-    );
-    print (token);
-    expect(token, isNotNull);
-
-    var result = await squareClient.createTerminalCheckout(request:
+    var result = await squareClient.createTerminalCheckout(
+        authToken: authToken,
+        request:
     CreateTerminalCheckoutRequest.fromJson({
       "idempotency_key": "28a0c3bc-7839-11ea-bc55-0242ac130003",
       "checkout": {
@@ -185,7 +160,7 @@ void main() {
 
     var result = await squareClient.readTerminalCheckout(
         authToken: authToken,
-        checkoutId: "1234");
+        checkoutId: "6Thw6JW8cSYqO");
 
     expect(result, isNotNull);
 
@@ -206,7 +181,7 @@ void main() {
 
     var result = await squareClient.cancelTerminalCheckout(
         authToken: authToken,
-        checkoutId: "08YceKh7B3ZqO");
+        checkoutId: "6Thw6JW8cSYqO");
 
     expect(result, isNotNull);
 
@@ -224,13 +199,10 @@ void main() {
     await squareClient.initialize();
     expect(squareClient.isInitialized(), true);
 
-    var token = await squareClient.refreshToken(
-        refreshToken: refreshToken
-    );
-    print (token);
-    expect(token, isNotNull);
 
-    var result = await squareClient.createTerminalRefund(request:
+    var result = await squareClient.createTerminalRefund(
+        authToken: authToken,
+        request:
     CreateRefundRequest.fromJson({
       "idempotency_key": "402a640b-b26f-401f-b406-46f839590c04",
       "refund": {
@@ -319,5 +291,8 @@ void main() {
     expect(result, isNotNull);
 
   });
+
+  // TODO Order Test Cases
+  
 
 }

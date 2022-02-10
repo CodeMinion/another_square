@@ -53,7 +53,7 @@ class TerminalService {
     }
     else {
       print (response.body);
-      throw TerminalException(statusCode: response.statusCode, message: TerminalCheckoutResponse.fromJson(jsonDecode(response.body)).errors?.take(0).toString());
+      throw TerminalException(statusCode: response.statusCode, message: TerminalCheckoutResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
     }
   }
 
@@ -87,7 +87,7 @@ class TerminalService {
       return TerminalCheckoutResponse.fromJson(jsonDecode(response.body));
     }
     else {
-      throw TerminalException(statusCode: response.statusCode, message: TerminalCheckoutResponse.fromJson(jsonDecode(response.body)).errors?.take(0).toString());
+      throw TerminalException(statusCode: response.statusCode, message: TerminalCheckoutResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
     }
   }
 
@@ -123,7 +123,7 @@ class TerminalService {
       return TerminalCheckoutResponse.fromJson(jsonDecode(response.body)).termCheckout!;
     }
     else {
-      throw TerminalException(statusCode: response.statusCode, message: TerminalCheckoutResponse.fromJson(jsonDecode(response.body)).errors?.take(0).toString());
+      throw TerminalException(statusCode: response.statusCode, message: TerminalCheckoutResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
     }
   }
 
@@ -158,7 +158,7 @@ class TerminalService {
       return TerminalCheckoutResponse.fromJson(jsonDecode(response.body)).termCheckout!;
     }
     else {
-      throw TerminalException(statusCode: response.statusCode, message: TerminalCheckoutResponse.fromJson(jsonDecode(response.body)).errors?.take(0).toString());
+      throw TerminalException(statusCode: response.statusCode, message: TerminalCheckoutResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
     }
   }
 
@@ -194,7 +194,7 @@ class TerminalService {
       return TerminalRefundResponse.fromJson(jsonDecode(response.body)).refund!;
     }
     else {
-      throw TerminalException(statusCode: response.statusCode, message: TerminalRefundResponse.fromJson(jsonDecode(response.body)).errors?.take(0).toString());
+      throw TerminalException(statusCode: response.statusCode, message: TerminalRefundResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
     }
   }
 
@@ -228,7 +228,7 @@ class TerminalService {
       return TerminalRefundResponse.fromJson(jsonDecode(response.body));
     }
     else {
-      throw TerminalException(statusCode: response.statusCode, message: TerminalRefundResponse.fromJson(jsonDecode(response.body)).errors?.take(0).toString());
+      throw TerminalException(statusCode: response.statusCode, message: TerminalRefundResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
     }
   }
 
@@ -263,7 +263,7 @@ class TerminalService {
       return TerminalRefundResponse.fromJson(jsonDecode(response.body)).refund!;
     }
     else {
-      throw TerminalException(statusCode: response.statusCode, message: TerminalRefundResponse.fromJson(jsonDecode(response.body)).errors?.take(0).toString());
+      throw TerminalException(statusCode: response.statusCode, message: TerminalRefundResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
     }
   }
 
@@ -298,7 +298,7 @@ class TerminalService {
       return TerminalRefundResponse.fromJson(jsonDecode(response.body)).refund!;
     }
     else {
-      throw TerminalException(statusCode: response.statusCode, message: TerminalRefundResponse.fromJson(jsonDecode(response.body)).errors?.take(0).toString());
+      throw TerminalException(statusCode: response.statusCode, message: TerminalRefundResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
     }
   }
 }

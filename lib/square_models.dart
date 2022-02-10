@@ -47,14 +47,16 @@ class Scope {
 
   static final Invalid = Scope._("invalid", "");
   static final BankAccountRead =
-      Scope._("BankAccountRead", "	BANK_ACCOUNTS_READ");
+      Scope._("BankAccountRead", "BANK_ACCOUNTS_READ");
 
   static final AppointmentsRead =
       Scope._("AppointmentsRead", "APPOINTMENTS_READ");
   static final AppointmentsWrite =
       Scope._("AppointmentsWrite", "APPOINTMENTS_WRITE");
   static final AppointmentReadAll =
-      Scope._("AppointmentReadAll", "APPOINTMENTS_ALL_READ");
+      Scope._("AppointmentReadAll", "APPOINTEMTNS_ALL_READ");
+  static final AppointmentWriteAll =
+      Scope._("AppointmenWriteAll", "APPOINTMETNS_ALL_WRITE");
 
   static final AppointmentBusinessSettingsRead = Scope._(
       "AppointmentBusinessSettingsRead", "APPOINTMENTS_BUSINESS_SETTINGS_READ");
@@ -129,7 +131,8 @@ class Scope {
     BankAccountRead,
     AppointmentsRead,
     AppointmentsWrite,
-    AppointmentReadAll,
+    //AppointmentReadAll,
+    //AppointmentWriteAll,
     AppointmentBusinessSettingsRead,
     CashDrawerRead,
     CustomerRead,
@@ -168,6 +171,17 @@ class Scope {
     TimeCardsSettingsWrite,
     Invalid,
   ];
+
+  static List<Scope> getScopes() {
+
+    List<Scope> outScopes = List<Scope>.empty(growable: true);
+    _values.forEach((element) {
+      if (element != Scope.Invalid) {
+        outScopes.add(element);
+      }
+    });
+    return outScopes;
+  }
 
   static Scope findById(String id) {
     Scope found = Invalid;
@@ -6873,7 +6887,364 @@ class CreateTerminalCheckoutRequest {
   }
 }
 
+@JsonSerializable(includeIfNull: false)
+class CreateOrderRequest {
 
+  @JsonKey(name: "idempotency_key")
+  final String idempotencyKey;
+
+  final Order? order;
+
+  CreateOrderRequest({
+    required this.idempotencyKey, required this.order
+  });
+
+  factory CreateOrderRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateOrderRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CreateOrderRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CalculateOrderRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String idempotencyKey;
+
+  final Order? order;
+
+  @JsonKey(name: "proposed_rewards")
+  final List<OrderReward>? proposedRewards;
+
+
+  CalculateOrderRequest({
+    required this.idempotencyKey, required this.order, this.proposedRewards
+  });
+
+  factory CalculateOrderRequest.fromJson(Map<String, dynamic> json) =>
+      _$CalculateOrderRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CalculateOrderRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CloneOrderRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String? idempotencyKey;
+
+  @JsonKey(name: "order_id")
+  final String orderId;
+
+  final int? version;
+
+  CloneOrderRequest({
+    this.idempotencyKey, required this.orderId, this.version
+  });
+
+  factory CloneOrderRequest.fromJson(Map<String, dynamic> json) =>
+      _$CloneOrderRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CloneOrderRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class UpdateOrderRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String? idempotencyKey;
+
+  final Order? order;
+
+  @JsonKey(name: "fields_to_clear")
+  final List<String>? fieldsToClear;
+
+  UpdateOrderRequest({
+    this.idempotencyKey, this.fieldsToClear, this.order
+  });
+
+  factory UpdateOrderRequest.fromJson(Map<String, dynamic> json) =>
+      _$UpdateOrderRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UpdateOrderRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class PayOrderRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String? idempotencyKey;
+
+  @JsonKey(name: "order_version")
+  final int? orderVersion;
+
+  @JsonKey(name: "payment_ids")
+  final List<String>? paymentIds;
+
+  PayOrderRequest({
+    this.idempotencyKey, this.orderVersion, this.paymentIds
+  });
+
+  factory PayOrderRequest.fromJson(Map<String, dynamic> json) =>
+      _$PayOrderRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PayOrderRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+
+@JsonSerializable(includeIfNull: false)
+class SearchOrderRequest {
+
+  @JsonKey(name: "location_ids")
+  final List<String>? locationIds;
+
+  final String? cursor;
+
+  final SearchOrdersQuery? query;
+
+  final int? limit;
+
+  @JsonKey(name: "return_entries")
+  final bool? returnEntries;
+
+
+  SearchOrderRequest({
+    this.limit,
+    this.query, this.cursor, this.locationIds, this.returnEntries
+  });
+
+  factory SearchOrderRequest.fromJson(Map<String, dynamic> json) =>
+      _$SearchOrderRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchOrderRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class SearchOrdersQuery {
+  final SearchOrdersFilter? filter;
+
+  final SearchOrdersSort? sort;
+
+  SearchOrdersQuery({
+    this.sort, this.filter
+  });
+
+  factory SearchOrdersQuery.fromJson(Map<String, dynamic> json) =>
+      _$SearchOrdersQueryFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchOrdersQueryToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+
+
+@JsonSerializable(includeIfNull: false)
+class SearchOrdersSort {
+
+  @JsonKey(name: "sort_field")
+  final String? sortField;
+
+  @JsonKey(name: "sort_order")
+  final SortOrder? sortOrder;
+
+  SearchOrdersSort({
+    this.sortOrder, this.sortField
+  });
+
+  factory SearchOrdersSort.fromJson(Map<String, dynamic> json) =>
+      _$SearchOrdersSortFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchOrdersSortToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class SearchOrdersFilter {
+
+  @JsonKey(name: "customer_filter")
+  final SearchOrdersCustomerFilter? customerFilter;
+
+  @JsonKey(name: "date_time_filter")
+  final SearchOrdersDateTimeFilter? dateTimeFilter;
+
+  @JsonKey(name: "fulfillment_filter")
+  final SearchOrdersFulfillmentFilter? fulfillmentFilter;
+
+  @JsonKey(name: "source_filter")
+  final SearchOrdersSourceFilter? sourceFilter;
+
+
+  @JsonKey(name: "state_filter")
+  final SearchOrdersStateFilter? stateFilter;
+
+  SearchOrdersFilter({
+    this.customerFilter, this.dateTimeFilter, this.fulfillmentFilter,
+    this.sourceFilter, this.stateFilter
+  });
+
+  factory SearchOrdersFilter.fromJson(Map<String, dynamic> json) =>
+      _$SearchOrdersFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchOrdersFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class SearchOrdersStateFilter {
+  final List<OrderState>? states;
+
+  SearchOrdersStateFilter({
+    this.states
+  });
+
+  factory SearchOrdersStateFilter.fromJson(Map<String, dynamic> json) =>
+      _$SearchOrdersStateFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchOrdersStateFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class SearchOrdersSourceFilter {
+
+  @JsonKey(name: "source_names")
+  final List<String>? sourceNames;
+
+  SearchOrdersSourceFilter({
+    this.sourceNames
+  });
+
+  factory SearchOrdersSourceFilter.fromJson(Map<String, dynamic> json) =>
+      _$SearchOrdersSourceFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchOrdersSourceFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull:false)
+class SearchOrdersFulfillmentFilter {
+
+  @JsonKey(name: "fulfillment_states")
+  final List<OrderFulfillmentState>? fulfillmentStates;
+
+  @JsonKey(name: "fulfillment_types")
+  final List<OrderFulfillmentType>? fulfillmentTypes;
+
+  SearchOrdersFulfillmentFilter({
+    this.fulfillmentStates, this.fulfillmentTypes
+  });
+
+  factory SearchOrdersFulfillmentFilter.fromJson(Map<String, dynamic> json) =>
+      _$SearchOrdersFulfillmentFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchOrdersFulfillmentFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class SearchOrdersDateTimeFilter {
+
+  @JsonKey(name: "closed_at")
+  final TimeRange? closedAt;
+
+  @JsonKey(name: "created_at")
+  final TimeRange? createdAt;
+
+  @JsonKey(name: "updated_at")
+  final TimeRange? updatedAt;
+
+  SearchOrdersDateTimeFilter({
+    this.updatedAt, this.createdAt, this.closedAt
+  });
+
+  factory SearchOrdersDateTimeFilter.fromJson(Map<String, dynamic> json) =>
+      _$SearchOrdersDateTimeFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchOrdersDateTimeFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class SearchOrdersCustomerFilter {
+
+  @JsonKey(name: "customer_ids")
+  final List<String>? customerIds;
+
+  SearchOrdersCustomerFilter({
+    this.customerIds
+  });
+
+  factory SearchOrdersCustomerFilter.fromJson(Map<String, dynamic> json) =>
+      _$SearchOrdersCustomerFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchOrdersCustomerFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
 
 @JsonSerializable(includeIfNull:false)
 class SearchTerminalRequest {
@@ -6988,9 +7359,9 @@ class TerminalSearchQuery {
   });
 
   factory TerminalSearchQuery.fromJson(Map<String, dynamic> json) =>
-      _$TerminalCheckoutQueryFromJson(json);
+      _$TerminalSearchQueryFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TerminalCheckoutQueryToJson(this);
+  Map<String, dynamic> toJson() => _$TerminalSearchQueryToJson(this);
 
   @override
   String toString() {
@@ -7014,9 +7385,9 @@ class TerminalQueryFilter {
   });
 
   factory TerminalQueryFilter.fromJson(Map<String, dynamic> json) =>
-      _$TerminalCheckoutQueryFilterFromJson(json);
+      _$TerminalQueryFilterFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TerminalCheckoutQueryFilterToJson(this);
+  Map<String, dynamic> toJson() => _$TerminalQueryFilterToJson(this);
 
   @override
   String toString() {
@@ -7036,14 +7407,90 @@ class TerminalQuerySort {
   });
 
   factory TerminalQuerySort.fromJson(Map<String, dynamic> json) =>
-      _$TerminalCheckoutQuerySortFromJson(json);
+      _$TerminalQuerySortFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TerminalCheckoutQuerySortToJson(this);
+  Map<String, dynamic> toJson() => _$TerminalQuerySortToJson(this);
 
   @override
   String toString() {
     return toJson().toString();
   }
+}
+
+@JsonSerializable(includeIfNull: false)
+class OrderResponse {
+
+  final List<SquareError>? errors;
+
+  final Order? order;
+
+  final List<Order>? orders;
+
+  final String? cursor;
+
+  @JsonKey(name: "order_entries")
+  final OrderEntry? orderEntries;
+
+
+  OrderResponse({
+    this.errors, this.order, this.orders, this.cursor, this.orderEntries
+  });
+
+  factory OrderResponse.fromJson(Map<String, dynamic> json) =>
+      _$OrderResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$OrderResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class BatchOrderRequest {
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  @JsonKey(name: "order_ids")
+  final List<String> orderIds;
+
+  BatchOrderRequest({
+    this.locationId, required this.orderIds
+  });
+
+  factory BatchOrderRequest.fromJson(Map<String, dynamic> json) =>
+      _$BatchOrderRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BatchOrderRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+enum OrderState {
+  OPEN,
+  COMPLETED,
+  CANCELED,
+  DRAFT,
+
+}
+
+enum OrderFulfillmentType {
+  PICKUP,
+  SHIPMENT
+}
+
+enum OrderFulfillmentState {
+  PROPOSED,
+  RESERVED,
+  PREPARED,
+  COMPLETED,
+  CANCELED,
+  FAILED
 }
 
 enum TerimnalRefundStatus {
