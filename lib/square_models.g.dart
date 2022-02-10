@@ -1775,32 +1775,6 @@ Map<String, dynamic> _$SubscriptionSourceToJson(SubscriptionSource instance) {
   return val;
 }
 
-SubscriptionResponse _$SubscriptionResponseFromJson(
-        Map<String, dynamic> json) =>
-    SubscriptionResponse(
-      erros: (json['erros'] as List<dynamic>?)
-          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      subscription: json['subscription'] == null
-          ? null
-          : Subscription.fromJson(json['subscription'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$SubscriptionResponseToJson(
-    SubscriptionResponse instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('erros', instance.erros);
-  writeNotNull('subscription', instance.subscription);
-  return val;
-}
-
 SquareError _$SquareErrorFromJson(Map<String, dynamic> json) => SquareError(
       category: json['category'] as String?,
       code: $enumDecodeNullable(_$SquareErrorCodeEnumMap, json['code']),
@@ -7781,3 +7755,182 @@ Map<String, dynamic> _$BatchOrderRequestToJson(BatchOrderRequest instance) {
   val['order_ids'] = instance.orderIds;
   return val;
 }
+
+CreateSubscriptionRequest _$CreateSubscriptionRequestFromJson(
+        Map<String, dynamic> json) =>
+    CreateSubscriptionRequest(
+      locationId: json['location_id'] as String,
+      idempotencyKey: json['idempotency_key'] as String?,
+      customerId: json['customer_id'] as String,
+      timezone: json['timezone'] as String?,
+      source: json['source'] == null
+          ? null
+          : SubscriptionSource.fromJson(json['source'] as Map<String, dynamic>),
+      cardId: json['card_id'] as String?,
+      taxPercentage: json['tax_percentage'] as String?,
+      startDate: json['start_date'] as String?,
+      priceOverrideMoney: json['price_override_money'] == null
+          ? null
+          : Money.fromJson(
+              json['price_override_money'] as Map<String, dynamic>),
+      canceledDate: json['canceled_date'] as String?,
+      planId: json['plan_id'] as String,
+    );
+
+Map<String, dynamic> _$CreateSubscriptionRequestToJson(
+    CreateSubscriptionRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('idempotency_key', instance.idempotencyKey);
+  val['location_id'] = instance.locationId;
+  val['plan_id'] = instance.planId;
+  val['customer_id'] = instance.customerId;
+  writeNotNull('start_date', instance.startDate);
+  writeNotNull('canceled_date', instance.canceledDate);
+  writeNotNull('tax_percentage', instance.taxPercentage);
+  writeNotNull('price_override_money', instance.priceOverrideMoney);
+  writeNotNull('card_id', instance.cardId);
+  writeNotNull('timezone', instance.timezone);
+  writeNotNull('source', instance.source);
+  return val;
+}
+
+SubscriptionResponse _$SubscriptionResponseFromJson(
+        Map<String, dynamic> json) =>
+    SubscriptionResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      subscriptions: (json['subscriptions'] as List<dynamic>?)
+          ?.map((e) => Subscription.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      subscription: json['subscription'] == null
+          ? null
+          : Subscription.fromJson(json['subscription'] as Map<String, dynamic>),
+      cursor: json['cursor'] as String?,
+      actions: (json['actions'] as List<dynamic>?)
+          ?.map((e) => SubscriptionAction.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$SubscriptionResponseToJson(
+    SubscriptionResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('subscription', instance.subscription);
+  writeNotNull('subscriptions', instance.subscriptions);
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('actions', instance.actions);
+  return val;
+}
+
+SearchSubscriptionRequest _$SearchSubscriptionRequestFromJson(
+        Map<String, dynamic> json) =>
+    SearchSubscriptionRequest(
+      cursor: json['cursor'] as String?,
+      query: json['query'] == null
+          ? null
+          : SearchSubscriptionsQuery.fromJson(
+              json['query'] as Map<String, dynamic>),
+      limit: json['limit'] as int?,
+      include:
+          (json['include'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$SearchSubscriptionRequestToJson(
+    SearchSubscriptionRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('limit', instance.limit);
+  writeNotNull('query', instance.query);
+  writeNotNull('include', instance.include);
+  return val;
+}
+
+SubscriptionEventResponse _$SubscriptionEventResponseFromJson(
+        Map<String, dynamic> json) =>
+    SubscriptionEventResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      subscriptionEvents: (json['subscription_events'] as List<dynamic>?)
+          ?.map((e) => SubscriptionEvent.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      subscriptionEvent: json['subscription_event'] == null
+          ? null
+          : SubscriptionEvent.fromJson(
+              json['subscription_event'] as Map<String, dynamic>),
+      cursor: json['cursor'] as String?,
+    );
+
+Map<String, dynamic> _$SubscriptionEventResponseToJson(
+    SubscriptionEventResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('subscription_event', instance.subscriptionEvent);
+  writeNotNull('subscription_events', instance.subscriptionEvents);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+SubscriptionStateRequest _$SubscriptionStateRequestFromJson(
+        Map<String, dynamic> json) =>
+    SubscriptionStateRequest(
+      pauseCycleDuration: json['pause_cycle_duration'] as int?,
+      pauseEffectiveDate: json['pause_effective_date'] as String?,
+      pauseReason: json['pause_reason'] as String?,
+      resumeChangeTiming: $enumDecodeNullable(
+          _$ChangeTimingEnumMap, json['resume_change_timing']),
+      resumeEffectiveDate: json['resume_effective_date'] as String?,
+    );
+
+Map<String, dynamic> _$SubscriptionStateRequestToJson(
+    SubscriptionStateRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('pause_effective_date', instance.pauseEffectiveDate);
+  writeNotNull('pause_cycle_duration', instance.pauseCycleDuration);
+  writeNotNull('resume_effective_date', instance.resumeEffectiveDate);
+  writeNotNull('resume_change_timing',
+      _$ChangeTimingEnumMap[instance.resumeChangeTiming]);
+  writeNotNull('pause_reason', instance.pauseReason);
+  return val;
+}
+
+const _$ChangeTimingEnumMap = {
+  ChangeTiming.IMMEDIATE: 'IMMEDIATE',
+  ChangeTiming.END_OF_BILLING_CYCLE: 'END_OF_BILLING_CYCLE',
+};

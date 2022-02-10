@@ -1931,24 +1931,6 @@ class SubscriptionSource {
   }
 }
 
-@JsonSerializable(includeIfNull: false)
-class SubscriptionResponse {
-  final List<SquareError>? erros;
-
-  final Subscription? subscription;
-
-  SubscriptionResponse({this.erros, this.subscription});
-
-  factory SubscriptionResponse.fromJson(Map<String, dynamic> json) =>
-      _$SubscriptionResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$SubscriptionResponseToJson(this);
-
-  @override
-  String toString() {
-    return toJson().toString();
-  }
-}
 
 @JsonSerializable(includeIfNull: false)
 class SquareError {
@@ -7471,6 +7453,180 @@ class BatchOrderRequest {
   }
 }
 
+@JsonSerializable(includeIfNull: false)
+class CreateSubscriptionRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String? idempotencyKey;
+
+  @JsonKey(name: "location_id")
+  final String locationId;
+
+  @JsonKey(name: "plan_id")
+  final String planId;
+
+  @JsonKey(name: "customer_id")
+  final String customerId;
+
+  @JsonKey(name: "start_date")
+  final String? startDate;
+
+  @JsonKey(name: "canceled_date")
+  final String? canceledDate;
+
+  @JsonKey(name: "tax_percentage")
+  final String? taxPercentage;
+
+  @JsonKey(name: "price_override_money")
+  final Money? priceOverrideMoney;
+
+  @JsonKey(name: "card_id")
+  final String? cardId;
+
+  final String? timezone;
+
+  final SubscriptionSource? source;
+
+  CreateSubscriptionRequest({
+  required this.locationId, this.idempotencyKey, required this.customerId,
+  this.timezone, this.source, this.cardId, this.taxPercentage,
+  this.startDate, this.priceOverrideMoney, this.canceledDate,
+  required this.planId
+  });
+
+  factory CreateSubscriptionRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateSubscriptionRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CreateSubscriptionRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class SubscriptionResponse {
+
+  final List<SquareError>? errors;
+
+  final Subscription? subscription;
+
+  final List<Subscription>? subscriptions;
+
+  final String? cursor;
+
+  final List<SubscriptionAction>? actions;
+
+
+
+  SubscriptionResponse({
+    this.errors, this.subscriptions, this.subscription, this.cursor, this.actions
+  });
+
+  factory SubscriptionResponse.fromJson(Map<String, dynamic> json) =>
+      _$SubscriptionResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SubscriptionResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class SearchSubscriptionRequest {
+
+  final String? cursor;
+  final int? limit;
+
+  final SearchSubscriptionsQuery? query;
+  final List<String>? include;
+
+  SearchSubscriptionRequest({
+    this.cursor, this.query, this.limit, this.include
+  });
+
+  factory SearchSubscriptionRequest.fromJson(Map<String, dynamic> json) =>
+      _$SearchSubscriptionRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchSubscriptionRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class SubscriptionEventResponse {
+
+  final List<SquareError>? errors;
+
+  @JsonKey(name: "subscription_event")
+  final SubscriptionEvent? subscriptionEvent;
+
+  @JsonKey(name: "subscription_events")
+  final List<SubscriptionEvent>? subscriptionEvents;
+
+  final String? cursor;
+
+  SubscriptionEventResponse({
+    this.errors, this.subscriptionEvents, this.subscriptionEvent, this.cursor
+  });
+
+  factory SubscriptionEventResponse.fromJson(Map<String, dynamic> json) =>
+      _$SubscriptionEventResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SubscriptionEventResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class SubscriptionStateRequest {
+
+  @JsonKey(name: "pause_effective_date")
+  final String? pauseEffectiveDate;
+
+  @JsonKey(name: "pause_cycle_duration")
+  final int? pauseCycleDuration;
+
+  @JsonKey(name: "resume_effective_date")
+  final String? resumeEffectiveDate;
+
+  @JsonKey(name: "resume_change_timing")
+  final ChangeTiming? resumeChangeTiming;
+
+  @JsonKey(name: "pause_reason")
+  final String? pauseReason;
+
+  SubscriptionStateRequest({
+    this.pauseCycleDuration, this.pauseEffectiveDate, this.pauseReason,
+  this.resumeChangeTiming, this.resumeEffectiveDate
+  });
+
+  factory SubscriptionStateRequest.fromJson(Map<String, dynamic> json) =>
+      _$SubscriptionStateRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SubscriptionStateRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+
+enum ChangeTiming {
+  IMMEDIATE,
+  END_OF_BILLING_CYCLE,
+
+}
 enum OrderState {
   OPEN,
   COMPLETED,

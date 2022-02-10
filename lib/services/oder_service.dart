@@ -15,11 +15,11 @@ import 'package:http/http.dart' as http;
 // Square pushes orders to the Seller Dashboard only if the orders meet
 // specific conditions
 ///
-class TerminalService {
+class OrderService {
   final String baseUrl;
   final AuthenticationService authenticationService;
 
-  TerminalService(
+  OrderService(
       {required this.baseUrl, required this.authenticationService});
 
 
