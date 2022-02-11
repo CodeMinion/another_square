@@ -2,6 +2,7 @@ library another_square;
 
 import 'package:another_square/services/authentication_service.dart';
 import 'package:another_square/services/catalog_service.dart';
+import 'package:another_square/services/inventory_service.dart';
 import 'package:another_square/services/invoice_service.dart';
 import 'package:another_square/services/oder_service.dart';
 import 'package:another_square/services/subscription_service.dart';
@@ -22,6 +23,7 @@ class SquareClient {
   late SubscriptionService _subscriptionService;
   late InvoiceService _invoiceService;
   late CatalogService _catalogService;
+  late InventoryService _inventoryService;
 
   SquareClient(
       {required this.applicationId,
@@ -58,6 +60,9 @@ class SquareClient {
         authenticationService: _authenticationService!, baseUrl: _url);
 
     _catalogService = CatalogService(
+        authenticationService: _authenticationService!, baseUrl: _url);
+
+    _inventoryService = InventoryService(
         authenticationService: _authenticationService!, baseUrl: _url);
   }
 
@@ -761,6 +766,98 @@ class SquareClient {
   }) async {
     return _catalogService.updateCatalogItemsModifiers(objectId: objectId, request: request, authToken: authToken);
   }
+
+  // INVENTORY
+
+  ///
+  /// Returns the InventoryAdjustment object with the provided adjustment_id.
+  ///
+  Future<InventoryAdjustment> readInventoryAdjustment({
+    required String adjustmentId,
+    String? authToken,
+  }) async {
+    return _inventoryService.readInventoryAdjustment(adjustmentId: adjustmentId, authToken: authToken);
+  }
+
+  ///
+  /// Applies adjustments and counts to the provided item quantities.
+  ///
+  /// On success: returns the current calculated counts for all objects
+  /// referenced in the request. On failure: returns a list of related errors.
+  ///
+  Future<InventoryResponse> batchInventoryChange({
+    required BatchInventoryChangeRequest request,
+    String? authToken,
+  }) async {
+    return _inventoryService.batchInventoryChange(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Returns historical physical counts and adjustments
+  /// based on the provided filter criteria.
+  ///
+  /// Results are paginated and sorted in ascending order according
+  /// their occurred_at timestamp (oldest first).
+  ///
+  Future<InventoryResponse> batchInventoryRead({
+    required BatchInventoryReadRequest request,
+    String? authToken,
+  }) async {
+    return _inventoryService.batchInventoryRead(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Returns current counts for the provided
+  /// CatalogObjects at the requested Locations.
+  ///
+  /// Results are paginated and sorted in descending order according to
+  /// their calculated_at timestamp (newest first).
+  ///
+  Future<InventoryResponse> batchInventoryReadCounts({
+    required BatchInventoryReadCountRequest request,
+    String? authToken,
+  }) async {
+    return _inventoryService.batchInventoryReadCounts(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Returns the InventoryPhysicalCount object with the
+  /// provided [physicalCountId].
+  ///
+  Future<InventoryPhysicalCount> readInventoryPhysicalCount({
+    required String physicalCountId,
+    String? authToken,
+  }) async {
+    return _inventoryService.readInventoryPhysicalCount(physicalCountId: physicalCountId, authToken: authToken);
+  }
+
+  ///
+  /// Returns the InventoryTransfer object with the provided transfer_id.
+  ///
+  Future<InventoryTransfer> readInventoryTransfer({
+    required String transferId,
+    String? authToken,
+  }) async {
+    return _inventoryService.readInventoryTransfer(transferId: transferId, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves the current calculated stock count for a
+  /// given CatalogObject at a given set of Locations.
+  ///
+  /// Responses are paginated and unsorted. For more sophisticated
+  /// queries, use a batch endpoint.
+  ///
+  Future<InventoryResponse> readInventoryCount({
+    required String catalogObjectId,
+    InventoryCountRequest? request,
+    String? authToken,
+  }) async {
+    return _inventoryService.readInventoryCount(catalogObjectId: catalogObjectId, request: request, authToken: authToken);
+  }
+
+
+
 
   bool isInitialized() {
     return _authenticationService != null;

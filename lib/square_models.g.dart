@@ -8525,3 +8525,308 @@ Map<String, dynamic> _$UpdateCatalogItemsTaxesToJson(
   writeNotNull('taxes_to_disable', instance.taxesToDisable);
   return val;
 }
+
+InventoryAdjustmentResponse _$InventoryAdjustmentResponseFromJson(
+        Map<String, dynamic> json) =>
+    InventoryAdjustmentResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      adjustment: json['adjustment'] == null
+          ? null
+          : InventoryAdjustment.fromJson(
+              json['adjustment'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$InventoryAdjustmentResponseToJson(
+    InventoryAdjustmentResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('adjustment', instance.adjustment);
+  return val;
+}
+
+InventoryResponse _$InventoryResponseFromJson(Map<String, dynamic> json) =>
+    InventoryResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      counts: (json['counts'] as List<dynamic>?)
+          ?.map((e) => InventoryCount.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      changes: (json['changes'] as List<dynamic>?)
+          ?.map((e) => InventoryChange.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      cursor: json['cursor'] as String?,
+      count: json['count'] == null
+          ? null
+          : InventoryCount.fromJson(json['count'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$InventoryResponseToJson(InventoryResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('counts', instance.counts);
+  writeNotNull('count', instance.count);
+  writeNotNull('changes', instance.changes);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+InventoryPhysicalResponse _$InventoryPhysicalResponseFromJson(
+        Map<String, dynamic> json) =>
+    InventoryPhysicalResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      counts: (json['counts'] as List<dynamic>?)
+          ?.map(
+              (e) => InventoryPhysicalCount.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      cursor: json['cursor'] as String?,
+      count: json['count'] == null
+          ? null
+          : InventoryPhysicalCount.fromJson(
+              json['count'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$InventoryPhysicalResponseToJson(
+    InventoryPhysicalResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('counts', instance.counts);
+  writeNotNull('count', instance.count);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+InventoryCount _$InventoryCountFromJson(Map<String, dynamic> json) =>
+    InventoryCount(
+      locationId: json['location_id'] as String?,
+      state: $enumDecodeNullable(_$InventoryStateEnumMap, json['state']),
+      catalogObjectType: json['catalog_object_type'] as String?,
+      quantity: json['quantity'] as String?,
+      catalogObjectId: json['catalog_object_id'] as String?,
+      calculatedAt: json['calculated_at'] as String?,
+      isEstimated: json['is_estimated'] as bool?,
+    );
+
+Map<String, dynamic> _$InventoryCountToJson(InventoryCount instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('calculated_at', instance.calculatedAt);
+  writeNotNull('catalog_object_id', instance.catalogObjectId);
+  writeNotNull('catalog_object_type', instance.catalogObjectType);
+  writeNotNull('is_estimated', instance.isEstimated);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('quantity', instance.quantity);
+  writeNotNull('state', _$InventoryStateEnumMap[instance.state]);
+  return val;
+}
+
+BatchInventoryChangeRequest _$BatchInventoryChangeRequestFromJson(
+        Map<String, dynamic> json) =>
+    BatchInventoryChangeRequest(
+      idempotencyKey: json['idempotency_key'] as String,
+      changes: (json['changes'] as List<dynamic>?)
+          ?.map((e) => InventoryChange.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      ignoreUnchangedCounts: json['ignore_unchanged_counts'] as bool?,
+    );
+
+Map<String, dynamic> _$BatchInventoryChangeRequestToJson(
+    BatchInventoryChangeRequest instance) {
+  final val = <String, dynamic>{
+    'idempotency_key': instance.idempotencyKey,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('changes', instance.changes);
+  writeNotNull('ignore_unchanged_counts', instance.ignoreUnchangedCounts);
+  return val;
+}
+
+BatchInventoryReadRequest _$BatchInventoryReadRequestFromJson(
+        Map<String, dynamic> json) =>
+    BatchInventoryReadRequest(
+      cursor: json['cursor'] as String?,
+      locationIds: (json['location_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      catalogObjectIds: (json['catalog_object_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      states: (json['states'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$InventoryStateEnumMap, e))
+          .toList(),
+      types: (json['types'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$InventoryChangeTypeEnumMap, e))
+          .toList(),
+      updatedAfter: json['updated_after'] as String?,
+      updatedBefore: json['updated_before'] as String?,
+    );
+
+Map<String, dynamic> _$BatchInventoryReadRequestToJson(
+    BatchInventoryReadRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('catalog_object_ids', instance.catalogObjectIds);
+  writeNotNull('location_ids', instance.locationIds);
+  writeNotNull('types',
+      instance.types?.map((e) => _$InventoryChangeTypeEnumMap[e]).toList());
+  writeNotNull('states',
+      instance.states?.map((e) => _$InventoryStateEnumMap[e]).toList());
+  writeNotNull('updated_after', instance.updatedAfter);
+  writeNotNull('updated_before', instance.updatedBefore);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+BatchInventoryReadCountRequest _$BatchInventoryReadCountRequestFromJson(
+        Map<String, dynamic> json) =>
+    BatchInventoryReadCountRequest(
+      updatedAfter: json['updated_after'] as String?,
+      states: (json['states'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$InventoryStateEnumMap, e))
+          .toList(),
+      catalogObjectIds: (json['catalog_object_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      locationIds: (json['location_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      cursor: json['cursor'] as String?,
+    );
+
+Map<String, dynamic> _$BatchInventoryReadCountRequestToJson(
+    BatchInventoryReadCountRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('catalog_object_ids', instance.catalogObjectIds);
+  writeNotNull('location_ids', instance.locationIds);
+  writeNotNull('states',
+      instance.states?.map((e) => _$InventoryStateEnumMap[e]).toList());
+  writeNotNull('updated_after', instance.updatedAfter);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+InventoryTransferResponse _$InventoryTransferResponseFromJson(
+        Map<String, dynamic> json) =>
+    InventoryTransferResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      transfer: json['transfer'] == null
+          ? null
+          : InventoryTransfer.fromJson(
+              json['transfer'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$InventoryTransferResponseToJson(
+    InventoryTransferResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('transfer', instance.transfer);
+  return val;
+}
+
+InventoryPhysicalCountResponse _$InventoryPhysicalCountResponseFromJson(
+        Map<String, dynamic> json) =>
+    InventoryPhysicalCountResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      count: json['count'] == null
+          ? null
+          : InventoryPhysicalCount.fromJson(
+              json['count'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$InventoryPhysicalCountResponseToJson(
+    InventoryPhysicalCountResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('count', instance.count);
+  return val;
+}
+
+InventoryCountRequest _$InventoryCountRequestFromJson(
+        Map<String, dynamic> json) =>
+    InventoryCountRequest(
+      cursor: json['cursor'] as String?,
+      locationIds: json['location_ids'] as String?,
+    );
+
+Map<String, dynamic> _$InventoryCountRequestToJson(
+    InventoryCountRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('location_ids', instance.locationIds);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}

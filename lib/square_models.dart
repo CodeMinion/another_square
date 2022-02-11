@@ -8212,6 +8212,280 @@ class UpdateCatalogItemsTaxes {
   }
 }
 
+@JsonSerializable(includeIfNull: false)
+class InventoryAdjustmentResponse {
+
+  final List<SquareError>? errors;
+  
+  final InventoryAdjustment? adjustment;
+
+  InventoryAdjustmentResponse({
+    this.errors,  this.adjustment
+  });
+
+  factory InventoryAdjustmentResponse.fromJson(Map<String, dynamic> json) =>
+      _$InventoryAdjustmentResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$InventoryAdjustmentResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class InventoryResponse {
+
+  final List<SquareError>? errors;
+
+  final List<InventoryCount>? counts;
+
+  final InventoryCount? count;
+
+  final List<InventoryChange>? changes;
+  
+  final String? cursor;
+
+  InventoryResponse({
+    this.errors, this.counts, this.changes, this.cursor, this.count
+  });
+
+  factory InventoryResponse.fromJson(Map<String, dynamic> json) =>
+      _$InventoryResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$InventoryResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class InventoryPhysicalResponse {
+
+  final List<SquareError>? errors;
+
+  final List<InventoryPhysicalCount>? counts;
+
+  final InventoryPhysicalCount? count;
+
+  final String? cursor;
+
+  InventoryPhysicalResponse({
+    this.errors, this.counts, this.cursor, this.count
+  });
+
+  factory InventoryPhysicalResponse.fromJson(Map<String, dynamic> json) =>
+      _$InventoryPhysicalResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$InventoryPhysicalResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class InventoryCount {
+
+  @JsonKey(name: "calculated_at")
+  final String? calculatedAt;
+
+  @JsonKey(name: "catalog_object_id")
+  final String? catalogObjectId;
+
+  @JsonKey(name: "catalog_object_type")
+  final String? catalogObjectType;
+
+  @JsonKey(name: "is_estimated")
+  final bool? isEstimated;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  final String? quantity;
+
+  final InventoryState? state;
+
+  InventoryCount({
+    this.locationId, this.state, this.catalogObjectType, this.quantity,
+  this.catalogObjectId, this.calculatedAt, this.isEstimated
+  });
+
+  factory InventoryCount.fromJson(Map<String, dynamic> json) =>
+      _$InventoryCountFromJson(json);
+
+  Map<String, dynamic> toJson() => _$InventoryCountToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class BatchInventoryChangeRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String idempotencyKey;
+
+  final List<InventoryChange>? changes;
+
+  @JsonKey(name: "ignore_unchanged_counts")
+  final bool? ignoreUnchangedCounts;
+
+  BatchInventoryChangeRequest({
+    required this.idempotencyKey, this.changes, this.ignoreUnchangedCounts
+  });
+
+  factory BatchInventoryChangeRequest.fromJson(Map<String, dynamic> json) =>
+      _$BatchInventoryChangeRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BatchInventoryChangeRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class BatchInventoryReadRequest {
+  
+  @JsonKey(name: "catalog_object_ids")
+  final List<String>? catalogObjectIds;
+
+  @JsonKey(name: "location_ids")
+  final List<String>? locationIds;
+
+  final List<InventoryChangeType>? types;
+
+  final List<InventoryState>? states;
+
+  @JsonKey(name: "updated_after")
+  final String? updatedAfter;
+
+  @JsonKey(name: "updated_before")
+  final String? updatedBefore;
+  
+  final String? cursor;
+
+  BatchInventoryReadRequest({
+    this.cursor, this.locationIds, this.catalogObjectIds,
+  this.states, this.types, this.updatedAfter, this.updatedBefore
+  });
+
+  factory BatchInventoryReadRequest.fromJson(Map<String, dynamic> json) =>
+      _$BatchInventoryReadRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BatchInventoryReadRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class BatchInventoryReadCountRequest {
+
+  @JsonKey(name: "catalog_object_ids")
+  final List<String>? catalogObjectIds;
+
+  @JsonKey(name: "location_ids")
+  final List<String>? locationIds;
+
+  final List<InventoryState>? states;
+
+  @JsonKey(name: "updated_after")
+  final String? updatedAfter;
+
+  final String? cursor;
+
+  BatchInventoryReadCountRequest({
+    this.updatedAfter, this.states, this.catalogObjectIds, this.locationIds,
+  this.cursor
+  });
+
+  factory BatchInventoryReadCountRequest.fromJson(Map<String, dynamic> json) =>
+      _$BatchInventoryReadCountRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BatchInventoryReadCountRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class InventoryTransferResponse {
+  final List<SquareError>? errors;
+  final InventoryTransfer? transfer;
+
+  InventoryTransferResponse({
+    this.errors, this.transfer
+  });
+
+  factory InventoryTransferResponse.fromJson(Map<String, dynamic> json) =>
+      _$InventoryTransferResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$InventoryTransferResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class InventoryPhysicalCountResponse {
+  final List<SquareError>? errors;
+  final InventoryPhysicalCount? count;
+
+  InventoryPhysicalCountResponse({
+    this.errors, this.count
+  });
+
+  factory InventoryPhysicalCountResponse.fromJson(Map<String, dynamic> json) =>
+      _$InventoryPhysicalCountResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$InventoryPhysicalCountResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class InventoryCountRequest {
+
+  @JsonKey(name: "location_ids")
+  final String? locationIds;
+
+  final String? cursor;
+
+  InventoryCountRequest({
+    this.cursor, this.locationIds
+  });
+
+  factory InventoryCountRequest.fromJson(Map<String, dynamic> json) =>
+      _$InventoryCountRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$InventoryCountRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
 enum SearchCatalogItemsRequestStockLevel {
   OUT,
   LOW
