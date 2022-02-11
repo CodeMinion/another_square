@@ -4079,6 +4079,22 @@ CatalogResponse _$CatalogResponseFromJson(Map<String, dynamic> json) =>
       relatedObjects: (json['related_objects'] as List<dynamic>?)
           ?.map((e) => CatalogObject.fromJson(e as Map<String, dynamic>))
           .toList(),
+      updatedAt: json['updated_at'] as String?,
+      idMappings: (json['id_mappings'] as List<dynamic>?)
+          ?.map((e) => CatalogIdMapping.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      image: json['image'] == null
+          ? null
+          : CatalogObject.fromJson(json['image'] as Map<String, dynamic>),
+      limits: json['limits'] == null
+          ? null
+          : CatalogInfoResponseLimits.fromJson(
+              json['limits'] as Map<String, dynamic>),
+      standardUnitDescriptionGroup: json['standard_unit_description_group'] ==
+              null
+          ? null
+          : StandardUnitDescriptionGroup.fromJson(
+              json['standard_unit_description_group'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$CatalogResponseToJson(CatalogResponse instance) {
@@ -4095,6 +4111,72 @@ Map<String, dynamic> _$CatalogResponseToJson(CatalogResponse instance) {
   writeNotNull('objects', instance.objects);
   writeNotNull('related_objects', instance.relatedObjects);
   writeNotNull('latest_time', instance.latestTime);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('id_mappings', instance.idMappings);
+  writeNotNull('image', instance.image);
+  writeNotNull('limits', instance.limits);
+  writeNotNull(
+      'standard_unit_description_group', instance.standardUnitDescriptionGroup);
+  return val;
+}
+
+CatalogInfoResponse _$CatalogInfoResponseFromJson(Map<String, dynamic> json) =>
+    CatalogInfoResponse(
+      limits: json['limits'] == null
+          ? null
+          : CatalogInfoResponseLimits.fromJson(
+              json['limits'] as Map<String, dynamic>),
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      standardUnitDescriptionGroup: json['standard_unit_description_group'] ==
+              null
+          ? null
+          : StandardUnitDescriptionGroup.fromJson(
+              json['standard_unit_description_group'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CatalogInfoResponseToJson(CatalogInfoResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('limits', instance.limits);
+  writeNotNull(
+      'standard_unit_description_group', instance.standardUnitDescriptionGroup);
+  return val;
+}
+
+CatalogDeleteResponse _$CatalogDeleteResponseFromJson(
+        Map<String, dynamic> json) =>
+    CatalogDeleteResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      deletedObjectIds: (json['deleted_object_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      deletedAt: json['deleted_at'] as String?,
+    );
+
+Map<String, dynamic> _$CatalogDeleteResponseToJson(
+    CatalogDeleteResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('deleted_object_ids', instance.deletedObjectIds);
+  writeNotNull('deleted_at', instance.deletedAt);
   return val;
 }
 
@@ -8060,5 +8142,386 @@ Map<String, dynamic> _$PublishInvoiceRequestToJson(
   }
 
   writeNotNull('idempotency_key', instance.idempotencyKey);
+  return val;
+}
+
+CatalogRetrieveRequest _$CatalogRetrieveRequestFromJson(
+        Map<String, dynamic> json) =>
+    CatalogRetrieveRequest(
+      objectIds: (json['object_ids'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      catalogVersion: json['catalogVersion'] as int?,
+      includeRelatedObjects: json['include_related_objects'] as bool?,
+    );
+
+Map<String, dynamic> _$CatalogRetrieveRequestToJson(
+    CatalogRetrieveRequest instance) {
+  final val = <String, dynamic>{
+    'object_ids': instance.objectIds,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('include_related_objects', instance.includeRelatedObjects);
+  writeNotNull('catalogVersion', instance.catalogVersion);
+  return val;
+}
+
+CatalogBatchUpsertRequest _$CatalogBatchUpsertRequestFromJson(
+        Map<String, dynamic> json) =>
+    CatalogBatchUpsertRequest(
+      idempotencyKey: json['idempotency_key'] as String,
+      batches: (json['batches'] as List<dynamic>)
+          .map((e) => CatalogObjectBatch.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$CatalogBatchUpsertRequestToJson(
+        CatalogBatchUpsertRequest instance) =>
+    <String, dynamic>{
+      'idempotency_key': instance.idempotencyKey,
+      'batches': instance.batches,
+    };
+
+CatalogObjectBatch _$CatalogObjectBatchFromJson(Map<String, dynamic> json) =>
+    CatalogObjectBatch(
+      objects: (json['objects'] as List<dynamic>)
+          .map((e) => CatalogObject.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$CatalogObjectBatchToJson(CatalogObjectBatch instance) =>
+    <String, dynamic>{
+      'objects': instance.objects,
+    };
+
+CreateCatalogImageRequest _$CreateCatalogImageRequestFromJson(
+        Map<String, dynamic> json) =>
+    CreateCatalogImageRequest(
+      image: CatalogObject.fromJson(json['image'] as Map<String, dynamic>),
+      idempotencyKey: json['idempotency_key'] as String,
+      objectId: json['object_id'] as String?,
+      isPrimary: json['is_primary'] as bool?,
+    );
+
+Map<String, dynamic> _$CreateCatalogImageRequestToJson(
+    CreateCatalogImageRequest instance) {
+  final val = <String, dynamic>{
+    'idempotency_key': instance.idempotencyKey,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('object_id', instance.objectId);
+  val['image'] = instance.image;
+  writeNotNull('is_primary', instance.isPrimary);
+  return val;
+}
+
+UpdateCatalogImageRequest _$UpdateCatalogImageRequestFromJson(
+        Map<String, dynamic> json) =>
+    UpdateCatalogImageRequest(
+      image: CatalogObject.fromJson(json['image'] as Map<String, dynamic>),
+      idempotencyKey: json['idempotency_key'] as String,
+    );
+
+Map<String, dynamic> _$UpdateCatalogImageRequestToJson(
+        UpdateCatalogImageRequest instance) =>
+    <String, dynamic>{
+      'idempotency_key': instance.idempotencyKey,
+      'image': instance.image,
+    };
+
+ListCatalogImageRequest _$ListCatalogImageRequestFromJson(
+        Map<String, dynamic> json) =>
+    ListCatalogImageRequest(
+      catalogVersion: json['catalog_version'] as String?,
+      cursor: json['cursor'] as String?,
+      type: $enumDecodeNullable(_$CatalogObjectTypeEnumMap, json['type']),
+    );
+
+Map<String, dynamic> _$ListCatalogImageRequestToJson(
+    ListCatalogImageRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('type', _$CatalogObjectTypeEnumMap[instance.type]);
+  writeNotNull('catalog_version', instance.catalogVersion);
+  return val;
+}
+
+UpsertCatalogRequest _$UpsertCatalogRequestFromJson(
+        Map<String, dynamic> json) =>
+    UpsertCatalogRequest(
+      idempotencyKey: json['idempotency_key'] as String,
+      object: CatalogObject.fromJson(json['object'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UpsertCatalogRequestToJson(
+        UpsertCatalogRequest instance) =>
+    <String, dynamic>{
+      'idempotency_key': instance.idempotencyKey,
+      'object': instance.object,
+    };
+
+CatalogSearchRequest _$CatalogSearchRequestFromJson(
+        Map<String, dynamic> json) =>
+    CatalogSearchRequest(
+      cursor: json['cursor'] as String?,
+      includeRelatedObjects: json['include_related_objects'] as bool?,
+      limit: json['limit'] as int?,
+      query: json['query'] == null
+          ? null
+          : CatalogQuery.fromJson(json['query'] as Map<String, dynamic>),
+      beginTime: json['begin_time'] as String?,
+      includeDeletedObjects: json['include_deleted_objects'] as bool?,
+      objectTypes: (json['object_types'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+    );
+
+Map<String, dynamic> _$CatalogSearchRequestToJson(
+    CatalogSearchRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('object_types', instance.objectTypes);
+  writeNotNull('include_deleted_objects', instance.includeDeletedObjects);
+  writeNotNull('include_related_objects', instance.includeRelatedObjects);
+  writeNotNull('begin_time', instance.beginTime);
+  writeNotNull('query', instance.query);
+  writeNotNull('limit', instance.limit);
+  return val;
+}
+
+CatalogItemsSearchRequest _$CatalogItemsSearchRequestFromJson(
+        Map<String, dynamic> json) =>
+    CatalogItemsSearchRequest(
+      limit: json['limit'] as int?,
+      cursor: json['cursor'] as String?,
+      sortOrder: $enumDecodeNullable(_$SortOrderEnumMap, json['sort_order']),
+      categoryIds: (json['category_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      customAttributeFilters: (json['custom_attribute_filters']
+              as List<dynamic>?)
+          ?.map(
+              (e) => CustomAttributeFilter.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      enabledLocationIds: (json['enabled_location_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      productTypes: (json['product_types'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$CatalogItemProductTypeEnumMap, e))
+          .toList(),
+      stockLevels: (json['stock_levels'] as List<dynamic>?)
+          ?.map((e) =>
+              $enumDecode(_$SearchCatalogItemsRequestStockLevelEnumMap, e))
+          .toList(),
+      textFilter: json['text_filter'] as String?,
+    );
+
+Map<String, dynamic> _$CatalogItemsSearchRequestToJson(
+    CatalogItemsSearchRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('text_filter', instance.textFilter);
+  writeNotNull('category_ids', instance.categoryIds);
+  writeNotNull(
+      'stock_levels',
+      instance.stockLevels
+          ?.map((e) => _$SearchCatalogItemsRequestStockLevelEnumMap[e])
+          .toList());
+  writeNotNull('enabled_location_ids', instance.enabledLocationIds);
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('limit', instance.limit);
+  writeNotNull('sort_order', _$SortOrderEnumMap[instance.sortOrder]);
+  writeNotNull(
+      'product_types',
+      instance.productTypes
+          ?.map((e) => _$CatalogItemProductTypeEnumMap[e])
+          .toList());
+  writeNotNull('custom_attribute_filters', instance.customAttributeFilters);
+  return val;
+}
+
+const _$SearchCatalogItemsRequestStockLevelEnumMap = {
+  SearchCatalogItemsRequestStockLevel.OUT: 'OUT',
+  SearchCatalogItemsRequestStockLevel.LOW: 'LOW',
+};
+
+CustomAttributeFilter _$CustomAttributeFilterFromJson(
+        Map<String, dynamic> json) =>
+    CustomAttributeFilter(
+      key: json['key'] as String?,
+      customAttributeDefinitionId:
+          json['custom_attribute_definition_id'] as String?,
+      boolFilter: json['bool_filter'] as bool?,
+      numberFilter: json['number_filter'] == null
+          ? null
+          : Range.fromJson(json['number_filter'] as Map<String, dynamic>),
+      selectionUidsFilter: (json['selection_uids_filter'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      stringFilter: json['string_filter'] as String?,
+    );
+
+Map<String, dynamic> _$CustomAttributeFilterToJson(
+    CustomAttributeFilter instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('bool_filter', instance.boolFilter);
+  writeNotNull(
+      'custom_attribute_definition_id', instance.customAttributeDefinitionId);
+  writeNotNull('key', instance.key);
+  writeNotNull('number_filter', instance.numberFilter);
+  writeNotNull('selection_uids_filter', instance.selectionUidsFilter);
+  writeNotNull('string_filter', instance.stringFilter);
+  return val;
+}
+
+Range _$RangeFromJson(Map<String, dynamic> json) => Range(
+      max: json['max'] as String?,
+      min: json['min'] as String?,
+    );
+
+Map<String, dynamic> _$RangeToJson(Range instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('max', instance.max);
+  writeNotNull('min', instance.min);
+  return val;
+}
+
+CatalogItemsResponse _$CatalogItemsResponseFromJson(
+        Map<String, dynamic> json) =>
+    CatalogItemsResponse(
+      cursor: json['cursor'] as String?,
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      items: (json['items'] as List<dynamic>?)
+          ?.map((e) => CatalogObject.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      matchedVariationIds: (json['matched_variation_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+    );
+
+Map<String, dynamic> _$CatalogItemsResponseToJson(
+    CatalogItemsResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('items', instance.items);
+  writeNotNull('matched_variation_ids', instance.matchedVariationIds);
+  return val;
+}
+
+UpdateCatalogItemsModifier _$UpdateCatalogItemsModifierFromJson(
+        Map<String, dynamic> json) =>
+    UpdateCatalogItemsModifier(
+      itemIds:
+          (json['item_ids'] as List<dynamic>).map((e) => e as String).toList(),
+      modifierListsToDisable:
+          (json['modifier_lists_to_disable'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList(),
+      modifierListsToEnable:
+          (json['modifier_lists_to_enable'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList(),
+    );
+
+Map<String, dynamic> _$UpdateCatalogItemsModifierToJson(
+    UpdateCatalogItemsModifier instance) {
+  final val = <String, dynamic>{
+    'item_ids': instance.itemIds,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('modifier_lists_to_enable', instance.modifierListsToEnable);
+  writeNotNull('modifier_lists_to_disable', instance.modifierListsToDisable);
+  return val;
+}
+
+UpdateCatalogItemsTaxes _$UpdateCatalogItemsTaxesFromJson(
+        Map<String, dynamic> json) =>
+    UpdateCatalogItemsTaxes(
+      itemIds:
+          (json['item_ids'] as List<dynamic>).map((e) => e as String).toList(),
+      taxesToDisable: (json['taxes_to_disable'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      taxesToEnable: (json['taxes_to_enable'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+    );
+
+Map<String, dynamic> _$UpdateCatalogItemsTaxesToJson(
+    UpdateCatalogItemsTaxes instance) {
+  final val = <String, dynamic>{
+    'item_ids': instance.itemIds,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('taxes_to_enable', instance.taxesToEnable);
+  writeNotNull('taxes_to_disable', instance.taxesToDisable);
   return val;
 }

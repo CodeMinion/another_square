@@ -3974,15 +3974,83 @@ class CatalogResponse {
   @JsonKey(name: "latest_time")
   final String? latestTime;
 
+  @JsonKey(name: "updated_at")
+  final String? updatedAt;
+
+  @JsonKey(name: "id_mappings")
+  final List<CatalogIdMapping>? idMappings;
+
+  final CatalogObject? image;
+
+  final CatalogInfoResponseLimits? limits;
+
+  @JsonKey(name: "standard_unit_description_group")
+  final StandardUnitDescriptionGroup? standardUnitDescriptionGroup;
+
+
   CatalogResponse({
     this.cursor, this.errors, this.latestTime, this.objects,
-    this.relatedObjects
+    this.relatedObjects, this.updatedAt, this.idMappings, this.image, this.limits,
+  this.standardUnitDescriptionGroup
   });
 
   factory CatalogResponse.fromJson(Map<String, dynamic> json) =>
       _$CatalogResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$CatalogResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CatalogInfoResponse {
+
+  final List<SquareError>? errors;
+
+
+  final CatalogInfoResponseLimits? limits;
+
+  @JsonKey(name: "standard_unit_description_group")
+  final StandardUnitDescriptionGroup? standardUnitDescriptionGroup;
+
+
+  CatalogInfoResponse({
+    this.limits, this.errors,
+    this.standardUnitDescriptionGroup
+  });
+
+  factory CatalogInfoResponse.fromJson(Map<String, dynamic> json) =>
+      _$CatalogInfoResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CatalogInfoResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CatalogDeleteResponse {
+  final List<SquareError>? errors;
+
+  @JsonKey(name: "deleted_object_ids")
+  final List<String>? deletedObjectIds;
+
+  @JsonKey(name: "deleted_at")
+  final String? deletedAt;
+
+  CatalogDeleteResponse({
+    this.errors, this.deletedObjectIds, this.deletedAt
+  });
+
+  factory CatalogDeleteResponse.fromJson(Map<String, dynamic> json) =>
+      _$CatalogDeleteResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CatalogDeleteResponseToJson(this);
 
   @override
   String toString() {
@@ -7746,6 +7814,408 @@ class PublishInvoiceRequest {
   }
 }
 
+
+
+@JsonSerializable(includeIfNull: false)
+class CatalogRetrieveRequest {
+
+  @JsonKey(name: "object_ids")
+  final List<String> objectIds;
+
+  @JsonKey(name: "include_related_objects")
+  final bool? includeRelatedObjects;
+
+  @JsonKey(name: "catalogVersion")
+  final int? catalogVersion;
+
+  CatalogRetrieveRequest({
+    required this.objectIds, this.catalogVersion, this.includeRelatedObjects
+  });
+
+  factory CatalogRetrieveRequest.fromJson(Map<String, dynamic> json) =>
+      _$CatalogRetrieveRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CatalogRetrieveRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CatalogBatchUpsertRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String idempotencyKey;
+
+  final List<CatalogObjectBatch> batches;
+
+  CatalogBatchUpsertRequest({
+    required this.idempotencyKey, required this.batches
+  });
+
+  factory CatalogBatchUpsertRequest.fromJson(Map<String, dynamic> json) =>
+      _$CatalogBatchUpsertRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CatalogBatchUpsertRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CatalogObjectBatch {
+
+    final List<CatalogObject> objects;
+
+    CatalogObjectBatch({
+      required this.objects
+    });
+
+    factory CatalogObjectBatch.fromJson(Map<String, dynamic> json) =>
+        _$CatalogObjectBatchFromJson(json);
+
+    Map<String, dynamic> toJson() => _$CatalogObjectBatchToJson(this);
+
+    @override
+    String toString() {
+      return toJson().toString();
+    }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CreateCatalogImageRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String idempotencyKey;
+
+  @JsonKey(name: "object_id")
+  final String? objectId;
+
+  final CatalogObject image;
+
+  @JsonKey(name: "is_primary")
+  final bool? isPrimary;
+
+  CreateCatalogImageRequest({
+    required this.image, required this.idempotencyKey, this.objectId, this.isPrimary
+  });
+
+  factory CreateCatalogImageRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateCatalogImageRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CreateCatalogImageRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class UpdateCatalogImageRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String idempotencyKey;
+
+  final CatalogObject image;
+
+
+  UpdateCatalogImageRequest({
+    required this.image, required this.idempotencyKey
+  });
+
+  factory UpdateCatalogImageRequest.fromJson(Map<String, dynamic> json) =>
+      _$UpdateCatalogImageRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UpdateCatalogImageRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class ListCatalogImageRequest {
+
+  final String? cursor;
+
+  final CatalogObjectType? type;
+
+  @JsonKey(name: "catalog_version")
+  final String? catalogVersion;
+
+  ListCatalogImageRequest({
+    this.catalogVersion, this.cursor, this.type
+  });
+
+  factory ListCatalogImageRequest.fromJson(Map<String, dynamic> json) =>
+      _$ListCatalogImageRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ListCatalogImageRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class UpsertCatalogRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String idempotencyKey;
+
+  final CatalogObject object;
+
+  UpsertCatalogRequest({
+    required this.idempotencyKey, required this.object
+  });
+
+  factory UpsertCatalogRequest.fromJson(Map<String, dynamic> json) =>
+      _$UpsertCatalogRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UpsertCatalogRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CatalogSearchRequest {
+
+  final String? cursor;
+
+  @JsonKey(name: "object_types")
+  final List<String>? objectTypes;
+
+  @JsonKey(name: "include_deleted_objects")
+  final bool? includeDeletedObjects;
+
+  @JsonKey(name: "include_related_objects")
+  final bool? includeRelatedObjects;
+
+  @JsonKey(name: "begin_time")
+  final String? beginTime;
+  
+  final CatalogQuery? query;
+
+  final int? limit;
+
+  CatalogSearchRequest({
+    this.cursor, this.includeRelatedObjects, this.limit,
+  this.query, this.beginTime, this.includeDeletedObjects,
+  this.objectTypes
+  });
+
+  factory CatalogSearchRequest.fromJson(Map<String, dynamic> json) =>
+      _$CatalogSearchRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CatalogSearchRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CatalogItemsSearchRequest {
+
+  @JsonKey(name: "text_filter")
+  final String? textFilter;
+
+  @JsonKey(name: "category_ids")
+  final List<String>? categoryIds;
+
+  @JsonKey(name: "stock_levels")
+  final List<SearchCatalogItemsRequestStockLevel>? stockLevels;
+
+  @JsonKey(name: "enabled_location_ids")
+  final List<String>? enabledLocationIds;
+
+  final String? cursor;
+  final int? limit;
+
+  @JsonKey(name: "sort_order")
+  final SortOrder? sortOrder;
+
+  @JsonKey(name: "product_types")
+  final List<CatalogItemProductType>? productTypes;
+
+  @JsonKey(name: "custom_attribute_filters")
+  final List<CustomAttributeFilter>? customAttributeFilters;
+
+
+
+  CatalogItemsSearchRequest({
+  this.limit, this.cursor, this.sortOrder, this.categoryIds,
+  this.customAttributeFilters, this.enabledLocationIds, this.productTypes,
+  this.stockLevels, this.textFilter
+  });
+
+  factory CatalogItemsSearchRequest.fromJson(Map<String, dynamic> json) =>
+      _$CatalogItemsSearchRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CatalogItemsSearchRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CustomAttributeFilter {
+
+  @JsonKey(name: "bool_filter")
+  final bool? boolFilter;
+
+  @JsonKey(name: "custom_attribute_definition_id")
+  final String? customAttributeDefinitionId;
+  
+  final String? key;
+
+  @JsonKey(name: "number_filter")
+  final Range? numberFilter;
+
+  @JsonKey(name: "selection_uids_filter")
+  final List<String>? selectionUidsFilter;
+
+  @JsonKey(name: "string_filter")
+  final String? stringFilter;
+
+  CustomAttributeFilter({
+    this.key, this.customAttributeDefinitionId, this.boolFilter,
+  this.numberFilter, this.selectionUidsFilter, this.stringFilter
+  });
+
+  factory CustomAttributeFilter.fromJson(Map<String, dynamic> json) =>
+      _$CustomAttributeFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CustomAttributeFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class Range {
+  final String? max;
+  final String?  min;
+
+  Range({
+    this.max, this.min
+  });
+
+  factory Range.fromJson(Map<String, dynamic> json) =>
+      _$RangeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RangeToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CatalogItemsResponse {
+
+  final List<SquareError>? errors;
+
+  final String? cursor;
+
+  final List<CatalogObject>? items;
+
+  @JsonKey(name:"matched_variation_ids")
+  final List<String>? matchedVariationIds;
+
+
+  CatalogItemsResponse({
+    this.cursor, this.errors, this.items, this.matchedVariationIds
+  });
+
+  factory CatalogItemsResponse.fromJson(Map<String, dynamic> json) =>
+      _$CatalogItemsResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CatalogItemsResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class UpdateCatalogItemsModifier {
+
+  @JsonKey(name: "item_ids")
+  final List<String> itemIds;
+
+  @JsonKey(name: "modifier_lists_to_enable")
+  final List<String>? modifierListsToEnable;
+
+  @JsonKey(name: "modifier_lists_to_disable")
+  final List<String>? modifierListsToDisable;
+
+  UpdateCatalogItemsModifier({
+    required this.itemIds, this.modifierListsToDisable, this.modifierListsToEnable
+  });
+
+  factory UpdateCatalogItemsModifier.fromJson(Map<String, dynamic> json) =>
+      _$UpdateCatalogItemsModifierFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UpdateCatalogItemsModifierToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class UpdateCatalogItemsTaxes {
+
+  @JsonKey(name: "item_ids")
+  final List<String> itemIds;
+
+  @JsonKey(name: "taxes_to_enable")
+  final List<String>? taxesToEnable;
+
+  @JsonKey(name: "taxes_to_disable")
+  final List<String>? taxesToDisable;
+
+  UpdateCatalogItemsTaxes({
+    required this.itemIds, this.taxesToDisable, this.taxesToEnable
+  });
+
+  factory UpdateCatalogItemsTaxes.fromJson(Map<String, dynamic> json) =>
+      _$UpdateCatalogItemsTaxesFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UpdateCatalogItemsTaxesToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+enum SearchCatalogItemsRequestStockLevel {
+  OUT,
+  LOW
+}
 
 enum ChangeTiming {
   IMMEDIATE,

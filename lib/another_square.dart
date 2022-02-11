@@ -1,6 +1,7 @@
 library another_square;
 
 import 'package:another_square/services/authentication_service.dart';
+import 'package:another_square/services/catalog_service.dart';
 import 'package:another_square/services/invoice_service.dart';
 import 'package:another_square/services/oder_service.dart';
 import 'package:another_square/services/subscription_service.dart';
@@ -20,6 +21,7 @@ class SquareClient {
   late OrderService _orderService;
   late SubscriptionService _subscriptionService;
   late InvoiceService _invoiceService;
+  late CatalogService _catalogService;
 
   SquareClient(
       {required this.applicationId,
@@ -53,6 +55,9 @@ class SquareClient {
         authenticationService: _authenticationService!, baseUrl: _url);
 
     _invoiceService = InvoiceService(
+        authenticationService: _authenticationService!, baseUrl: _url);
+
+    _catalogService = CatalogService(
         authenticationService: _authenticationService!, baseUrl: _url);
   }
 
@@ -556,6 +561,206 @@ class SquareClient {
     return _invoiceService.publishInvoice(invoiceId: invoiceId, request: request, authToken: authToken);
   }
 
+
+  // CATALOG
+  ///
+  /// Deletes a set of CatalogItems based on the provided list of
+  /// target IDs and returns a set of successfully deleted IDs in the response.
+  ///
+  /// Deletion is a cascading event such that all children of the
+  /// targeted object are also deleted. For example, deleting a
+  /// CatalogItem will also delete all of its CatalogItemVariation children.
+  ///
+  /// BatchDeleteCatalogObjects succeeds even if only a portion of
+  /// the targeted IDs can be deleted. The response will only include
+  /// IDs that were actually deleted.
+  ///
+  Future<CatalogDeleteResponse> batchDeleteCatalog({
+    required List<String> objectIds,
+    String? authToken,
+  }) async {
+    return _catalogService.batchDeleteCatalog(objectIds: objectIds, authToken: authToken);
+  }
+
+  ///
+  /// Returns a set of objects based on the provided ID.
+  ///
+  /// Each CatalogItem returned in the set includes all of its
+  /// child information including: all of its CatalogItemVariation
+  /// objects, references to its CatalogModifierList objects, and
+  /// the ids of any CatalogTax objects that apply to it.
+  ///
+  Future<CatalogResponse> batchRetrieveCatalog({
+    required CatalogRetrieveRequest request,
+    String? authToken,
+  }) async {
+    return _catalogService.batchRetrieveCatalog(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Creates or updates up to 10,000 target objects based
+  /// on the provided list of objects.
+  ///
+  /// The target objects are grouped into batches and each
+  /// batch is inserted/updated in an all-or-nothing manner.
+  /// If an object within a batch is malformed in some way,
+  /// or violates a database constraint, the entire batch containing
+  /// that item will be disregarded. However, other batches in the
+  /// same request may still succeed. Each batch may contain up to
+  /// 1,000 objects, and batches will be processed in order as long
+  /// as the total object count for the request (items, variations,
+  /// modifier lists, discounts, and taxes) is no more than 10,000.
+  ///
+  Future<CatalogResponse> batchUpsertCatalog({
+    required CatalogBatchUpsertRequest request,
+    String? authToken,
+  }) async {
+    return _catalogService.batchUpsertCatalog(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Uploads an image file to be represented by a CatalogImage
+  /// object that can be linked to an existing CatalogObject instance.
+  ///
+  /// The resulting CatalogImage is unattached to any CatalogObject
+  /// if the object_id is not specified.
+  ///
+  /// This CreateCatalogImage endpoint accepts HTTP multipart/form-data
+  /// requests with a JSON part and an image file part in JPEG, PJPEG,
+  /// PNG, or GIF format. The maximum file size is 15MB.
+  ///
+  Future<CatalogObject> createCatalogImage({
+    required CreateCatalogImageRequest request,
+    String? authToken,
+  }) async {
+    return _catalogService.createCatalogImage(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Uploads a new image file to replace the existing one in the specified CatalogImage object.
+  ///
+  /// This UpdateCatalogImage endpoint accepts HTTP multipart/form-data
+  /// requests with a JSON part and an image file part in JPEG, PJPEG, PNG, or
+  /// GIF format. The maximum file size is 15MB.
+  ///
+  Future<CatalogObject> updateCatalogImage({
+    required UpdateCatalogImageRequest request,
+    required String imageId,
+    String? authToken,
+  }) async {
+    return _catalogService.updateCatalogImage(request: request, imageId: imageId, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves information about the Square Catalog API,
+  /// such as batch size limits that can be used by the
+  /// BatchUpsertCatalogObjects endpoint
+  ///
+  Future<CatalogInfoResponse> readCatalogInfo({
+    required UpdateCatalogImageRequest request,
+    required String imageId,
+    String? authToken,
+  }) async {
+    return _catalogService.readCatalogInfo(request: request, imageId: imageId, authToken: authToken);
+  }
+
+  ///
+  /// Returns a list of all CatalogObjects of the specified types in the catalog.
+  ///
+  /// The types parameter is specified as a comma-separated list of
+  /// the CatalogObjectType values, for example, "ITEM, ITEM_VARIATION,
+  /// MODIFIER, MODIFIER_LIST, CATEGORY, DISCOUNT, TAX, IMAGE".
+  ///
+  /// Important: ListCatalog does not return deleted catalog items.
+  /// To retrieve deleted catalog items, use SearchCatalogObjects and
+  /// set the include_deleted_objects attribute value to true.
+  ///
+  Future<CatalogResponse> listCatalog({
+    required ListCatalogImageRequest request,
+    String? authToken,
+  }) async {
+    return _catalogService.listCatalog(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Creates or updates the target CatalogObject.
+  ///
+  Future<CatalogResponse> upsertCatalog({
+    required UpsertCatalogRequest request,
+    String? authToken,
+  }) async {
+    return _catalogService.upsertCatalog(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Deletes a single CatalogObject based on the provided ID and
+  /// returns the set of successfully deleted IDs in the response.
+  ///
+  /// Deletion is a cascading event such that all children of the
+  /// targeted object are also deleted. For example, deleting a
+  /// CatalogItem will also delete all of its CatalogItemVariation children.
+  ///
+  Future<CatalogDeleteResponse> deleteCatalog({
+    required String objectId,
+    String? authToken,
+  }) async {
+    return _catalogService.deleteCatalog(objectId: objectId, authToken: authToken);
+  }
+
+  ///
+  /// Returns a single CatalogItem as a CatalogObject based on the provided ID.
+  ///
+  /// The returned object includes all of the relevant CatalogItem
+  /// information including: CatalogItemVariation children, references
+  /// to its CatalogModifierList objects, and the ids of any CatalogTax
+  /// objects that apply to it
+  ///
+  Future<CatalogResponse> readCatalog({
+    required String objectId,
+    String? authToken,
+  }) async {
+    return _catalogService.readCatalog(objectId: objectId, authToken: authToken);
+  }
+
+  ///
+  /// Searches for CatalogObject of any type by matching supported
+  /// search attribute values, excluding custom attribute values
+  /// on items or item variations, against one or more of the specified
+  /// query filters.
+  ///
+  Future<CatalogResponse> searchCatalog({
+    required String objectId,
+    required CatalogSearchRequest request,
+    String? authToken,
+  }) async {
+    return _catalogService.searchCatalog(objectId: objectId, request: request, authToken: authToken);
+  }
+
+  ///
+  /// Searches for catalog items or item variations by matching
+  /// supported search attribute values, including custom attribute
+  /// values, against one or more of the specified query filters.
+  ///
+  Future<CatalogItemsResponse> searchCatalogItems({
+    required String objectId,
+    required CatalogItemsSearchRequest request,
+    String? authToken,
+  }) async {
+    return _catalogService.searchCatalogItems(objectId: objectId, request: request, authToken: authToken);
+  }
+
+  ///
+  /// Updates the CatalogModifierList objects that apply to the
+  /// targeted CatalogItem without having to perform an upsert
+  /// on the entire item.
+  ///
+  Future<String> updateCatalogItemsModifiers({
+    required String objectId,
+    required UpdateCatalogItemsModifier request,
+    String? authToken,
+  }) async {
+    return _catalogService.updateCatalogItemsModifiers(objectId: objectId, request: request, authToken: authToken);
+  }
 
   bool isInitialized() {
     return _authenticationService != null;
