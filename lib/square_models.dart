@@ -7622,6 +7622,131 @@ class SubscriptionStateRequest {
 }
 
 
+@JsonSerializable(includeIfNull: false)
+class InvoiceResponse {
+
+  final List<SquareError>? errors;
+
+  final Invoice? invoice;
+
+  final List<Invoice>? invoices;
+
+  final String? cursor;
+
+
+  InvoiceResponse({
+    this.errors, this.invoice, this.invoices, this.cursor
+  });
+
+  factory InvoiceResponse.fromJson(Map<String, dynamic> json) =>
+      _$InvoiceResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$InvoiceResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CreateInvoiceRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String? idempotencyKey;
+
+  final Invoice? invoice;
+
+
+  CreateInvoiceRequest({
+    this.idempotencyKey, this.invoice
+  });
+
+  factory CreateInvoiceRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateInvoiceRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CreateInvoiceRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class SearchInvoiceRequest {
+
+  final InvoiceQuery query;
+
+  final int? limit; 
+  
+  final String? cursor;
+
+  SearchInvoiceRequest({
+    required this.query, this.limit, this.cursor
+  });
+
+  factory SearchInvoiceRequest.fromJson(Map<String, dynamic> json) =>
+      _$SearchInvoiceRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchInvoiceRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class UpdateInvoiceRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String? idempotencyKey;
+
+  final Order order;
+
+  @JsonKey(name: "fields_to_clear")
+  final List<String>? fieldsToClear;
+
+  UpdateInvoiceRequest({
+    this.idempotencyKey, this.fieldsToClear, required this.order
+  });
+
+  factory UpdateInvoiceRequest.fromJson(Map<String, dynamic> json) =>
+      _$UpdateInvoiceRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UpdateInvoiceRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class PublishInvoiceRequest {
+
+  final int version;
+
+  @JsonKey(name: "idempotency_key")
+  final String? idempotencyKey;
+
+  PublishInvoiceRequest({
+  required this.version, this.idempotencyKey
+  });
+
+  factory PublishInvoiceRequest.fromJson(Map<String, dynamic> json) =>
+      _$PublishInvoiceRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PublishInvoiceRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+
 enum ChangeTiming {
   IMMEDIATE,
   END_OF_BILLING_CYCLE,

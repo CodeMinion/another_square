@@ -1,6 +1,7 @@
 library another_square;
 
 import 'package:another_square/services/authentication_service.dart';
+import 'package:another_square/services/invoice_service.dart';
 import 'package:another_square/services/oder_service.dart';
 import 'package:another_square/services/subscription_service.dart';
 import 'package:another_square/services/terminal_service.dart';
@@ -18,6 +19,7 @@ class SquareClient {
   late TerminalService _terminalService;
   late OrderService _orderService;
   late SubscriptionService _subscriptionService;
+  late InvoiceService _invoiceService;
 
   SquareClient(
       {required this.applicationId,
@@ -48,6 +50,9 @@ class SquareClient {
         authenticationService: _authenticationService!, baseUrl: _url);
 
     _subscriptionService = SubscriptionService(
+        authenticationService: _authenticationService!, baseUrl: _url);
+
+    _invoiceService = InvoiceService(
         authenticationService: _authenticationService!, baseUrl: _url);
   }
 
@@ -384,7 +389,7 @@ class SquareClient {
     int? limit,
     String? authToken,
   }) async {
-    return _subscriptionService.listSubscriptionEvents(subscriptionId: subscriptionId, cursor: cursor, limit: limit, authToken: authToken);
+    return _subscriptionService.listSubscriptionEvents(subscriptionId: subscriptionId, cursor: cursor, limit: limit?? 200, authToken: authToken);
   }
 
   ///
@@ -410,12 +415,145 @@ class SquareClient {
     return _subscriptionService.resumeSubscription(subscriptionId: subscriptionId, request: request, authToken: authToken);
   }
 
+  ///
+  /// Schedules a SWAP_PLAN action to swap a
+  /// subscription plan in an existing subscription.
+  ///
   Future<Subscription> swapPlan({
     required String subscriptionId,
     required String newPlanId,
     String? authToken,
   }) async {
     return _subscriptionService.swapPlan(subscriptionId: subscriptionId, newPlanId: newPlanId, authToken: authToken);
+  }
+
+  // Invoice
+
+  ///
+  /// Returns a list of invoices for a given location.
+  ///
+  /// The response is paginated. If truncated, the
+  /// response includes a cursor that you
+  /// use in a subsequent request to retrieve the
+  /// next set of invoices.
+  ///
+  Future<InvoiceResponse> listInvoices({
+    required String locationId,
+    String? cursor,
+    int limit = 200,
+    String? authToken,
+  }) async {
+    return _invoiceService.listInvoices(locationId: locationId, cursor: cursor, authToken: authToken);
+  }
+
+  ///
+  /// Creates a draft invoice for an order created using the Orders API.
+  ///
+  /// A draft invoice remains in your account and no action is taken.
+  /// You must publish the invoice before Square can process it
+  /// (send it to the customer's email address or charge the
+  /// customer’s card on file).
+  ///
+  Future<Invoice> createInvoice({
+    required CreateInvoiceRequest request,
+    String? authToken,
+  }) async {
+    return _invoiceService.createInvoice(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Searches for invoices from a location specified in the filter.
+  ///
+  /// You can optionally specify customers in the filter for whom to
+  /// retrieve invoices. In the current implementation, you can only
+  /// specify one location and optionally one customer.
+  ///
+  /// The response is paginated. If truncated, the response includes a
+  /// cursor that you use in a subsequent request to retrieve the
+  /// next set of invoices.
+  ///
+  Future<InvoiceResponse> searchInvoice({
+    required SearchInvoiceRequest request,
+    String? authToken,
+  }) async {
+    return _invoiceService.searchInvoice(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Deletes the specified invoice.
+  ///
+  /// When an invoice is deleted, the associated order status
+  /// changes to CANCELED. You can only delete a draft invoice
+  /// (you cannot delete a published invoice, including one that
+  /// is scheduled for processing).
+  ///
+  Future<bool> deleteInvoice({
+    required int invoiceId,
+    required int version,
+    String? authToken,
+  }) async {
+    return _invoiceService.deleteInvoice(invoiceId: invoiceId, version: version, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves an invoice by invoice ID.
+  ///
+  Future<Invoice> readInvoice({
+    required String invoiceId,
+    String? authToken,
+  }) async {
+    return _invoiceService.readInvoice(invoiceId: invoiceId, authToken: authToken);
+  }
+
+  ///
+  /// Updates an invoice by modifying fields, clearing fields, or both.
+  ///
+  /// For most updates, you can use a sparse Invoice object to add fields
+  /// or change values and use the fields_to_clear field to specify fields
+  /// to clear. However, some restrictions apply. For example, you cannot
+  /// change the order_id or location_id field and you must provide the
+  /// complete custom_fields list to update a custom field. Published
+  /// invoices have additional restrictions.
+  ///
+  Future<Invoice> updateInvoice({
+    required int invoiceId,
+    required UpdateInvoiceRequest request,
+    String? authToken,
+  }) async {
+    return _invoiceService.updateInvoice(invoiceId: invoiceId, request: request, authToken: authToken);
+  }
+
+  ///
+  /// Cancels an invoice.
+  ///
+  /// The seller cannot collect payments for the canceled invoice.
+  ///
+  /// You cannot cancel an invoice in the DRAFT state or in a
+  /// terminal state: PAID, REFUNDED, CANCELED, or FAILED.
+  ///
+  Future<Invoice> cancelInvoice({
+    required int invoiceId,
+    required int version,
+    String? authToken,
+  }) async {
+    return _invoiceService.cancelInvoice(invoiceId: invoiceId, version: version, authToken: authToken);
+  }
+
+  ///
+  /// Publishes the specified draft invoice.
+  ///
+  /// After an invoice is published, Square follows up based
+  /// on the invoice configuration. For example, Square sends
+  /// the invoice to the customer's email address, charges the
+  /// customer's card on file, or does nothing. Square also
+  /// makes the invoice available on a Square-hosted invoice page.
+  ///
+  Future<Invoice> publishInvoice({
+    required String invoiceId,
+    required PublishInvoiceRequest request,
+    String? authToken,
+  }) async {
+    return _invoiceService.publishInvoice(invoiceId: invoiceId, request: request, authToken: authToken);
   }
 
 

@@ -272,6 +272,7 @@ class SubscriptionService {
     String? authToken,
   }) async {
 
+    limit ??= 200;
     authToken ??= authenticationService.getCachedToken()?.accessToken;
 
     Map<String, String> headers = {
@@ -282,9 +283,12 @@ class SubscriptionService {
     };
 
     Map<String, dynamic> params = {
-      "cursor": cursor,
       "limit": limit
     };
+
+    if (cursor != null) {
+      params.putIfAbsent("cursor", () => cursor);
+    }
 
 
     Uri endpoint = Uri.https(
@@ -379,6 +383,10 @@ class SubscriptionService {
   }
 
 
+  ///
+  /// Schedules a SWAP_PLAN action to swap a
+  /// subscription plan in an existing subscription.
+  ///
   Future<Subscription> swapPlan({
     required String subscriptionId,
     required String newPlanId,

@@ -7934,3 +7934,131 @@ const _$ChangeTimingEnumMap = {
   ChangeTiming.IMMEDIATE: 'IMMEDIATE',
   ChangeTiming.END_OF_BILLING_CYCLE: 'END_OF_BILLING_CYCLE',
 };
+
+InvoiceResponse _$InvoiceResponseFromJson(Map<String, dynamic> json) =>
+    InvoiceResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      invoice: json['invoice'] == null
+          ? null
+          : Invoice.fromJson(json['invoice'] as Map<String, dynamic>),
+      invoices: (json['invoices'] as List<dynamic>?)
+          ?.map((e) => Invoice.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      cursor: json['cursor'] as String?,
+    );
+
+Map<String, dynamic> _$InvoiceResponseToJson(InvoiceResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('invoice', instance.invoice);
+  writeNotNull('invoices', instance.invoices);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+CreateInvoiceRequest _$CreateInvoiceRequestFromJson(
+        Map<String, dynamic> json) =>
+    CreateInvoiceRequest(
+      idempotencyKey: json['idempotency_key'] as String?,
+      invoice: json['invoice'] == null
+          ? null
+          : Invoice.fromJson(json['invoice'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CreateInvoiceRequestToJson(
+    CreateInvoiceRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('idempotency_key', instance.idempotencyKey);
+  writeNotNull('invoice', instance.invoice);
+  return val;
+}
+
+SearchInvoiceRequest _$SearchInvoiceRequestFromJson(
+        Map<String, dynamic> json) =>
+    SearchInvoiceRequest(
+      query: InvoiceQuery.fromJson(json['query'] as Map<String, dynamic>),
+      limit: json['limit'] as int?,
+      cursor: json['cursor'] as String?,
+    );
+
+Map<String, dynamic> _$SearchInvoiceRequestToJson(
+    SearchInvoiceRequest instance) {
+  final val = <String, dynamic>{
+    'query': instance.query,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('limit', instance.limit);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+UpdateInvoiceRequest _$UpdateInvoiceRequestFromJson(
+        Map<String, dynamic> json) =>
+    UpdateInvoiceRequest(
+      idempotencyKey: json['idempotency_key'] as String?,
+      fieldsToClear: (json['fields_to_clear'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      order: Order.fromJson(json['order'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UpdateInvoiceRequestToJson(
+    UpdateInvoiceRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('idempotency_key', instance.idempotencyKey);
+  val['order'] = instance.order;
+  writeNotNull('fields_to_clear', instance.fieldsToClear);
+  return val;
+}
+
+PublishInvoiceRequest _$PublishInvoiceRequestFromJson(
+        Map<String, dynamic> json) =>
+    PublishInvoiceRequest(
+      version: json['version'] as int,
+      idempotencyKey: json['idempotency_key'] as String?,
+    );
+
+Map<String, dynamic> _$PublishInvoiceRequestToJson(
+    PublishInvoiceRequest instance) {
+  final val = <String, dynamic>{
+    'version': instance.version,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('idempotency_key', instance.idempotencyKey);
+  return val;
+}
