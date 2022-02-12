@@ -5,6 +5,7 @@ import 'package:another_square/services/catalog_service.dart';
 import 'package:another_square/services/customer_service.dart';
 import 'package:another_square/services/inventory_service.dart';
 import 'package:another_square/services/invoice_service.dart';
+import 'package:another_square/services/loyalty_service.dart';
 import 'package:another_square/services/oder_service.dart';
 import 'package:another_square/services/subscription_service.dart';
 import 'package:another_square/services/terminal_service.dart';
@@ -26,6 +27,7 @@ class SquareClient {
   late CatalogService _catalogService;
   late InventoryService _inventoryService;
   late CustomerService _customerService;
+  late LoyaltyService _loyaltyService;
 
   SquareClient(
       {required this.applicationId,
@@ -68,6 +70,9 @@ class SquareClient {
         authenticationService: _authenticationService!, baseUrl: _url);
 
     _customerService = CustomerService(
+        authenticationService: _authenticationService!, baseUrl: _url);
+
+    _loyaltyService = LoyaltyService(
         authenticationService: _authenticationService!, baseUrl: _url);
   }
 
@@ -1043,6 +1048,166 @@ class SquareClient {
   }) async {
     return _customerService.readCustomerSegments(segmentId: segmentId, authToken: authToken);
   }
+
+  // LOYALTY
+  ///
+  /// Creates a loyalty account.
+  ///
+  /// To create a loyalty account, you must provide the
+  /// program_id and a mapping with the phone_number of the buyer.
+  ///
+  Future<LoyaltyAccount> createLoyalty({
+    required LoyaltyUpsertRequest request,
+    String? authToken,
+  }) async {
+    return _loyaltyService.createLoyalty(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Searches for loyalty accounts in a loyalty program.
+  ///
+  /// You can search for a loyalty account using the phone number
+  /// or customer ID associated with the account. To return all
+  /// loyalty accounts, specify an empty query object or omit it entirely.
+  ///
+  Future<LoyaltyResponse> searchLoyalty({
+    required SearchLoyaltyRequest request,
+    String? authToken,
+  }) async {
+    return _loyaltyService.searchLoyalty(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves a loyalty account.
+  ///
+  Future<LoyaltyAccount> readLoyalty({
+    required String accountId,
+    String? authToken,
+  }) async {
+    return _loyaltyService.readLoyalty(accountId: accountId, authToken: authToken);
+  }
+
+  ///
+  /// Adds points to a loyalty account.
+  ///
+  Future<LoyaltyEvent> accumulateLoyaltyPoints({
+    required String accountId,
+    required AccumulateLoyaltyPointRequest request,
+    String? authToken,
+  }) async {
+    return _loyaltyService.accumulateLoyaltyPoints(accountId: accountId, request: request, authToken: authToken);
+  }
+
+  ///
+  /// Adds points to or subtracts points from a buyer's account.
+  ///
+  /// Use this endpoint only when you need to manually adjust points.
+  /// Otherwise, in your application flow, you call AccumulateLoyaltyPoints
+  /// to add points when a buyer pays for the purchase.
+  ///
+  Future<LoyaltyEvent> adjustLoyaltyPoints({
+    required String accountId,
+    required AdjustLoyaltyPointRequest request,
+    String? authToken,
+  }) async {
+    return _loyaltyService.adjustLoyaltyPoints(accountId: accountId, request: request, authToken: authToken);
+  }
+
+  ///
+  /// Searches for loyalty events.
+  ///
+  /// A Square loyalty program maintains a ledger of events that occur
+  /// during the lifetime of a buyer's loyalty account. Each change in
+  /// the point balance (for example, points earned, points redeemed,
+  /// and points expired) is recorded in the ledger. Using this endpoint,
+  /// you can search the ledger for events.
+  ///
+  Future<LoyaltyEventResponse> searchLoyaltyEvents({
+    required SearchLoyaltyEventsRequest request,
+    String? authToken,
+  }) async {
+    return _loyaltyService.searchLoyaltyEvents(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves the loyalty program in a seller's account,
+  /// specified by the program ID or the keyword main.
+  ///
+  Future<LoyaltyProgram> readLoyaltyProgram({
+    required String programId,
+    String? authToken,
+  }) async {
+    return _loyaltyService.readLoyaltyProgram(programId: programId, authToken: authToken);
+  }
+
+  ///
+  /// Calculates the points a purchase earns.
+  ///
+  Future<int> calculateLoyaltyPoints({
+    required String programId,
+    required CalculateLoyaltyPointsRequest request,
+    String? authToken,
+  }) async {
+    return _loyaltyService.calculateLoyaltyPoints(programId: programId, request: request, authToken: authToken);
+  }
+
+  ///
+  /// Creates a loyalty reward.
+  ///
+  Future<LoyaltyReward> calculateLoyaltyReward({
+    required UpsertLoyaltyRewardRequest request,
+    String? authToken,
+  }) async {
+    return _loyaltyService.calculateLoyaltyReward(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Searches for loyalty rewards in a loyalty account.
+  ///
+  /// In the current implementation, the endpoint supports
+  /// search by the reward status.
+  ///
+  Future<LoyaltyRewardResponse> searchLoyaltyReward({
+    required SearchLoyaltyRewardRequest request,
+    String? authToken,
+  }) async {
+    return _loyaltyService.searchLoyaltyReward(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Deletes a loyalty reward
+  ///
+  Future<bool> deleteLoyaltyReward({
+    required String rewardId,
+    String? authToken,
+  }) async {
+    return _loyaltyService.deleteLoyaltyReward(rewardId: rewardId, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves a loyalty reward.
+  ///
+  Future<LoyaltyReward> readLoyaltyReward({
+    required String rewardId,
+    String? authToken,
+  }) async {
+    return _loyaltyService.readLoyaltyReward(rewardId: rewardId, authToken: authToken);
+  }
+
+  ///
+  /// Redeems a loyalty reward.
+  ///
+  /// The endpoint sets the reward to the REDEEMED terminal state.
+  ///
+  Future<LoyaltyEvent> redeemLoyaltyReward({
+    required String rewardId,
+    required RedeemLoyaltyRequest request,
+    String? authToken,
+  }) async {
+    return _loyaltyService.redeemLoyaltyReward(rewardId: rewardId, request: request, authToken: authToken);
+  }
+
+
 
     bool isInitialized() {
     return _authenticationService != null;

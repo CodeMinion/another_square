@@ -8712,6 +8712,750 @@ class CustomerSegmentResponse {
   }
 }
 
+@JsonSerializable(includeIfNull: false)
+class LoyaltyUpsertRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String? idempotencyKey;
+
+  @JsonKey(name: "loyalty_account")
+  final LoyaltyAccount? loyaltyAccount;
+
+  LoyaltyUpsertRequest({
+    this.idempotencyKey, this.loyaltyAccount
+  });
+
+  factory LoyaltyUpsertRequest.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyUpsertRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyUpsertRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class LoyaltyResponse {
+  final List<SquareError>? errors;
+
+  @JsonKey(name: "loyalty_account")
+  final LoyaltyAccount? loyaltyAccount;
+
+  @JsonKey(name: "loyalty_accounts")
+  final List<LoyaltyAccount>? loyaltyAccounts;
+
+  final String? cursor;
+
+  LoyaltyResponse({
+    this.loyaltyAccount, this.errors, this.cursor, this.loyaltyAccounts
+  });
+
+  factory LoyaltyResponse.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class SearchLoyaltyRequest {
+
+  final SearchLoyaltyAccountsRequestLoyaltyAccountQuery? query;
+  
+  final int? limit;
+
+  final String? cursor;
+
+  SearchLoyaltyRequest({
+    this.query, this.cursor, this.limit
+  });
+
+  factory SearchLoyaltyRequest.fromJson(Map<String, dynamic> json) =>
+      _$SearchLoyaltyRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchLoyaltyRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class LoyaltyEvent {
+  final String? id;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "loyalty_account_id")
+  final String? loyaltyAccountId;
+
+  final LoyaltyEventSource? source;
+
+  final LoyaltyEventType? type;
+
+  @JsonKey(name: "accumulate_points")
+  final LoyaltyEventAccumulatePoints? accumulatePoints;
+
+  @JsonKey(name: "adjust_points")
+  final LoyaltyEventAdjustPoints? adjustPoints;
+
+  @JsonKey(name: "create_reward")
+  final LoyaltyEventCreateReward? createReward;
+
+  @JsonKey(name: "delete_reward")
+  final LoyaltyEventDeleteReward? deleteReward;
+
+  @JsonKey(name: "expire_points")
+  final LoyaltyEventExpirePoints? expirePoints;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  @JsonKey(name: "other_event")
+  final LoyaltyEventOther? otherEvent;
+
+  @JsonKey(name: "redeem_reward")
+  final LoyaltyEventRedeemReward? redeemReward;
+
+  LoyaltyEvent({
+    this.locationId, this.type, this.id, this.createdAt, this.source,
+  this.loyaltyAccountId, this.accumulatePoints, this.adjustPoints,
+  this.createReward, this.deleteReward, this.expirePoints, this.otherEvent,
+    this.redeemReward
+  });
+
+  factory LoyaltyEvent.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyEventFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyEventToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class LoyaltyEventRedeemReward{
+  
+  @JsonKey(name: "loyalty_program_id")
+  final String? loyaltyProgramId;
+
+  @JsonKey(name: "order_id")
+  final String? orderId;
+
+  @JsonKey(name: "reward_id")
+  final String? rewardId;
+
+  LoyaltyEventRedeemReward({
+  this.orderId, this.loyaltyProgramId, this.rewardId
+  });
+
+  factory LoyaltyEventRedeemReward.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyEventRedeemRewardFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyEventRedeemRewardToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class LoyaltyEventOther {
+
+  @JsonKey(name: "loyalty_program_id")
+  final String? loyaltyProgramId;
+
+  final int? points;
+
+  LoyaltyEventOther({
+    this.loyaltyProgramId, this.points
+  });
+
+  factory LoyaltyEventOther.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyEventOtherFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyEventOtherToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class LoyaltyEventExpirePoints {
+
+  @JsonKey(name: "loyalty_program_id")
+  final String? loyaltyProgramId;
+  
+  final int? points;
+
+  LoyaltyEventExpirePoints({
+    this.loyaltyProgramId, this.points
+  });
+
+  factory LoyaltyEventExpirePoints.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyEventExpirePointsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyEventExpirePointsToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class LoyaltyEventDeleteReward {
+  @JsonKey(name: "loyalty_program_id")
+  final String? loyaltyProgramId;
+
+  final int? points;
+
+  @JsonKey(name: "reward_id")
+  final String? rewardId;
+
+  LoyaltyEventDeleteReward({
+    this.loyaltyProgramId, this.points, this.rewardId
+  });
+
+  factory LoyaltyEventDeleteReward.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyEventDeleteRewardFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyEventDeleteRewardToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class LoyaltyEventCreateReward {
+
+  @JsonKey(name: "loyalty_program_id")
+  final String? loyaltyProgramId;
+
+  final int? points;
+
+  @JsonKey(name: "reward_id")
+  final String? rewardId;
+
+  LoyaltyEventCreateReward({
+    this.loyaltyProgramId, this.points, this.rewardId
+  });
+
+  factory LoyaltyEventCreateReward.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyEventCreateRewardFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyEventCreateRewardToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class LoyaltyEventAdjustPoints {
+
+  final int? points;
+  
+  @JsonKey(name: "loyalty_program_id")
+  final String? loyaltyProgramId;
+  
+  final String? reason;
+
+  LoyaltyEventAdjustPoints({
+    this.points, this.loyaltyProgramId, this.reason
+  });
+
+  factory LoyaltyEventAdjustPoints.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyEventAdjustPointsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyEventAdjustPointsToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class LoyaltyEventAccumulatePoints {
+
+  final int? points;
+
+  @JsonKey(name: "loyalty_program_id")
+  final String? loyaltyProgramId;
+
+  final String? reason;
+
+  LoyaltyEventAccumulatePoints({
+    this.points, this.loyaltyProgramId, this.reason
+  });
+
+  factory LoyaltyEventAccumulatePoints.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyEventAccumulatePointsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyEventAccumulatePointsToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class LoyaltyEventResponse {
+  final List<SquareError>? errors;
+
+  final LoyaltyEvent? event;
+
+  final List<LoyaltyEvent>? events;
+
+  final String? cursor;
+
+  LoyaltyEventResponse({
+    this.event, this.errors, this.cursor, this.events
+  });
+
+  factory LoyaltyEventResponse.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyEventResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyEventResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class AccumulateLoyaltyPointRequest {
+
+  @JsonKey(name: "accumulate_points")
+  final LoyaltyEventAccumulatePoints? accumulatePoints;
+
+  @JsonKey(name: "idempotency_key")
+  final String? idempotencyKey;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  AccumulateLoyaltyPointRequest({
+    this.accumulatePoints, this.locationId, this.idempotencyKey
+  });
+
+  factory AccumulateLoyaltyPointRequest.fromJson(Map<String, dynamic> json) =>
+      _$AccumulateLoyaltyPointRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AccumulateLoyaltyPointRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class AdjustLoyaltyPointRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String? idempotencyKey;
+
+  @JsonKey(name: "adjust_points")
+  final LoyaltyEventAdjustPoints? adjustPoints;
+
+  AdjustLoyaltyPointRequest({
+    this.idempotencyKey, this.adjustPoints
+  });
+
+  factory AdjustLoyaltyPointRequest.fromJson(Map<String, dynamic> json) =>
+      _$AdjustLoyaltyPointRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AdjustLoyaltyPointRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class SearchLoyaltyEventsRequest {
+  
+  final LoyaltyEventQuery? query;
+  
+  final int? limit;
+  
+  final String? cursor;
+
+  SearchLoyaltyEventsRequest({
+    this.limit, this.cursor, this.query
+  });
+
+  factory SearchLoyaltyEventsRequest.fromJson(Map<String, dynamic> json) =>
+      _$SearchLoyaltyEventsRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchLoyaltyEventsRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class LoyaltyEventQuery {
+
+  final LoyaltyEventFilter? query;
+
+  LoyaltyEventQuery({
+    this.query
+  });
+
+  factory LoyaltyEventQuery.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyEventQueryFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyEventQueryToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class LoyaltyEventFilter {
+
+  @JsonKey(name: "date_time_filter")
+  final LoyaltyEventDateTimeFilter? dateTimeFilter;
+
+  @JsonKey(name: "location_filter")
+  final LoyaltyEventLocationFilter? locationFilter;
+
+  @JsonKey(name: "loyalty_account_filter")
+  final LoyaltyEventLoyaltyAccountFilter? loyaltyAccountFilter;
+
+  @JsonKey(name: "order_filter")
+  final LoyaltyEventOrderFilter? orderFilter;
+
+  @JsonKey(name: "type_filter")
+  final LoyaltyEventTypeFilter? typeFilter;
+
+  LoyaltyEventFilter({
+    this.dateTimeFilter, this.locationFilter, this.loyaltyAccountFilter,
+  this.orderFilter, this.typeFilter
+  });
+
+  factory LoyaltyEventFilter.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyEventFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyEventFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class LoyaltyEventTypeFilter {
+
+  final List<LoyaltyEventType>? types;
+
+  LoyaltyEventTypeFilter({
+    this.types
+  });
+
+  factory LoyaltyEventTypeFilter.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyEventTypeFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyEventTypeFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class LoyaltyEventOrderFilter {
+
+  @JsonKey(name: "order_id")
+  final String? orderId;
+
+  LoyaltyEventOrderFilter({
+    this.orderId
+  });
+
+  factory LoyaltyEventOrderFilter.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyEventOrderFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyEventOrderFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class LoyaltyEventLoyaltyAccountFilter {
+
+  @JsonKey(name: "loyalty_account_id")
+  final String? loyaltyAccountId;
+
+  LoyaltyEventLoyaltyAccountFilter({
+    this.loyaltyAccountId,
+  });
+
+  factory LoyaltyEventLoyaltyAccountFilter.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyEventLoyaltyAccountFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyEventLoyaltyAccountFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class LoyaltyEventLocationFilter {
+
+  @JsonKey(name: "location_ids")
+  final List<String>? locationIds;
+
+  LoyaltyEventLocationFilter({
+    this.locationIds
+  });
+
+  factory LoyaltyEventLocationFilter.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyEventLocationFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyEventLocationFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class LoyaltyEventDateTimeFilter {
+
+  @JsonKey(name: "created_at")
+  final TimeRange? createdAt;
+
+  LoyaltyEventDateTimeFilter({
+    this.createdAt
+  });
+
+  factory LoyaltyEventDateTimeFilter.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyEventDateTimeFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyEventDateTimeFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class LoyaltyProgramResponse {
+  final List<SquareError>? errors;
+
+  final LoyaltyProgram? program;
+
+  final List<LoyaltyProgram>? programs;
+
+  final String? cursor;
+
+  LoyaltyProgramResponse({
+    this.cursor, this.errors, this.program, this.programs
+  });
+
+  factory LoyaltyProgramResponse.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyProgramResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyProgramResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CalculateLoyaltyPointsRequest {
+
+  @JsonKey(name: "order_id")
+  final String? orderId;
+
+  @JsonKey(name: "transaction_amount_money")
+  final Money? transactionAmountMoney;
+
+  CalculateLoyaltyPointsRequest({
+    this.orderId, this.transactionAmountMoney
+  });
+
+  factory CalculateLoyaltyPointsRequest.fromJson(Map<String, dynamic> json) =>
+      _$CalculateLoyaltyPointsRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CalculateLoyaltyPointsRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class LoyaltyPointResponse {
+  final List<SquareError>? errors;
+
+  final int? points;
+
+  LoyaltyPointResponse({
+    this.errors, this.points
+  });
+
+  factory LoyaltyPointResponse.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyPointResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyPointResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class UpsertLoyaltyRewardRequest {
+
+  final LoyaltyReward reward;
+
+  @JsonKey(name: "idempotency_key")
+  final String? idempotencyKey;
+
+  UpsertLoyaltyRewardRequest({
+    required this.reward, this.idempotencyKey
+  });
+
+  factory UpsertLoyaltyRewardRequest.fromJson(Map<String, dynamic> json) =>
+      _$UpsertLoyaltyRewardRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UpsertLoyaltyRewardRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class LoyaltyRewardResponse {
+  final List<SquareError>? errors;
+
+  final LoyaltyReward? reward;
+
+  final List<LoyaltyReward>? rewards;
+
+  final String? cursor;
+
+  LoyaltyRewardResponse({
+    this.reward, this.errors, this.cursor, this.rewards
+  });
+
+  factory LoyaltyRewardResponse.fromJson(Map<String, dynamic> json) =>
+      _$LoyaltyRewardResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoyaltyRewardResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class SearchLoyaltyRewardRequest {
+
+  final SearchLoyaltyRewardsRequestLoyaltyRewardQuery? query;
+  final int? limit;
+  final String? cursor;
+
+  SearchLoyaltyRewardRequest({
+    this.cursor, this.query, this.limit
+  });
+
+  factory SearchLoyaltyRewardRequest.fromJson(Map<String, dynamic> json) =>
+      _$SearchLoyaltyRewardRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchLoyaltyRewardRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class RedeemLoyaltyRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String idempotencyKey;
+
+  @JsonKey(name: "location_id")
+  final String locationId;
+
+  RedeemLoyaltyRequest({
+    required this.idempotencyKey, required this.locationId
+  });
+
+  factory RedeemLoyaltyRequest.fromJson(Map<String, dynamic> json) =>
+      _$RedeemLoyaltyRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RedeemLoyaltyRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+enum LoyaltyEventType {
+  ACCUMULATE_POINTS,
+  CREATE_REWARD,
+  REDEEM_REWARD
+}
+
+
+enum LoyaltyEventSource {
+  SQUARE,
+  LOYALTY_API
+}
+
 enum SearchCatalogItemsRequestStockLevel {
   OUT,
   LOW
