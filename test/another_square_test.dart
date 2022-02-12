@@ -297,4 +297,6 @@ void main() {
   // TODO Invoice Test Cases
   // TODO Catalog Test Cases
   // TODO Inventory Test Cases
+  // TODO Customer Test Cases
+
 }

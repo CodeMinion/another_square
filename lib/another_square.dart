@@ -2,6 +2,7 @@ library another_square;
 
 import 'package:another_square/services/authentication_service.dart';
 import 'package:another_square/services/catalog_service.dart';
+import 'package:another_square/services/customer_service.dart';
 import 'package:another_square/services/inventory_service.dart';
 import 'package:another_square/services/invoice_service.dart';
 import 'package:another_square/services/oder_service.dart';
@@ -24,6 +25,7 @@ class SquareClient {
   late InvoiceService _invoiceService;
   late CatalogService _catalogService;
   late InventoryService _inventoryService;
+  late CustomerService _customerService;
 
   SquareClient(
       {required this.applicationId,
@@ -63,6 +65,9 @@ class SquareClient {
         authenticationService: _authenticationService!, baseUrl: _url);
 
     _inventoryService = InventoryService(
+        authenticationService: _authenticationService!, baseUrl: _url);
+
+    _customerService = CustomerService(
         authenticationService: _authenticationService!, baseUrl: _url);
   }
 
@@ -856,10 +861,119 @@ class SquareClient {
     return _inventoryService.readInventoryCount(catalogObjectId: catalogObjectId, request: request, authToken: authToken);
   }
 
+  ///
+  /// Lists customer profiles associated with a Square account.
+  ///
+  /// Under normal operating conditions, newly created or
+  /// updated customer profiles become available for the listing
+  /// operation in well under 30 seconds. Occasionally, propagation
+  /// of the new or updated profiles can take closer to one minute
+  /// or longer, especially during network incidents and outages.
+  ///
+  Future<List<Customer>> listCustomer({
+    required ListCustomerRequest request,
+    String? authToken,
+  }) async {
+    return _customerService.listCustomer(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Creates a new customer for a business.
+  ///
+  /// You must provide at least one of the following values in
+  /// your request to this
+  ///
+  Future<Customer> createCustomer({
+    required CustomerUpsertRequest request,
+    String? authToken,
+  }) async {
+    return _customerService.createCustomer(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Searches the customer profiles associated with a Square account
+  /// using a supported query filter.
+  ///
+  /// Calling SearchCustomers without any explicit query filter
+  /// returns all customer profiles ordered alphabetically based
+  /// on given_name and family_name.
+  ///
+  Future<CustomerResponse> searchCustomer({
+    required SearchCustomerRequest request,
+    String? authToken,
+  }) async {
+    return _customerService.searchCustomer(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Deletes a customer profile from a business.
+  ///
+  /// This operation also unlinks any associated cards on file.
+  ///
+  Future<bool> deleteCustomer({
+    required String customerId,
+    String? authToken,
+  }) async {
+    return _customerService.deleteCustomer(customerId: customerId, authToken: authToken);
+  }
+
+  ///
+  /// Returns details for a single customer.
+  ///
+  Future<Customer> readCustomer({
+    required String customerId,
+    String? authToken,
+  }) async {
+    return _customerService.readCustomer(customerId: customerId, authToken: authToken);
+  }
+
+  ///
+  /// Updates a customer profile.
+  ///
+  /// To change an attribute, specify the new value. To remove an
+  /// attribute, specify the value as an empty string or empty object.
+  ///
+  Future<Customer> updateCustomer({
+    required String customerId,
+    required CustomerUpsertRequest request,
+    String? authToken,
+  }) async {
+    return _customerService.updateCustomer(customerId: customerId, request: request, authToken: authToken);
+  }
+
+  ///
+  /// Removes a group membership from a customer.
+  ///
+  /// The customer is identified by the customer_id value and the
+  /// customer group is identified by the group_id value.
+  ///
+  Future<bool> removeCustomerFromGroup({
+    required String customerId,
+    required String groupId,
+    String? authToken,
+  }) async {
+    return _customerService.removeCustomerFromGroup(customerId: customerId, groupId: groupId, authToken: authToken);
+  }
+
+  ///
+  /// Adds a group membership to a customer.
+  ///
+  /// The customer is identified by the customer_id value
+  /// and the customer group is identified by the group_id value.
+  ///
+  Future<bool> addCustomerToGroup({
+    required String customerId,
+    required String groupId,
+    String? authToken,
+  }) async {
+    return _customerService.addCustomerToGroup(customerId: customerId, groupId: groupId, authToken: authToken);
+  }
 
 
 
-  bool isInitialized() {
+
+
+    bool isInitialized() {
     return _authenticationService != null;
   }
 }

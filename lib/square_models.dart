@@ -8486,6 +8486,139 @@ class InventoryCountRequest {
   }
 }
 
+@JsonSerializable(includeIfNull: false)
+class ListCustomerRequest {
+  final String? cursor;
+  
+  final int? limit;
+
+  @JsonKey(name: "sort_field")
+  final CustomerSortField? sortField;
+
+  @JsonKey(name: "sort_order")
+  final SortOrder? sortOrder;
+
+  ListCustomerRequest({
+    this.cursor, this.sortOrder, this.limit, this.sortField
+  });
+
+  factory ListCustomerRequest.fromJson(Map<String, dynamic> json) =>
+      _$ListCustomerRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ListCustomerRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CustomerResponse {
+  final List<SquareError>? errors;
+  
+  final Customer? customer;
+  
+  final List<Customer>? customers;
+  
+  final String? cursor;
+
+  CustomerResponse({
+    this.cursor, this.errors, this.customer, this.customers
+  });
+
+  factory CustomerResponse.fromJson(Map<String, dynamic> json) =>
+      _$CustomerResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CustomerResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CustomerUpsertRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String? idempotencyKey;
+
+  final Address? address;
+
+  final String? birthday;
+
+  @JsonKey(name: "company_name")
+  final String? companyName;
+
+  @JsonKey(name: "email_address")
+  final String? emailAddress;
+
+  @JsonKey(name: "family_name")
+  final String? familyName;
+
+  @JsonKey(name: "given_name")
+  final String? givenName;
+
+  final String? nickname;
+
+  final String? note;
+
+  @JsonKey(name: "phone_number")
+  final String? phoneNumber;
+
+  @JsonKey(name: "reference_id")
+  final String? referenceId;
+
+  @JsonKey(name: "tax_ids")
+  final CustomerTaxIds? taxIds;
+
+
+  CustomerUpsertRequest({
+    this.idempotencyKey,this.nickname,
+    this.referenceId, this.taxIds,
+    this.familyName, this.givenName,
+    this.companyName, this.phoneNumber, this.address, this.emailAddress,
+    this.note, this.birthday
+  });
+
+  factory CustomerUpsertRequest.fromJson(Map<String, dynamic> json) =>
+      _$CustomerUpsertRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CustomerUpsertRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class SearchCustomerRequest {
+  final String? cursor;
+  
+  final int? limit;
+
+  final CustomerQuery? query;
+
+  SearchCustomerRequest({
+    this.cursor, this.limit, this.query
+  });
+
+  factory SearchCustomerRequest.fromJson(Map<String, dynamic> json) =>
+      _$SearchCustomerRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchCustomerRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+
+
 enum SearchCatalogItemsRequestStockLevel {
   OUT,
   LOW

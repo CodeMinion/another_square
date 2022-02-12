@@ -8830,3 +8830,130 @@ Map<String, dynamic> _$InventoryCountRequestToJson(
   writeNotNull('cursor', instance.cursor);
   return val;
 }
+
+ListCustomerRequest _$ListCustomerRequestFromJson(Map<String, dynamic> json) =>
+    ListCustomerRequest(
+      cursor: json['cursor'] as String?,
+      sortOrder: $enumDecodeNullable(_$SortOrderEnumMap, json['sort_order']),
+      limit: json['limit'] as int?,
+      sortField:
+          $enumDecodeNullable(_$CustomerSortFieldEnumMap, json['sort_field']),
+    );
+
+Map<String, dynamic> _$ListCustomerRequestToJson(ListCustomerRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('limit', instance.limit);
+  writeNotNull('sort_field', _$CustomerSortFieldEnumMap[instance.sortField]);
+  writeNotNull('sort_order', _$SortOrderEnumMap[instance.sortOrder]);
+  return val;
+}
+
+CustomerResponse _$CustomerResponseFromJson(Map<String, dynamic> json) =>
+    CustomerResponse(
+      cursor: json['cursor'] as String?,
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      customer: json['customer'] == null
+          ? null
+          : Customer.fromJson(json['customer'] as Map<String, dynamic>),
+      customers: (json['customers'] as List<dynamic>?)
+          ?.map((e) => Customer.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$CustomerResponseToJson(CustomerResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('customer', instance.customer);
+  writeNotNull('customers', instance.customers);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+CustomerUpsertRequest _$CustomerUpsertRequestFromJson(
+        Map<String, dynamic> json) =>
+    CustomerUpsertRequest(
+      idempotencyKey: json['idempotency_key'] as String?,
+      nickname: json['nickname'] as String?,
+      referenceId: json['reference_id'] as String?,
+      taxIds: json['tax_ids'] == null
+          ? null
+          : CustomerTaxIds.fromJson(json['tax_ids'] as Map<String, dynamic>),
+      familyName: json['family_name'] as String?,
+      givenName: json['given_name'] as String?,
+      companyName: json['company_name'] as String?,
+      phoneNumber: json['phone_number'] as String?,
+      address: json['address'] == null
+          ? null
+          : Address.fromJson(json['address'] as Map<String, dynamic>),
+      emailAddress: json['email_address'] as String?,
+      note: json['note'] as String?,
+      birthday: json['birthday'] as String?,
+    );
+
+Map<String, dynamic> _$CustomerUpsertRequestToJson(
+    CustomerUpsertRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('idempotency_key', instance.idempotencyKey);
+  writeNotNull('address', instance.address);
+  writeNotNull('birthday', instance.birthday);
+  writeNotNull('company_name', instance.companyName);
+  writeNotNull('email_address', instance.emailAddress);
+  writeNotNull('family_name', instance.familyName);
+  writeNotNull('given_name', instance.givenName);
+  writeNotNull('nickname', instance.nickname);
+  writeNotNull('note', instance.note);
+  writeNotNull('phone_number', instance.phoneNumber);
+  writeNotNull('reference_id', instance.referenceId);
+  writeNotNull('tax_ids', instance.taxIds);
+  return val;
+}
+
+SearchCustomerRequest _$SearchCustomerRequestFromJson(
+        Map<String, dynamic> json) =>
+    SearchCustomerRequest(
+      cursor: json['cursor'] as String?,
+      limit: json['limit'] as int?,
+      query: json['query'] == null
+          ? null
+          : CustomerQuery.fromJson(json['query'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$SearchCustomerRequestToJson(
+    SearchCustomerRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('limit', instance.limit);
+  writeNotNull('query', instance.query);
+  return val;
+}
