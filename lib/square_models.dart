@@ -8617,7 +8617,100 @@ class SearchCustomerRequest {
   }
 }
 
+@JsonSerializable(includeIfNull: false)
+class CustomerGroupResponse {
+  final List<SquareError>? errors;
 
+  final CustomerGroup? group;
+
+  final List<Customer>? groups;
+
+  final String? cursor;
+
+  CustomerGroupResponse({
+    this.cursor, this.errors, this.group, this.groups
+  });
+
+  factory CustomerGroupResponse.fromJson(Map<String, dynamic> json) =>
+      _$CustomerGroupResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CustomerGroupResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class SearchRequest {
+
+  final String? cursor;
+
+  final int? limit;
+
+  SearchRequest({
+    this.cursor, this.limit
+  });
+
+  factory SearchRequest.fromJson(Map<String, dynamic> json) =>
+      _$SearchRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CreateCustomerGroup {
+  
+  @JsonKey(name: "idempotency_key")
+  final String? idempotencyKey;
+  
+  final CustomerGroup group;
+
+  CreateCustomerGroup({
+    required this.group, this.idempotencyKey
+  });
+
+  factory CreateCustomerGroup.fromJson(Map<String, dynamic> json) =>
+      _$CreateCustomerGroupFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CreateCustomerGroupToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CustomerSegmentResponse {
+  final List<SquareError>? errors;
+
+  final CustomerSegment? segment;
+
+  final List<CustomerSegment>? segments;
+
+  final String? cursor;
+
+  CustomerSegmentResponse({
+    this.cursor, this.errors, this.segment, this.segments
+  });
+
+  factory CustomerSegmentResponse.fromJson(Map<String, dynamic> json) =>
+      _$CustomerSegmentResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CustomerSegmentResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
 
 enum SearchCatalogItemsRequestStockLevel {
   OUT,

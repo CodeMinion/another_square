@@ -8957,3 +8957,107 @@ Map<String, dynamic> _$SearchCustomerRequestToJson(
   writeNotNull('query', instance.query);
   return val;
 }
+
+CustomerGroupResponse _$CustomerGroupResponseFromJson(
+        Map<String, dynamic> json) =>
+    CustomerGroupResponse(
+      cursor: json['cursor'] as String?,
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      group: json['group'] == null
+          ? null
+          : CustomerGroup.fromJson(json['group'] as Map<String, dynamic>),
+      groups: (json['groups'] as List<dynamic>?)
+          ?.map((e) => Customer.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$CustomerGroupResponseToJson(
+    CustomerGroupResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('group', instance.group);
+  writeNotNull('groups', instance.groups);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+SearchRequest _$SearchRequestFromJson(Map<String, dynamic> json) =>
+    SearchRequest(
+      cursor: json['cursor'] as String?,
+      limit: json['limit'] as int?,
+    );
+
+Map<String, dynamic> _$SearchRequestToJson(SearchRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('limit', instance.limit);
+  return val;
+}
+
+CreateCustomerGroup _$CreateCustomerGroupFromJson(Map<String, dynamic> json) =>
+    CreateCustomerGroup(
+      group: CustomerGroup.fromJson(json['group'] as Map<String, dynamic>),
+      idempotencyKey: json['idempotency_key'] as String?,
+    );
+
+Map<String, dynamic> _$CreateCustomerGroupToJson(CreateCustomerGroup instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('idempotency_key', instance.idempotencyKey);
+  val['group'] = instance.group;
+  return val;
+}
+
+CustomerSegmentResponse _$CustomerSegmentResponseFromJson(
+        Map<String, dynamic> json) =>
+    CustomerSegmentResponse(
+      cursor: json['cursor'] as String?,
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      segment: json['segment'] == null
+          ? null
+          : CustomerSegment.fromJson(json['segment'] as Map<String, dynamic>),
+      segments: (json['segments'] as List<dynamic>?)
+          ?.map((e) => CustomerSegment.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$CustomerSegmentResponseToJson(
+    CustomerSegmentResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('segment', instance.segment);
+  writeNotNull('segments', instance.segments);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}

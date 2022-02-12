@@ -330,6 +330,256 @@ class CustomerService {
     }
   }
 
+  ///
+  /// Retrieves the list of customer groups of a business.
+  ///
+  Future<CustomerGroupResponse> listCustomerGroup({
+    required SearchRequest request,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/customers/groups", request.toJson());
+
+    //print (endpoint.toString());
+
+    var response = await
+    http.get(endpoint, headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return CustomerGroupResponse.fromJson(jsonDecode(response.body));
+    }
+    else {
+      print (response.body);
+      throw CustomerException(statusCode: response.statusCode, message: CustomerGroupResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+  ///
+  /// Creates a new customer group for a business.
+  ///
+  /// The request must include the name value of the group.
+  ///
+  Future<CustomerGroup> createCustomerGroup({
+    required CreateCustomerGroup request,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/customers/groups");
+
+    //print (endpoint.toString());
+
+    var response = await
+    http.post(endpoint, body:request.toJson(), headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return CustomerGroupResponse.fromJson(jsonDecode(response.body)).group!;
+    }
+    else {
+      print (response.body);
+      throw CustomerException(statusCode: response.statusCode, message: CustomerGroupResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+  ///
+  /// Deletes a customer group as identified by the group_id value.
+  ///
+  Future<bool> deleteCustomerGroup({
+    required String groupId,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/customers/groups/$groupId");
+
+    //print (endpoint.toString());
+
+    var response = await
+    http.delete(endpoint, headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return true;
+    }
+    else {
+      print (response.body);
+      throw CustomerException(statusCode: response.statusCode, message: CustomerGroupResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+  ///
+  /// Retrieves a specific customer group as identified by the group_id value.
+  ///
+  Future<CustomerGroup> readCustomerGroup({
+    required String groupId,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/customers/groups/$groupId");
+
+    //print (endpoint.toString());
+
+    var response = await
+    http.get(endpoint, headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return CustomerGroupResponse.fromJson(jsonDecode(response.body)).group!;
+    }
+    else {
+      print (response.body);
+      throw CustomerException(statusCode: response.statusCode, message: CustomerGroupResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+  ///
+  /// Updates a customer group as identified by the group_id value.
+  ///
+  Future<CustomerGroup> updateCustomerGroup({
+    required String groupId,
+    required CustomerGroup group,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/customers/groups/$groupId");
+
+    //print (endpoint.toString());
+
+    var response = await
+    http.put(endpoint,body: group.toJson(), headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return CustomerGroupResponse.fromJson(jsonDecode(response.body)).group!;
+    }
+    else {
+      print (response.body);
+      throw CustomerException(statusCode: response.statusCode, message: CustomerGroupResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+  ///
+  /// Retrieves the list of customer segments of a business.
+  ///
+  Future<CustomerSegmentResponse> listCustomerSegments({
+    required SearchRequest request,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/customers/segments", request.toJson());
+
+    //print (endpoint.toString());
+
+    var response = await
+    http.get(endpoint, headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return CustomerSegmentResponse.fromJson(jsonDecode(response.body));
+    }
+    else {
+      print (response.body);
+      throw CustomerException(statusCode: response.statusCode, message: CustomerSegmentResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+  ///
+  /// Retrieves a specific customer segment as identified by the
+  /// segment_id value.
+  ///
+  Future<CustomerSegment> readCustomerSegments({
+    required String segmentId,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/customers/segments/$segmentId");
+
+    //print (endpoint.toString());
+
+    var response = await
+    http.get(endpoint, headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return CustomerSegmentResponse.fromJson(jsonDecode(response.body)).segment!;
+    }
+    else {
+      print (response.body);
+      throw CustomerException(statusCode: response.statusCode, message: CustomerSegmentResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+
+
 
 }
 

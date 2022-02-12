@@ -970,8 +970,79 @@ class SquareClient {
   }
 
 
+  ///
+  /// Retrieves the list of customer groups of a business.
+  ///
+  Future<CustomerGroupResponse> listCustomerGroup({
+    required SearchRequest request,
+    String? authToken,
+  }) async {
+    return _customerService.listCustomerGroup(request: request, authToken: authToken);
+  }
 
+  ///
+  /// Creates a new customer group for a business.
+  ///
+  /// The request must include the name value of the group.
+  ///
+  Future<CustomerGroup> createCustomerGroup({
+    required CreateCustomerGroup request,
+    String? authToken,
+  }) async {
+    return _customerService.createCustomerGroup(request: request, authToken: authToken);
+  }
 
+  ///
+  /// Deletes a customer group as identified by the group_id value.
+  ///
+  Future<bool> deleteCustomerGroup({
+    required String groupId,
+    String? authToken,
+  }) async {
+    return _customerService.deleteCustomerGroup(groupId: groupId, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves a specific customer group as identified by the group_id value.
+  ///
+  Future<CustomerGroup> readCustomerGroup({
+    required String groupId,
+    String? authToken,
+  }) async {
+    return _customerService.readCustomerGroup(groupId: groupId, authToken: authToken);
+  }
+
+  ///
+  /// Updates a customer group as identified by the group_id value.
+  ///
+  Future<CustomerGroup> updateCustomerGroup({
+    required String groupId,
+    required CustomerGroup group,
+    String? authToken,
+  }) async {
+    return _customerService.updateCustomerGroup(groupId: groupId, group: group, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves the list of customer segments of a business.
+  ///
+  Future<CustomerSegmentResponse> listCustomerSegments({
+    required SearchRequest request,
+    String? authToken,
+  }) async {
+    return _customerService.listCustomerSegments(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves a specific customer segment as identified by the
+  /// segment_id value.
+  ///
+  Future<CustomerSegment> readCustomerSegments({
+    required String segmentId,
+    String? authToken,
+  }) async {
+    return _customerService.readCustomerSegments(segmentId: segmentId, authToken: authToken);
+  }
 
     bool isInitialized() {
     return _authenticationService != null;
