@@ -10518,6 +10518,61 @@ class SearchWorkWeekConfigRequest {
   }
 }
 
+
+@JsonSerializable(includeIfNull: false)
+class BankAccountResponse {
+
+  @JsonKey(name: "bank_accounts")
+  final List<BankAccount>? bankAccounts;
+
+  @JsonKey(name: "bank_account")
+  final BankAccount? bankAccount;
+
+  final String? cursor;
+
+  final List<SquareError>? errors;
+
+  BankAccountResponse({
+    this.cursor, this.errors, this.bankAccount, this.bankAccounts
+  });
+
+  factory BankAccountResponse.fromJson(Map<String, dynamic> json) =>
+      _$BankAccountResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BankAccountResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class ListBankAccountsRequest  {
+
+  final String? cursor;
+  
+  final int? limit;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  ListBankAccountsRequest({
+    this.cursor, this.limit, this.locationId
+  });
+
+  factory ListBankAccountsRequest.fromJson(Map<String, dynamic> json) =>
+      _$ListBankAccountsRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ListBankAccountsRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+
 enum ShiftWorkdayMatcher {
   START_AT,
   END_AT,

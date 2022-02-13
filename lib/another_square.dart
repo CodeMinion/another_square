@@ -1,6 +1,7 @@
 library another_square;
 
 import 'package:another_square/services/authentication_service.dart';
+import 'package:another_square/services/bank_account_service.dart';
 import 'package:another_square/services/bookings_service.dart';
 import 'package:another_square/services/catalog_service.dart';
 import 'package:another_square/services/customer_service.dart';
@@ -36,6 +37,7 @@ class SquareClient {
   late BookingsService _bookingsService;
   late MerchantService _merchantService;
   late TeamService _teamService;
+  late BankAccountService _bankAccountService;
 
   SquareClient(
       {required this.applicationId,
@@ -93,6 +95,9 @@ class SquareClient {
         authenticationService: _authenticationService!, baseUrl: _url);
 
     _teamService = TeamService(
+        authenticationService: _authenticationService!, baseUrl: _url);
+
+    _bankAccountService = BankAccountService(
         authenticationService: _authenticationService!, baseUrl: _url);
   }
 
@@ -1814,7 +1819,38 @@ class SquareClient {
   }
 
 
-  
+  // Financial/Bank Account
+  ///
+  /// Returns a list of BankAccount objects linked to a Square account.
+  ///
+  Future<BankAccountResponse> listBankAccounts({
+    required ListBankAccountsRequest request,
+    String? authToken,
+  }) async {
+    return _bankAccountService.listBankAccounts(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Returns details of a BankAccount identified by V1 bank account ID.
+  ///
+  Future<BankAccount> readBankAccountByV1Id({
+    required String v1BankAccountId,
+    String? authToken,
+  }) async {
+    return _bankAccountService.readBankAccountByV1Id(v1BankAccountId: v1BankAccountId, authToken: authToken);
+  }
+
+  ///
+  /// Returns details of a BankAccount linked to a Square account.
+  ///
+  Future<BankAccount> readBankAccountById({
+    required String bankAccountId,
+    String? authToken,
+  }) async {
+    return _bankAccountService.readBankAccountById(bankAccountId: bankAccountId, authToken: authToken);
+  }
+
+
   
     bool isInitialized() {
     return _authenticationService != null;

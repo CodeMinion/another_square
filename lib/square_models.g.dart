@@ -10923,3 +10923,57 @@ Map<String, dynamic> _$SearchWorkWeekConfigRequestToJson(
   writeNotNull('cursor', instance.cursor);
   return val;
 }
+
+BankAccountResponse _$BankAccountResponseFromJson(Map<String, dynamic> json) =>
+    BankAccountResponse(
+      cursor: json['cursor'] as String?,
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      bankAccount: json['bank_account'] == null
+          ? null
+          : BankAccount.fromJson(json['bank_account'] as Map<String, dynamic>),
+      bankAccounts: (json['bank_accounts'] as List<dynamic>?)
+          ?.map((e) => BankAccount.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$BankAccountResponseToJson(BankAccountResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('bank_accounts', instance.bankAccounts);
+  writeNotNull('bank_account', instance.bankAccount);
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('errors', instance.errors);
+  return val;
+}
+
+ListBankAccountsRequest _$ListBankAccountsRequestFromJson(
+        Map<String, dynamic> json) =>
+    ListBankAccountsRequest(
+      cursor: json['cursor'] as String?,
+      limit: json['limit'] as int?,
+      locationId: json['location_id'] as String?,
+    );
+
+Map<String, dynamic> _$ListBankAccountsRequestToJson(
+    ListBankAccountsRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('limit', instance.limit);
+  writeNotNull('location_id', instance.locationId);
+  return val;
+}
