@@ -6861,8 +6861,8 @@ Map<String, dynamic> _$ShiftWageToJson(ShiftWage instance) {
   return val;
 }
 
-TeamMemberWag _$TeamMemberWagFromJson(Map<String, dynamic> json) =>
-    TeamMemberWag(
+TeamMemberWage _$TeamMemberWageFromJson(Map<String, dynamic> json) =>
+    TeamMemberWage(
       hourlyRate: json['hourly_rate'] == null
           ? null
           : Money.fromJson(json['hourly_rate'] as Map<String, dynamic>),
@@ -6871,7 +6871,7 @@ TeamMemberWag _$TeamMemberWagFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String?,
     );
 
-Map<String, dynamic> _$TeamMemberWagToJson(TeamMemberWag instance) {
+Map<String, dynamic> _$TeamMemberWageToJson(TeamMemberWage instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -10271,6 +10271,655 @@ Map<String, dynamic> _$LocationResponseToJson(LocationResponse instance) {
   writeNotNull('errors', instance.errors);
   writeNotNull('location', instance.location);
   writeNotNull('locations', instance.locations);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+TeamMemberUpsertRequest _$TeamMemberUpsertRequestFromJson(
+        Map<String, dynamic> json) =>
+    TeamMemberUpsertRequest(
+      idempotencyKey: json['idempotency_key'] as String?,
+      teamMember: json['team_member'] == null
+          ? null
+          : TeamMember.fromJson(json['team_member'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$TeamMemberUpsertRequestToJson(
+    TeamMemberUpsertRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('idempotency_key', instance.idempotencyKey);
+  writeNotNull('team_member', instance.teamMember);
+  return val;
+}
+
+TeamMemberBatchUpsertRequest _$TeamMemberBatchUpsertRequestFromJson(
+        Map<String, dynamic> json) =>
+    TeamMemberBatchUpsertRequest(
+      teamMembers: (json['team_members'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(
+            k, TeamMemberUpsertRequest.fromJson(e as Map<String, dynamic>)),
+      ),
+    );
+
+Map<String, dynamic> _$TeamMemberBatchUpsertRequestToJson(
+    TeamMemberBatchUpsertRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('team_members', instance.teamMembers);
+  return val;
+}
+
+TeamMemberResponse _$TeamMemberResponseFromJson(Map<String, dynamic> json) =>
+    TeamMemberResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      cursor: json['cursor'] as String?,
+      teamMember: json['team_member'] == null
+          ? null
+          : TeamMember.fromJson(json['team_member'] as Map<String, dynamic>),
+      teamMembers: (json['team_members'] as List<dynamic>?)
+          ?.map((e) => TeamMember.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$TeamMemberResponseToJson(TeamMemberResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('team_member', instance.teamMember);
+  writeNotNull('team_members', instance.teamMembers);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+TeamMemberBatchResponse _$TeamMemberBatchResponseFromJson(
+        Map<String, dynamic> json) =>
+    TeamMemberBatchResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      teamMembers: (json['team_members'] as Map<String, dynamic>?)?.map(
+        (k, e) =>
+            MapEntry(k, TeamMemberResponse.fromJson(e as Map<String, dynamic>)),
+      ),
+    );
+
+Map<String, dynamic> _$TeamMemberBatchResponseToJson(
+    TeamMemberBatchResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('team_members', instance.teamMembers);
+  return val;
+}
+
+TeamMemberSearchRequest _$TeamMemberSearchRequestFromJson(
+        Map<String, dynamic> json) =>
+    TeamMemberSearchRequest(
+      query: json['query'] == null
+          ? null
+          : SearchTeamMembersQuery.fromJson(
+              json['query'] as Map<String, dynamic>),
+      limit: json['limit'] as int?,
+      cursor: json['cursor'] as String?,
+    );
+
+Map<String, dynamic> _$TeamMemberSearchRequestToJson(
+    TeamMemberSearchRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('query', instance.query);
+  writeNotNull('limit', instance.limit);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+SearchTeamMembersQuery _$SearchTeamMembersQueryFromJson(
+        Map<String, dynamic> json) =>
+    SearchTeamMembersQuery(
+      filter: json['filter'] == null
+          ? null
+          : SearchTeamMembersFilter.fromJson(
+              json['filter'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$SearchTeamMembersQueryToJson(
+    SearchTeamMembersQuery instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('filter', instance.filter);
+  return val;
+}
+
+SearchTeamMembersFilter _$SearchTeamMembersFilterFromJson(
+        Map<String, dynamic> json) =>
+    SearchTeamMembersFilter(
+      isOwner: json['is_owner'] as bool?,
+      status: $enumDecodeNullable(_$TeamMemberStatusEnumMap, json['status']),
+      locationIds: (json['location_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+    );
+
+Map<String, dynamic> _$SearchTeamMembersFilterToJson(
+    SearchTeamMembersFilter instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('is_owner', instance.isOwner);
+  writeNotNull('location_ids', instance.locationIds);
+  writeNotNull('status', _$TeamMemberStatusEnumMap[instance.status]);
+  return val;
+}
+
+WageSettingResponse _$WageSettingResponseFromJson(Map<String, dynamic> json) =>
+    WageSettingResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      wageSetting: json['wage_setting'] == null
+          ? null
+          : WageSetting.fromJson(json['wage_setting'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$WageSettingResponseToJson(WageSettingResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('wage_setting', instance.wageSetting);
+  return val;
+}
+
+WageSetting _$WageSettingFromJson(Map<String, dynamic> json) => WageSetting(
+      teamMemberId: json['team_member_id'] as String?,
+      createdAt: json['created_at'] as String?,
+      updatedAt: json['updated_at'] as String?,
+      version: json['version'] as int?,
+      isOvertimeExempt: json['is_overtime_exempt'] as bool?,
+      jobAssignments: (json['job_assignments'] as List<dynamic>?)
+          ?.map((e) => JobAssignment.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$WageSettingToJson(WageSetting instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('is_overtime_exempt', instance.isOvertimeExempt);
+  writeNotNull('job_assignments', instance.jobAssignments);
+  writeNotNull('team_member_id', instance.teamMemberId);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('version', instance.version);
+  return val;
+}
+
+JobAssignment _$JobAssignmentFromJson(Map<String, dynamic> json) =>
+    JobAssignment(
+      hourlyRate: json['hourly_rate'] == null
+          ? null
+          : Money.fromJson(json['hourly_rate'] as Map<String, dynamic>),
+      annualRate: json['annual_rate'] == null
+          ? null
+          : Money.fromJson(json['annual_rate'] as Map<String, dynamic>),
+      jobTitle: json['job_title'] as String?,
+      payType:
+          $enumDecodeNullable(_$JobAssignmentPayTypeEnumMap, json['pay_type']),
+      weeklyHours: json['weekly_hours'] as int?,
+    );
+
+Map<String, dynamic> _$JobAssignmentToJson(JobAssignment instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('job_title', instance.jobTitle);
+  writeNotNull('pay_type', _$JobAssignmentPayTypeEnumMap[instance.payType]);
+  writeNotNull('annual_rate', instance.annualRate);
+  writeNotNull('hourly_rate', instance.hourlyRate);
+  writeNotNull('weekly_hours', instance.weeklyHours);
+  return val;
+}
+
+const _$JobAssignmentPayTypeEnumMap = {
+  JobAssignmentPayType.NONE: 'NONE',
+  JobAssignmentPayType.HOURLY: 'HOURLY',
+  JobAssignmentPayType.SALARY: 'SALARY',
+};
+
+ListBreakTypesRequest _$ListBreakTypesRequestFromJson(
+        Map<String, dynamic> json) =>
+    ListBreakTypesRequest(
+      cursor: json['cursor'] as String?,
+      limit: json['limit'] as int?,
+      locationId: json['location_id'] as String?,
+    );
+
+Map<String, dynamic> _$ListBreakTypesRequestToJson(
+    ListBreakTypesRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('limit', instance.limit);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+BreakTypeResponse _$BreakTypeResponseFromJson(Map<String, dynamic> json) =>
+    BreakTypeResponse(
+      cursor: json['cursor'] as String?,
+      breakTypes: (json['break_types'] as List<dynamic>?)
+          ?.map((e) => BreakType.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      breakType: json['break_type'] == null
+          ? null
+          : BreakType.fromJson(json['break_type'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$BreakTypeResponseToJson(BreakTypeResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('break_types', instance.breakTypes);
+  writeNotNull('break_type', instance.breakType);
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('errors', instance.errors);
+  return val;
+}
+
+CreateBreakTypeRequest _$CreateBreakTypeRequestFromJson(
+        Map<String, dynamic> json) =>
+    CreateBreakTypeRequest(
+      breakType: json['break_type'] == null
+          ? null
+          : BreakType.fromJson(json['break_type'] as Map<String, dynamic>),
+      idempotencyKey: json['idempotency_key'] as String?,
+    );
+
+Map<String, dynamic> _$CreateBreakTypeRequestToJson(
+    CreateBreakTypeRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('idempotency_key', instance.idempotencyKey);
+  writeNotNull('break_type', instance.breakType);
+  return val;
+}
+
+CreateShiftRequest _$CreateShiftRequestFromJson(Map<String, dynamic> json) =>
+    CreateShiftRequest(
+      shift: Shift.fromJson(json['shift'] as Map<String, dynamic>),
+      idempotencyKey: json['idempotency_key'] as String?,
+    );
+
+Map<String, dynamic> _$CreateShiftRequestToJson(CreateShiftRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('idempotency_key', instance.idempotencyKey);
+  val['shift'] = instance.shift;
+  return val;
+}
+
+ShiftResponse _$ShiftResponseFromJson(Map<String, dynamic> json) =>
+    ShiftResponse(
+      cursor: json['cursor'] as String?,
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      shift: json['shift'] == null
+          ? null
+          : Shift.fromJson(json['shift'] as Map<String, dynamic>),
+      shifts: (json['shifts'] as List<dynamic>?)
+          ?.map((e) => Shift.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$ShiftResponseToJson(ShiftResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('shifts', instance.shifts);
+  writeNotNull('shift', instance.shift);
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('errors', instance.errors);
+  return val;
+}
+
+SearchShiftRequest _$SearchShiftRequestFromJson(Map<String, dynamic> json) =>
+    SearchShiftRequest(
+      cursor: json['cursor'] as String?,
+      limit: json['limit'] as int?,
+      query: json['query'] == null
+          ? null
+          : ShiftQuery.fromJson(json['query'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$SearchShiftRequestToJson(SearchShiftRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('query', instance.query);
+  writeNotNull('limit', instance.limit);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+ShiftQuery _$ShiftQueryFromJson(Map<String, dynamic> json) => ShiftQuery(
+      filter: json['filter'] == null
+          ? null
+          : ShiftFilter.fromJson(json['filter'] as Map<String, dynamic>),
+      sort: json['sort'] == null
+          ? null
+          : SearchOrdersSort.fromJson(json['sort'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ShiftQueryToJson(ShiftQuery instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('filter', instance.filter);
+  writeNotNull('sort', instance.sort);
+  return val;
+}
+
+ShiftFilter _$ShiftFilterFromJson(Map<String, dynamic> json) => ShiftFilter(
+      locationIds: (json['location_ids'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      status: $enumDecodeNullable(_$ShiftStatusEnumMap, json['status']),
+      teamMemberIds: (json['team_member_ids'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      employeeIds: (json['employee_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      end: json['end'] == null
+          ? null
+          : TimeRange.fromJson(json['end'] as Map<String, dynamic>),
+      start: json['start'] == null
+          ? null
+          : TimeRange.fromJson(json['start'] as Map<String, dynamic>),
+      workday: json['workday'] == null
+          ? null
+          : ShiftWorkday.fromJson(json['workday'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ShiftFilterToJson(ShiftFilter instance) {
+  final val = <String, dynamic>{
+    'location_ids': instance.locationIds,
+    'team_member_ids': instance.teamMemberIds,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('end', instance.end);
+  writeNotNull('start', instance.start);
+  writeNotNull('status', _$ShiftStatusEnumMap[instance.status]);
+  writeNotNull('workday', instance.workday);
+  writeNotNull('employee_ids', instance.employeeIds);
+  return val;
+}
+
+ShiftWorkday _$ShiftWorkdayFromJson(Map<String, dynamic> json) => ShiftWorkday(
+      dateRange: json['date_range'] == null
+          ? null
+          : DateRange.fromJson(json['date_range'] as Map<String, dynamic>),
+      defaultTimezone: json['default_timezone'] as String?,
+      matchShiftsBy: $enumDecodeNullable(
+          _$ShiftWorkdayMatcherEnumMap, json['match_shifts_by']),
+    );
+
+Map<String, dynamic> _$ShiftWorkdayToJson(ShiftWorkday instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('date_range', instance.dateRange);
+  writeNotNull('default_timezone', instance.defaultTimezone);
+  writeNotNull(
+      'match_shifts_by', _$ShiftWorkdayMatcherEnumMap[instance.matchShiftsBy]);
+  return val;
+}
+
+const _$ShiftWorkdayMatcherEnumMap = {
+  ShiftWorkdayMatcher.START_AT: 'START_AT',
+  ShiftWorkdayMatcher.END_AT: 'END_AT',
+  ShiftWorkdayMatcher.INTERSECTION: 'INTERSECTION',
+};
+
+DateRange _$DateRangeFromJson(Map<String, dynamic> json) => DateRange(
+      startDate: json['start_date'] as String?,
+      endDate: json['end_date'] as String?,
+    );
+
+Map<String, dynamic> _$DateRangeToJson(DateRange instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('end_date', instance.endDate);
+  writeNotNull('start_date', instance.startDate);
+  return val;
+}
+
+TeamMemberWageResponse _$TeamMemberWageResponseFromJson(
+        Map<String, dynamic> json) =>
+    TeamMemberWageResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      cursor: json['cursor'] as String?,
+      teamMemberWage: json['team_member_wage'] == null
+          ? null
+          : TeamMemberWage.fromJson(
+              json['team_member_wage'] as Map<String, dynamic>),
+      teamMemberWages: (json['team_member_wages'] as List<dynamic>?)
+          ?.map((e) => TeamMemberWage.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$TeamMemberWageResponseToJson(
+    TeamMemberWageResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('team_member_wages', instance.teamMemberWages);
+  writeNotNull('team_member_wage', instance.teamMemberWage);
+  writeNotNull('errors', instance.errors);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+ListTeamMemberWageRequest _$ListTeamMemberWageRequestFromJson(
+        Map<String, dynamic> json) =>
+    ListTeamMemberWageRequest(
+      cursor: json['cursor'] as String?,
+      limit: json['limit'] as int?,
+      teamMemberId: json['team_member_id'] as String?,
+    );
+
+Map<String, dynamic> _$ListTeamMemberWageRequestToJson(
+    ListTeamMemberWageRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('team_member_id', instance.teamMemberId);
+  writeNotNull('limit', instance.limit);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+WorkWeekConfigResponse _$WorkWeekConfigResponseFromJson(
+        Map<String, dynamic> json) =>
+    WorkWeekConfigResponse(
+      cursor: json['cursor'] as String?,
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      workweekConfig: json['workweek_config'] == null
+          ? null
+          : WorkweekConfig.fromJson(
+              json['workweek_config'] as Map<String, dynamic>),
+      workweekConfigs: (json['workweek_configs'] as List<dynamic>?)
+          ?.map((e) => WorkweekConfig.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$WorkWeekConfigResponseToJson(
+    WorkWeekConfigResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('workweek_configs', instance.workweekConfigs);
+  writeNotNull('workweek_config', instance.workweekConfig);
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('errors', instance.errors);
+  return val;
+}
+
+SearchWorkWeekConfigRequest _$SearchWorkWeekConfigRequestFromJson(
+        Map<String, dynamic> json) =>
+    SearchWorkWeekConfigRequest(
+      cursor: json['cursor'] as String?,
+      limit: json['limit'] as int?,
+    );
+
+Map<String, dynamic> _$SearchWorkWeekConfigRequestToJson(
+    SearchWorkWeekConfigRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('limit', instance.limit);
   writeNotNull('cursor', instance.cursor);
   return val;
 }

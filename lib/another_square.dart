@@ -11,6 +11,7 @@ import 'package:another_square/services/loyalty_service.dart';
 import 'package:another_square/services/merchant_service.dart';
 import 'package:another_square/services/oder_service.dart';
 import 'package:another_square/services/subscription_service.dart';
+import 'package:another_square/services/team_service.dart';
 import 'package:another_square/services/terminal_service.dart';
 import 'package:another_square/square_models.dart';
 
@@ -34,6 +35,7 @@ class SquareClient {
   late GiftCardService _giftCardService;
   late BookingsService _bookingsService;
   late MerchantService _merchantService;
+  late TeamService _teamService;
 
   SquareClient(
       {required this.applicationId,
@@ -88,6 +90,9 @@ class SquareClient {
         authenticationService: _authenticationService!, baseUrl: _url);
 
     _merchantService = MerchantService(
+        authenticationService: _authenticationService!, baseUrl: _url);
+
+    _teamService = TeamService(
         authenticationService: _authenticationService!, baseUrl: _url);
   }
 
@@ -1544,7 +1549,273 @@ class SquareClient {
     return _merchantService.updateLocation(location: location, authToken: authToken);
   }
 
+  // TEAM
 
+  ///
+  /// Creates a single TeamMember object.
+  ///
+  /// The TeamMember object is returned on successful creates.
+  ///
+  Future<TeamMember> createTeamMember({
+    required TeamMemberUpsertRequest request,
+    String? authToken,
+  }) async {
+    return _teamService.createTeamMember(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Creates multiple TeamMember objects.
+  ///
+  /// The created TeamMember objects are returned on successful
+  /// creates. This process is non-transactional and processes
+  /// as much of the request as possible. If one of the creates
+  /// in the request cannot be successfully processed, the request
+  /// is not marked as failed, but the body of the response contains
+  /// explicit error information for the failed create.
+  ///
+  Future<Map<String, TeamMember>> batchCreateTeamMember({
+    required TeamMemberBatchUpsertRequest request,
+    String? authToken,
+  }) async {
+    return _teamService.batchCreateTeamMember(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Updates multiple TeamMember objects.
+  ///
+  /// The updated TeamMember objects are returned on successful
+  /// updates. This process is non-transactional and processes
+  /// as much of the request as possible. If one of the updates
+  /// in the request cannot be successfully processed, the request
+  /// is not marked as failed, but the body of the response contains
+  /// explicit error information for the failed update. Learn about
+  /// Troubleshooting the Team API.
+  ///
+  Future<Map<String, TeamMember>> batchUpdateTeamMember({
+    required TeamMemberBatchUpsertRequest request,
+    String? authToken,
+  }) async {
+    return _teamService.batchUpdateTeamMember(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Returns a paginated list of TeamMember objects for a business.
+  ///
+  Future<TeamMemberResponse> searchTeamMember({
+    required TeamMemberSearchRequest request,
+    String? authToken,
+  }) async {
+    return _teamService.searchTeamMember(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves a TeamMember object for the given TeamMember.id.
+  ///
+  /// Learn about Troubleshooting the Team API.
+  ///
+  Future<TeamMember> readTeamMember({
+    required String teamMemberId,
+    String? authToken,
+  }) async {
+    return _teamService.readTeamMember(teamMemberId: teamMemberId, authToken: authToken);
+  }
+
+  ///
+  /// Updates a single TeamMember object.
+  ///
+  /// The TeamMember object is returned on successful updates.
+  /// Learn about Troubleshooting the Team API.
+  ///
+  Future<TeamMember> updateTeamMember({
+    required TeamMember teamMember,
+    String? authToken,
+  }) async {
+    return _teamService.updateTeamMember(teamMember: teamMember, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves a WageSetting object for a team member
+  /// specified by TeamMember.id.
+  ///
+  /// Learn about Troubleshooting the Team API.
+  ///
+  Future<WageSetting> readWageSetting({
+    required String teamMemberId,
+    String? authToken,
+  }) async {
+    return _teamService.readWageSetting(teamMemberId: teamMemberId, authToken: authToken);
+  }
+
+  ///
+  /// Creates or updates a WageSetting object.
+  ///
+  /// The object is created if a WageSetting with the specified
+  /// team_member_id does not exist. Otherwise, it fully replaces
+  /// the WageSetting object for the team member. The WageSetting
+  /// is returned on a successful update. Learn about Troubleshooting
+  /// the Team API.
+  ///
+  Future<WageSetting> updateWageSetting({
+    required WageSetting wageSetting,
+    String? authToken,
+  }) async {
+    return _teamService.updateWageSetting(wageSetting: wageSetting, authToken: authToken);
+  }
+
+  ///
+  /// Returns a paginated list of BreakType instances for a business.
+  ///
+  Future<BreakTypeResponse> listBreakTypes({
+    required ListBreakTypesRequest request,
+    String? authToken,
+  }) async {
+    return _teamService.listBreakTypes(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Creates a new BreakType.
+  ///
+  Future<BreakType> createBreakTypes({
+    required CreateBreakTypeRequest request,
+    String? authToken,
+  }) async {
+    return _teamService.createBreakTypes(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Deletes an existing BreakType.
+  ///
+  /// A BreakType can be deleted even if it is referenced from a Shift.
+  ///
+  Future<bool> deleteBreakTypes({
+    required String breakTypeId,
+    String? authToken,
+  }) async {
+    return _teamService.deleteBreakTypes(breakTypeId: breakTypeId, authToken: authToken);
+  }
+
+  ///
+  /// Returns a single BreakType specified by id.
+  ///
+  Future<BreakType> readBreakTypes({
+    required String breakTypeId,
+    String? authToken,
+  }) async {
+    return _teamService.readBreakTypes(breakTypeId: breakTypeId, authToken: authToken);
+  }
+
+  ///
+  /// Updates an existing BreakType.
+  ///
+  Future<BreakType> updateBreakTypes({
+    required BreakType breakType,
+    String? authToken,
+  }) async {
+    return _teamService.updateBreakTypes(breakType: breakType, authToken: authToken);
+  }
+
+  ///
+  /// Creates a new Shift.
+  ///
+  /// A Shift represents a complete workday for a single employee.
+  ///
+  Future<Shift> createShift({
+    required CreateShiftRequest request,
+    String? authToken,
+  }) async {
+    return _teamService.createShift(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Returns a paginated list of Shift records for a business.
+  ///
+  Future<ShiftResponse> searchShift({
+    required SearchShiftRequest request,
+    String? authToken,
+  }) async {
+    return _teamService.searchShift(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Deletes a Shift.
+  ///
+  Future<bool> deleteShift({
+    required String shiftId,
+    String? authToken,
+  }) async {
+    return _teamService.deleteShift(shiftId: shiftId, authToken: authToken);
+  }
+
+  ///
+  /// Returns a single Shift specified by id.
+  ///
+  Future<Shift> readShift({
+    required String shiftId,
+    String? authToken,
+  }) async {
+    return _teamService.readShift(shiftId: shiftId, authToken: authToken);
+  }
+
+  ///
+  /// Updates an existing Shift.
+  ///
+  /// When adding a Break to a Shift, any earlier Break instances in
+  /// the Shift have the end_at property set to a valid RFC-3339
+  /// datetime string.
+  ///
+  /// When closing a Shift, all Break instances in the Shift must
+  /// be complete with end_at set on each Break.
+  ///
+  Future<Shift> updateShift({
+    required Shift shift,
+    String? authToken,
+  }) async {
+    return _teamService.updateShift(shift: shift, authToken: authToken);
+  }
+
+  ///
+  /// Returns a paginated list of TeamMemberWage instances for a business.
+  ///
+  Future<TeamMemberWageResponse> listTeamMemberWages({
+    required ListTeamMemberWageRequest request,
+    String? authToken,
+  }) async {
+    return _teamService.listTeamMemberWages(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Returns a single TeamMemberWage specified by id.
+  ///
+  Future<TeamMemberWage> getTeamMemberWages({
+    required String teamMemberId,
+    String? authToken,
+  }) async {
+    return _teamService.getTeamMemberWages(teamMemberId: teamMemberId, authToken: authToken);
+  }
+
+  ///
+  /// Returns a list of WorkweekConfig instances for a business.
+  ///
+  Future<WorkWeekConfigResponse> listWorkWeekConfigs({
+    required SearchWorkWeekConfigRequest request,
+    String? authToken,
+  }) async {
+    return _teamService.listWorkWeekConfigs(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Updates a WorkweekConfig.
+  ///
+  Future<WorkweekConfig> updateWorkWeekConfigs({
+    required WorkweekConfig config,
+    String? authToken,
+  }) async {
+    return _teamService.updateWorkWeekConfigs(config: config, authToken: authToken);
+  }
+
+
+  
+  
     bool isInitialized() {
     return _authenticationService != null;
   }

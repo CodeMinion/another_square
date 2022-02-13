@@ -6576,7 +6576,7 @@ class ShiftWage {
 }
 
 @JsonSerializable(includeIfNull: false)
-class TeamMemberWag {
+class TeamMemberWage {
 
   final String? id;
 
@@ -6588,14 +6588,14 @@ class TeamMemberWag {
 
   final String? title;
 
-  TeamMemberWag({
+  TeamMemberWage({
     this.hourlyRate, this.title, this.teamMemberId, this.id
   });
 
-  factory TeamMemberWag.fromJson(Map<String, dynamic> json) =>
-      _$TeamMemberWagFromJson(json);
+  factory TeamMemberWage.fromJson(Map<String, dynamic> json) =>
+      _$TeamMemberWageFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TeamMemberWagToJson(this);
+  Map<String, dynamic> toJson() => _$TeamMemberWageToJson(this);
 
   @override
   String toString() {
@@ -9886,6 +9886,648 @@ class LocationResponse {
   String toString() {
     return toJson().toString();
   }
+}
+
+@JsonSerializable(includeIfNull: false)
+class TeamMemberUpsertRequest {
+  
+  @JsonKey(name: "idempotency_key")
+  final String? idempotencyKey;
+
+  @JsonKey(name: "team_member")
+  final TeamMember? teamMember;
+
+  TeamMemberUpsertRequest({
+    this.idempotencyKey, this.teamMember
+  });
+
+  factory TeamMemberUpsertRequest.fromJson(Map<String, dynamic> json) =>
+      _$TeamMemberUpsertRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TeamMemberUpsertRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class TeamMemberBatchUpsertRequest {
+
+  @JsonKey(name: "team_members")
+  final Map<String, TeamMemberUpsertRequest>? teamMembers;
+
+  TeamMemberBatchUpsertRequest({
+     this.teamMembers
+  });
+
+  factory TeamMemberBatchUpsertRequest.fromJson(Map<String, dynamic> json) =>
+      _$TeamMemberBatchUpsertRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TeamMemberBatchUpsertRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class TeamMemberResponse {
+
+  final List<SquareError>? errors;
+
+  @JsonKey(name: "team_member")
+  final TeamMember? teamMember;
+
+  @JsonKey(name: "team_members")
+  final List<TeamMember>? teamMembers;
+
+  final String? cursor;
+
+  TeamMemberResponse({
+    this.errors, this.cursor, this.teamMember, this.teamMembers
+  });
+
+  factory TeamMemberResponse.fromJson(Map<String, dynamic> json) =>
+      _$TeamMemberResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TeamMemberResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class TeamMemberBatchResponse {
+
+  final List<SquareError>? errors;
+
+  @JsonKey(name: "team_members")
+  final Map<String, TeamMemberResponse>? teamMembers;
+
+  TeamMemberBatchResponse({
+    this.errors, this.teamMembers
+  });
+
+  factory TeamMemberBatchResponse.fromJson(Map<String, dynamic> json) =>
+      _$TeamMemberBatchResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TeamMemberBatchResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class TeamMemberSearchRequest {
+  final SearchTeamMembersQuery? query;
+
+  final int? limit;
+  
+  final String? cursor;
+
+  TeamMemberSearchRequest({
+    this.query, this.limit, this.cursor
+  });
+
+  factory TeamMemberSearchRequest.fromJson(Map<String, dynamic> json) =>
+      _$TeamMemberSearchRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TeamMemberSearchRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class SearchTeamMembersQuery {
+
+  final SearchTeamMembersFilter? filter;
+
+  SearchTeamMembersQuery({
+    this.filter
+  });
+
+  factory SearchTeamMembersQuery.fromJson(Map<String, dynamic> json) =>
+      _$SearchTeamMembersQueryFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchTeamMembersQueryToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class SearchTeamMembersFilter {
+
+  @JsonKey(name: "is_owner")
+  final bool? isOwner;
+
+  @JsonKey(name: "location_ids")
+  final List<String>? locationIds;
+
+  final TeamMemberStatus? status;
+
+  SearchTeamMembersFilter({
+    this.isOwner, this.status, this.locationIds
+  });
+
+  factory SearchTeamMembersFilter.fromJson(Map<String, dynamic> json) =>
+      _$SearchTeamMembersFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchTeamMembersFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class WageSettingResponse {
+
+  final List<SquareError>? errors;
+
+  @JsonKey(name: "wage_setting")
+  final WageSetting? wageSetting;
+
+  WageSettingResponse({
+    this.errors, this.wageSetting
+  });
+
+  factory WageSettingResponse.fromJson(Map<String, dynamic> json) =>
+      _$WageSettingResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$WageSettingResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class WageSetting {
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "is_overtime_exempt")
+  final bool? isOvertimeExempt;
+
+  @JsonKey(name: "job_assignments")
+  final List<JobAssignment>? jobAssignments;
+
+  @JsonKey(name: "team_member_id")
+  final String? teamMemberId;
+
+  @JsonKey(name: "updated_at")
+  final String? updatedAt;
+  
+  final int? version;
+
+  WageSetting({
+    this.teamMemberId, this.createdAt, this.updatedAt,
+    this.version, this.isOvertimeExempt, this.jobAssignments
+  });
+
+  factory WageSetting.fromJson(Map<String, dynamic> json) =>
+      _$WageSettingFromJson(json);
+
+  Map<String, dynamic> toJson() => _$WageSettingToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class JobAssignment {
+
+  @JsonKey(name: "job_title")
+  final String? jobTitle;
+
+  @JsonKey(name: "pay_type")
+  final JobAssignmentPayType? payType;
+
+  @JsonKey(name: "annual_rate")
+  final Money? annualRate;
+
+  @JsonKey(name: "hourly_rate")
+  final Money? hourlyRate;
+
+  @JsonKey(name: "weekly_hours")
+  final int? weeklyHours;
+
+  JobAssignment({
+    this.hourlyRate, this.annualRate, this.jobTitle, this.payType,
+    this.weeklyHours
+  });
+
+  factory JobAssignment.fromJson(Map<String, dynamic> json) =>
+      _$JobAssignmentFromJson(json);
+
+  Map<String, dynamic> toJson() => _$JobAssignmentToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class ListBreakTypesRequest {
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+  
+  final int? limit;
+
+  final String? cursor;
+
+  ListBreakTypesRequest({
+    this.cursor, this.limit, this.locationId
+  });
+
+  factory ListBreakTypesRequest.fromJson(Map<String, dynamic> json) =>
+      _$ListBreakTypesRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ListBreakTypesRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class BreakTypeResponse {
+
+  @JsonKey(name: "break_types")
+  final List<BreakType>? breakTypes;
+
+  @JsonKey(name: "break_type")
+  final BreakType? breakType;
+
+  final String? cursor;
+
+  final List<SquareError>? errors;
+
+  BreakTypeResponse({
+    this.cursor, this.breakTypes, this.errors, this.breakType
+  });
+
+  factory BreakTypeResponse.fromJson(Map<String, dynamic> json) =>
+      _$BreakTypeResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BreakTypeResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class CreateBreakTypeRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String? idempotencyKey;
+
+  @JsonKey(name: "break_type")
+  final BreakType? breakType;
+
+  CreateBreakTypeRequest({
+    this.breakType, this.idempotencyKey
+  });
+
+  factory CreateBreakTypeRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateBreakTypeRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CreateBreakTypeRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class CreateShiftRequest {
+  
+  @JsonKey(name: "idempotency_key")
+  final String? idempotencyKey;    
+  
+  final Shift shift;
+
+  CreateShiftRequest({
+    required this.shift, this.idempotencyKey
+  });
+
+  factory CreateShiftRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateShiftRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CreateShiftRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+  
+}
+
+@JsonSerializable(includeIfNull: false)
+class ShiftResponse {
+
+  final List<Shift>? shifts;
+
+  final Shift? shift;
+
+  final String? cursor;
+
+  final List<SquareError>? errors;
+
+  ShiftResponse({
+    this.cursor, this.errors, this.shift, this.shifts
+  });
+
+  factory ShiftResponse.fromJson(Map<String, dynamic> json) =>
+      _$ShiftResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ShiftResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull:false)
+class SearchShiftRequest {
+  
+  final ShiftQuery? query;
+  
+  final int? limit;
+  
+  final String? cursor;
+
+  SearchShiftRequest({
+    this.cursor, this.limit, this.query
+  });
+
+  factory SearchShiftRequest.fromJson(Map<String, dynamic> json) =>
+      _$SearchShiftRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchShiftRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+  
+}
+
+@JsonSerializable(includeIfNull: false)
+class ShiftQuery {
+
+  final ShiftFilter? filter;
+
+  final SearchOrdersSort? sort;
+
+
+  ShiftQuery({
+    this.filter, this.sort
+  });
+
+  factory ShiftQuery.fromJson(Map<String, dynamic> json) =>
+      _$ShiftQueryFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ShiftQueryToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class ShiftFilter {
+
+  @JsonKey(name: "location_ids")
+  final List<String> locationIds;
+
+  @JsonKey(name: "team_member_ids")
+  final List<String> teamMemberIds;
+ 
+  final TimeRange? end;
+  
+  final TimeRange? start;
+  
+  final ShiftStatus? status;
+
+  final ShiftWorkday? workday;
+
+  @JsonKey(name: "employee_ids")
+  final List<String>? employeeIds;
+
+  ShiftFilter({
+    required this.locationIds, this.status, required this.teamMemberIds,
+  this.employeeIds, this.end, this.start, this.workday
+ });
+
+  factory ShiftFilter.fromJson(Map<String, dynamic> json) =>
+      _$ShiftFilterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ShiftFilterToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class ShiftWorkday {
+
+  @JsonKey(name: "date_range")
+  final DateRange? dateRange;
+  
+  @JsonKey(name: "default_timezone")
+  final String? defaultTimezone;
+
+  @JsonKey(name: "match_shifts_by")
+  final ShiftWorkdayMatcher ? matchShiftsBy;
+
+  ShiftWorkday({
+    this.dateRange, this.defaultTimezone, this.matchShiftsBy
+  });
+
+  factory ShiftWorkday.fromJson(Map<String, dynamic> json) =>
+      _$ShiftWorkdayFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ShiftWorkdayToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class DateRange {
+
+  @JsonKey(name: "end_date")
+  final String? endDate;
+
+  @JsonKey(name: "start_date")
+  final String? startDate;
+
+  DateRange({
+   this.startDate, this.endDate
+  });
+
+  factory DateRange.fromJson(Map<String, dynamic> json) =>
+      _$DateRangeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DateRangeToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class TeamMemberWageResponse {
+
+  @JsonKey(name: "team_member_wages")
+  final List<TeamMemberWage>? teamMemberWages;
+
+  @JsonKey(name: "team_member_wage")
+  final TeamMemberWage? teamMemberWage;
+
+  List<SquareError>? errors;
+
+  final String? cursor;
+
+  TeamMemberWageResponse({
+    this.errors, this.cursor, this.teamMemberWage, this.teamMemberWages
+  });
+
+  factory TeamMemberWageResponse.fromJson(Map<String, dynamic> json) =>
+      _$TeamMemberWageResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TeamMemberWageResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class ListTeamMemberWageRequest {
+
+  @JsonKey(name: "team_member_id")
+  final String? teamMemberId;
+
+  final int? limit;
+
+  final String? cursor;
+
+  ListTeamMemberWageRequest({
+    this.cursor, this.limit, this.teamMemberId
+  });
+
+  factory ListTeamMemberWageRequest.fromJson(Map<String, dynamic> json) =>
+      _$ListTeamMemberWageRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ListTeamMemberWageRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+
+@JsonSerializable(includeIfNull: false)
+class WorkWeekConfigResponse {
+
+  @JsonKey(name: "workweek_configs")
+  final List<WorkweekConfig>? workweekConfigs;
+
+  @JsonKey(name: "workweek_config")
+  final WorkweekConfig? workweekConfig;
+
+  final String? cursor;
+
+  final List<SquareError>? errors;
+
+  WorkWeekConfigResponse({
+    this.cursor, this.errors, this.workweekConfig, this.workweekConfigs
+  });
+
+  factory WorkWeekConfigResponse.fromJson(Map<String, dynamic> json) =>
+      _$WorkWeekConfigResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$WorkWeekConfigResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class SearchWorkWeekConfigRequest {
+  final int? limit;
+  final String? cursor;
+
+  SearchWorkWeekConfigRequest({
+    this.cursor, this.limit
+  });
+
+  factory SearchWorkWeekConfigRequest.fromJson(Map<String, dynamic> json) =>
+      _$SearchWorkWeekConfigRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchWorkWeekConfigRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+enum ShiftWorkdayMatcher {
+  START_AT,
+  END_AT,
+  INTERSECTION
+}
+
+enum JobAssignmentPayType {
+  NONE,
+  HOURLY,
+  SALARY
 }
 
 enum LoyaltyEventType {
