@@ -10218,3 +10218,59 @@ Map<String, dynamic> _$ReadTeamMemberBookingProfileRequestToJson(
   writeNotNull('location_id', instance.locationId);
   return val;
 }
+
+MerchantResponse _$MerchantResponseFromJson(Map<String, dynamic> json) =>
+    MerchantResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      cursor: json['cursor'] as String?,
+      merchants: (json['merchant'] as List<dynamic>?)
+          ?.map((e) => Merchant.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$MerchantResponseToJson(MerchantResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('merchant', instance.merchants);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+LocationResponse _$LocationResponseFromJson(Map<String, dynamic> json) =>
+    LocationResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      cursor: json['cursor'] as String?,
+      location: json['location'] == null
+          ? null
+          : Location.fromJson(json['location'] as Map<String, dynamic>),
+      locations: (json['locations'] as List<dynamic>?)
+          ?.map((e) => Location.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$LocationResponseToJson(LocationResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('location', instance.location);
+  writeNotNull('locations', instance.locations);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}

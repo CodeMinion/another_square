@@ -8,6 +8,7 @@ import 'package:another_square/services/giftcard_service.dart';
 import 'package:another_square/services/inventory_service.dart';
 import 'package:another_square/services/invoice_service.dart';
 import 'package:another_square/services/loyalty_service.dart';
+import 'package:another_square/services/merchant_service.dart';
 import 'package:another_square/services/oder_service.dart';
 import 'package:another_square/services/subscription_service.dart';
 import 'package:another_square/services/terminal_service.dart';
@@ -32,6 +33,7 @@ class SquareClient {
   late LoyaltyService _loyaltyService;
   late GiftCardService _giftCardService;
   late BookingsService _bookingsService;
+  late MerchantService _merchantService;
 
   SquareClient(
       {required this.applicationId,
@@ -83,6 +85,9 @@ class SquareClient {
         authenticationService: _authenticationService!, baseUrl: _url);
 
     _bookingsService = BookingsService(
+        authenticationService: _authenticationService!, baseUrl: _url);
+
+    _merchantService = MerchantService(
         authenticationService: _authenticationService!, baseUrl: _url);
   }
 
@@ -1455,7 +1460,89 @@ class SquareClient {
     return _bookingsService.cancelBooking(bookingId: bookingId, request: request, authToken: authToken);
   }
 
+  // MERCHANT
 
+  ///
+  /// Returns Merchant information for a given access token.
+  ///
+  /// If you don't know a Merchant ID, you can use this endpoint
+  /// to retrieve the merchant ID for an access token. You can specify
+  /// your personal access token to get your own merchant information or
+  /// specify an OAuth token to get the information for the merchant that
+  /// granted you access.
+  ///
+  /// If you know the merchant ID, you can also use the RetrieveMerchant
+  /// endpoint to get the merchant information.
+  ///
+  Future<MerchantResponse> listMerchants({
+    String? cursor,
+    String? authToken,
+  }) async {
+    return _merchantService.listMerchants(cursor: cursor, authToken: authToken);
+  }
+
+  ///
+  /// Retrieve a Merchant object for the given merchant_id.
+  ///
+  Future<Merchant> readMerchant({
+    required String merchantId,
+    String? authToken,
+  }) async {
+    return _merchantService.readMerchant(merchantId: merchantId, authToken: authToken);
+  }
+
+  ///
+  /// Provides details about all of the seller's
+  /// locations, including those with an inactive status.
+  ///
+  Future<List<Location>> listLocation({
+    required String merchantId,
+    String? authToken,
+  }) async {
+    return _merchantService.listLocation(merchantId: merchantId, authToken: authToken);
+  }
+
+  ///
+  /// Creates a location.
+  ///
+  /// Creating new locations allows for separate configuration
+  /// of receipt layouts, item prices, and sales reports. Developers
+  /// can use locations to separate sales activity via applications
+  /// that integrate with Square from sales activity elsewhere in a
+  /// seller's account. Locations created programmatically with the
+  /// Locations API will last forever and are visible to the seller
+  /// for their own management, so ensure that each location has a
+  /// sensible and unique name.
+  ///
+  Future<Location> createLocation({
+    required Location location,
+    String? authToken,
+  }) async {
+    return _merchantService.createLocation(location: location, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves details of a single location.
+  ///
+  /// Specify "main" as the location ID to retrieve details
+  /// of the main location.
+  ///
+  Future<Location> readLocation({
+    required String locationId,
+    String? authToken,
+  }) async {
+    return _merchantService.readLocation(locationId: locationId, authToken: authToken);
+  }
+
+  ///
+  /// Updates a location.
+  ///
+  Future<Location> updateLocation({
+    required Location location,
+    String? authToken,
+  }) async {
+    return _merchantService.updateLocation(location: location, authToken: authToken);
+  }
 
 
     bool isInitialized() {

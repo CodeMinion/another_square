@@ -301,4 +301,5 @@ void main() {
   // TODO Loyalty Test Cases
   // TODO GiftCard Test Cases
   // TODO Bookings Test Cases
+  // TODO Merchant Test Cases
 }

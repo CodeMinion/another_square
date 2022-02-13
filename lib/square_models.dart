@@ -9838,7 +9838,55 @@ class ReadTeamMemberBookingProfileRequest {
   }
 }
 
+@JsonSerializable(includeIfNull: false)
+class MerchantResponse {
+  
+  final List<SquareError>? errors;
 
+  @JsonKey(name: "merchant")
+  final List<Merchant>? merchants;
+
+  final String? cursor;
+
+  MerchantResponse({
+    this.errors, this.cursor, this.merchants
+  });
+
+  factory MerchantResponse.fromJson(Map<String, dynamic> json) =>
+      _$MerchantResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MerchantResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class LocationResponse {
+
+  final List<SquareError>? errors;
+
+  final Location? location;
+  final List<Location>? locations;
+
+  final String? cursor;
+
+  LocationResponse({
+    this.errors, this.cursor, this.location, this.locations
+  });
+
+  factory LocationResponse.fromJson(Map<String, dynamic> json) =>
+      _$LocationResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LocationResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
 
 enum LoyaltyEventType {
   ACCUMULATE_POINTS,
