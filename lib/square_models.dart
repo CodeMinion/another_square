@@ -9421,6 +9421,102 @@ class SearchLoyaltyRewardRequest {
 }
 
 @JsonSerializable(includeIfNull: false)
+class GiftCardResponse {
+
+  final List<SquareError>? errors;
+
+  @JsonKey(name: "gift_card")
+  final GiftCard? giftCard;
+
+  @JsonKey(name: "gift_cards")
+  final List<GiftCard>? giftCards;
+
+  final String? cursor;
+
+  GiftCardResponse({
+    this.cursor, this.errors, this.giftCard, this.giftCards
+  });
+
+  factory GiftCardResponse.fromJson(Map<String, dynamic> json) =>
+      _$GiftCardResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GiftCardResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class GiftCardActivityResponse {
+
+  final List<SquareError>? errors;
+
+  @JsonKey(name: "gift_card_activity")
+  final GiftCardActivity? giftCardActivity;
+
+  @JsonKey(name: "gift_card_activities")
+  final List<GiftCardActivity>? giftCardActivities;
+
+  final String? cursor;
+
+  GiftCardActivityResponse({
+    this.cursor, this.errors, this.giftCardActivities, this.giftCardActivity
+  });
+
+  factory GiftCardActivityResponse.fromJson(Map<String, dynamic> json) =>
+      _$GiftCardActivityResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GiftCardActivityResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class ListGiftCardActivityRequest {
+
+  @JsonKey(name: "gift_card_id")
+  final String? giftCardId;
+
+  final GiftCardActivityType? type;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  @JsonKey(name: "begin_time")
+  final String? beginTime;
+
+  @JsonKey(name: "end_time")
+  final String? endTime;
+
+  final int? limit;
+  
+  final String? cursor;
+
+  @JsonKey(name: "sort_order")
+  final SortOrder? sortOrder;
+
+  ListGiftCardActivityRequest({
+    this.cursor, this.giftCardId, this.locationId, this.type,
+  this.limit, this.sortOrder, this.beginTime, this.endTime,
+  });
+
+  factory ListGiftCardActivityRequest.fromJson(Map<String, dynamic> json) =>
+      _$ListGiftCardActivityRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ListGiftCardActivityRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
 class RedeemLoyaltyRequest {
 
   @JsonKey(name: "idempotency_key")
@@ -9437,6 +9533,84 @@ class RedeemLoyaltyRequest {
       _$RedeemLoyaltyRequestFromJson(json);
 
   Map<String, dynamic> toJson() => _$RedeemLoyaltyRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class ListGiftCardRequest {
+  final GiftCardType? type;
+  final GiftCardStatus? status;
+  final int? limit;
+  final String? cursor;
+
+  @JsonKey(name: "customer_id")
+  final String? customerId;
+
+  ListGiftCardRequest({
+    this.cursor, this.limit, this.type, this.status,
+    this.customerId
+  });
+
+  factory ListGiftCardRequest.fromJson(Map<String, dynamic> json) =>
+      _$ListGiftCardRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ListGiftCardRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class CreateGiftCardRequest {
+  
+  @JsonKey(name: "idempotency_key")
+  final String idempotencyKey;
+
+  @JsonKey(name: "location_id")
+  final String locationId;
+
+  @JsonKey(name: "gift_card")
+  final GiftCard giftCard;
+
+  CreateGiftCardRequest({
+    required this.giftCard, required this.locationId, required this.idempotencyKey
+  });
+
+  factory CreateGiftCardRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateGiftCardRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CreateGiftCardRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CreateGiftCardActivityRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String? idempotencyKey;
+
+  @JsonKey(name: "gift_card_activity")
+  final GiftCardActivity giftCardActivity;
+
+  CreateGiftCardActivityRequest({
+    required this.giftCardActivity, this.idempotencyKey
+  });
+
+  factory CreateGiftCardActivityRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateGiftCardActivityRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CreateGiftCardActivityRequestToJson(this);
 
   @override
   String toString() {

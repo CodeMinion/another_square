@@ -299,4 +299,5 @@ void main() {
   // TODO Inventory Test Cases
   // TODO Customer Test Cases
   // TODO Loyalty Test Cases
+  // TODO GiftCard Test Cases
 }

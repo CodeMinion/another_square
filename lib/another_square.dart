@@ -3,6 +3,7 @@ library another_square;
 import 'package:another_square/services/authentication_service.dart';
 import 'package:another_square/services/catalog_service.dart';
 import 'package:another_square/services/customer_service.dart';
+import 'package:another_square/services/giftcard_service.dart';
 import 'package:another_square/services/inventory_service.dart';
 import 'package:another_square/services/invoice_service.dart';
 import 'package:another_square/services/loyalty_service.dart';
@@ -28,6 +29,7 @@ class SquareClient {
   late InventoryService _inventoryService;
   late CustomerService _customerService;
   late LoyaltyService _loyaltyService;
+  late GiftCardService _giftCardService;
 
   SquareClient(
       {required this.applicationId,
@@ -73,6 +75,9 @@ class SquareClient {
         authenticationService: _authenticationService!, baseUrl: _url);
 
     _loyaltyService = LoyaltyService(
+        authenticationService: _authenticationService!, baseUrl: _url);
+
+    _giftCardService = GiftCardService(
         authenticationService: _authenticationService!, baseUrl: _url);
   }
 
@@ -1205,6 +1210,120 @@ class SquareClient {
     String? authToken,
   }) async {
     return _loyaltyService.redeemLoyaltyReward(rewardId: rewardId, request: request, authToken: authToken);
+  }
+
+  // GIFTCARD
+
+
+  ///
+  /// Lists all gift cards.
+  ///
+  /// You can specify optional filters to retrieve a subset of
+  /// the gift cards.
+  ///
+  Future<GiftCardResponse> listGiftCards({
+    required ListGiftCardRequest request,
+    String? authToken,
+  }) async {
+    return _giftCardService.listGiftCards(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Creates a digital gift card or registers a physical (plastic) gift card.
+  ///
+  /// You must activate the gift card before it can be used for payment.
+  /// For more information, see Selling gift cards.
+  ///
+  Future<GiftCard> createGiftCard({
+    required CreateGiftCardRequest request,
+    String? authToken,
+  }) async {
+    return _giftCardService.createGiftCard(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves a gift card using the gift card account number (GAN).
+  ///
+  Future<GiftCard> readGiftCardFromGan({
+    required String gan,
+    String? authToken,
+  }) async {
+    return _giftCardService.readGiftCardFromGan(gan: gan, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves a gift card using a secure payment
+  /// token that represents the gift card.
+  ///
+  Future<GiftCard> readGiftCardFromNonce({
+    required String nonce,
+    String? authToken,
+  }) async {
+    return _giftCardService.readGiftCardFromNonce(nonce: nonce, authToken: authToken);
+  }
+
+  ///
+  /// Links a customer to a gift card, which is also
+  /// referred to as adding a card on file.
+  ///
+  Future<GiftCard> linkGiftCardToCustomer({
+    required String giftCardId,
+    required String customerId,
+    String? authToken,
+  }) async {
+    return _giftCardService.linkGiftCardToCustomer(giftCardId: giftCardId, customerId: customerId, authToken: authToken);
+  }
+
+  ///
+  /// Unlinks a customer from a gift card, which is also
+  /// referred to as removing a card on file.
+  ///
+  Future<GiftCard> unlinkGiftCardToCustomer({
+    required String giftCardId,
+    required String customerId,
+    String? authToken,
+  }) async {
+    return _giftCardService.unlinkGiftCardToCustomer(giftCardId: giftCardId, customerId: customerId, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves a gift card using its ID.
+  ///
+  Future<GiftCard> readGiftCard({
+    required String giftCardId,
+    String? authToken,
+  }) async {
+    return _giftCardService.readGiftCard(giftCardId: giftCardId, authToken: authToken);
+  }
+
+  ///
+  /// Lists gift card activities.
+  ///
+  /// By default, you get gift card activities for all
+  /// gift cards in the seller's account. You can optionally
+  /// specify query parameters to filter the list. For example,
+  /// you can get a list of gift card activities for a gift card,
+  /// for all gift cards in a specific region, or for activities within
+  /// a time window.
+  ///
+  Future<GiftCardActivityResponse> listGiftCardActivities({
+    required ListGiftCardActivityRequest request,
+    String? authToken,
+  }) async {
+    return _giftCardService.listGiftCardActivities(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Creates a gift card activity.
+  ///
+  /// For more information, see GiftCardActivity and Using
+  /// activated gift cards.
+  ///
+  Future<GiftCardActivity> createGiftCardActivities({
+    required CreateGiftCardActivityRequest request,
+    String? authToken,
+  }) async {
+    return _giftCardService.createGiftCardActivities(request: request, authToken: authToken);
   }
 
 

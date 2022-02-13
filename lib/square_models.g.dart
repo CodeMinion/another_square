@@ -9821,6 +9821,103 @@ Map<String, dynamic> _$SearchLoyaltyRewardRequestToJson(
   return val;
 }
 
+GiftCardResponse _$GiftCardResponseFromJson(Map<String, dynamic> json) =>
+    GiftCardResponse(
+      cursor: json['cursor'] as String?,
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      giftCard: json['gift_card'] == null
+          ? null
+          : GiftCard.fromJson(json['gift_card'] as Map<String, dynamic>),
+      giftCards: (json['gift_cards'] as List<dynamic>?)
+          ?.map((e) => GiftCard.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$GiftCardResponseToJson(GiftCardResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('gift_card', instance.giftCard);
+  writeNotNull('gift_cards', instance.giftCards);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+GiftCardActivityResponse _$GiftCardActivityResponseFromJson(
+        Map<String, dynamic> json) =>
+    GiftCardActivityResponse(
+      cursor: json['cursor'] as String?,
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      giftCardActivities: (json['gift_card_activities'] as List<dynamic>?)
+          ?.map((e) => GiftCardActivity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      giftCardActivity: json['gift_card_activity'] == null
+          ? null
+          : GiftCardActivity.fromJson(
+              json['gift_card_activity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$GiftCardActivityResponseToJson(
+    GiftCardActivityResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('gift_card_activity', instance.giftCardActivity);
+  writeNotNull('gift_card_activities', instance.giftCardActivities);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+ListGiftCardActivityRequest _$ListGiftCardActivityRequestFromJson(
+        Map<String, dynamic> json) =>
+    ListGiftCardActivityRequest(
+      cursor: json['cursor'] as String?,
+      giftCardId: json['gift_card_id'] as String?,
+      locationId: json['location_id'] as String?,
+      type: $enumDecodeNullable(_$GiftCardActivityTypeEnumMap, json['type']),
+      limit: json['limit'] as int?,
+      sortOrder: $enumDecodeNullable(_$SortOrderEnumMap, json['sort_order']),
+      beginTime: json['begin_time'] as String?,
+      endTime: json['end_time'] as String?,
+    );
+
+Map<String, dynamic> _$ListGiftCardActivityRequestToJson(
+    ListGiftCardActivityRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('gift_card_id', instance.giftCardId);
+  writeNotNull('type', _$GiftCardActivityTypeEnumMap[instance.type]);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('begin_time', instance.beginTime);
+  writeNotNull('end_time', instance.endTime);
+  writeNotNull('limit', instance.limit);
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('sort_order', _$SortOrderEnumMap[instance.sortOrder]);
+  return val;
+}
+
 RedeemLoyaltyRequest _$RedeemLoyaltyRequestFromJson(
         Map<String, dynamic> json) =>
     RedeemLoyaltyRequest(
@@ -9834,3 +9931,68 @@ Map<String, dynamic> _$RedeemLoyaltyRequestToJson(
       'idempotency_key': instance.idempotencyKey,
       'location_id': instance.locationId,
     };
+
+ListGiftCardRequest _$ListGiftCardRequestFromJson(Map<String, dynamic> json) =>
+    ListGiftCardRequest(
+      cursor: json['cursor'] as String?,
+      limit: json['limit'] as int?,
+      type: $enumDecodeNullable(_$GiftCardTypeEnumMap, json['type']),
+      status: $enumDecodeNullable(_$GiftCardStatusEnumMap, json['status']),
+      customerId: json['customer_id'] as String?,
+    );
+
+Map<String, dynamic> _$ListGiftCardRequestToJson(ListGiftCardRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('type', _$GiftCardTypeEnumMap[instance.type]);
+  writeNotNull('status', _$GiftCardStatusEnumMap[instance.status]);
+  writeNotNull('limit', instance.limit);
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('customer_id', instance.customerId);
+  return val;
+}
+
+CreateGiftCardRequest _$CreateGiftCardRequestFromJson(
+        Map<String, dynamic> json) =>
+    CreateGiftCardRequest(
+      giftCard: GiftCard.fromJson(json['gift_card'] as Map<String, dynamic>),
+      locationId: json['location_id'] as String,
+      idempotencyKey: json['idempotency_key'] as String,
+    );
+
+Map<String, dynamic> _$CreateGiftCardRequestToJson(
+        CreateGiftCardRequest instance) =>
+    <String, dynamic>{
+      'idempotency_key': instance.idempotencyKey,
+      'location_id': instance.locationId,
+      'gift_card': instance.giftCard,
+    };
+
+CreateGiftCardActivityRequest _$CreateGiftCardActivityRequestFromJson(
+        Map<String, dynamic> json) =>
+    CreateGiftCardActivityRequest(
+      giftCardActivity: GiftCardActivity.fromJson(
+          json['gift_card_activity'] as Map<String, dynamic>),
+      idempotencyKey: json['idempotency_key'] as String?,
+    );
+
+Map<String, dynamic> _$CreateGiftCardActivityRequestToJson(
+    CreateGiftCardActivityRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('idempotency_key', instance.idempotencyKey);
+  val['gift_card_activity'] = instance.giftCardActivity;
+  return val;
+}
