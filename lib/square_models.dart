@@ -9618,6 +9618,228 @@ class CreateGiftCardActivityRequest {
   }
 }
 
+@JsonSerializable(includeIfNull: false)
+class ListBookingsRequest {
+  final int? limit;
+  final String? cursor;
+  
+  @JsonKey(name: "team_member_id")
+  final String? teamMemberId;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  @JsonKey(name: "start_at_max")
+  final String? startAtMax;
+
+  ListBookingsRequest({
+    this.limit, this.locationId, this.cursor, this.teamMemberId,
+    this.startAtMax
+  });
+
+  factory ListBookingsRequest.fromJson(Map<String, dynamic> json) =>
+      _$ListBookingsRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ListBookingsRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class BookingsResponse {
+
+  final Booking? booking;
+
+  final List<Booking>? bookings;
+
+  final String? cursor;
+  
+  final List<SquareError>? errors;
+
+  BookingsResponse({
+    this.cursor, this.errors, this.booking, this.bookings
+  });
+
+  factory BookingsResponse.fromJson(Map<String, dynamic> json) =>
+      _$BookingsResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BookingsResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class UpsertBookingRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String idempotencyKey;
+
+  final Booking booking;
+
+  UpsertBookingRequest({
+    required this.booking, required this.idempotencyKey
+  });
+
+  factory UpsertBookingRequest.fromJson(Map<String, dynamic> json) =>
+      _$UpsertBookingRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UpsertBookingRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CancelBookingRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String? idempotencyKey;
+
+  @JsonKey(name: "booking_version")
+  final String? bookingVersion;
+
+  CancelBookingRequest({
+     this.bookingVersion, required this.idempotencyKey
+  });
+
+  factory CancelBookingRequest.fromJson(Map<String, dynamic> json) =>
+      _$CancelBookingRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CancelBookingRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class AvailabilityResponse {
+
+  final Availability? availability;
+
+  final List<Availability>? availabilities;
+
+  final String? cursor;
+
+  final List<SquareError>? errors;
+
+  AvailabilityResponse({
+    this.errors, this.cursor, this.availabilities, this.availability
+  });
+
+  factory AvailabilityResponse.fromJson(Map<String, dynamic> json) =>
+      _$AvailabilityResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AvailabilityResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+
+@JsonSerializable(includeIfNull: false)
+class BusinessBookingProfileResponse {
+
+  @JsonKey(name: "business_booking_profile")
+  final BusinessBookingProfile? businessBookingProfile;
+
+  @JsonKey(name: "business_booking_profiles")
+  final List<BusinessBookingProfile>? businessBookingProfiles;
+
+  final String? cursor;
+
+  final List<SquareError>? errors;
+
+  BusinessBookingProfileResponse({
+    this.errors, this.cursor, this.businessBookingProfile, this.businessBookingProfiles
+
+  });
+
+  factory BusinessBookingProfileResponse.fromJson(Map<String, dynamic> json) =>
+      _$BusinessBookingProfileResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BusinessBookingProfileResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class TeamMemberBookingProfileResponse {
+
+  @JsonKey(name: "team_member_booking_profile")
+  final TeamMemberBookingProfile? teamMemberBookingProfile;
+
+  @JsonKey(name: "team_member_booking_profiles")
+  final List<TeamMemberBookingProfile>? teamMemberBookingProfiles;
+
+  final String? cursor;
+
+  final List<SquareError>? errors;
+
+  TeamMemberBookingProfileResponse({
+    this.errors, this.cursor, this.teamMemberBookingProfile, this.teamMemberBookingProfiles
+
+  });
+
+  factory TeamMemberBookingProfileResponse.fromJson(Map<String, dynamic> json) =>
+      _$TeamMemberBookingProfileResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TeamMemberBookingProfileResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class ReadTeamMemberBookingProfileRequest {
+
+  @JsonKey(name: "bookable_only")
+  final String? bookableOnly;
+
+  final int? limit;
+
+  final String? cursor;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  ReadTeamMemberBookingProfileRequest({
+    this.cursor, this.locationId, this.limit, this.bookableOnly
+  });
+
+  factory ReadTeamMemberBookingProfileRequest.fromJson(Map<String, dynamic> json) =>
+      _$ReadTeamMemberBookingProfileRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ReadTeamMemberBookingProfileRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+
+
 enum LoyaltyEventType {
   ACCUMULATE_POINTS,
   CREATE_REWARD,

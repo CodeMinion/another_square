@@ -9996,3 +9996,225 @@ Map<String, dynamic> _$CreateGiftCardActivityRequestToJson(
   val['gift_card_activity'] = instance.giftCardActivity;
   return val;
 }
+
+ListBookingsRequest _$ListBookingsRequestFromJson(Map<String, dynamic> json) =>
+    ListBookingsRequest(
+      limit: json['limit'] as int?,
+      locationId: json['location_id'] as String?,
+      cursor: json['cursor'] as String?,
+      teamMemberId: json['team_member_id'] as String?,
+      startAtMax: json['start_at_max'] as String?,
+    );
+
+Map<String, dynamic> _$ListBookingsRequestToJson(ListBookingsRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('limit', instance.limit);
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('team_member_id', instance.teamMemberId);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('start_at_max', instance.startAtMax);
+  return val;
+}
+
+BookingsResponse _$BookingsResponseFromJson(Map<String, dynamic> json) =>
+    BookingsResponse(
+      cursor: json['cursor'] as String?,
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      booking: json['booking'] == null
+          ? null
+          : Booking.fromJson(json['booking'] as Map<String, dynamic>),
+      bookings: (json['bookings'] as List<dynamic>?)
+          ?.map((e) => Booking.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$BookingsResponseToJson(BookingsResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('booking', instance.booking);
+  writeNotNull('bookings', instance.bookings);
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('errors', instance.errors);
+  return val;
+}
+
+UpsertBookingRequest _$UpsertBookingRequestFromJson(
+        Map<String, dynamic> json) =>
+    UpsertBookingRequest(
+      booking: Booking.fromJson(json['booking'] as Map<String, dynamic>),
+      idempotencyKey: json['idempotency_key'] as String,
+    );
+
+Map<String, dynamic> _$UpsertBookingRequestToJson(
+        UpsertBookingRequest instance) =>
+    <String, dynamic>{
+      'idempotency_key': instance.idempotencyKey,
+      'booking': instance.booking,
+    };
+
+CancelBookingRequest _$CancelBookingRequestFromJson(
+        Map<String, dynamic> json) =>
+    CancelBookingRequest(
+      bookingVersion: json['booking_version'] as String?,
+      idempotencyKey: json['idempotency_key'] as String?,
+    );
+
+Map<String, dynamic> _$CancelBookingRequestToJson(
+    CancelBookingRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('idempotency_key', instance.idempotencyKey);
+  writeNotNull('booking_version', instance.bookingVersion);
+  return val;
+}
+
+AvailabilityResponse _$AvailabilityResponseFromJson(
+        Map<String, dynamic> json) =>
+    AvailabilityResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      cursor: json['cursor'] as String?,
+      availabilities: (json['availabilities'] as List<dynamic>?)
+          ?.map((e) => Availability.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      availability: json['availability'] == null
+          ? null
+          : Availability.fromJson(json['availability'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AvailabilityResponseToJson(
+    AvailabilityResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('availability', instance.availability);
+  writeNotNull('availabilities', instance.availabilities);
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('errors', instance.errors);
+  return val;
+}
+
+BusinessBookingProfileResponse _$BusinessBookingProfileResponseFromJson(
+        Map<String, dynamic> json) =>
+    BusinessBookingProfileResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      cursor: json['cursor'] as String?,
+      businessBookingProfile: json['business_booking_profile'] == null
+          ? null
+          : BusinessBookingProfile.fromJson(
+              json['business_booking_profile'] as Map<String, dynamic>),
+      businessBookingProfiles: (json['business_booking_profiles']
+              as List<dynamic>?)
+          ?.map(
+              (e) => BusinessBookingProfile.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$BusinessBookingProfileResponseToJson(
+    BusinessBookingProfileResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('business_booking_profile', instance.businessBookingProfile);
+  writeNotNull('business_booking_profiles', instance.businessBookingProfiles);
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('errors', instance.errors);
+  return val;
+}
+
+TeamMemberBookingProfileResponse _$TeamMemberBookingProfileResponseFromJson(
+        Map<String, dynamic> json) =>
+    TeamMemberBookingProfileResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      cursor: json['cursor'] as String?,
+      teamMemberBookingProfile: json['team_member_booking_profile'] == null
+          ? null
+          : TeamMemberBookingProfile.fromJson(
+              json['team_member_booking_profile'] as Map<String, dynamic>),
+      teamMemberBookingProfiles:
+          (json['team_member_booking_profiles'] as List<dynamic>?)
+              ?.map((e) =>
+                  TeamMemberBookingProfile.fromJson(e as Map<String, dynamic>))
+              .toList(),
+    );
+
+Map<String, dynamic> _$TeamMemberBookingProfileResponseToJson(
+    TeamMemberBookingProfileResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'team_member_booking_profile', instance.teamMemberBookingProfile);
+  writeNotNull(
+      'team_member_booking_profiles', instance.teamMemberBookingProfiles);
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('errors', instance.errors);
+  return val;
+}
+
+ReadTeamMemberBookingProfileRequest
+    _$ReadTeamMemberBookingProfileRequestFromJson(Map<String, dynamic> json) =>
+        ReadTeamMemberBookingProfileRequest(
+          cursor: json['cursor'] as String?,
+          locationId: json['location_id'] as String?,
+          limit: json['limit'] as int?,
+          bookableOnly: json['bookable_only'] as String?,
+        );
+
+Map<String, dynamic> _$ReadTeamMemberBookingProfileRequestToJson(
+    ReadTeamMemberBookingProfileRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('bookable_only', instance.bookableOnly);
+  writeNotNull('limit', instance.limit);
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('location_id', instance.locationId);
+  return val;
+}

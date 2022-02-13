@@ -1,6 +1,7 @@
 library another_square;
 
 import 'package:another_square/services/authentication_service.dart';
+import 'package:another_square/services/bookings_service.dart';
 import 'package:another_square/services/catalog_service.dart';
 import 'package:another_square/services/customer_service.dart';
 import 'package:another_square/services/giftcard_service.dart';
@@ -30,6 +31,7 @@ class SquareClient {
   late CustomerService _customerService;
   late LoyaltyService _loyaltyService;
   late GiftCardService _giftCardService;
+  late BookingsService _bookingsService;
 
   SquareClient(
       {required this.applicationId,
@@ -78,6 +80,9 @@ class SquareClient {
         authenticationService: _authenticationService!, baseUrl: _url);
 
     _giftCardService = GiftCardService(
+        authenticationService: _authenticationService!, baseUrl: _url);
+
+    _bookingsService = BookingsService(
         authenticationService: _authenticationService!, baseUrl: _url);
   }
 
@@ -1325,6 +1330,131 @@ class SquareClient {
   }) async {
     return _giftCardService.createGiftCardActivities(request: request, authToken: authToken);
   }
+
+
+  // BOOKINGS
+  ///
+  /// Retrieve a collection of bookings.
+  ///
+  /// To call this endpoint with buyer-level permissions,
+  /// set APPOINTMENTS_READ for the OAuth scope.
+  /// To call this endpoint with seller-level permissions,
+  /// set APPOINTMENTS_ALL_READ and APPOINTMENTS_READ for
+  /// the OAuth scope.
+  ///
+  Future<BookingsResponse> listBookings({
+    required ListBookingsRequest request,
+    String? authToken,
+  }) async {
+    return _bookingsService.listBookings(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Creates a booking.
+  ///
+  /// To call this endpoint with buyer-level permissions,
+  /// set APPOINTMENTS_WRITE for the OAuth scope.
+  /// To call this endpoint with seller-level permissions,
+  /// set APPOINTMENTS_ALL_WRITE and APPOINTMENTS_WRITE for the OAuth scope.
+  ///
+  Future<Booking> createBooking({
+    required UpsertBookingRequest request,
+    String? authToken,
+  }) async {
+    return _bookingsService.createBooking(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Searches for availabilities for booking.
+  ///
+  /// To call this endpoint with buyer-level permissions,
+  /// set APPOINTMENTS_READ for the OAuth scope.
+  /// To call this endpoint with seller-level permissions,
+  /// set APPOINTMENTS_ALL_READ and APPOINTMENTS_READ for the OAuth scope.
+  ///
+  Future<List<Availability>> searchBookingAvailability({
+    required SearchAvailabilityQuery query,
+    String? authToken,
+  }) async {
+    return _bookingsService.searchBookingAvailability(query: query, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves a seller's booking profile.
+  ///
+  Future<BusinessBookingProfile> readBusinessBooking({
+    String? authToken,
+  }) async {
+    return _bookingsService.readBusinessBooking(authToken: authToken);
+  }
+
+  ///
+  /// Lists booking profiles for team members.
+  ///
+  Future<TeamMemberBookingProfileResponse> listTeamMemberBookingProfile({
+    required ReadTeamMemberBookingProfileRequest request,
+    String? authToken,
+  }) async {
+    return _bookingsService.listTeamMemberBookingProfile(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves a team member's booking profile.
+  ///
+  Future<TeamMemberBookingProfile> readTeamMemberBookingProfile({
+    required String teamMemberId,
+    String? authToken,
+  }) async {
+    return _bookingsService.readTeamMemberBookingProfile(teamMemberId: teamMemberId, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves a booking.
+  ///
+  /// To call this endpoint with buyer-level permissions,
+  /// set APPOINTMENTS_READ for the OAuth scope.
+  /// To call this endpoint with seller-level permissions,
+  /// set APPOINTMENTS_ALL_READ and APPOINTMENTS_READ for the OAuth scope.
+  ///
+  Future<Booking> readBooking({
+    required String bookingId,
+    String? authToken,
+  }) async {
+    return _bookingsService.readBooking(bookingId: bookingId, authToken: authToken);
+  }
+
+  ///
+  /// Updates a booking.
+  ///
+  /// To call this endpoint with buyer-level permissions,
+  /// set APPOINTMENTS_WRITE for the OAuth scope.
+  /// To call this endpoint with seller-level permissions,
+  /// set APPOINTMENTS_ALL_WRITE and APPOINTMENTS_WRITE for the OAuth scope.
+  ///
+  Future<Booking> updateBooking({
+    required String bookingId,
+    required UpsertBookingRequest request,
+    String? authToken,
+  }) async {
+    return _bookingsService.updateBooking(bookingId: bookingId, request: request, authToken: authToken);
+  }
+
+  ///
+  /// Cancels an existing booking.
+  ///
+  /// To call this endpoint with buyer-level permissions,
+  /// set APPOINTMENTS_WRITE for the OAuth scope.
+  /// To call this endpoint with seller-level permissions,
+  /// set APPOINTMENTS_ALL_WRITE and APPOINTMENTS_WRITE for the OAuth scope.
+  ///
+  Future<Booking> cancelBooking({
+    required String bookingId,
+    required CancelBookingRequest request,
+    String? authToken,
+  }) async {
+    return _bookingsService.cancelBooking(bookingId: bookingId, request: request, authToken: authToken);
+  }
+
 
 
 
