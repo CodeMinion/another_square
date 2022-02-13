@@ -137,7 +137,7 @@ class BankAccountException implements Exception {
 
   @override
   String toString() {
-    return "CatalogException: $statusCode - $message";
+    return "BankAccountException: $statusCode - $message";
   }
 }
 

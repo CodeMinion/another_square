@@ -10572,6 +10572,87 @@ class ListBankAccountsRequest  {
   }
 }
 
+@JsonSerializable(includeIfNull: false)
+class SitesResponse {
+
+  final List<SquareError>? errors;
+
+  final List<Site>? sites;
+
+  final Site? site;
+
+  final String? cursor;
+
+  SitesResponse({
+    this.cursor, this.errors, this.site, this.sites
+  });
+
+  factory SitesResponse.fromJson(Map<String, dynamic> json) =>
+      _$SitesResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SitesResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class SnippetResponse {
+
+  final List<SquareError>? errors;
+
+  final List<Snippet>? snippets;
+
+  final Snippet? snippet;
+
+  final String? cursor;
+
+  SnippetResponse({
+    this.cursor, this.errors, this.snippet, this.snippets
+  });
+
+  factory SnippetResponse.fromJson(Map<String, dynamic> json) =>
+      _$SnippetResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SnippetResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class Snippet {
+  final String? id;
+
+  final String? content;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "site_id")
+  final String? siteId;
+
+  @JsonKey(name: "updated_at")
+  final String? updatedAt;
+
+  Snippet({
+    this.id, this.updatedAt, this.createdAt, this.content, this.siteId
+  });
+
+  factory Snippet.fromJson(Map<String, dynamic> json) =>
+      _$SnippetFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SnippetToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
 
 enum ShiftWorkdayMatcher {
   START_AT,

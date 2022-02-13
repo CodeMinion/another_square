@@ -10977,3 +10977,88 @@ Map<String, dynamic> _$ListBankAccountsRequestToJson(
   writeNotNull('location_id', instance.locationId);
   return val;
 }
+
+SitesResponse _$SitesResponseFromJson(Map<String, dynamic> json) =>
+    SitesResponse(
+      cursor: json['cursor'] as String?,
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      site: json['site'] == null
+          ? null
+          : Site.fromJson(json['site'] as Map<String, dynamic>),
+      sites: (json['sites'] as List<dynamic>?)
+          ?.map((e) => Site.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$SitesResponseToJson(SitesResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('sites', instance.sites);
+  writeNotNull('site', instance.site);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+SnippetResponse _$SnippetResponseFromJson(Map<String, dynamic> json) =>
+    SnippetResponse(
+      cursor: json['cursor'] as String?,
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      snippet: json['snippet'] == null
+          ? null
+          : Snippet.fromJson(json['snippet'] as Map<String, dynamic>),
+      snippets: (json['snippets'] as List<dynamic>?)
+          ?.map((e) => Snippet.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$SnippetResponseToJson(SnippetResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('snippets', instance.snippets);
+  writeNotNull('snippet', instance.snippet);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+Snippet _$SnippetFromJson(Map<String, dynamic> json) => Snippet(
+      id: json['id'] as String?,
+      updatedAt: json['updated_at'] as String?,
+      createdAt: json['created_at'] as String?,
+      content: json['content'] as String?,
+      siteId: json['site_id'] as String?,
+    );
+
+Map<String, dynamic> _$SnippetToJson(Snippet instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('content', instance.content);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('site_id', instance.siteId);
+  writeNotNull('updated_at', instance.updatedAt);
+  return val;
+}

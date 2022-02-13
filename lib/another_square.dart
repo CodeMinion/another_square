@@ -11,6 +11,7 @@ import 'package:another_square/services/invoice_service.dart';
 import 'package:another_square/services/loyalty_service.dart';
 import 'package:another_square/services/merchant_service.dart';
 import 'package:another_square/services/oder_service.dart';
+import 'package:another_square/services/online_service.dart';
 import 'package:another_square/services/subscription_service.dart';
 import 'package:another_square/services/team_service.dart';
 import 'package:another_square/services/terminal_service.dart';
@@ -38,6 +39,7 @@ class SquareClient {
   late MerchantService _merchantService;
   late TeamService _teamService;
   late BankAccountService _bankAccountService;
+  late OnlineService _onlineService;
 
   SquareClient(
       {required this.applicationId,
@@ -98,6 +100,9 @@ class SquareClient {
         authenticationService: _authenticationService!, baseUrl: _url);
 
     _bankAccountService = BankAccountService(
+        authenticationService: _authenticationService!, baseUrl: _url);
+
+    _onlineService = OnlineService(
         authenticationService: _authenticationService!, baseUrl: _url);
   }
 
@@ -1848,6 +1853,62 @@ class SquareClient {
     String? authToken,
   }) async {
     return _bankAccountService.readBankAccountById(bankAccountId: bankAccountId, authToken: authToken);
+  }
+
+  // ONLINE
+  ///
+  /// Lists the Square Online sites that belong to a seller.
+  ///
+  /// Sites are listed in descending order by the created_at date.
+  ///
+  Future<List<Site>> listSites({
+    String? authToken,
+  }) async {
+    return _onlineService.listSites(authToken: authToken);
+  }
+
+  ///
+  /// Removes your snippet from a Square Online site.
+  ///
+  /// You can call ListSites to get the IDs of the sites that
+  /// belong to a seller.
+  ///
+  Future<bool> deleteSnippet({
+    required String siteId,
+    String? authToken,
+  }) async {
+    return _onlineService.deleteSnippet(siteId: siteId, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves your snippet from a Square Online site.
+  ///
+  /// A site can contain snippets from multiple snippet applications,
+  /// but you can retrieve only the snippet that was added by your application.
+  ///
+  Future<Snippet> readSnippet({
+    required String siteId,
+    String? authToken,
+  }) async {
+    return _onlineService.readSnippet(siteId: siteId, authToken: authToken);
+  }
+
+  ///
+  /// Adds a snippet to a Square Online site or updates the existing
+  /// snippet on the site.
+  ///
+  /// The snippet code is appended to the end of the head element on
+  /// every page of the site, except checkout pages. A snippet application
+  /// can add one snippet to a given site.
+  ///
+  /// You can call ListSites to get the IDs of the sites that belong
+  /// to a seller.
+  ///
+  Future<Snippet> upsertSnippet({
+    required Snippet snippet,
+    String? authToken,
+  }) async {
+    return _onlineService.upsertSnippet(snippet: snippet, authToken: authToken);
   }
 
 
