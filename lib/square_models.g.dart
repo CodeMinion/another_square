@@ -11620,3 +11620,37 @@ const _$ApplicationDetailsExternalSquareProductEnumMap = {
   ApplicationDetailsExternalSquareProduct.TERMINAL_API: 'TERMINAL_API',
   ApplicationDetailsExternalSquareProduct.VIRTUAL_TERMINAL: 'VIRTUAL_TERMINAL',
 };
+
+ListPaymentRequest _$ListPaymentRequestFromJson(Map<String, dynamic> json) =>
+    ListPaymentRequest(
+      locationId: json['location_id'] as String?,
+      cursor: json['cursor'] as String?,
+      limit: json['limit'] as int?,
+      endTime: json['end_time'] as String?,
+      beginTime: json['begin_time'] as String?,
+      sortOrder: $enumDecodeNullable(_$SortOrderEnumMap, json['sort_order']),
+      last4: json['last_4'] as String?,
+      cardBrand: json['card_brand'] as String?,
+      total: json['total'] as String?,
+    );
+
+Map<String, dynamic> _$ListPaymentRequestToJson(ListPaymentRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('begin_time', instance.beginTime);
+  writeNotNull('end_time', instance.endTime);
+  writeNotNull('sort_order', _$SortOrderEnumMap[instance.sortOrder]);
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('total', instance.total);
+  writeNotNull('last_4', instance.last4);
+  writeNotNull('card_brand', instance.cardBrand);
+  writeNotNull('limit', instance.limit);
+  return val;
+}
