@@ -1,39 +1,53 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Another Square
+Flutter package for Square REST Apis. 
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+## Square APIs
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+| Feature | Supported   | URL  |
+|---|:---:|---|
+| Payments  | N  | IN-PROGRESS  |
+| Terminal  | Y  |https://developer.squareup.com/reference/square/terminal-api  |
+| Order  | Y  | https://developer.squareup.com/reference/square/orders-api  |
+| Subscription  | Y  | https://developer.squareup.com/reference/square/subscriptions-api  |
+| Invoice  | Y  | https://developer.squareup.com/reference/square/invoices-api  |
+| Catalog  | Y  | https://developer.squareup.com/reference/square/catalog-api  |
+| Inventory  | Y  | https://developer.squareup.com/reference/square/inventory-api  |
+| Customer  | Y  | https://developer.squareup.com/reference/square/customers-api  |
+| Loyalty  | Y  | https://developer.squareup.com/reference/square/loyalty-api  |
+| Gift Cards  | Y  | https://developer.squareup.com/reference/square/gift-cards-api  |
+| Bookings  | Y  | https://developer.squareup.com/reference/square/bookings-api  |
+| Business  | Y  | https://developer.squareup.com/reference/square/merchants-api  |
+| Team  | Y  | https://developer.squareup.com/reference/square/team-api  |
+| Financial  | Y  | https://developer.squareup.com/reference/square/bank-accounts-api  |
+| Online  | Y  | https://developer.squareup.com/reference/square/sites-api  |
+| Token  | Y  | https://developer.squareup.com/reference/square/oauth-api  |
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+## Credentials
 
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+In order to interact with Square you'll need a developer account and the clientId and clientSecret https://developer.squareup.com/apps
 
 ```dart
-const like = 'sample';
+final squareClient = SquareClient(
+    applicationId: applicationId,
+    clientId: clientId,
+    clientSecret: clientSecret,
+    environmentType: EnvironmentType.Sandbox);
+// Initialize the client.        
+await squareClient.initialize();
+
+// Use this to prompt the user to authorize your app
+var authUrl = squareClient.getAuthorizationPageUrl(
+        scopes: [Scope.CustomerWrite,Scope.CustomerRead,],         
+        redirectUrl: <your redirect url>, 
+        state: "state123")
+
+// On authorization success use the params to get the access token.
+var autoToken = squareClient.getAuthToken(
+        code: <code from redirect url>,
+        redirectUrl: <redirect url>);
+        
+// Note: The token can be refreshed when it expires using the refreshToken
+String token = (await squareClient.refreshToken(
+        refreshToken: autoToken.refresh_token
+    )).accessToken
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
