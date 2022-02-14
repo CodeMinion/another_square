@@ -4,9 +4,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:another_square/another_square.dart';
 
 void main() {
-  const String applicationId = "sandbox-sq0idb-BOZshuZ7XTKLKpBk73rJtQ";
-  const String clientId = "sandbox-sq0idb-BOZshuZ7XTKLKpBk73rJtQ";
-  const String clientSecret = "sandbox-sq0csb-JFyKEpzTvo2Sp_TXf8yZ20FAaOycuokBeQR0Fj3KXaQ";
+  const String applicationId = "sq0idp-wAI8-tQ0nFxsDKZGl3Fe1g";
+  const String clientId = applicationId;
+  const String clientSecret = "sq0csp-tz4D8MB760Kf1IvBOmXlkRw5nEq5QLBRbqh8VL8csZ0";
+
+  //const String applicationId = "sandbox-sq0idb-BOZshuZ7XTKLKpBk73rJtQ";
+  //const String clientId = "sandbox-sq0idb-BOZshuZ7XTKLKpBk73rJtQ";
+  //const String clientSecret = "sandbox-sq0csb-JFyKEpzTvo2Sp_TXf8yZ20FAaOycuokBeQR0Fj3KXaQ";
   const String refreshToken = "EQAAENfNieufQblDRPhuWTDJicWLTlgoPTFJctN_OfokyNLve9fxD6yWOmuY1QWf";
   const String authToken = "EAAAENBS3PLg1fNJoLZ72y3g-uwtloX3Lmmj5YQuskG4tcXKIKH7xGmHpfYJ7fh0";
 
@@ -20,7 +24,7 @@ void main() {
         applicationId: applicationId,
         clientId: clientId,
         clientSecret: clientSecret,
-    environmentType: EnvironmentType.Sandbox
+    environmentType: EnvironmentType.Production
     );
     await squareClient.initialize();
     expect(squareClient.isInitialized(), true);
@@ -52,7 +56,7 @@ void main() {
     expect(squareClient.isInitialized(), true);
 
     var response = await squareClient.getAuthToken(
-      code: "sandbox-sq0cgb-g-AjFOCFJtBmtIUIKqk8hg",
+      code: 'sq0cgp-d1ncPIgm6QdeZY0beHDF2Q',//"sandbox-sq0cgb-g-AjFOCFJtBmtIUIKqk8hg",
         redirectUrl: "https://localhost"
     );
 

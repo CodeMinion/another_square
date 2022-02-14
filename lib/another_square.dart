@@ -60,8 +60,8 @@ class SquareClient {
         clientId: clientId,
         clientSecret: clientSecret,
         authorizationEndpoint: "https://$_url/oauth2/authorize",
-        tokenEndpoint: "https://connect.squareupsandbox.com/oauth2/token",
-        revocationEndpoint: "https://connect.squareupsandbox.com/oauth2/token");
+        tokenEndpoint: "https://$_url/oauth2/token",
+        revocationEndpoint: "https://$_url/oauth2/token");
 
     _terminalService = TerminalService(
         authenticationService: _authenticationService!, baseUrl: _url);
