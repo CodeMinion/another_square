@@ -1,6 +1,6 @@
 name: another_square
-description: A Flutter package for the Square APIs
-version: 0.0.1
+description: A Flutter package for the Square APIs. This is a wrapper for the Square REST APIs.
+version: 0.0.2
 homepage: https://github.com/CodeMinion/another_square
 
 environment:
