@@ -328,7 +328,7 @@ class OrderLineItem {
   final List<OrderLineItemAppliedTax>? appliedTaxes;
 
   @JsonKey(name: "base_price_money")
-  final List<Money>? basePriceMoney;
+  final Money? basePriceMoney;
 
   @JsonKey(name: "catalog_object_id")
   final String? catalogObjectId;
@@ -2549,7 +2549,7 @@ class CatalogTimePeriod {
 class CatalogTax{
 
   @JsonKey(name: "applies_to_custom_amounts")
-  final String? appliesToCustomAmounts;
+  final bool? appliesToCustomAmounts;
 
   @JsonKey(name: "calculation_phase")
   final TaxCalculationPhase? calculationPhase;
@@ -7817,7 +7817,7 @@ class PublishInvoiceRequest {
 
 
 @JsonSerializable(includeIfNull: false)
-class CatalogRetrieveRequest {
+class RetrieveCatalogRequest {
 
   @JsonKey(name: "object_ids")
   final List<String> objectIds;
@@ -7828,14 +7828,14 @@ class CatalogRetrieveRequest {
   @JsonKey(name: "catalogVersion")
   final int? catalogVersion;
 
-  CatalogRetrieveRequest({
+  RetrieveCatalogRequest({
     required this.objectIds, this.catalogVersion, this.includeRelatedObjects
   });
 
-  factory CatalogRetrieveRequest.fromJson(Map<String, dynamic> json) =>
-      _$CatalogRetrieveRequestFromJson(json);
+  factory RetrieveCatalogRequest.fromJson(Map<String, dynamic> json) =>
+      _$RetrieveCatalogRequestFromJson(json);
 
-  Map<String, dynamic> toJson() => _$CatalogRetrieveRequestToJson(this);
+  Map<String, dynamic> toJson() => _$RetrieveCatalogRequestToJson(this);
 
   @override
   String toString() {
@@ -7844,21 +7844,21 @@ class CatalogRetrieveRequest {
 }
 
 @JsonSerializable(includeIfNull: false)
-class CatalogBatchUpsertRequest {
+class BatchUpsertCatalogRequest {
 
   @JsonKey(name: "idempotency_key")
   final String idempotencyKey;
 
   final List<CatalogObjectBatch> batches;
 
-  CatalogBatchUpsertRequest({
+  BatchUpsertCatalogRequest({
     required this.idempotencyKey, required this.batches
   });
 
-  factory CatalogBatchUpsertRequest.fromJson(Map<String, dynamic> json) =>
-      _$CatalogBatchUpsertRequestFromJson(json);
+  factory BatchUpsertCatalogRequest.fromJson(Map<String, dynamic> json) =>
+      _$BatchUpsertCatalogRequestFromJson(json);
 
-  Map<String, dynamic> toJson() => _$CatalogBatchUpsertRequestToJson(this);
+  Map<String, dynamic> toJson() => _$BatchUpsertCatalogRequestToJson(this);
 
   @override
   String toString() {
@@ -7942,7 +7942,7 @@ class UpdateCatalogImageRequest {
 }
 
 @JsonSerializable(includeIfNull: false)
-class ListCatalogImageRequest {
+class ListCatalogRequest {
 
   final String? cursor;
 
@@ -7951,14 +7951,14 @@ class ListCatalogImageRequest {
   @JsonKey(name: "catalog_version")
   final String? catalogVersion;
 
-  ListCatalogImageRequest({
+  ListCatalogRequest({
     this.catalogVersion, this.cursor, this.type
   });
 
-  factory ListCatalogImageRequest.fromJson(Map<String, dynamic> json) =>
-      _$ListCatalogImageRequestFromJson(json);
+  factory ListCatalogRequest.fromJson(Map<String, dynamic> json) =>
+      _$ListCatalogRequestFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ListCatalogImageRequestToJson(this);
+  Map<String, dynamic> toJson() => _$ListCatalogRequestToJson(this);
 
   @override
   String toString() {
@@ -10652,6 +10652,646 @@ class Snippet {
   String toString() {
     return toJson().toString();
   }
+}
+
+@JsonSerializable(includeIfNull: false)
+class SquarePaymentResponse {
+
+  final List<Payment>?payments;
+
+  final Payment? payment;
+
+  final List<SquareError>? errors;
+
+  final String ? cursor;
+
+  SquarePaymentResponse({
+    this.errors, this.cursor, this.payment, this.payments
+  });
+
+  factory SquarePaymentResponse.fromJson(Map<String, dynamic> json) =>
+      _$SquarePaymentResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SquarePaymentResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class Payment {
+
+  final String? id;
+
+  @JsonKey(name: "amount_money")
+  final Money? amountMoney;
+  
+  @JsonKey(name: "app_fee_money")
+  final Money? appFeeMoney;
+  
+  @JsonKey(name: "application_details")
+  final ApplicationDetails? applicationDetails;
+  
+  @JsonKey(name: "approved_money")
+  final Money? approvedMoney;
+  
+  @JsonKey(name:"bank_account_details")
+  final BankAccountPaymentDetails? bankAccountDetails;
+
+  @JsonKey(name: "billing_address")
+  final Address? billingAddress;
+
+  @JsonKey(name: "buyer_email_address")
+  final String? buyerEmailAddress;
+  
+  final List<String>? capabilities;
+
+  @JsonKey(name: "card_details")
+  final CardPaymentDetails? cardDetails;
+
+  @JsonKey(name: "cash_details")
+  final CashPaymentDetails? cashDetails;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+  
+  @JsonKey(name: "customer_id")
+  final String? customerId;
+
+  @JsonKey(name: "delay_action")
+  final String? delayAction;
+
+  @JsonKey(name: "delay_duration")
+  final String? delayDuration;
+
+  @JsonKey(name: "delayed_until")
+  final String? delayedUntil;
+  
+  @JsonKey(name: "device_details")
+  final DeviceDetails? deviceDetails;
+
+  @JsonKey(name: "external_details")
+  final ExternalPaymentDetails? externalDetails;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  final String? note;
+
+  @JsonKey(name: "order_id")
+  final String? orderId;
+
+  @JsonKey(name: "processing_fee")
+  final List<ProcessingFee>? processingFee;
+
+  @JsonKey(name: "receipt_number")
+  final String? receiptNumber;
+
+  @JsonKey(name: "receipt_url")
+  final String? receiptUrl;
+
+  @JsonKey(name: "reference_id")
+  final String? referenceId;
+
+  @JsonKey(name: "refund_ids")
+  final List<String>? refundIds;
+
+  @JsonKey(name: "refunded_money")
+  final Money? refundedMoney;
+
+  @JsonKey(name: "risk_evaluation")
+  final RiskEvaluation? riskEvaluation;
+
+  @JsonKey(name: "hipping_address")
+  final Address? hippingAddress;
+
+  @JsonKey(name: "source_type")
+  final PaymentSourceType? sourceType;
+  
+  @JsonKey(name: "statement_description_identifier")
+  final String? statementDescriptionIdentifier;
+  
+  @JsonKey(name: "team_member_id")
+  final String? teamMemberId;
+  
+  @JsonKey(name: "tip_money")
+  final Money? tipMoney;
+
+  @JsonKey(name: "total_money")
+  final Money? totalMoney;
+
+  @JsonKey(name: "updated_at")
+  final String? updatedAt;
+
+  @JsonKey(name: "version_token")
+  final String? versionToken;
+
+  @JsonKey(name: "wallet_details")
+  final DigitalWalletDetails? walletDetails;
+
+  @JsonKey(name: "employee_id")
+  final String? employeeId;
+
+  Payment({
+    this.createdAt, this.id, this.updatedAt, this.locationId,
+  this.teamMemberId, this.customerId, this.orderId,
+  this.amountMoney, this.note, this.referenceId,
+  this.employeeId, this.capabilities, this.billingAddress,
+  this.totalMoney, this.cashDetails, this.cardDetails,
+  this.tipMoney, this.appFeeMoney, this.applicationDetails,
+  this.approvedMoney, this.bankAccountDetails, this.buyerEmailAddress,
+    this.delayAction, this.delayDuration, this.delayedUntil,
+  this.deviceDetails, this.externalDetails, this.hippingAddress,
+  this.processingFee, this.receiptNumber, this.receiptUrl,
+  this.refundedMoney, this.refundIds, this.riskEvaluation,
+  this.sourceType, this.statementDescriptionIdentifier, this.versionToken,
+    this.walletDetails
+  });
+
+  factory Payment.fromJson(Map<String, dynamic> json) =>
+      _$PaymentFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PaymentToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class DigitalWalletDetails {
+
+  final DigitalWalletStatus? status;
+
+  DigitalWalletDetails({
+  this.status
+  });
+
+  factory DigitalWalletDetails.fromJson(Map<String, dynamic> json) =>
+      _$DigitalWalletDetailsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DigitalWalletDetailsToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+
+@JsonSerializable (includeIfNull: false)
+class RiskEvaluation {
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "risk_level")
+  final RiskEvaluationRiskLevel? riskLevel;
+
+  RiskEvaluation({
+    this.createdAt, this.riskLevel
+  });
+
+  factory RiskEvaluation.fromJson(Map<String, dynamic> json) =>
+      _$RiskEvaluationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RiskEvaluationToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class ProcessingFee {
+
+  @JsonKey(name: "amount_money")
+  final Money? amountMoney;
+
+  @JsonKey(name: "effective_at")
+  final String? effectiveAt;
+  
+  final ProcessingFeeType? type;
+
+  ProcessingFee({
+    this.amountMoney, this.type, this.effectiveAt
+  });
+
+  factory ProcessingFee.fromJson(Map<String, dynamic> json) =>
+      _$ProcessingFeeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProcessingFeeToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class ExternalPaymentDetails {
+
+  final String? source;
+  
+  final ExternalPaymentType? type;
+
+  @JsonKey(name: "source_fee_money")
+  final Money? sourceFeeMoney;
+
+  @JsonKey(name: "source_id")
+  final String? sourceId;
+
+  ExternalPaymentDetails({
+    this.type, this.source, this.sourceFeeMoney, this.sourceId
+  });
+
+  factory ExternalPaymentDetails.fromJson(Map<String, dynamic> json) =>
+      _$ExternalPaymentDetailsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ExternalPaymentDetailsToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class DeviceDetails {
+
+  @JsonKey(name: "device_id")
+  final String? deviceId;
+
+  @JsonKey(name: "device_installation_id")
+  final String? deviceInstallationId;
+
+  @JsonKey(name: "device_name")
+  final String? deviceName;
+
+  DeviceDetails({
+    this.deviceId, this.deviceInstallationId, this.deviceName
+  });
+
+  factory DeviceDetails.fromJson(Map<String, dynamic> json) =>
+      _$DeviceDetailsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DeviceDetailsToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CashPaymentDetails {
+
+  @JsonKey(name: "buyer_supplied_money")
+  final Money? buyerSuppliedMoney;
+
+  @JsonKey(name: "change_back_money")
+  final Money? changeBackMoney;
+
+  CashPaymentDetails({
+    this.buyerSuppliedMoney, this.changeBackMoney
+  });
+
+  factory CashPaymentDetails.fromJson(Map<String, dynamic> json) =>
+      _$CashPaymentDetailsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CashPaymentDetailsToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CardPaymentDetails {
+
+  @JsonKey(name: "application_cryptogram")
+  final String? applicationCryptogram;
+
+  @JsonKey(name: "application_identifier")
+  final String? applicationIdentifier;
+
+  @JsonKey(name: "application_name")
+  final String? applicationName;
+
+  @JsonKey(name: "auth_result_code")
+  final String? authResultCode;
+
+  @JsonKey(name: "avs_status")
+  final AvsStatus? avsStatus;
+
+  final Card? card;
+
+  @JsonKey(name: "card_payment_timeline")
+  final CardPaymentTimeline? cardPaymentTimeline;
+
+  @JsonKey(name: "cvv_status")
+  final CvvStatus? cvv_status;
+
+  @JsonKey(name: "entry_method")
+  final String? entryMethod;
+
+  final List<SquareError>? errors;
+
+  @JsonKey(name: "refund_requires_card_presence")
+  final bool? refundRequiresCardPresence;
+
+  @JsonKey(name: "statement_description")
+  final String? statementDescription;
+
+  final TenderCardDetailsStatus? status;
+  
+  @JsonKey(name: "verification_method")
+  final String? verificationMethod;
+  
+  @JsonKey(name: "verification_results")
+  final String? verificationResults;
+
+  @JsonKey(name: "device_details")
+  final DeviceDetails? deviceDetails;
+
+  CardPaymentDetails({
+    this.status, this.deviceDetails, this.errors, this.card,
+    this.entryMethod, this.applicationCryptogram, this.applicationIdentifier,
+  this.applicationName, this.authResultCode, this.avsStatus,
+    this.cardPaymentTimeline, this.cvv_status, this.refundRequiresCardPresence,
+this.statementDescription, this.verificationMethod, this.verificationResults
+ });
+
+  factory CardPaymentDetails.fromJson(Map<String, dynamic> json) =>
+      _$CardPaymentDetailsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CardPaymentDetailsToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CardPaymentTimeline {
+
+  @JsonKey(name: "authorized_at")
+  final String? authorizedAt;
+
+  @JsonKey(name: "captured_at")
+  final String? capturedAt;
+
+  @JsonKey(name: "voided_at")
+  final String? voidedAt;
+
+  CardPaymentTimeline({
+    this.authorizedAt, this.capturedAt, this.voidedAt
+  });
+
+  factory CardPaymentTimeline.fromJson(Map<String, dynamic> json) =>
+      _$CardPaymentTimelineFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CardPaymentTimelineToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class BankAccountPaymentDetails {
+
+  @JsonKey(name: "account_ownership_type")
+  final String? accountOwnershipType;
+  
+  @JsonKey(name: "ach_details")
+  final ACHDetails? achDetails;
+
+  @JsonKey(name: "bank_name")
+  final String? bankName;
+
+  final String? country;
+  
+  final List<SquareError>? errors;
+  
+  final String? fingerprint;
+  
+  @JsonKey(name: "statement_description")
+  final String? statementDescription;
+
+  @JsonKey(name: "transfer_type")
+  final TransferType? transferType;
+
+  BankAccountPaymentDetails({
+    this.statementDescription, this.errors, this.bankName,
+    this.fingerprint, this.country, this.accountOwnershipType,
+  this.achDetails, this.transferType
+  });
+
+  factory BankAccountPaymentDetails.fromJson(Map<String, dynamic> json) =>
+      _$BankAccountPaymentDetailsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BankAccountPaymentDetailsToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class ACHDetails {
+
+  @JsonKey(name: "account_number_suffix")
+  final String? accountNumberSuffix;
+
+  @JsonKey(name: "account_type")
+  final AchAccountType? accountType;
+
+  @JsonKey(name: "routing_number")
+  final String? routingNumber;
+
+  ACHDetails({
+  this.accountNumberSuffix, this.accountType, this.routingNumber
+  });
+
+  factory ACHDetails.fromJson(Map<String, dynamic> json) =>
+      _$ACHDetailsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ACHDetailsToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+@JsonSerializable(includeIfNull: false)
+class ApplicationDetails {
+
+  @JsonKey(name: "application_id")
+  final String? applicationId;
+
+  @JsonKey(name: "squareProduct")
+  final ApplicationDetailsExternalSquareProduct? squareProduct;
+
+  ApplicationDetails({
+    this.applicationId, this.squareProduct
+  });
+
+  factory ApplicationDetails.fromJson(Map<String, dynamic> json) =>
+      _$ApplicationDetailsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ApplicationDetailsToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class ListPaymentRequest {
+
+  @JsonKey(name: "begin_time")
+  final String? beginTime;
+
+  @JsonKey(name: "end_time")
+  final String? endTime;
+
+  @JsonKey(name: "sort_order")
+  final SortOrder? sortOrder;
+
+  final String? cursor;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  final String? total;
+
+  @JsonKey(name: "last_4")
+  final String? last4;
+  
+  @JsonKey(name: "card_brand")
+  final String? cardBrand;
+  
+  final int? limit;
+
+  ListPaymentRequest({
+    this.locationId, this.cursor, this.limit, this.endTime,
+  this.beginTime, this.sortOrder, this.last4, this.cardBrand,
+  this.total
+  });
+
+  factory ListPaymentRequest.fromJson(Map<String, dynamic> json) =>
+      _$ListPaymentRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ListPaymentRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+enum ApplicationDetailsExternalSquareProduct {
+  APPOINTMENTS,
+  ECOMMERCE_API,
+  INVOICES,
+  ONLINE_STORE,
+  OTHER,
+  RESTAURANTS,
+  RETAIL,
+  SQUARE_POS,
+  TERMINAL_API,
+  VIRTUAL_TERMINAL
+}
+
+
+enum AchAccountType {
+  CHECKING,
+  SAVINGS,
+  UNKNOWN
+}
+enum TransferType {
+  ACH,
+  UNKNOWN,
+}
+
+enum CvvStatus {
+  CVV_ACCEPTED,
+  CVV_REJECTED,
+  CVV_NOT_CHECKED
+}
+
+enum AvsStatus {
+  AVS_ACCEPTED,
+  AVS_REJECTED,
+  AVS_NOT_CHECKED,
+  
+}
+
+enum ExternalPaymentType {
+  CHECK,
+  BANK_TRANSFER,
+  OTHER_GIFT_CARD,
+  CRYPTO,
+  SQUARE_CASH,
+  SOCIAL,
+  EXTERNAL,
+  EMONEY,
+  CARD,
+  STORED_BALANCE,
+  FOOD_VOUCHER,
+  OTHER,
+}
+
+enum ProcessingFeeType {
+  INITIAL,
+  ADJUSTMENT
+}
+
+enum RiskEvaluationRiskLevel {
+  PENDING,
+  NORMAL,
+  MODERATE,
+  HIGH
+}
+
+enum DigitalWalletStatus {
+  WALLET,
+  AUTHORIZED,
+  CAPTURED,
+  VOIDED,
+  FAILED
+}
+
+enum PaymentStatus {
+  APPROVED,
+  PENDING,
+  COMPLETED,
+  CANCELED,
+  FAILED
+}
+
+enum PaymentSourceType {
+  CARD,
+  BANK_ACCOUNT,
+  WALLET,
+  BUY_NOW_PAY_LATER,
+  CASH,
+  EXTERNAL,
+  
 }
 
 enum ShiftWorkdayMatcher {

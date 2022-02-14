@@ -8,7 +8,7 @@ void main() {
   const String clientId = "sandbox-sq0idb-BOZshuZ7XTKLKpBk73rJtQ";
   const String clientSecret = "sandbox-sq0csb-JFyKEpzTvo2Sp_TXf8yZ20FAaOycuokBeQR0Fj3KXaQ";
   const String refreshToken = "EQAAENfNieufQblDRPhuWTDJicWLTlgoPTFJctN_OfokyNLve9fxD6yWOmuY1QWf";
-  const String authToken = "EAAAENJpx8oLhXucYIZdKo_TuwoPaQi7CS6T117xS3wWCLoLID4CD5HIBWZivvUV";
+  const String authToken = "EAAAENBS3PLg1fNJoLZ72y3g-uwtloX3Lmmj5YQuskG4tcXKIKH7xGmHpfYJ7fh0";
 
 
   ///
@@ -293,9 +293,256 @@ void main() {
   });
 
   // TODO Order Test Cases
+  ///
+  /// Tests order create
+  test('test create order ', () async {
+    final squareClient = SquareClient(
+        applicationId: applicationId,
+        clientId: clientId,
+        clientSecret: clientSecret,
+        environmentType: EnvironmentType.Sandbox
+    );
+    await squareClient.initialize();
+    expect(squareClient.isInitialized(), true);
+
+    var result = await squareClient.createOrder(
+        authToken: authToken,
+        request: CreateOrderRequest.fromJson({
+          "idempotency_key": "8193148c-9586-11e6-99f9-28cfe92138cf",
+          "order": {
+            "reference_id": "my-order-001",
+            "location_id": "LPYKKD4HSCRGP",
+            "line_items": [
+              {
+                "name": "New York Strip Steak",
+                "quantity": "1",
+                "base_price_money": {
+                  "amount": 1599,
+                  "currency": "USD"
+                }
+              },
+            ],
+            "taxes": [
+              {
+                "uid": "state-sales-tax",
+                "name": "State Sales Tax",
+                "percentage": "9",
+                "scope": "ORDER"
+              }
+            ],
+          }
+        }));
+
+    expect(result, isNotNull);
+
+  });
+
+  test('test batch read order ', () async {
+    final squareClient = SquareClient(
+        applicationId: applicationId,
+        clientId: clientId,
+        clientSecret: clientSecret,
+        environmentType: EnvironmentType.Sandbox
+    );
+    await squareClient.initialize();
+    expect(squareClient.isInitialized(), true);
+
+    var result = await squareClient.batchOrderRead(
+        authToken: authToken,
+        request: BatchOrderRequest.fromJson({
+          "location_id": "LPYKKD4HSCRGP",
+          "order_ids": [
+            "oTuVRPmTDfXBSLbyzdyynm7MYc4F",
+          ]
+        }));
+
+    expect(result, isNotNull);
+
+  });
+
+  test('test read order ', () async {
+    final squareClient = SquareClient(
+        applicationId: applicationId,
+        clientId: clientId,
+        clientSecret: clientSecret,
+        environmentType: EnvironmentType.Sandbox
+    );
+    await squareClient.initialize();
+    expect(squareClient.isInitialized(), true);
+
+    var result = await squareClient.readOrder(
+        authToken: authToken,
+      orderId: "oTuVRPmTDfXBSLbyzdyynm7MYc4F"
+        );
+
+    expect(result, isNotNull);
+
+  });
+  
   // TODO Subscription Test Cases
   // TODO Invoice Test Cases
   // TODO Catalog Test Cases
+  test('test batch upsert catalog ', () async {
+    final squareClient = SquareClient(
+        applicationId: applicationId,
+        clientId: clientId,
+        clientSecret: clientSecret,
+        environmentType: EnvironmentType.Sandbox
+    );
+    await squareClient.initialize();
+    expect(squareClient.isInitialized(), true);
+
+    var result = await squareClient.batchUpsertCatalog(
+        authToken: authToken,
+        request: BatchUpsertCatalogRequest.fromJson({
+          "idempotency_key": "789ff020-f723-43a9-b4b5-43b5dc1fa3dc",
+          "batches": [
+            {
+              "objects": [
+                {
+                  "type": "ITEM",
+                  "id": "#Tea",
+                  "present_at_all_locations": true,
+                  "item_data": {
+                    "name": "Tea",
+                    "description": "Hot Leaf Juice",
+                    "category_id": "#Beverages",
+                    "tax_ids": [
+                      "#SalesTax"
+                    ],
+                    "variations": [
+                      {
+                        "type": "ITEM_VARIATION",
+                        "id": "#Tea_Mug",
+                        "present_at_all_locations": true,
+                        "item_variation_data": {
+                          "item_id": "#Tea",
+                          "name": "Mug",
+                          "pricing_type": "FIXED_PRICING",
+                          "price_money": {
+                            "amount": 150,
+                            "currency": "USD"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "ITEM",
+                  "id": "#Coffee",
+                  "present_at_all_locations": true,
+                  "item_data": {
+                    "name": "Coffee",
+                    "description": "Hot Bean Juice",
+                    "category_id": "#Beverages",
+                    "tax_ids": [
+                      "#SalesTax"
+                    ],
+                    "variations": [
+                      {
+                        "type": "ITEM_VARIATION",
+                        "id": "#Coffee_Regular",
+                        "present_at_all_locations": true,
+                        "item_variation_data": {
+                          "item_id": "#Coffee",
+                          "name": "Regular",
+                          "pricing_type": "FIXED_PRICING",
+                          "price_money": {
+                            "amount": 250,
+                            "currency": "USD"
+                          }
+                        }
+                      },
+                      {
+                        "type": "ITEM_VARIATION",
+                        "id": "#Coffee_Large",
+                        "present_at_all_locations": true,
+                        "item_variation_data": {
+                          "item_id": "#Coffee",
+                          "name": "Large",
+                          "pricing_type": "FIXED_PRICING",
+                          "price_money": {
+                            "amount": 350,
+                            "currency": "USD"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "CATEGORY",
+                  "id": "#Beverages",
+                  "present_at_all_locations": true,
+                  "category_data": {
+                    "name": "Beverages"
+                  }
+                },
+                {
+                  "type": "TAX",
+                  "id": "#SalesTax",
+                  "present_at_all_locations": true,
+                  "tax_data": {
+                    "name": "Sales Tax",
+                    "calculation_phase": "TAX_SUBTOTAL_PHASE",
+                    "inclusion_type": "ADDITIVE",
+                    "percentage": "5.0",
+                    "applies_to_custom_amounts": true,
+                    "enabled": true
+                  }
+                }
+              ]
+            }
+          ]
+        }));
+
+    expect(result, isNotNull);
+
+  });
+
+  test('test list catalog ', () async {
+    final squareClient = SquareClient(
+        applicationId: applicationId,
+        clientId: clientId,
+        clientSecret: clientSecret,
+        environmentType: EnvironmentType.Sandbox
+    );
+    await squareClient.initialize();
+    expect(squareClient.isInitialized(), true);
+
+    var result = await squareClient.listCatalog(
+        authToken: authToken,
+        request: ListCatalogRequest());
+
+    expect(result, isNotNull);
+
+  });
+
+  test('test batch retrieve catalog ', () async {
+    final squareClient = SquareClient(
+        applicationId: applicationId,
+        clientId: clientId,
+        clientSecret: clientSecret,
+        environmentType: EnvironmentType.Sandbox
+    );
+    await squareClient.initialize();
+    expect(squareClient.isInitialized(), true);
+
+    var result = await squareClient.batchRetrieveCatalog(
+        authToken: authToken,
+        request: RetrieveCatalogRequest.fromJson({
+          "object_ids": [
+            "W62UWFY35CWMYGVWK6TWJDNI",
+            "AA27W3M2GGTF3H6AVPNB77CK"
+          ],
+          "include_related_objects": true
+        }));
+
+    expect(result, isNotNull);
+
+  });
+
   // TODO Inventory Test Cases
   // TODO Customer Test Cases
   // TODO Loyalty Test Cases

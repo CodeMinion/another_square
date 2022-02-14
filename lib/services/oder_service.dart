@@ -88,7 +88,7 @@ class OrderService {
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
-      return OrderResponse.fromJson(jsonDecode(response.body)).orders!;
+      return OrderResponse.fromJson(jsonDecode(response.body)).orders ?? List.empty();
     }
     else {
       print (response.body);

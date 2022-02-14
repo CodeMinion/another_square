@@ -81,7 +81,7 @@ class CatalogService {
   /// the ids of any CatalogTax objects that apply to it.
   ///
   Future<CatalogResponse> batchRetrieveCatalog({
-    required CatalogRetrieveRequest request,
+    required RetrieveCatalogRequest request,
     String? authToken,
   }) async {
 
@@ -128,7 +128,7 @@ class CatalogService {
   /// modifier lists, discounts, and taxes) is no more than 10,000.
   ///
   Future<CatalogResponse> batchUpsertCatalog({
-    required CatalogBatchUpsertRequest request,
+    required BatchUpsertCatalogRequest request,
     String? authToken,
   }) async {
 
@@ -293,7 +293,7 @@ class CatalogService {
   /// set the include_deleted_objects attribute value to true.
   ///
   Future<CatalogResponse> listCatalog({
-    required ListCatalogImageRequest request,
+    required ListCatalogRequest request,
     String? authToken,
   }) async {
 

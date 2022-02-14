@@ -636,7 +636,7 @@ class SquareClient {
   /// the ids of any CatalogTax objects that apply to it.
   ///
   Future<CatalogResponse> batchRetrieveCatalog({
-    required CatalogRetrieveRequest request,
+    required RetrieveCatalogRequest request,
     String? authToken,
   }) async {
     return _catalogService.batchRetrieveCatalog(request: request, authToken: authToken);
@@ -657,7 +657,7 @@ class SquareClient {
   /// modifier lists, discounts, and taxes) is no more than 10,000.
   ///
   Future<CatalogResponse> batchUpsertCatalog({
-    required CatalogBatchUpsertRequest request,
+    required BatchUpsertCatalogRequest request,
     String? authToken,
   }) async {
     return _catalogService.batchUpsertCatalog(request: request, authToken: authToken);
@@ -721,7 +721,7 @@ class SquareClient {
   /// set the include_deleted_objects attribute value to true.
   ///
   Future<CatalogResponse> listCatalog({
-    required ListCatalogImageRequest request,
+    required ListCatalogRequest request,
     String? authToken,
   }) async {
     return _catalogService.listCatalog(request: request, authToken: authToken);
