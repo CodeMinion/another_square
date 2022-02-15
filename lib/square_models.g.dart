@@ -11153,9 +11153,9 @@ Payment _$PaymentFromJson(Map<String, dynamic> json) => Payment(
           ? null
           : ExternalPaymentDetails.fromJson(
               json['external_details'] as Map<String, dynamic>),
-      hippingAddress: json['hipping_address'] == null
+      shippingAddress: json['shipping_address'] == null
           ? null
-          : Address.fromJson(json['hipping_address'] as Map<String, dynamic>),
+          : Address.fromJson(json['shipping_address'] as Map<String, dynamic>),
       processingFee: (json['processing_fee'] as List<dynamic>?)
           ?.map((e) => ProcessingFee.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -11219,7 +11219,7 @@ Map<String, dynamic> _$PaymentToJson(Payment instance) {
   writeNotNull('refund_ids', instance.refundIds);
   writeNotNull('refunded_money', instance.refundedMoney);
   writeNotNull('risk_evaluation', instance.riskEvaluation);
-  writeNotNull('hipping_address', instance.hippingAddress);
+  writeNotNull('shipping_address', instance.shippingAddress);
   writeNotNull('source_type', _$PaymentSourceTypeEnumMap[instance.sourceType]);
   writeNotNull('statement_description_identifier',
       instance.statementDescriptionIdentifier);
@@ -11651,6 +11651,181 @@ Map<String, dynamic> _$ListPaymentRequestToJson(ListPaymentRequest instance) {
   writeNotNull('total', instance.total);
   writeNotNull('last_4', instance.last4);
   writeNotNull('card_brand', instance.cardBrand);
+  writeNotNull('limit', instance.limit);
+  return val;
+}
+
+CreatePaymentRequest _$CreatePaymentRequestFromJson(
+        Map<String, dynamic> json) =>
+    CreatePaymentRequest(
+      locationId: json['location_id'] as String?,
+      sourceId: json['source_id'] as String,
+      amountMoney: json['amount_money'] == null
+          ? null
+          : Money.fromJson(json['amount_money'] as Map<String, dynamic>),
+      appFeeMoney: json['app_fee_money'] == null
+          ? null
+          : Money.fromJson(json['app_fee_money'] as Map<String, dynamic>),
+      externalDetails: json['external_details'] == null
+          ? null
+          : ExternalPaymentDetails.fromJson(
+              json['external_details'] as Map<String, dynamic>),
+      delayDuration: json['delay_duration'] as String?,
+      tipMoney: json['tip_money'] == null
+          ? null
+          : Money.fromJson(json['tip_money'] as Map<String, dynamic>),
+      buyerEmailAddress: json['buyer_email_address'] as String?,
+      cashDetails: json['cash_details'] == null
+          ? null
+          : CashPaymentDetails.fromJson(
+              json['cash_details'] as Map<String, dynamic>),
+      billingAddress: json['billing_address'] == null
+          ? null
+          : Address.fromJson(json['billing_address'] as Map<String, dynamic>),
+      referenceId: json['reference_id'] as String?,
+      note: json['note'] as String?,
+      orderId: json['order_id'] as String?,
+      customerId: json['customer_id'] as String?,
+      teamMemberId: json['team_member_id'] as String?,
+      idempotencyKey: json['idempotency_key'] as String,
+      acceptPartialAuthorization: json['accept_partial_authorization'] as bool?,
+      autocomplete: json['autocomplete'] as bool?,
+      shippingAddress: json['shipping_address'] == null
+          ? null
+          : Address.fromJson(json['shipping_address'] as Map<String, dynamic>),
+      verificationToken: json['verification_token'] as String?,
+    );
+
+Map<String, dynamic> _$CreatePaymentRequestToJson(
+    CreatePaymentRequest instance) {
+  final val = <String, dynamic>{
+    'idempotency_key': instance.idempotencyKey,
+    'source_id': instance.sourceId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('amount_money', instance.amountMoney);
+  writeNotNull('tip_money', instance.tipMoney);
+  writeNotNull('app_fee_money', instance.appFeeMoney);
+  writeNotNull('delay_duration', instance.delayDuration);
+  writeNotNull('autocomplete', instance.autocomplete);
+  writeNotNull('order_id', instance.orderId);
+  writeNotNull('customer_id', instance.customerId);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('team_member_id', instance.teamMemberId);
+  writeNotNull('reference_id', instance.referenceId);
+  writeNotNull('verification_token', instance.verificationToken);
+  writeNotNull(
+      'accept_partial_authorization', instance.acceptPartialAuthorization);
+  writeNotNull('buyer_email_address', instance.buyerEmailAddress);
+  writeNotNull('billing_address', instance.billingAddress);
+  writeNotNull('shipping_address', instance.shippingAddress);
+  writeNotNull('note', instance.note);
+  writeNotNull('cash_details', instance.cashDetails);
+  writeNotNull('external_details', instance.externalDetails);
+  return val;
+}
+
+UpdatePaymentRequest _$UpdatePaymentRequestFromJson(
+        Map<String, dynamic> json) =>
+    UpdatePaymentRequest(
+      idempotencyKey: json['idempotency_key'] as String,
+      payment: Payment.fromJson(json['payment'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UpdatePaymentRequestToJson(
+        UpdatePaymentRequest instance) =>
+    <String, dynamic>{
+      'idempotency_key': instance.idempotencyKey,
+      'payment': instance.payment,
+    };
+
+CompletePaymentRequest _$CompletePaymentRequestFromJson(
+        Map<String, dynamic> json) =>
+    CompletePaymentRequest(
+      versionToken: json['version_token'] as String?,
+    );
+
+Map<String, dynamic> _$CompletePaymentRequestToJson(
+    CompletePaymentRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('version_token', instance.versionToken);
+  return val;
+}
+
+SquareRefundResponse _$SquareRefundResponseFromJson(
+        Map<String, dynamic> json) =>
+    SquareRefundResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      cursor: json['cursor'] as String?,
+      refund: json['refund'] == null
+          ? null
+          : Refund.fromJson(json['refund'] as Map<String, dynamic>),
+      refunds: (json['refunds'] as List<dynamic>?)
+          ?.map((e) => Refund.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$SquareRefundResponseToJson(
+    SquareRefundResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('refunds', instance.refunds);
+  writeNotNull('refund', instance.refund);
+  writeNotNull('errors', instance.errors);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+ListRefundsRequest _$ListRefundsRequestFromJson(Map<String, dynamic> json) =>
+    ListRefundsRequest(
+      locationId: json['location_id'] as String?,
+      sortOrder: $enumDecodeNullable(_$SortOrderEnumMap, json['sort_order']),
+      beginTime: json['begin_time'] as String?,
+      endTime: json['endTime'] as String?,
+      limit: json['limit'] as int?,
+      cursor: json['cursor'] as String?,
+      status: $enumDecodeNullable(_$RefundStatusEnumMap, json['status']),
+      sourceType:
+          $enumDecodeNullable(_$PaymentSourceTypeEnumMap, json['source_type']),
+    );
+
+Map<String, dynamic> _$ListRefundsRequestToJson(ListRefundsRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('begin_time', instance.beginTime);
+  writeNotNull('endTime', instance.endTime);
+  writeNotNull('sort_order', _$SortOrderEnumMap[instance.sortOrder]);
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('status', _$RefundStatusEnumMap[instance.status]);
+  writeNotNull('source_type', _$PaymentSourceTypeEnumMap[instance.sourceType]);
   writeNotNull('limit', instance.limit);
   return val;
 }
