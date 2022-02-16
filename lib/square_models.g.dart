@@ -11802,7 +11802,7 @@ ListRefundsRequest _$ListRefundsRequestFromJson(Map<String, dynamic> json) =>
       locationId: json['location_id'] as String?,
       sortOrder: $enumDecodeNullable(_$SortOrderEnumMap, json['sort_order']),
       beginTime: json['begin_time'] as String?,
-      endTime: json['endTime'] as String?,
+      endTime: json['end_time'] as String?,
       limit: json['limit'] as int?,
       cursor: json['cursor'] as String?,
       status: $enumDecodeNullable(_$RefundStatusEnumMap, json['status']),
@@ -11820,7 +11820,7 @@ Map<String, dynamic> _$ListRefundsRequestToJson(ListRefundsRequest instance) {
   }
 
   writeNotNull('begin_time', instance.beginTime);
-  writeNotNull('endTime', instance.endTime);
+  writeNotNull('end_time', instance.endTime);
   writeNotNull('sort_order', _$SortOrderEnumMap[instance.sortOrder]);
   writeNotNull('cursor', instance.cursor);
   writeNotNull('location_id', instance.locationId);

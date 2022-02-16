@@ -11361,7 +11361,7 @@ class ListRefundsRequest {
   @JsonKey(name: "begin_time")
   final String? beginTime;
   
-  @JsonKey(nanme: "end_time")
+  @JsonKey(name: "end_time")
   final String? endTime;
 
   @JsonKey(name:"sort_order")
@@ -11385,9 +11385,9 @@ class ListRefundsRequest {
  });
 
   factory ListRefundsRequest.fromJson(Map<String, dynamic> json) =>
-      _$SquareRefundResponseFromJson(json);
+      _$ListRefundsRequestFromJson(json);
 
-  Map<String, dynamic> toJson() => _$SquareRefundResponseToJson(this);
+  Map<String, dynamic> toJson() => _$ListRefundsRequestToJson(this);
 
   @override
   String toString() {
