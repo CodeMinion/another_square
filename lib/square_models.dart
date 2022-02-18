@@ -11395,6 +11395,45 @@ class ListRefundsRequest {
   }
 }
 
+@JsonSerializable(includeIfNull: false)
+class RefundPaymentRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String idempotencyKey;
+
+  @JsonKey(name: "amount_money")
+  final Money amountMoney;
+
+  @JsonKey(name: "app_fee_money")
+  final Money? appFeeMoney;
+
+  @JsonKey(name: "payment_id")
+  final String? paymentId;
+  
+  final String? reason;
+
+  @JsonKey(name: "payment_version_token")
+  final String? paymentVersionToken;
+
+  @JsonKey(name: "team_member_id")
+  final String? teamMemberId;
+
+  RefundPaymentRequest({
+    required this.idempotencyKey, this.teamMemberId, this.appFeeMoney,
+  required this.amountMoney, this.reason, this.paymentId, this.paymentVersionToken
+  });
+
+  factory RefundPaymentRequest.fromJson(Map<String, dynamic> json) =>
+      _$RefundPaymentRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RefundPaymentRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
 
 enum ApplicationDetailsExternalSquareProduct {
   APPOINTMENTS,

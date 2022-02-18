@@ -11829,3 +11829,38 @@ Map<String, dynamic> _$ListRefundsRequestToJson(ListRefundsRequest instance) {
   writeNotNull('limit', instance.limit);
   return val;
 }
+
+RefundPaymentRequest _$RefundPaymentRequestFromJson(
+        Map<String, dynamic> json) =>
+    RefundPaymentRequest(
+      idempotencyKey: json['idempotency_key'] as String,
+      teamMemberId: json['team_member_id'] as String?,
+      appFeeMoney: json['app_fee_money'] == null
+          ? null
+          : Money.fromJson(json['app_fee_money'] as Map<String, dynamic>),
+      amountMoney: Money.fromJson(json['amount_money'] as Map<String, dynamic>),
+      reason: json['reason'] as String?,
+      paymentId: json['payment_id'] as String?,
+      paymentVersionToken: json['payment_version_token'] as String?,
+    );
+
+Map<String, dynamic> _$RefundPaymentRequestToJson(
+    RefundPaymentRequest instance) {
+  final val = <String, dynamic>{
+    'idempotency_key': instance.idempotencyKey,
+    'amount_money': instance.amountMoney,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('app_fee_money', instance.appFeeMoney);
+  writeNotNull('payment_id', instance.paymentId);
+  writeNotNull('reason', instance.reason);
+  writeNotNull('payment_version_token', instance.paymentVersionToken);
+  writeNotNull('team_member_id', instance.teamMemberId);
+  return val;
+}

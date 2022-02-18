@@ -337,6 +337,83 @@ class BankAccountService {
       throw PaymentException(statusCode: response.statusCode, message: SquareRefundResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
     }
   }
+
+  ///
+  /// Refunds a payment.
+  ///
+  /// You can refund the entire payment amount or a portion of it.
+  /// You can use this endpoint to refund a card payment or record a
+  /// refund of a cash or external payment. For more information, see
+  /// Refund Payment.
+  ///
+  Future<Refund> refundPayment({
+    required RefundPaymentRequest request,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/refunds");
+
+    //print (endpoint.toString());
+
+    var response = await
+    http.post(endpoint, body:request.toJson(), headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return SquareRefundResponse.fromJson(jsonDecode(response.body)).refund!;
+    }
+    else {
+      print (response.body);
+      throw PaymentException(statusCode: response.statusCode, message: SquareRefundResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+  ///
+  /// Retrieves a specific refund using the refund_id
+  ///
+  Future<Refund> readPaymentRefund({
+    required String refundId,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/refunds/$refundId");
+
+    //print (endpoint.toString());
+
+    var response = await
+    http.get(endpoint, headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return SquareRefundResponse.fromJson(jsonDecode(response.body)).refund!;
+    }
+    else {
+      print (response.body);
+      throw PaymentException(statusCode: response.statusCode, message: SquareRefundResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+
   // TODO Add remaining calls.
 
 }
