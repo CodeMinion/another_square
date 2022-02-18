@@ -11864,3 +11864,334 @@ Map<String, dynamic> _$RefundPaymentRequestToJson(
   writeNotNull('team_member_id', instance.teamMemberId);
   return val;
 }
+
+ListDisputesRequest _$ListDisputesRequestFromJson(Map<String, dynamic> json) =>
+    ListDisputesRequest(
+      cursor: json['cursor'] as String?,
+      locationId: json['location_id'] as String?,
+      states: $enumDecodeNullable(_$DisputeStateEnumMap, json['states']),
+    );
+
+Map<String, dynamic> _$ListDisputesRequestToJson(ListDisputesRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('states', _$DisputeStateEnumMap[instance.states]);
+  writeNotNull('location_id', instance.locationId);
+  return val;
+}
+
+const _$DisputeStateEnumMap = {
+  DisputeState.INQUIRY_EVIDENCE_REQUIRED: 'INQUIRY_EVIDENCE_REQUIRED',
+  DisputeState.INQUIRY_PROCESSING: 'INQUIRY_PROCESSING',
+  DisputeState.INQUIRY_CLOSED: 'INQUIRY_CLOSED',
+  DisputeState.EVIDENCE_REQUIRED: 'EVIDENCE_REQUIRED',
+  DisputeState.PROCESSING: 'PROCESSING',
+  DisputeState.WON: 'WON',
+  DisputeState.LOST: 'LOST',
+  DisputeState.ACCEPTED: 'ACCEPTED',
+};
+
+DisputeResponse _$DisputeResponseFromJson(Map<String, dynamic> json) =>
+    DisputeResponse(
+      cursor: json['cursor'] as String?,
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      dispute: json['dispute'] == null
+          ? null
+          : Dispute.fromJson(json['dispute'] as Map<String, dynamic>),
+      disputes: (json['disputes'] as List<dynamic>?)
+          ?.map((e) => Dispute.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$DisputeResponseToJson(DisputeResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('disputes', instance.disputes);
+  writeNotNull('dispute', instance.dispute);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+Dispute _$DisputeFromJson(Map<String, dynamic> json) => Dispute(
+      amountMoney: json['amount_money'] == null
+          ? null
+          : Money.fromJson(json['amount_money'] as Map<String, dynamic>),
+      id: json['id'] as String?,
+      locationId: json['location_id'] as String?,
+      reason: $enumDecodeNullable(_$DisputeReasonEnumMap, json['reason']),
+      cardBrand: json['card_brand'] as String?,
+      createdAt: json['created_at'] as String?,
+      updatedAt: json['updated_at'] as String?,
+      version: json['version'] as int?,
+      state: $enumDecodeNullable(_$DisputeStateEnumMap, json['state']),
+      brandDisputeId: json['brand_dispute_id'] as String?,
+      disputedPayment: json['disputed_payment'] == null
+          ? null
+          : DisputedPayment.fromJson(
+              json['disputed_payment'] as Map<String, dynamic>),
+      disputeId: json['dispute_id'] as String?,
+      dueAt: json['due_at'] as String?,
+      evidenceIds: (json['evidence_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      reportedAt: json['reported_at'] as String?,
+      reportedDate: json['reported_date'] as String?,
+    );
+
+Map<String, dynamic> _$DisputeToJson(Dispute instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('amount_money', instance.amountMoney);
+  writeNotNull('brand_dispute_id', instance.brandDisputeId);
+  writeNotNull('card_brand', instance.cardBrand);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('disputed_payment', instance.disputedPayment);
+  writeNotNull('due_at', instance.dueAt);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('reason', _$DisputeReasonEnumMap[instance.reason]);
+  writeNotNull('reported_at', instance.reportedAt);
+  writeNotNull('state', _$DisputeStateEnumMap[instance.state]);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('version', instance.version);
+  writeNotNull('dispute_id', instance.disputeId);
+  writeNotNull('evidence_ids', instance.evidenceIds);
+  writeNotNull('reported_date', instance.reportedDate);
+  return val;
+}
+
+const _$DisputeReasonEnumMap = {
+  DisputeReason.AMOUNT_DIFFERS: 'AMOUNT_DIFFERS',
+  DisputeReason.CANCELLED: 'CANCELLED',
+  DisputeReason.DUPLICATE: 'DUPLICATE',
+  DisputeReason.NO_KNOWLEDGE: 'NO_KNOWLEDGE',
+  DisputeReason.NOT_AS_DESCRIBED: 'NOT_AS_DESCRIBED',
+  DisputeReason.NOT_RECEIVED: 'NOT_RECEIVED',
+  DisputeReason.PAID_BY_OTHER_MEANS: 'PAID_BY_OTHER_MEANS',
+  DisputeReason.CUSTOMER_REQUESTS_CREDIT: 'CUSTOMER_REQUESTS_CREDIT',
+  DisputeReason.EMV_LIABILITY_SHIFT: 'EMV_LIABILITY_SHIFT',
+};
+
+DisputedPayment _$DisputedPaymentFromJson(Map<String, dynamic> json) =>
+    DisputedPayment(
+      paymentId: json['payment_id'] as String?,
+    );
+
+Map<String, dynamic> _$DisputedPaymentToJson(DisputedPayment instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('payment_id', instance.paymentId);
+  return val;
+}
+
+DisputeEvidenceListResponse _$DisputeEvidenceListResponseFromJson(
+        Map<String, dynamic> json) =>
+    DisputeEvidenceListResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      cursor: json['cursor'] as String?,
+      evidence: (json['evidence'] as List<dynamic>?)
+          ?.map((e) => DisputeEvidence.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$DisputeEvidenceListResponseToJson(
+    DisputeEvidenceListResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('evidence', instance.evidence);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+DisputeEvidence _$DisputeEvidenceFromJson(Map<String, dynamic> json) =>
+    DisputeEvidence(
+      id: json['id'] as String?,
+      disputeId: json['dispute_id'] as String?,
+      evidenceFile: json['evidence_file'] == null
+          ? null
+          : DisputeEvidenceFile.fromJson(
+              json['evidence_file'] as Map<String, dynamic>),
+      evidenceId: json['evidence_id'] as String?,
+      evidenceType: $enumDecodeNullable(
+          _$DisputeEvidenceTypeEnumMap, json['evidence_type']),
+      evidenceText: json['evidence_text'] as String?,
+      uploadedAt: json['uploaded_at'] as String?,
+    );
+
+Map<String, dynamic> _$DisputeEvidenceToJson(DisputeEvidence instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('dispute_id', instance.disputeId);
+  writeNotNull('evidence_file', instance.evidenceFile);
+  writeNotNull('evidence_text', instance.evidenceText);
+  writeNotNull(
+      'evidence_type', _$DisputeEvidenceTypeEnumMap[instance.evidenceType]);
+  writeNotNull('uploaded_at', instance.uploadedAt);
+  writeNotNull('evidence_id', instance.evidenceId);
+  return val;
+}
+
+const _$DisputeEvidenceTypeEnumMap = {
+  DisputeEvidenceType.GENERIC_EVIDENCE: 'GENERIC_EVIDENCE',
+  DisputeEvidenceType.ONLINE_OR_APP_ACCESS_LOG: 'ONLINE_OR_APP_ACCESS_LOG',
+  DisputeEvidenceType.AUTHORIZATION_DOCUMENTATION:
+      'AUTHORIZATION_DOCUMENTATION',
+  DisputeEvidenceType.CANCELLATION_OR_REFUND_DOCUMENTATION:
+      'CANCELLATION_OR_REFUND_DOCUMENTATION',
+  DisputeEvidenceType.CARDHOLDER_COMMUNICATION: 'CARDHOLDER_COMMUNICATION',
+  DisputeEvidenceType.CARDHOLDER_INFORMATION: 'CARDHOLDER_INFORMATION',
+  DisputeEvidenceType.PURCHASE_ACKNOWLEDGEMENT: 'PURCHASE_ACKNOWLEDGEMENT',
+  DisputeEvidenceType.DUPLICATE_CHARGE_DOCUMENTATION:
+      'DUPLICATE_CHARGE_DOCUMENTATION',
+  DisputeEvidenceType.PRODUCT_OR_SERVICE_DESCRIPTION:
+      'PRODUCT_OR_SERVICE_DESCRIPTION',
+  DisputeEvidenceType.RECEIPT: 'RECEIPT',
+  DisputeEvidenceType.SERVICE_RECEIVED_DOCUMENTATION:
+      'SERVICE_RECEIVED_DOCUMENTATION',
+  DisputeEvidenceType.PROOF_OF_DELIVERY_DOCUMENTATION:
+      'PROOF_OF_DELIVERY_DOCUMENTATION',
+  DisputeEvidenceType.RELATED_TRANSACTION_DOCUMENTATION:
+      'RELATED_TRANSACTION_DOCUMENTATION',
+  DisputeEvidenceType.REBUTTAL_EXPLANATION: 'REBUTTAL_EXPLANATION',
+  DisputeEvidenceType.TRACKING_NUMBER: 'TRACKING_NUMBER',
+};
+
+DisputeEvidenceFile _$DisputeEvidenceFileFromJson(Map<String, dynamic> json) =>
+    DisputeEvidenceFile(
+      filename: json['filename'] as String?,
+      filetype: json['filetype'] as String?,
+    );
+
+Map<String, dynamic> _$DisputeEvidenceFileToJson(DisputeEvidenceFile instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('filename', instance.filename);
+  writeNotNull('filetype', instance.filetype);
+  return val;
+}
+
+ListDisputeEvidenceRequest _$ListDisputeEvidenceRequestFromJson(
+        Map<String, dynamic> json) =>
+    ListDisputeEvidenceRequest(
+      disputeId: json['dispute_id'] as String?,
+      cursor: json['cursor'] as String?,
+    );
+
+Map<String, dynamic> _$ListDisputeEvidenceRequestToJson(
+    ListDisputeEvidenceRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('dispute_id', instance.disputeId);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+DisputeEvidenceResponse _$DisputeEvidenceResponseFromJson(
+        Map<String, dynamic> json) =>
+    DisputeEvidenceResponse(
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      cursor: json['cursor'] as String?,
+      evidence: json['evidence'] == null
+          ? null
+          : DisputeEvidence.fromJson(json['evidence'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DisputeEvidenceResponseToJson(
+    DisputeEvidenceResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('evidence', instance.evidence);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+CreateDisputeEvidenceFileRequest _$CreateDisputeEvidenceFileRequestFromJson(
+        Map<String, dynamic> json) =>
+    CreateDisputeEvidenceFileRequest(
+      evidenceType: $enumDecodeNullable(
+          _$DisputeEvidenceTypeEnumMap, json['evidence_type']),
+      idempotencyKey: json['idempotency_key'] as String?,
+      contentType: json['content_type'] as String?,
+    );
+
+Map<String, dynamic> _$CreateDisputeEvidenceFileRequestToJson(
+    CreateDisputeEvidenceFileRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('idempotency_key', instance.idempotencyKey);
+  writeNotNull(
+      'evidence_type', _$DisputeEvidenceTypeEnumMap[instance.evidenceType]);
+  writeNotNull('content_type', instance.contentType);
+  return val;
+}

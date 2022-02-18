@@ -413,7 +413,201 @@ class BankAccountService {
     }
   }
 
+  ///
+  /// Returns a list of disputes associated with a particular account.
+  ///
+  Future<DisputeResponse> listDisputes({
+    required ListDisputesRequest request,
+    String? authToken,
+  }) async {
 
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/disputes", request.toJson());
+
+    //print (endpoint.toString());
+
+    var response = await
+    http.get(endpoint, headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return DisputeResponse.fromJson(jsonDecode(response.body));
+    }
+    else {
+      print (response.body);
+      throw PaymentException(statusCode: response.statusCode, message: DisputeResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+  ///
+  /// Returns details about a specific dispute.
+  ///
+  Future<Dispute> readDispute({
+    required String disputeId,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/disputes/$disputeId");
+
+    //print (endpoint.toString());
+
+    var response = await
+    http.get(endpoint, headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return DisputeResponse.fromJson(jsonDecode(response.body)).dispute!;
+    }
+    else {
+      print (response.body);
+      throw PaymentException(statusCode: response.statusCode, message: DisputeResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+  ///
+  /// Accepts the loss on a dispute.
+  ///
+  /// Square returns the disputed amount to the cardholder and
+  /// updates the dispute state to ACCEPTED.
+  ///
+  /// Square debits the disputed amount from the seller’s Square account.
+  /// If the Square account does not have sufficient funds, Square debits
+  /// the associated bank account.
+  ///
+  Future<Dispute> acceptDispute({
+    required String disputeId,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/disputes/$disputeId/accept");
+
+    //print (endpoint.toString());
+
+    var response = await
+    http.post(endpoint, headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return DisputeResponse.fromJson(jsonDecode(response.body)).dispute!;
+    }
+    else {
+      print (response.body);
+      throw PaymentException(statusCode: response.statusCode, message: DisputeResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+  ///
+  /// Returns a list of evidence associated with a dispute.
+  ///
+  Future<DisputeEvidenceListResponse> listDisputeEvidence({
+    required String disputeId,
+    String? cursor,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Map<String, dynamic>? request;
+
+    if (cursor != null) {
+      request = {
+        "cursor": cursor
+      };
+    }
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/disputes/$disputeId/evidence", request);
+
+    //print (endpoint.toString());
+
+    var response = await
+    http.get(endpoint, headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return DisputeEvidenceListResponse.fromJson(jsonDecode(response.body));
+    }
+    else {
+      print (response.body);
+      throw PaymentException(statusCode: response.statusCode, message: DisputeEvidenceListResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+  ///
+  /// Uploads a file to use as evidence in a dispute challenge.
+  ///
+  /// The endpoint accepts HTTP multipart/form-data file uploads in
+  /// HEIC, HEIF, JPEG, PDF, PNG, and TIFF formats.
+  ///
+  Future<DisputeEvidence> createDisputeEvidenceFile({
+    required String disputeId,
+    required CreateDisputeEvidenceFileRequest request,
+    String? cursor,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/disputes/$disputeId/evidence-files");
+
+    //print (endpoint.toString());
+
+    var response = await
+    http.post(endpoint, body: request.toJson(), headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return DisputeEvidenceResponse.fromJson(jsonDecode(response.body)).evidence!;
+    }
+    else {
+    print (response.body);
+    throw PaymentException(statusCode: response.statusCode, message: DisputeEvidenceResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
   // TODO Add remaining calls.
 
 }

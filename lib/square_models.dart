@@ -11434,6 +11434,343 @@ class RefundPaymentRequest {
   }
 }
 
+@JsonSerializable(includeIfNull: false)
+class ListDisputesRequest {
+
+  final String? cursor;
+
+  final DisputeState? states;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  ListDisputesRequest({
+    this.cursor, this.locationId, this.states
+  });
+
+  factory ListDisputesRequest.fromJson(Map<String, dynamic> json) =>
+      _$ListDisputesRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ListDisputesRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class DisputeResponse {
+
+  final List<SquareError>? errors;
+
+  final List<Dispute>? disputes;
+
+  final Dispute? dispute;
+
+  final String? cursor;
+
+  DisputeResponse({
+    this.cursor, this.errors, this.dispute, this.disputes
+  });
+
+  factory DisputeResponse.fromJson(Map<String, dynamic> json) =>
+      _$DisputeResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DisputeResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class Dispute {
+
+  final String? id;
+  
+  @JsonKey(name: "amount_money")
+  final Money? amountMoney;
+  
+  @JsonKey(name: "brand_dispute_id")
+  final String? brandDisputeId;
+
+  @JsonKey(name: "card_brand")
+  final String? cardBrand;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "disputed_payment")
+  final DisputedPayment? disputedPayment;
+
+  @JsonKey(name: "due_at")
+  final String? dueAt;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  final DisputeReason? reason;
+
+  @JsonKey(name: "reported_at")
+  final String? reportedAt;
+
+  final DisputeState? state;
+
+  @JsonKey(name: "updated_at")
+  final String? updatedAt;
+
+  final int? version;
+
+  @JsonKey(name: "dispute_id")
+  final String? disputeId;
+
+  @JsonKey(name: "evidence_ids")
+  final List<String>? evidenceIds;
+
+  @JsonKey(name: "reported_date")
+  final String? reportedDate;
+
+  Dispute({
+    this.amountMoney, this.id, this.locationId, this.reason,
+  this.cardBrand, this.createdAt, this.updatedAt, this.version,
+  this.state, this.brandDisputeId, this.disputedPayment, this.disputeId,
+  this.dueAt, this.evidenceIds, this.reportedAt, this.reportedDate
+  });
+
+  factory Dispute.fromJson(Map<String, dynamic> json) =>
+      _$DisputeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DisputeToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class DisputedPayment {
+
+  @JsonKey(name: "payment_id")
+  final String? paymentId;
+
+  DisputedPayment({
+    this.paymentId
+  });
+
+  factory DisputedPayment.fromJson(Map<String, dynamic> json) =>
+      _$DisputedPaymentFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DisputedPaymentToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class DisputeEvidenceListResponse {
+
+  final List<SquareError>? errors;
+
+  final List<DisputeEvidence>? evidence;
+
+  final String? cursor;
+
+  DisputeEvidenceListResponse({
+    this.errors, this.cursor, this.evidence
+  });
+
+  factory DisputeEvidenceListResponse.fromJson(Map<String, dynamic> json) =>
+      _$DisputeEvidenceListResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DisputeEvidenceListResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class DisputeEvidence {
+  final String? id;
+
+  @JsonKey(name: "dispute_id")
+  final String? disputeId;
+
+  @JsonKey(name: "evidence_file")
+  final DisputeEvidenceFile? evidenceFile;
+
+  @JsonKey(name: "evidence_text")
+  final String? evidenceText;
+
+  @JsonKey(name: "evidence_type")
+  final DisputeEvidenceType? evidenceType;
+  
+  @JsonKey(name: "uploaded_at")
+  final String? uploadedAt;
+
+  @JsonKey(name: "evidence_id")
+  final String? evidenceId;
+
+  DisputeEvidence({
+    this.id, this.disputeId, this.evidenceFile, this.evidenceId,
+  this.evidenceType, this.evidenceText, this.uploadedAt
+  });
+
+  factory DisputeEvidence.fromJson(Map<String, dynamic> json) =>
+      _$DisputeEvidenceFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DisputeEvidenceToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class DisputeEvidenceFile {
+  final String? filename;
+
+  final String? filetype;
+
+  DisputeEvidenceFile({
+    this.filename, this.filetype
+  });
+
+  factory DisputeEvidenceFile.fromJson(Map<String, dynamic> json) =>
+      _$DisputeEvidenceFileFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DisputeEvidenceFileToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class ListDisputeEvidenceRequest {
+
+  @JsonKey(name: "dispute_id")
+  final String ? disputeId;
+
+  final String? cursor;
+
+  ListDisputeEvidenceRequest({
+    this.disputeId, this.cursor
+  });
+
+  factory ListDisputeEvidenceRequest.fromJson(Map<String, dynamic> json) =>
+      _$ListDisputeEvidenceRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ListDisputeEvidenceRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+@JsonSerializable(includeIfNull: false)
+class DisputeEvidenceResponse {
+
+  final List<SquareError>? errors;
+
+  final DisputeEvidence? evidence;
+
+  final String? cursor;
+
+  DisputeEvidenceResponse({
+    this.errors, this.cursor, this.evidence
+  });
+
+  factory DisputeEvidenceResponse.fromJson(Map<String, dynamic> json) =>
+      _$DisputeEvidenceResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DisputeEvidenceResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CreateDisputeEvidenceFileRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String? idempotencyKey;
+
+  @JsonKey(name: "evidence_type")
+  final DisputeEvidenceType? evidenceType;
+
+  @JsonKey(name: "content_type")
+  final String? contentType;
+
+  CreateDisputeEvidenceFileRequest({
+    this.evidenceType, this.idempotencyKey, this.contentType
+  });
+
+  factory CreateDisputeEvidenceFileRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateDisputeEvidenceFileRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CreateDisputeEvidenceFileRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+enum DisputeEvidenceType {
+  GENERIC_EVIDENCE,
+  ONLINE_OR_APP_ACCESS_LOG,
+  AUTHORIZATION_DOCUMENTATION,
+  CANCELLATION_OR_REFUND_DOCUMENTATION,
+  CARDHOLDER_COMMUNICATION,
+  CARDHOLDER_INFORMATION,
+  PURCHASE_ACKNOWLEDGEMENT,
+  DUPLICATE_CHARGE_DOCUMENTATION,
+  PRODUCT_OR_SERVICE_DESCRIPTION,
+  RECEIPT,
+  SERVICE_RECEIVED_DOCUMENTATION,
+  PROOF_OF_DELIVERY_DOCUMENTATION,
+  RELATED_TRANSACTION_DOCUMENTATION,
+  REBUTTAL_EXPLANATION,
+  TRACKING_NUMBER,
+  
+}
+
+enum DisputeReason {
+  AMOUNT_DIFFERS,
+  CANCELLED,
+  DUPLICATE,
+  NO_KNOWLEDGE,
+  NOT_AS_DESCRIBED,
+  NOT_RECEIVED,
+  PAID_BY_OTHER_MEANS,
+  CUSTOMER_REQUESTS_CREDIT,
+  EMV_LIABILITY_SHIFT,
+
+}
+
+enum DisputeState {
+  INQUIRY_EVIDENCE_REQUIRED,
+  INQUIRY_PROCESSING,
+  INQUIRY_CLOSED,
+  EVIDENCE_REQUIRED,
+  PROCESSING,
+  WON,
+  LOST,
+  ACCEPTED,
+
+}
 
 enum ApplicationDetailsExternalSquareProduct {
   APPOINTMENTS,
