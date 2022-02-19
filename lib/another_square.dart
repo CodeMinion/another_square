@@ -12,6 +12,7 @@ import 'package:another_square/services/loyalty_service.dart';
 import 'package:another_square/services/merchant_service.dart';
 import 'package:another_square/services/oder_service.dart';
 import 'package:another_square/services/online_service.dart';
+import 'package:another_square/services/payments_service.dart';
 import 'package:another_square/services/subscription_service.dart';
 import 'package:another_square/services/team_service.dart';
 import 'package:another_square/services/terminal_service.dart';
@@ -40,6 +41,7 @@ class SquareClient {
   late TeamService _teamService;
   late BankAccountService _bankAccountService;
   late OnlineService _onlineService;
+  late PaymentService _paymentService;
 
   SquareClient(
       {required this.applicationId,
@@ -103,6 +105,9 @@ class SquareClient {
         authenticationService: _authenticationService!, baseUrl: _url);
 
     _onlineService = OnlineService(
+        authenticationService: _authenticationService!, baseUrl: _url);
+
+    _paymentService = PaymentService(
         authenticationService: _authenticationService!, baseUrl: _url);
   }
 
@@ -1911,8 +1916,343 @@ class SquareClient {
     return _onlineService.upsertSnippet(snippet: snippet, authToken: authToken);
   }
 
+  // Payment
+  ///
+  /// Retrieves a list of payments taken by the account making the request.
+  ///
+  /// Results are eventually consistent, and new payments or
+  /// changes to payments might take several seconds to appear.
+  ///
+  /// The maximum results per page is 100.
+  ///
+  Future<SquarePaymentResponse> listPayments({
+    required ListPaymentRequest request,
+    String? authToken,
+  }) async {
+    return _paymentService.listPayments(request: request, authToken: authToken);
+  }
 
-  
+  ///
+  /// Creates a payment using the provided source.
+  ///
+  /// You can use this endpoint to charge a card (credit/debit card or
+  /// Square gift card) or record a payment that the seller
+  /// received outside of Square (cash payment from a buyer or a
+  /// payment that an external entity processed on behalf of the seller).
+  ///
+  Future<Payment> createPayment({
+    required CreatePaymentRequest request,
+    String? authToken,
+  }) async {
+    return _paymentService.createPayment(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Cancels (voids) a payment identified by the idempotency key
+  /// that is specified in the request.
+  ///
+  /// Use this method when the status of a CreatePayment request
+  /// is unknown (for example, after you send a CreatePayment
+  /// request, a network error occurs and you do not get a response).
+  /// In this case, you can direct Square to cancel the payment using
+  /// this endpoint. In the request, you provide the same idempotency
+  /// key that you provided in your CreatePayment request that you want
+  /// to cancel. After canceling the payment, you can submit your
+  /// CreatePayment request again.
+  ///
+  /// Note that if no payment with the specified idempotency key is found,
+  /// no action is taken and the endpoint returns successful
+  ///
+  Future<bool> cancelPaymentByIdempotencyKey({
+    required String idempotencyKey,
+    String? authToken,
+  }) async {
+    return _paymentService.cancelPaymentByIdempotencyKey(idempotencyKey: idempotencyKey, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves details for a specific payment.
+  ///
+  Future<Payment> readPayment({
+    required String paymentId,
+    String? authToken,
+  }) async {
+    return _paymentService.readPayment(paymentId: paymentId, authToken: authToken);
+  }
+
+  ///
+  /// Updates a payment with the APPROVED status.
+  ///
+  /// You can update the amount_money and tip_money using this endpoint.
+  ///
+  Future<Payment> updatePayment({
+    required String paymentId,
+    required UpdatePaymentRequest request,
+    String? authToken,
+  }) async {
+    return _paymentService.updatePayment(paymentId: paymentId, request: request, authToken: authToken);
+  }
+
+  ///
+  /// Cancels (voids) a payment.
+  ///
+  /// You can use this endpoint to cancel a payment with the APPROVED status.
+  ///
+  Future<bool> cancelPayment({
+    required String paymentId,
+    String? authToken,
+  }) async {
+    return _paymentService.cancelPayment(paymentId: paymentId, authToken: authToken);
+  }
+
+  ///
+  /// Completes (captures) a payment.
+  ///
+  /// By default, payments are set to complete immediately
+  /// after they are created.
+  ///
+  /// You can use this endpoint to complete a payment with the
+  /// APPROVED status.
+  ///
+  Future<Payment> completePayment({
+    required String paymentId,
+    required CompletePaymentRequest request,
+    String? authToken,
+  }) async {
+    return _paymentService.completePayment(paymentId: paymentId, request: request, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves a list of refunds for the account making the request.
+  ///
+  /// Results are eventually consistent, and new refunds or changes
+  /// to refunds might take several seconds to appear.
+  ///
+  Future<SquareRefundResponse> listRefunds({
+    required ListRefundsRequest request,
+    String? authToken,
+  }) async {
+    return _paymentService.listRefunds(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Refunds a payment.
+  ///
+  /// You can refund the entire payment amount or a portion of it.
+  /// You can use this endpoint to refund a card payment or record a
+  /// refund of a cash or external payment. For more information, see
+  /// Refund Payment.
+  ///
+  Future<Refund> refundPayment({
+    required RefundPaymentRequest request,
+    String? authToken,
+  }) async {
+    return _paymentService.refundPayment(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves a specific refund using the refund_id
+  ///
+  Future<Refund> readPaymentRefund({
+    required String refundId,
+    String? authToken,
+  }) async {
+    return _paymentService.readPaymentRefund(refundId: refundId, authToken: authToken);
+  }
+
+  ///
+  /// Returns a list of disputes associated with a particular account.
+  ///
+  Future<DisputeResponse> listDisputes({
+    required ListDisputesRequest request,
+    String? authToken,
+  }) async {
+    return _paymentService.listDisputes(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Returns details about a specific dispute.
+  ///
+  Future<Dispute> readDispute({
+    required String disputeId,
+    String? authToken,
+  }) async {
+    return _paymentService.readDispute(disputeId: disputeId, authToken: authToken);
+  }
+
+  ///
+  /// Accepts the loss on a dispute.
+  ///
+  /// Square returns the disputed amount to the cardholder and
+  /// updates the dispute state to ACCEPTED.
+  ///
+  /// Square debits the disputed amount from the seller’s Square account.
+  /// If the Square account does not have sufficient funds, Square debits
+  /// the associated bank account.
+  ///
+  Future<Dispute> acceptDispute({
+    required String disputeId,
+    String? authToken,
+  }) async {
+    return _paymentService.acceptDispute(disputeId: disputeId, authToken: authToken);
+  }
+
+  ///
+  /// Returns a list of evidence associated with a dispute.
+  ///
+  Future<DisputeEvidenceListResponse> listDisputeEvidence({
+    required String disputeId,
+    String? cursor,
+    String? authToken,
+  }) async {
+    return _paymentService.listDisputeEvidence(disputeId: disputeId, cursor: cursor, authToken: authToken);
+  }
+
+  ///
+  /// Uploads a file to use as evidence in a dispute challenge.
+  ///
+  /// The endpoint accepts HTTP multipart/form-data file uploads in
+  /// HEIC, HEIF, JPEG, PDF, PNG, and TIFF formats.
+  ///
+  Future<DisputeEvidence> createDisputeEvidenceFile({
+    required String disputeId,
+    required CreateDisputeEvidenceFileRequest request,
+    String? authToken,
+  }) async {
+    return _paymentService.createDisputeEvidenceFile(disputeId: disputeId, request: request, authToken: authToken);
+  }
+
+  ///
+  /// Uploads text to use as evidence for a dispute challenge.
+  ///
+  Future<DisputeEvidence> createDisputeEvidenceText({
+    required String disputeId,
+    required CreateDisputeEvidenceTextRequest request,
+    String? authToken,
+  }) async {
+    return _paymentService.createDisputeEvidenceText(disputeId: disputeId, request: request, authToken: authToken);
+  }
+
+  ///
+  /// Removes specified evidence from a dispute.
+  ///
+  /// Square does not send the bank any evidence that is removed. Also,
+  /// you cannot remove evidence after submitting it to the bank using
+  /// SubmitEvidence
+  ///
+  Future<bool> deleteDisputeEvidence({
+    required String disputeId,
+    required String evidenceId,
+    String? authToken,
+  }) async {
+    return _paymentService.deleteDisputeEvidence(disputeId: disputeId, evidenceId: evidenceId, authToken: authToken);
+  }
+
+  ///
+  /// Returns the evidence metadata specified by the evidence ID
+  /// in the request URL path
+  ///
+  Future<DisputeEvidence> readDisputeEvidence({
+    required String disputeId,
+    required String evidenceId,
+    String? authToken,
+  }) async {
+    return _paymentService.readDisputeEvidence(disputeId: disputeId, evidenceId: evidenceId, authToken: authToken);
+  }
+
+  ///
+  /// Submits evidence to the cardholder's bank.
+  ///
+  /// Before submitting evidence, Square compiles all available evidence.
+  /// This includes evidence uploaded using the CreateDisputeEvidenceFile
+  /// and CreateDisputeEvidenceText endpoints and evidence automatically
+  /// provided by Square, when available.
+  ///
+  Future<DisputeEvidence> submitDisputeEvidence({
+    required String disputeId,
+    String? authToken,
+  }) async {
+    return _paymentService.submitDisputeEvidence(disputeId: disputeId, authToken: authToken);
+  }
+
+  ///
+  /// Links a checkoutId to a checkout_page_url that
+  /// customers are directed to in order to provide their
+  /// payment information using a payment processing workflow
+  /// hosted on connect.squareup.com.
+  ///
+  Future<Checkout> createCheckout({
+    required String locationId,
+    required CreateCheckoutRequest request,
+    String? authToken,
+  }) async {
+    return _paymentService.createCheckout(locationId: locationId, request: request, authToken: authToken);
+  }
+
+  ///
+  /// Activates a domain for use with Apple Pay on the Web and Square.
+  ///
+  /// A validation is performed on this domain by Apple to ensure that
+  /// it is properly set up as an Apple Pay enabled domain.
+  ///
+  /// This endpoint provides an easy way for platform developers to bulk
+  /// activate Apple Pay on the Web with Square for merchants using
+  /// their platform.
+  ///
+  /// To learn more about Web Apple Pay, see Add the Apple Pay on
+  /// the Web Button.
+  ///
+  Future<RegisterDomainResponseStatus> registerApplePayDomain({
+    required String domainName,
+    String? authToken,
+  }) async {
+    return _paymentService.registerApplePayDomain(domainName: domainName, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves a list of cards owned by the account making the request.
+  ///
+  /// A max of 25 cards will be returned.
+  ///
+  Future<CardResponse> listCards({
+    required ListCardRequest request,
+    String? authToken,
+  }) async {
+    return _paymentService.listCards(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Adds a card on file to an existing merchant.
+  ///
+  Future<Card> createCard({
+    required CreateCardRequest request,
+    String? authToken,
+  }) async {
+    return _paymentService.createCard(request: request, authToken: authToken);
+  }
+
+  ///
+  /// Retrieves details for a specific Card.
+  ///
+  Future<Card> readCard({
+    required String cardId,
+    String? authToken,
+  }) async {
+    return _paymentService.readCard(cardId: cardId, authToken: authToken);
+  }
+
+  ///
+  /// Disables the card, preventing any further updates or charges.
+  ///
+  /// Disabling an already disabled card is allowed but has no effect.
+  ///
+  Future<Card> disableCard({
+    required String cardId,
+    String? authToken,
+  }) async {
+    return _paymentService.disableCard(cardId: cardId, authToken: authToken);
+  }
+
     bool isInitialized() {
     return _authenticationService != null;
   }

@@ -5,7 +5,7 @@ Flutter package for Square REST Apis.
 
 | Feature | Supported   | URL  |
 |---|:---:|---|
-| Payments  | N  | IN-PROGRESS  |
+| Payments  | Y  | https://developer.squareup.com/reference/square/payments-api  |
 | Terminal  | Y  |https://developer.squareup.com/reference/square/terminal-api  |
 | Order  | Y  | https://developer.squareup.com/reference/square/orders-api  |
 | Subscription  | Y  | https://developer.squareup.com/reference/square/subscriptions-api  |

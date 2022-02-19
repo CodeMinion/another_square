@@ -12175,12 +12175,113 @@ CreateDisputeEvidenceFileRequest _$CreateDisputeEvidenceFileRequestFromJson(
     CreateDisputeEvidenceFileRequest(
       evidenceType: $enumDecodeNullable(
           _$DisputeEvidenceTypeEnumMap, json['evidence_type']),
-      idempotencyKey: json['idempotency_key'] as String?,
+      idempotencyKey: json['idempotency_key'] as String,
       contentType: json['content_type'] as String?,
     );
 
 Map<String, dynamic> _$CreateDisputeEvidenceFileRequestToJson(
     CreateDisputeEvidenceFileRequest instance) {
+  final val = <String, dynamic>{
+    'idempotency_key': instance.idempotencyKey,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'evidence_type', _$DisputeEvidenceTypeEnumMap[instance.evidenceType]);
+  writeNotNull('content_type', instance.contentType);
+  return val;
+}
+
+CreateDisputeEvidenceTextRequest _$CreateDisputeEvidenceTextRequestFromJson(
+        Map<String, dynamic> json) =>
+    CreateDisputeEvidenceTextRequest(
+      evidenceType: $enumDecodeNullable(
+          _$DisputeEvidenceTypeEnumMap, json['evidence_type']),
+      idempotencyKey: json['idempotency_key'] as String,
+      evidenceText: json['evidence_text'] as String,
+    );
+
+Map<String, dynamic> _$CreateDisputeEvidenceTextRequestToJson(
+    CreateDisputeEvidenceTextRequest instance) {
+  final val = <String, dynamic>{
+    'idempotency_key': instance.idempotencyKey,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'evidence_type', _$DisputeEvidenceTypeEnumMap[instance.evidenceType]);
+  val['evidence_text'] = instance.evidenceText;
+  return val;
+}
+
+CreateCheckoutRequest _$CreateCheckoutRequestFromJson(
+        Map<String, dynamic> json) =>
+    CreateCheckoutRequest(
+      idempotencyKey: json['idempotency_key'] as String,
+      note: json['note'] as String?,
+      order: json['order'] == null
+          ? null
+          : CreateOrderRequest.fromJson(json['order'] as Map<String, dynamic>),
+      additionalRecipients: (json['additional_recipients'] as List<dynamic>?)
+          ?.map((e) => ChargeRequestAdditionalRecipient.fromJson(
+              e as Map<String, dynamic>))
+          .toList(),
+      redirectUrl: json['redirect_url'] as String?,
+      askForShippingAddress: json['ask_for_shipping_address'] as bool?,
+      merchantSupportEmail: json['merchant_support_email'] as String?,
+      prePopulateBuyerEmail: json['pre_populate_buyer_email'] as String?,
+      prePopulateShippingAddress: json['pre_populate_shipping_address'] == null
+          ? null
+          : Address.fromJson(
+              json['pre_populate_shipping_address'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CreateCheckoutRequestToJson(
+    CreateCheckoutRequest instance) {
+  final val = <String, dynamic>{
+    'idempotency_key': instance.idempotencyKey,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('order', instance.order);
+  writeNotNull('ask_for_shipping_address', instance.askForShippingAddress);
+  writeNotNull('merchant_support_email', instance.merchantSupportEmail);
+  writeNotNull('pre_populate_buyer_email', instance.prePopulateBuyerEmail);
+  writeNotNull(
+      'pre_populate_shipping_address', instance.prePopulateShippingAddress);
+  writeNotNull('redirect_url', instance.redirectUrl);
+  writeNotNull('additional_recipients', instance.additionalRecipients);
+  writeNotNull('note', instance.note);
+  return val;
+}
+
+ChargeRequestAdditionalRecipient _$ChargeRequestAdditionalRecipientFromJson(
+        Map<String, dynamic> json) =>
+    ChargeRequestAdditionalRecipient(
+      locationId: json['location_id'] as String?,
+      amountMoney: json['amount_money'] == null
+          ? null
+          : Money.fromJson(json['amount_money'] as Map<String, dynamic>),
+      description: json['description'] as String?,
+    );
+
+Map<String, dynamic> _$ChargeRequestAdditionalRecipientToJson(
+    ChargeRequestAdditionalRecipient instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -12189,9 +12290,190 @@ Map<String, dynamic> _$CreateDisputeEvidenceFileRequestToJson(
     }
   }
 
-  writeNotNull('idempotency_key', instance.idempotencyKey);
+  writeNotNull('amount_money', instance.amountMoney);
+  writeNotNull('description', instance.description);
+  writeNotNull('location_id', instance.locationId);
+  return val;
+}
+
+CheckoutResponse _$CheckoutResponseFromJson(Map<String, dynamic> json) =>
+    CheckoutResponse(
+      checkout: json['checkout'] == null
+          ? null
+          : Checkout.fromJson(json['checkout'] as Map<String, dynamic>),
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      cursor: json['cursor'] as String?,
+    );
+
+Map<String, dynamic> _$CheckoutResponseToJson(CheckoutResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('checkout', instance.checkout);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+Checkout _$CheckoutFromJson(Map<String, dynamic> json) => Checkout(
+      prePopulateShippingAddress: json['pre_populate_shipping_address'] == null
+          ? null
+          : Address.fromJson(
+              json['pre_populate_shipping_address'] as Map<String, dynamic>),
+      prePopulateBuyerEmail: json['pre_populate_buyer_email'] as String?,
+      merchantSupportEmail: json['merchant_support_email'] as String?,
+      askForShippingAddress: json['ask_for_shipping_address'] as bool?,
+      redirectUrl: json['redirect_url'] as String?,
+      additionalRecipients: (json['additional_recipients'] as List<dynamic>?)
+          ?.map((e) => AdditionalRecipient.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      order: json['order'] == null
+          ? null
+          : Order.fromJson(json['order'] as Map<String, dynamic>),
+      id: json['id'] as String?,
+      createdAt: json['created_at'] as String?,
+      checkoutPageUrl: json['checkout_page_url'] as String?,
+    );
+
+Map<String, dynamic> _$CheckoutToJson(Checkout instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('ask_for_shipping_address', instance.askForShippingAddress);
+  writeNotNull('checkout_page_url', instance.checkoutPageUrl);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('merchant_support_email', instance.merchantSupportEmail);
+  writeNotNull('order', instance.order);
+  writeNotNull('pre_populate_buyer_email', instance.prePopulateBuyerEmail);
   writeNotNull(
-      'evidence_type', _$DisputeEvidenceTypeEnumMap[instance.evidenceType]);
-  writeNotNull('content_type', instance.contentType);
+      'pre_populate_shipping_address', instance.prePopulateShippingAddress);
+  writeNotNull('redirect_url', instance.redirectUrl);
+  writeNotNull('additional_recipients', instance.additionalRecipients);
+  return val;
+}
+
+RegisterDomainResponse _$RegisterDomainResponseFromJson(
+        Map<String, dynamic> json) =>
+    RegisterDomainResponse(
+      status: $enumDecodeNullable(
+          _$RegisterDomainResponseStatusEnumMap, json['status']),
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      cursor: json['cursor'] as String?,
+    );
+
+Map<String, dynamic> _$RegisterDomainResponseToJson(
+    RegisterDomainResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull(
+      'status', _$RegisterDomainResponseStatusEnumMap[instance.status]);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+const _$RegisterDomainResponseStatusEnumMap = {
+  RegisterDomainResponseStatus.PENDING: 'PENDING',
+  RegisterDomainResponseStatus.VERIFIED: 'VERIFIED',
+};
+
+CardResponse _$CardResponseFromJson(Map<String, dynamic> json) => CardResponse(
+      cursor: json['cursor'] as String?,
+      errors: (json['errors'] as List<dynamic>?)
+          ?.map((e) => SquareError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      card: json['card'] == null
+          ? null
+          : Card.fromJson(json['card'] as Map<String, dynamic>),
+      cards: (json['cards'] as List<dynamic>?)
+          ?.map((e) => Card.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$CardResponseToJson(CardResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('card', instance.card);
+  writeNotNull('cards', instance.cards);
+  writeNotNull('cursor', instance.cursor);
+  return val;
+}
+
+ListCardRequest _$ListCardRequestFromJson(Map<String, dynamic> json) =>
+    ListCardRequest(
+      cursor: json['cursor'] as String?,
+      sortOrder: $enumDecodeNullable(_$SortOrderEnumMap, json['sort_order']),
+      customerId: json['customer_id'] as String?,
+      referenceId: json['reference_id'] as String?,
+      includeDisabled: json['include_disabled'] as bool?,
+    );
+
+Map<String, dynamic> _$ListCardRequestToJson(ListCardRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('cursor', instance.cursor);
+  writeNotNull('customer_id', instance.customerId);
+  writeNotNull('include_disabled', instance.includeDisabled);
+  writeNotNull('reference_id', instance.referenceId);
+  writeNotNull('sort_order', _$SortOrderEnumMap[instance.sortOrder]);
+  return val;
+}
+
+CreateCardRequest _$CreateCardRequestFromJson(Map<String, dynamic> json) =>
+    CreateCardRequest(
+      card: Card.fromJson(json['card'] as Map<String, dynamic>),
+      idempotencyKey: json['idempotency_key'] as String,
+      verificationToken: json['verification_token'] as String?,
+      sourceId: json['source_id'] as String,
+    );
+
+Map<String, dynamic> _$CreateCardRequestToJson(CreateCardRequest instance) {
+  final val = <String, dynamic>{
+    'idempotency_key': instance.idempotencyKey,
+    'source_id': instance.sourceId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('verification_token', instance.verificationToken);
+  val['card'] = instance.card;
   return val;
 }

@@ -8,11 +8,11 @@ import 'package:http/http.dart' as http;
 /// URL: https://developer.squareup.com/reference/square/payments-api
 ///
 ///
-class BankAccountService {
+class PaymentService {
   final String baseUrl;
   final AuthenticationService authenticationService;
 
-  BankAccountService(
+  PaymentService(
       {required this.baseUrl, required this.authenticationService});
 
 
@@ -578,7 +578,6 @@ class BankAccountService {
   Future<DisputeEvidence> createDisputeEvidenceFile({
     required String disputeId,
     required CreateDisputeEvidenceFileRequest request,
-    String? cursor,
     String? authToken,
   }) async {
 
@@ -608,7 +607,395 @@ class BankAccountService {
     throw PaymentException(statusCode: response.statusCode, message: DisputeEvidenceResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
     }
   }
-  // TODO Add remaining calls.
+
+  ///
+  /// Uploads text to use as evidence for a dispute challenge.
+  ///
+  Future<DisputeEvidence> createDisputeEvidenceText({
+    required String disputeId,
+    required CreateDisputeEvidenceTextRequest request,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/disputes/$disputeId/evidence-files");
+
+    //print (endpoint.toString());
+
+    var response = await
+    http.post(endpoint, body: request.toJson(), headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return DisputeEvidenceResponse.fromJson(jsonDecode(response.body)).evidence!;
+    }
+    else {
+      print (response.body);
+      throw PaymentException(statusCode: response.statusCode, message: DisputeEvidenceResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+  ///
+  /// Removes specified evidence from a dispute.
+  ///
+  /// Square does not send the bank any evidence that is removed. Also,
+  /// you cannot remove evidence after submitting it to the bank using
+  /// SubmitEvidence
+  ///
+  Future<bool> deleteDisputeEvidence({
+    required String disputeId,
+    required String evidenceId,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/disputes/$disputeId/evidence/$evidenceId");
+
+    //print (endpoint.toString());
+
+    var response = await
+    http.delete(endpoint, headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return true;
+    }
+    else {
+      print (response.body);
+      throw PaymentException(statusCode: response.statusCode, message: DisputeEvidenceResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+  ///
+  /// Returns the evidence metadata specified by the evidence ID
+  /// in the request URL path
+  ///
+  Future<DisputeEvidence> readDisputeEvidence({
+    required String disputeId,
+    required String evidenceId,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/disputes/$disputeId/evidence/$evidenceId");
+
+    //print (endpoint.toString());
+
+    var response = await
+    http.get(endpoint, headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return DisputeEvidenceResponse.fromJson(jsonDecode(response.body)).evidence!;
+    }
+    else {
+      print (response.body);
+      throw PaymentException(statusCode: response.statusCode, message: DisputeEvidenceResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+  ///
+  /// Submits evidence to the cardholder's bank.
+  ///
+  /// Before submitting evidence, Square compiles all available evidence.
+  /// This includes evidence uploaded using the CreateDisputeEvidenceFile
+  /// and CreateDisputeEvidenceText endpoints and evidence automatically
+  /// provided by Square, when available.
+  ///
+  Future<DisputeEvidence> submitDisputeEvidence({
+    required String disputeId,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/disputes/$disputeId/submit-evidence");
+
+    //print (endpoint.toString());
+
+    var response = await
+    http.post(endpoint, headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return DisputeEvidenceResponse.fromJson(jsonDecode(response.body)).evidence!;
+    }
+    else {
+      print (response.body);
+      throw PaymentException(statusCode: response.statusCode, message: DisputeEvidenceResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+  ///
+  /// Links a checkoutId to a checkout_page_url that
+  /// customers are directed to in order to provide their
+  /// payment information using a payment processing workflow
+  /// hosted on connect.squareup.com.
+  ///
+  Future<Checkout> createCheckout({
+    required String locationId,
+    required CreateCheckoutRequest request,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/locations/$locationId/checkouts");
+
+    //print (endpoint.toString());
+
+    var response = await
+    http.post(endpoint, body: request.toJson(), headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return CheckoutResponse.fromJson(jsonDecode(response.body)).checkout!;
+    }
+    else {
+      print (response.body);
+      throw PaymentException(statusCode: response.statusCode, message: CheckoutResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+  ///
+  /// Activates a domain for use with Apple Pay on the Web and Square.
+  ///
+  /// A validation is performed on this domain by Apple to ensure that
+  /// it is properly set up as an Apple Pay enabled domain.
+  ///
+  /// This endpoint provides an easy way for platform developers to bulk
+  /// activate Apple Pay on the Web with Square for merchants using
+  /// their platform.
+  ///
+  /// To learn more about Web Apple Pay, see Add the Apple Pay on
+  /// the Web Button.
+  ///
+  Future<RegisterDomainResponseStatus> registerApplePayDomain({
+    required String domainName,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/apple-pay/domains");
+
+    //print (endpoint.toString());
+
+    var request = {
+      "domain_name": domainName
+    };
+    var response = await
+    http.post(endpoint, body: request, headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return RegisterDomainResponse.fromJson(jsonDecode(response.body)).status!;
+    }
+    else {
+      print (response.body);
+      throw PaymentException(statusCode: response.statusCode, message: RegisterDomainResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+
+  ///
+  /// Retrieves a list of cards owned by the account making the request.
+  ///
+  /// A max of 25 cards will be returned.
+  ///
+  Future<CardResponse> listCards({
+    required ListCardRequest request,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/cards", request.toJson());
+
+    //print (endpoint.toString());
+
+
+    var response = await
+    http.get(endpoint, headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return CardResponse.fromJson(jsonDecode(response.body));
+    }
+    else {
+      print (response.body);
+      throw PaymentException(statusCode: response.statusCode, message: CardResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+  ///
+  /// Adds a card on file to an existing merchant.
+  ///
+  Future<Card> createCard({
+    required CreateCardRequest request,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/cards");
+
+    //print (endpoint.toString());
+
+
+    var response = await
+    http.post(endpoint, body:request.toJson(), headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return CardResponse.fromJson(jsonDecode(response.body)).card!;
+    }
+    else {
+      print (response.body);
+      throw PaymentException(statusCode: response.statusCode, message: CardResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+  ///
+  /// Retrieves details for a specific Card.
+  ///
+  Future<Card> readCard({
+    required String cardId,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/cards/$cardId");
+
+    //print (endpoint.toString());
+
+
+    var response = await
+    http.get(endpoint, headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return CardResponse.fromJson(jsonDecode(response.body)).card!;
+    }
+    else {
+      print (response.body);
+      throw PaymentException(statusCode: response.statusCode, message: CardResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
+  ///
+  /// Disables the card, preventing any further updates or charges.
+  ///
+  /// Disabling an already disabled card is allowed but has no effect.
+  ///
+  Future<Card> disableCard({
+    required String cardId,
+    String? authToken,
+  }) async {
+
+    authToken ??= authenticationService.getCachedToken()?.accessToken;
+
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken ?? ""}",
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+
+    };
+
+    Uri endpoint = Uri.https(
+        baseUrl, "/v2/cards/$cardId/disable");
+
+    //print (endpoint.toString());
+
+    var response = await
+    http.post(endpoint, headers: headers);
+
+    if (response.statusCode == 200) {
+      print (jsonDecode(response.body));
+      return CardResponse.fromJson(jsonDecode(response.body)).card!;
+    }
+    else {
+      print (response.body);
+      throw PaymentException(statusCode: response.statusCode, message: CardResponse.fromJson(jsonDecode(response.body)).errors?[0].detail?.toString());
+    }
+  }
+
 
 }
 

@@ -11705,7 +11705,7 @@ class DisputeEvidenceResponse {
 class CreateDisputeEvidenceFileRequest {
 
   @JsonKey(name: "idempotency_key")
-  final String? idempotencyKey;
+  final String idempotencyKey;
 
   @JsonKey(name: "evidence_type")
   final DisputeEvidenceType? evidenceType;
@@ -11714,7 +11714,7 @@ class CreateDisputeEvidenceFileRequest {
   final String? contentType;
 
   CreateDisputeEvidenceFileRequest({
-    this.evidenceType, this.idempotencyKey, this.contentType
+    this.evidenceType, required this.idempotencyKey, this.contentType
   });
 
   factory CreateDisputeEvidenceFileRequest.fromJson(Map<String, dynamic> json) =>
@@ -11726,6 +11726,294 @@ class CreateDisputeEvidenceFileRequest {
   String toString() {
     return toJson().toString();
   }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CreateDisputeEvidenceTextRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String idempotencyKey;
+
+  @JsonKey(name: "evidence_type")
+  final DisputeEvidenceType? evidenceType;
+
+  @JsonKey(name: "evidence_text")
+  final String evidenceText;
+
+  CreateDisputeEvidenceTextRequest({
+    this.evidenceType, required this.idempotencyKey, required this.evidenceText
+  });
+
+  factory CreateDisputeEvidenceTextRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateDisputeEvidenceTextRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CreateDisputeEvidenceTextRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CreateCheckoutRequest {
+
+  @JsonKey(name: "idempotency_key")
+  final String idempotencyKey;
+
+  final CreateOrderRequest? order;
+
+  @JsonKey(name: "ask_for_shipping_address")
+  final bool? askForShippingAddress;
+
+  @JsonKey(name: "merchant_support_email")
+  final String? merchantSupportEmail;
+
+  @JsonKey(name: "pre_populate_buyer_email")
+  final String? prePopulateBuyerEmail;
+
+  @JsonKey(name: "pre_populate_shipping_address")
+  final Address? prePopulateShippingAddress;
+
+  @JsonKey(name: "redirect_url")
+  final String? redirectUrl;
+
+  @JsonKey(name: "additional_recipients")
+  final List<ChargeRequestAdditionalRecipient> ? additionalRecipients;
+
+  final String? note;
+
+  CreateCheckoutRequest({
+    required this.idempotencyKey, this.note, this.order, this.additionalRecipients,
+  this.redirectUrl, this.askForShippingAddress, this.merchantSupportEmail,
+  this.prePopulateBuyerEmail, this.prePopulateShippingAddress
+  });
+
+  factory CreateCheckoutRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateCheckoutRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CreateCheckoutRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class ChargeRequestAdditionalRecipient {
+
+  @JsonKey(name: "amount_money")
+  final Money? amountMoney;
+
+  final String? description;
+
+  @JsonKey(name: "location_id")
+  final String? locationId;
+
+  ChargeRequestAdditionalRecipient({
+    this.locationId, this.amountMoney, this.description
+    });
+
+  factory ChargeRequestAdditionalRecipient.fromJson(Map<String, dynamic> json) =>
+      _$ChargeRequestAdditionalRecipientFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ChargeRequestAdditionalRecipientToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CheckoutResponse {
+
+  final List<SquareError>? errors;
+
+  final Checkout? checkout;
+
+  final String? cursor;
+
+  CheckoutResponse({
+    this.checkout, this.errors, this.cursor
+  });
+
+  factory CheckoutResponse.fromJson(Map<String, dynamic> json) =>
+      _$CheckoutResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CheckoutResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class Checkout {
+
+  final String? id;
+  
+  @JsonKey(name: "ask_for_shipping_address")
+  final bool? askForShippingAddress;
+
+  @JsonKey(name: "checkout_page_url")
+  final String? checkoutPageUrl;
+
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @JsonKey(name: "merchant_support_email")
+  final String? merchantSupportEmail;
+
+  final Order? order;
+
+  @JsonKey(name: "pre_populate_buyer_email")
+  final String? prePopulateBuyerEmail;
+
+  @JsonKey(name: "pre_populate_shipping_address")
+  final Address? prePopulateShippingAddress;
+  
+  @JsonKey(name: "redirect_url")
+  final String? redirectUrl;
+
+  @JsonKey(name: "additional_recipients")
+  final List<AdditionalRecipient> ? additionalRecipients;
+
+  Checkout({
+    this.prePopulateShippingAddress, this.prePopulateBuyerEmail, this.merchantSupportEmail,
+  this.askForShippingAddress, this.redirectUrl, this.additionalRecipients,
+    this.order, this.id, this.createdAt, this.checkoutPageUrl
+  });
+
+  factory Checkout.fromJson(Map<String, dynamic> json) =>
+      _$CheckoutFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CheckoutToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+@JsonSerializable(includeIfNull: false)
+class RegisterDomainResponse {
+
+  final List<SquareError>? errors;
+
+  final RegisterDomainResponseStatus? status;
+
+  final String? cursor;
+
+  RegisterDomainResponse({
+    this.status, this.errors, this.cursor
+  });
+
+  factory RegisterDomainResponse.fromJson(Map<String, dynamic> json) =>
+      _$RegisterDomainResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RegisterDomainResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CardResponse {
+
+  final List<SquareError>? errors;
+
+  final Card? card;
+
+  final List<Card>? cards;
+
+  final String? cursor;
+
+  CardResponse({
+    this.cursor, this.errors, this.card, this.cards
+  });
+
+  factory CardResponse.fromJson(Map<String, dynamic> json) =>
+      _$CardResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CardResponseToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class ListCardRequest {
+  
+  final String? cursor;
+
+  @JsonKey(name: "customer_id")
+  final String? customerId;
+
+  @JsonKey(name: "include_disabled")
+  final bool? includeDisabled;
+
+  @JsonKey(name: "reference_id")
+  final String? referenceId;
+
+  @JsonKey(name: "sort_order")
+  final SortOrder? sortOrder;
+
+  ListCardRequest({
+    this.cursor, this.sortOrder, this.customerId, this.referenceId,
+    this.includeDisabled
+  });
+
+  factory ListCardRequest.fromJson(Map<String, dynamic> json) =>
+      _$ListCardRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ListCardRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+}
+
+@JsonSerializable(includeIfNull: false)
+class CreateCardRequest {
+  @JsonKey(name: "idempotency_key")
+  final String idempotencyKey;
+
+  @JsonKey(name: "source_id")
+  final String sourceId;
+
+  @JsonKey(name: "verification_token")
+  final String? verificationToken;
+
+  final Card card;
+
+  CreateCardRequest({
+    required this.card, required this.idempotencyKey, this.verificationToken, required this.sourceId
+  });
+
+  factory CreateCardRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateCardRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CreateCardRequestToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+}
+
+enum RegisterDomainResponseStatus {
+  PENDING,
+  VERIFIED
 }
 
 enum DisputeEvidenceType {
