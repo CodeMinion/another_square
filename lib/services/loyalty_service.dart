@@ -157,7 +157,7 @@ class LoyaltyService {
     //print (endpoint.toString());
 
     var response = await
-    http.post(endpoint, body: request.toJson(), headers: headers);
+    http.post(endpoint, body: jsonEncode(request.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
@@ -197,7 +197,7 @@ class LoyaltyService {
     //print (endpoint.toString());
 
     var response = await
-    http.post(endpoint, body: request.toJson(), headers: headers);
+    http.post(endpoint, body: jsonEncode(request.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
@@ -238,7 +238,7 @@ class LoyaltyService {
     //print (endpoint.toString());
 
     var response = await
-    http.post(endpoint, body: request.toJson(), headers: headers);
+    http.post(endpoint, body: jsonEncode(request.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
@@ -310,7 +310,7 @@ class LoyaltyService {
     //print (endpoint.toString());
 
     var response = await
-    http.post(endpoint, body: request.toJson(), headers: headers);
+    http.post(endpoint, body: jsonEncode(request.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
@@ -345,7 +345,7 @@ class LoyaltyService {
     //print (endpoint.toString());
 
     var response = await
-    http.post(endpoint, body: request.toJson(), headers: headers);
+    http.post(endpoint, body: jsonEncode(request.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
@@ -384,7 +384,7 @@ class LoyaltyService {
     //print (endpoint.toString());
 
     var response = await
-    http.post(endpoint, body: request.toJson(), headers: headers);
+    http.post(endpoint, body: jsonEncode(request.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
@@ -491,7 +491,7 @@ class LoyaltyService {
     //print (endpoint.toString());
 
     var response = await
-    http.post(endpoint, body:request.toJson(), headers: headers);
+    http.post(endpoint, body:jsonEncode(request.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));

@@ -176,7 +176,7 @@ class MerchantService {
     //print (endpoint.toString());
 
     var response = await
-    http.post(endpoint, body:location.toJson(), headers: headers);
+    http.post(endpoint, body:jsonEncode(location.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
@@ -251,7 +251,7 @@ class MerchantService {
     //print (endpoint.toString());
 
     var response = await
-    http.put(endpoint, body:location.toJson(), headers: headers);
+    http.put(endpoint, body:jsonEncode(location.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));

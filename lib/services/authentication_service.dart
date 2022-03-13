@@ -108,7 +108,7 @@ class AuthenticationService {
     Uri tokenUri = Uri.parse(tokenEndpoint);
 
     //print("tokenUri $tokenUri}");
-    final response = await http.post(tokenUri, body: body,
+    final response = await http.post(tokenUri, body: jsonEncode(body),
         headers:  headers);
 
     if(response.statusCode == 200) {

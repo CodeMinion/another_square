@@ -1,6 +1,7 @@
 
 import 'dart:convert';
 import 'package:another_square/services/authentication_service.dart';
+import 'package:another_square/services/backend_extensions.dart';
 import 'package:another_square/square_models.dart';
 import 'package:http/http.dart' as http;
 
@@ -46,7 +47,7 @@ class CustomerService {
     };
 
     Uri endpoint = Uri.https(
-        baseUrl, "/v2/customers", request.toJson());
+        baseUrl, "/v2/customers", request.toJson().toQueryParam());
 
     //print (endpoint.toString());
 
@@ -240,7 +241,7 @@ class CustomerService {
     //print (endpoint.toString());
 
     var response = await
-    http.put(endpoint, body: request.toJson(), headers: headers);
+    http.put(endpoint, body: jsonEncode(request.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
@@ -348,7 +349,7 @@ class CustomerService {
     };
 
     Uri endpoint = Uri.https(
-        baseUrl, "/v2/customers/groups", request.toJson());
+        baseUrl, "/v2/customers/groups", request.toJson().toQueryParam());
 
     //print (endpoint.toString());
 
@@ -390,7 +391,7 @@ class CustomerService {
     //print (endpoint.toString());
 
     var response = await
-    http.post(endpoint, body:request.toJson(), headers: headers);
+    http.post(endpoint, body:jsonEncode(request.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
@@ -496,7 +497,7 @@ class CustomerService {
     //print (endpoint.toString());
 
     var response = await
-    http.put(endpoint,body: group.toJson(), headers: headers);
+    http.put(endpoint,body: jsonEncode(group.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
@@ -526,7 +527,7 @@ class CustomerService {
     };
 
     Uri endpoint = Uri.https(
-        baseUrl, "/v2/customers/segments", request.toJson());
+        baseUrl, "/v2/customers/segments", request.toJson().toQueryParam());
 
     //print (endpoint.toString());
 

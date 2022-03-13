@@ -170,7 +170,7 @@ class OnlineService {
     //print (endpoint.toString());
 
     var response = await
-    http.post(endpoint, body:snippet.toJson(),  headers: headers);
+    http.post(endpoint, body:jsonEncode(snippet.toJson()),  headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));

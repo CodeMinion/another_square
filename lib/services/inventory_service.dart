@@ -1,6 +1,7 @@
 
 import 'dart:convert';
 import 'package:another_square/services/authentication_service.dart';
+import 'package:another_square/services/backend_extensions.dart';
 import 'package:another_square/square_models.dart';
 import 'package:http/http.dart' as http;
 
@@ -266,7 +267,7 @@ class InventoryService {
     };
 
     Uri endpoint = Uri.https(
-        baseUrl, "/v2/inventory/$catalogObjectId", request?.toJson());
+        baseUrl, "/v2/inventory/$catalogObjectId", request?.toJson().toQueryParam());
 
     //print (endpoint.toString());
 

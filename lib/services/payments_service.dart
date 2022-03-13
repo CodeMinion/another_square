@@ -1,6 +1,7 @@
 
 import 'dart:convert';
 import 'package:another_square/services/authentication_service.dart';
+import 'package:another_square/services/backend_extensions.dart';
 import 'package:another_square/square_models.dart';
 import 'package:http/http.dart' as http;
 
@@ -40,7 +41,7 @@ class PaymentService {
     };
 
     Uri endpoint = Uri.https(
-        baseUrl, "/v2/payments", request.toJson());
+        baseUrl, "/v2/payments", request.toJson().toQueryParam());
 
     //print (endpoint.toString());
 
@@ -85,7 +86,7 @@ class PaymentService {
     //print (endpoint.toString());
 
     var response = await
-    http.post(endpoint, body: request.toJson(), headers: headers);
+    http.post(endpoint, body: jsonEncode(request.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
@@ -209,7 +210,7 @@ class PaymentService {
     //print (endpoint.toString());
 
     var response = await
-    http.put(endpoint, body:request.toJson(), headers: headers);
+    http.put(endpoint, body: jsonEncode(request.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
@@ -288,7 +289,7 @@ class PaymentService {
     //print (endpoint.toString());
 
     var response = await
-    http.post(endpoint, body:request.toJson(), headers: headers);
+    http.post(endpoint, body: jsonEncode(request.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
@@ -321,7 +322,7 @@ class PaymentService {
     };
 
     Uri endpoint = Uri.https(
-        baseUrl, "/v2/refunds", request.toJson());
+        baseUrl, "/v2/refunds", request.toJson().toQueryParam());
 
     //print (endpoint.toString());
 
@@ -366,7 +367,7 @@ class PaymentService {
     //print (endpoint.toString());
 
     var response = await
-    http.post(endpoint, body:request.toJson(), headers: headers);
+    http.post(endpoint, body:jsonEncode(request.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
@@ -431,7 +432,7 @@ class PaymentService {
     };
 
     Uri endpoint = Uri.https(
-        baseUrl, "/v2/disputes", request.toJson());
+        baseUrl, "/v2/disputes", request.toJson().toQueryParam());
 
     //print (endpoint.toString());
 
@@ -596,7 +597,7 @@ class PaymentService {
     //print (endpoint.toString());
 
     var response = await
-    http.post(endpoint, body: request.toJson(), headers: headers);
+    http.post(endpoint, body: jsonEncode(request.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
@@ -632,7 +633,7 @@ class PaymentService {
     //print (endpoint.toString());
 
     var response = await
-    http.post(endpoint, body: request.toJson(), headers: headers);
+    http.post(endpoint, body: jsonEncode(request.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
@@ -788,7 +789,7 @@ class PaymentService {
     //print (endpoint.toString());
 
     var response = await
-    http.post(endpoint, body: request.toJson(), headers: headers);
+    http.post(endpoint, body: jsonEncode(request.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
@@ -869,7 +870,7 @@ class PaymentService {
     };
 
     Uri endpoint = Uri.https(
-        baseUrl, "/v2/cards", request.toJson());
+        baseUrl, "/v2/cards", request.toJson().toQueryParam());
 
     //print (endpoint.toString());
 
@@ -911,7 +912,7 @@ class PaymentService {
 
 
     var response = await
-    http.post(endpoint, body:request.toJson(), headers: headers);
+    http.post(endpoint, body:jsonEncode(request.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));

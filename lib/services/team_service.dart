@@ -1,6 +1,7 @@
 
 import 'dart:convert';
 import 'package:another_square/services/authentication_service.dart';
+import 'package:another_square/services/backend_extensions.dart';
 import 'package:another_square/square_models.dart';
 import 'package:http/http.dart' as http;
 
@@ -355,7 +356,7 @@ class TeamService {
     };
 
     Uri endpoint = Uri.https(
-        baseUrl, "/v2/labor/break-types", request.toJson());
+        baseUrl, "/v2/labor/break-types", request.toJson().toQueryParam());
 
     //print (endpoint.toString());
 
@@ -719,7 +720,7 @@ class TeamService {
     };
 
     Uri endpoint = Uri.https(
-        baseUrl, "/v2/labor/team-member-wages", request.toJson());
+        baseUrl, "/v2/labor/team-member-wages", request.toJson().toQueryParam());
 
     //print (endpoint.toString());
 
@@ -789,7 +790,7 @@ class TeamService {
     };
 
     Uri endpoint = Uri.https(
-        baseUrl, "/v2/labor/workweek-configs", request.toJson());
+        baseUrl, "/v2/labor/workweek-configs", request.toJson().toQueryParam());
 
     //print (endpoint.toString());
 
@@ -829,7 +830,7 @@ class TeamService {
     //print (endpoint.toString());
 
     var response = await
-    http.put(endpoint, body: config.toJson(), headers: headers);
+    http.put(endpoint, body: jsonEncode(config.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));

@@ -1,6 +1,7 @@
 
 import 'dart:convert';
 import 'package:another_square/services/authentication_service.dart';
+import 'package:another_square/services/backend_extensions.dart';
 import 'package:another_square/square_models.dart';
 import 'package:http/http.dart' as http;
 
@@ -47,7 +48,7 @@ class BookingsService {
     };
 
     Uri endpoint = Uri.https(
-        baseUrl, "/v2/bookings", request.toJson());
+        baseUrl, "/v2/bookings", request.toJson().toQueryParam());
 
     //print (endpoint.toString());
 
@@ -92,7 +93,7 @@ class BookingsService {
     //print (endpoint.toString());
 
     var response = await
-    http.post(endpoint, body: request.toJson(), headers: headers);
+    http.post(endpoint, body: jsonEncode(request.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
@@ -132,7 +133,7 @@ class BookingsService {
     //print (endpoint.toString());
 
     var response = await
-    http.post(endpoint, body: query.toJson(), headers: headers);
+    http.post(endpoint, body: jsonEncode(query.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
@@ -196,7 +197,7 @@ class BookingsService {
     };
 
     Uri endpoint = Uri.https(
-        baseUrl, "/v2/bookings/team-member-booking-profiles", request.toJson());
+        baseUrl, "/v2/bookings/team-member-booking-profiles", request.toJson().toQueryParam());
 
     //print (endpoint.toString());
 
@@ -319,7 +320,7 @@ class BookingsService {
     //print (endpoint.toString());
 
     var response = await
-    http.put(endpoint, body:request.toJson(), headers: headers);
+    http.put(endpoint, body:jsonEncode(request.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
@@ -360,7 +361,7 @@ class BookingsService {
     //print (endpoint.toString());
 
     var response = await
-    http.post(endpoint, body:request.toJson(), headers: headers);
+    http.post(endpoint, body:jsonEncode(request.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
       print (jsonDecode(response.body));
